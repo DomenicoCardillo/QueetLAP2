@@ -1,0 +1,3 @@
+rootProject.name = 'newQueetLAP2'
+
+include ':app'
