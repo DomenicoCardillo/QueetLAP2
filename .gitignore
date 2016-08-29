@@ -41,3 +41,6 @@ android/keystores/debug.keystore
 
 # Editor
 .vscode/
+
+# Typescript
+tsconfig.json

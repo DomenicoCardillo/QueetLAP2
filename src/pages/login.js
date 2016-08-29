@@ -11,11 +11,10 @@ import {
   AsyncStorage
 } from 'react-native';
 
-import Button from '../components/button';
-import Header from '../components/header';
+import { Actions } from 'react-native-router-flux'
 
+import Button from '../components/button';
 import Signup from './signup';
-import Account from './account';
 
 import Firebase from 'firebase';
 import * as globals from '../globals'
@@ -38,7 +37,6 @@ export default class login extends Component {
   render(){
     return (
       <View style={styles.container}>
-        <Header text="Login" loaded={this.state.loaded} />
         <View style={styles.body}>
           <TextInput
             style={styles.textinput}
@@ -70,7 +68,7 @@ export default class login extends Component {
     );
   }
 
-  login(){
+  login() {
 
     this.setState({
       loaded: false
@@ -88,21 +86,15 @@ export default class login extends Component {
 
       if(error){
         alert('Login Failed. Please try again');
-      }else{
+      } else {
         AsyncStorage.setItem('user_data', JSON.stringify(user_data));
-        this.props.navigator.push({
-          component: Account
-        });
+        Actions.account()
       }
     });
-
-
   }
 
   goToSignup(){
-    this.props.navigator.push({
-      component: Signup
-    });
+    Actions.signup()
   }
 
 }

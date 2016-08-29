@@ -9,10 +9,9 @@ import {
   View
 } from 'react-native';
 
-import Button from '../components/button';
-import Header from '../components/header';
+import { Actions } from 'react-native-router-flux'
 
-import Login from './login';
+import Button from '../components/button';
 
 import Firebase from 'firebase';
 import * as globals from '../globals'
@@ -43,6 +42,8 @@ export default class signup extends Component {
       this.state.password
     ).then(function (response) {
       console.log(response)
+      Actions.account()
+      
       /*
       if(error){
         switch(error.code){
@@ -74,15 +75,12 @@ export default class signup extends Component {
   }
 
   goToLogin(){
-    this.props.navigator.push({
-      component: Login
-    });
+    Actions.login()
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Header text="Signup" loaded={this.state.loaded} />
         <View style={styles.body}>
           
   		    <TextInput

@@ -11,7 +11,6 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-
 export default class header extends Component {
 
   render(){
@@ -31,8 +30,6 @@ export default class header extends Component {
       </View>
     );
   }
-
-
 }
 
 const styles = StyleSheet.create({

@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 import React, {
   StyleSheet
-} from 'react-native';
+} from 'react-native'
 
 module.exports = StyleSheet.create({
   container: {
@@ -39,4 +39,4 @@ module.exports = StyleSheet.create({
     width: 100,
     height: 100
   }
-});
+})
