@@ -16,7 +16,7 @@ import { Actions } from 'react-native-router-flux'
 
 class Splash extends Component {
   goto(page) {
-    Actions[page]()
+    Actions[page]({type: 'push'})
   }
   render() {
     return (

@@ -85,14 +85,14 @@ const scenes = Actions.create(
       component={Login}
       hideNavBar={false}
       hideTabBar={true}
-      hideBackImage={true} />
+      type='replace' />
     <Scene 
       key='signup'
       title='Signup'
       component={Signup}
       hideNavBar={false}
       hideTabBar={true}
-      hideBackImage={true} />
+      type='replace' />
     <Scene 
       key='main'
       tabs
