@@ -53,7 +53,7 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 class App extends Component {
 
   componentWillMount(){
-     this.props.dispatch(reauthenticate())
+     //this.props.dispatch(reauthenticate())  Doesn't work yet
   }
 
   render() {
