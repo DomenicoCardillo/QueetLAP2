@@ -1,4 +1,3 @@
-'use strict'
 import React, {
   StyleSheet
 } from 'react-native'
@@ -8,7 +7,7 @@ import styleVariables from './variables'
 
 let commonStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   topBody: {
     flex: 1,
@@ -22,7 +21,6 @@ let commonStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
     marginTop: styleVariables.spacer*2,
     paddingLeft: styleVariables.spacer,
     paddingRight: styleVariables.spacer,
@@ -52,9 +50,11 @@ let commonStyles = StyleSheet.create({
     color: '#fff',
     fontSize: 18
   },
-  image: {
-    width: 100,
-    height: 100
+  textBold: {
+    fontWeight: '700'
+  },
+  whiteText: {
+    color: '#fff'
   }
 })
 

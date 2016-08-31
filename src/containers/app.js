@@ -12,9 +12,7 @@ import {
   Platform
 } from 'react-native'
 
-import { Scene, Router } from 'react-native-router-flux'
-
-import TabItem from '../components/tabitem'
+import { Actions, Scene, Router } from 'react-native-router-flux'
 
 import * as globals from '../globals'
 import styleVariables from '../styles/variables'
@@ -22,10 +20,13 @@ import styleVariables from '../styles/variables'
 import { connect } from 'react-redux'
 import { reauthenticate } from '../actions/auth'
 
+import TabItem from '../components/tabitem'
+import Splash from '../components/splashPage'
+
 import Signup from './signup'
 import Login from './login'
 
-/* Set status bar color */
+/* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
   StatusBar.setBarStyle('light-content', true)
 } else {
@@ -49,55 +50,6 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
   return style
 }
 
-class App extends Component {
-
-  componentWillMount(){
-     //this.props.dispatch(reauthenticate())  Doesn't work yet
-  }
-
-  render() {
-    return (
-      <Router 
-        getSceneStyle={getSceneStyle}>
-        <Scene 
-          key='root'
-          hideNavBar={false}
-          hideTabBar={false}
-          navigationBarStyle={styles.navigationBarStyle} 
-          titleStyle={styles.titleStyle}>
-          <Scene 
-            key='login' 
-            component={Login} 
-            title='Login'
-            hideBackImage={true} />
-          <Scene 
-            key='signup' 
-            component={Signup}
-            title='Signup'
-            initial={true}
-            hideBackImage={true} />
-          <Scene 
-            key='main'
-            tabs
-            tabBarStyle={styles.tabBarStyle}
-            tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
-            <Scene 
-              key='account'
-              title='Account'
-              component={Signup}
-              hideNavBar={false}
-              hideTabBar={false}
-              icon={TabItem}
-              navigationBarStyle={styles.navigationBarStyle} 
-              titleStyle={styles.titleStyle}>
-            </Scene>
-          </Scene>
-        </Scene>
-      </Router>
-    )
-  }
-}
-
 const styles = StyleSheet.create({
   navigationBarStyle: {
     backgroundColor: styleVariables.colors.brandPrimary
@@ -113,5 +65,63 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd'
   }
 })
+
+const scenes = Actions.create(
+  <Scene 
+    key='root'
+    navigationBarStyle={styles.navigationBarStyle} 
+    titleStyle={styles.titleStyle}>
+    <Scene 
+      key='splash' 
+      title=''
+      component={Splash}
+      hideNavBar={true}
+      hideTabBar={true}
+      initial={true} />
+    <Scene 
+      key='login' 
+      title='Login'
+      component={Login}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true} />
+    <Scene 
+      key='signup'
+      title='Signup'
+      component={Signup}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true} />
+    <Scene 
+      key='main'
+      tabs
+      tabBarStyle={styles.tabBarStyle}
+      tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
+      <Scene 
+        key='account'
+        title='Account'
+        component={Signup}
+        hideNavBar={false}
+        hideTabBar={false}
+        icon={TabItem} 
+        titleStyle={styles.titleStyle}>
+      </Scene>
+    </Scene>
+  </Scene>
+)
+
+class App extends Component {
+
+  componentWillMount(){
+     //this.props.dispatch(reauthenticate())  Doesn't work yet
+  }
+
+  render() {
+    return (
+      <Router scenes={scenes} getSceneStyle={getSceneStyle}>
+      </Router>
+    )
+  }
+}
 
 export default connect(state => state)(App)

@@ -10,7 +10,7 @@ import {
 
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
-import commonStyles from '../styles/common'
+import commonStyles from '../styles/commons'
 
 export default class SignupPage extends Component {
   constructor (props) {
