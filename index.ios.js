@@ -1,5 +1,5 @@
 import React from 'react'
-import Index from './src/pages/index.js'
+import Index from './src/containers/index'
 
 import {
   AppRegistry

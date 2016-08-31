@@ -79,7 +79,7 @@ export default class login extends Component {
       this.state.password
     ).then(function (response) {
       console.log(response)
-      
+      //response.sendEmailVerification();
       this.setState({
         loaded: true
       });
