@@ -4,6 +4,7 @@ let styleVariables = {
   colors: {
     brandPrimary: '#0080bb',
     brandPrimaryDark: '#004c6f',
+    brandDanger: '#ff0033',
     borderColor: '#ddd',
   }
 }

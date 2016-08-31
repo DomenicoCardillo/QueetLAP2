@@ -5,12 +5,15 @@ import {
   Text,
   TextInput,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
+
 import commonStyles from '../styles/commons'
+import styleVariables from '../styles/variables'
 
 export default class SignupPage extends Component {
   constructor (props) {
@@ -24,8 +27,16 @@ export default class SignupPage extends Component {
   render() {
     return (
       <View style={commonStyles.container}>
-        <View style={commonStyles.topBody}>
+        
+        { this.props.hasError ? (
+          <View style={styles.errorBox}>
+            <Text style={styles.errorBoxText}>
+              {this.props.errorMessage}
+            </Text>
+          </View>
+        ) : null }
 
+        <View style={commonStyles.topBody}>
           <TextInput
             style={commonStyles.textInput}
             onChangeText={(email) => this.setState({email: email})}
@@ -44,12 +55,6 @@ export default class SignupPage extends Component {
             onPress={this.signup.bind(this)}>
             Signup
           </Button>
-          
-          { this.props.hasError ? (
-            <Text>
-              {this.props.errorMessage}
-            </Text>
-          ) : null }
 
           <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToLogin.bind(this)}>
             <Text>Got an Account?</Text>
@@ -60,3 +65,15 @@ export default class SignupPage extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  errorBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    backgroundColor: styleVariables.colors.brandDanger
+  },
+  errorBoxText: {
+    color: '#fff'
+  }
+})

@@ -5,13 +5,15 @@ import {
   Text,
   TextInput,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
 
 import commonStyles from '../styles/commons'
+import styleVariables from '../styles/variables'
 
 export default class LoginPage extends Component {
   constructor (props) {
@@ -25,6 +27,15 @@ export default class LoginPage extends Component {
   render() {
     return (
       <View style={commonStyles.container}>
+
+        { this.props.hasError ? (
+          <View style={styles.errorBox}>
+            <Text style={styles.errorBoxText}>
+              {this.props.errorMessage}
+            </Text>
+          </View>
+        ) : null }
+
         <View style={commonStyles.topBody}>
 
           <TextInput
@@ -46,12 +57,6 @@ export default class LoginPage extends Component {
             Login
           </Button>
           
-          { this.props.hasError ? (
-            <Text>
-              {this.props.errorMessage}
-            </Text>
-          ) : null }
-          
           <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
             <Text>Do not have an account yet?</Text>
           </TouchableOpacity>
@@ -60,3 +65,15 @@ export default class LoginPage extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  errorBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    backgroundColor: styleVariables.colors.brandDanger
+  },
+  errorBoxText: {
+    color: '#fff'
+  }
+})
