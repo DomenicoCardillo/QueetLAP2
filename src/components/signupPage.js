@@ -4,13 +4,13 @@ import React, {
 import {
   Text,
   TextInput,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
-
-import styles from '../styles/common-styles.js'
+import commonStyles from '../styles/common'
 
 export default class SignupPage extends Component {
   constructor (props) {
@@ -23,23 +23,23 @@ export default class SignupPage extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.body}>
+      <View style={commonStyles.container}>
+        <View style={commonStyles.topBody}>
 
           <TextInput
-            style={styles.textinput}
+            style={commonStyles.textInput}
             onChangeText={(email) => this.setState({email: email})}
             placeholder={"Email Address"}
           />
           <TextInput
-            style={styles.textinput}
+            style={commonStyles.textInput}
             secureTextEntry={true}
             onChangeText={(pass) => this.setState({pass: pass})}
             placeholder={"Password"}
           />
           <Button 
-            style={styles.primary_button} 
-            textStyle={styles.primary_button_text}
+            style={commonStyles.primaryButton} 
+            textStyle={commonStyles.primaryButtonText}
             isLoading={this.props.isLoading}
             onPress={this.signup.bind(this)}>
             Signup
@@ -51,12 +51,9 @@ export default class SignupPage extends Component {
             </Text>
           ) : null }
 
-          <Button 
-            style={styles.transparent_button} 
-            textStyle={styles.transparent_button_text}
-            onPress={this.props.goToLogin.bind(this)}>
-            Got an Account?
-          </Button>
+          <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToLogin.bind(this)}>
+            <Text>Got an Account?</Text>
+          </TouchableOpacity>
         
         </View>
       </View>

@@ -17,8 +17,7 @@ import { Scene, Router } from 'react-native-router-flux'
 import TabItem from '../components/tabitem'
 
 import * as globals from '../globals'
-import commonStyle from '../styles/common-styles.js'
-import Colors from '../styles/colors'
+import styleVariables from '../styles/variables'
 
 import { connect } from 'react-redux'
 import { reauthenticate } from '../actions/auth'
@@ -30,7 +29,7 @@ import Login from './login'
 if (Platform.OS == 'ios') {
   StatusBar.setBarStyle('light-content', true)
 } else {
-  StatusBar.setBackgroundColor(Colors.brandPrimaryDark)
+  StatusBar.setBackgroundColor(styleVariables.colors.brandPrimaryDark)
 }
 
 /* Define this based on the styles/dimensions you use */
@@ -61,20 +60,22 @@ class App extends Component {
       <Router 
         getSceneStyle={getSceneStyle}>
         <Scene 
-          key='root'>
+          key='root'
+          hideNavBar={false}
+          hideTabBar={false}
+          navigationBarStyle={styles.navigationBarStyle} 
+          titleStyle={styles.titleStyle}>
           <Scene 
             key='login' 
             component={Login} 
             title='Login'
-            hideNavBar={false}
-            hideTabBar={false} />
+            hideBackImage={true} />
           <Scene 
             key='signup' 
-            component={Signup} 
+            component={Signup}
             title='Signup'
             initial={true}
-            hideNavBar={false}
-            hideTabBar={false} />
+            hideBackImage={true} />
           <Scene 
             key='main'
             tabs
@@ -99,10 +100,11 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   navigationBarStyle: {
-    backgroundColor: Colors.brandPrimary
+    backgroundColor: styleVariables.colors.brandPrimary
   },
   titleStyle: {
-    color: 'white'
+    color: 'white',
+    fontWeight: '600'
   },
   tabBarStyle: {
     backgroundColor: '#eee'
