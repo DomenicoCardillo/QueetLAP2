@@ -55,7 +55,7 @@ export const login = (email, pass) => {
         userData.reauthToken = reauthToken
         AsyncStorage.setItem('userData', JSON.stringify(userData))
       })
-      Actions.account()
+      Actions.main()
     }).catch(function(error) {
       dispatch(loginFailed(error))
     })

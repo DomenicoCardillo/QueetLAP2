@@ -25,6 +25,7 @@ import Splash from '../components/splashPage'
 
 import Signup from './signup'
 import Login from './login'
+import Account from './account'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -100,11 +101,12 @@ const scenes = Actions.create(
       <Scene 
         key='account'
         title='Account'
-        component={Signup}
+        component={Account}
         hideNavBar={false}
         hideTabBar={false}
         icon={TabItem} 
-        titleStyle={styles.titleStyle}>
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}>
       </Scene>
     </Scene>
   </Scene>
