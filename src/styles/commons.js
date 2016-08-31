@@ -55,6 +55,12 @@ let commonStyles = StyleSheet.create({
   },
   whiteText: {
     color: '#fff'
+  },
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   }
 })
 

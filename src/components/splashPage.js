@@ -20,12 +20,13 @@ class Splash extends Component {
   }
   render() {
     return (
-      <Image source={require('../assets/img/splash.png')} style={styles.backgroundImage}>
+      <Image source={require('../assets/img/splash.png')} style={commonStyles.backgroundImage}>
         <View style={commonStyles.container}>
             <View style={commonStyles.centeredBody}>
-                <Text style={styles.mainText}>Queet</Text>
+                <Text style={styles.logoText}>Queet</Text>
+                <Text style={styles.titleText}>Scopri</Text>
                 <Text style={styles.subText}>
-                    Lorem Ipsum e' un <Text style={commonStyles.textBold}>testo segnaposto</Text> utilizzato nel settore della tipografia e della <Text style={commonStyles.textBold}>stampa</Text>.
+                    Lorem Ipsum e' un testo segnaposto utilizzato nel settore della tipografia e della stampa.
                 </Text>
                 <Button 
                   style={commonStyles.primaryButton} 
@@ -49,18 +50,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    backgroundColor: 'rgba(0, 0, 0, 0)'
-  },
-  mainText: {
+  logoText: {
     fontSize: 60,
     fontWeight: 'bold',
     color: 'white',
     fontFamily: 'Helvetica Neue',
-    marginBottom: 10
+    marginBottom: 30
+  },
+  titleText: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginBottom: 5
   },
   subText: {
     color: '#fff',
