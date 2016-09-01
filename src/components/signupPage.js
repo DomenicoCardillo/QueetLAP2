@@ -23,7 +23,9 @@ export default class SignupPage extends Component {
   }
 
   signup() {
-    this.props.submit(this.state.email, this.state.pass)
+    if(this.state && this.state.email && this.state.pass) {
+      this.props.submit(this.state.email, this.state.pass)
+    }
   }
 
   render() {

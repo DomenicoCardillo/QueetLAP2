@@ -32,7 +32,9 @@ export default class LoginPage extends Component {
   }
 
   login() {
-    this.props.submit(this.state.email, this.state.pass)
+    if(this.state && this.state.email && this.state.pass) {
+      this.props.submit(this.state.email, this.state.pass)
+    }
   }
 
   goToForm() {
