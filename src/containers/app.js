@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: styleVariables.colors.brandPrimary
   },
   titleStyle: {
-    color: 'white',
+    color: '#fff',
     fontWeight: '600'
   },
   tabBarStyle: {

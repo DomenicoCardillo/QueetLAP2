@@ -26,17 +26,17 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <View style={commonStyles.container}>
+      <View style={commonStyles.mainContainer}>
 
         { this.props.hasError ? (
           <View style={styles.errorBox}>
-            <Text style={styles.errorBoxText}>
+            <Text style={commonStyles.whiteText}>
               {this.props.errorMessage}
             </Text>
           </View>
         ) : null }
 
-        <View style={commonStyles.topBody}>
+        <View style={commonStyles.container}>
 
           <TextInput
             style={commonStyles.textInput}
@@ -72,8 +72,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 40,
     backgroundColor: styleVariables.colors.brandDanger
-  },
-  errorBoxText: {
-    color: '#fff'
   }
 })

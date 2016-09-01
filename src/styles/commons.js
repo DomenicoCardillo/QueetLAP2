@@ -2,41 +2,46 @@ import React, {
   StyleSheet
 } from 'react-native'
 
-import Dimensions from 'Dimensions'
 import styleVariables from './variables'
 
 let commonStyles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: styleVariables.baseSpacer*2,
+    paddingLeft: styleVariables.baseSpacer,
+    paddingRight: styleVariables.baseSpacer
   },
   topBody: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fff',
-    marginTop: styleVariables.spacer*2,
-    paddingLeft: styleVariables.spacer,
-    paddingRight: styleVariables.spacer,
+    marginTop: styleVariables.baseSpacer*2,
+    paddingLeft: styleVariables.baseSpacer,
+    paddingRight: styleVariables.baseSpacer,
   },
   centeredBody: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: styleVariables.spacer*2,
-    paddingLeft: styleVariables.spacer,
-    paddingRight: styleVariables.spacer,
+    marginTop: styleVariables.baseSpacer*2,
+    paddingLeft: styleVariables.baseSpacer,
+    paddingRight: styleVariables.baseSpacer,
   },
   textInput: {
     height: 40,
-    width: Dimensions.get('window').width - styleVariables.spacer*2,
-    marginBottom: styleVariables.spacer,
+    width: styleVariables.screenWidth - styleVariables.baseSpacer*2,
+    marginBottom: styleVariables.baseSpacer*2,
     borderColor: styleVariables.colors.borderColor,
     borderWidth: 1,
-    paddingLeft: styleVariables.spacer,
-    paddingRight: styleVariables.spacer,
-    borderRadius: styleVariables.radius
+    paddingLeft: styleVariables.baseSpacer,
+    paddingRight: styleVariables.baseSpacer,
+    borderRadius: styleVariables.baseRadius
   },
   primaryButton: {
-    marginTop: styleVariables.spacer,
+    marginTop: styleVariables.baseSpacer,
     backgroundColor: styleVariables.colors.brandPrimary,
     borderWidth: 0
   },

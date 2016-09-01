@@ -21,7 +21,7 @@ class Splash extends Component {
   render() {
     return (
       <Image source={require('../assets/img/splash.png')} style={commonStyles.backgroundImage}>
-        <View style={commonStyles.container}>
+        <View style={{ flex: 1 }}>
             <View style={commonStyles.centeredBody}>
                 <Text style={styles.logoText}>Queet</Text>
                 <Text style={styles.titleText}>Scopri</Text>
