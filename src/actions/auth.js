@@ -13,8 +13,15 @@ export const signup = (email, pass) => {
     Firebase.auth().createUserWithEmailAndPassword(
       email,
       pass
-    ).then(function (userData) {
+    ).then(function(userData) {
       userData.sendEmailVerification()
+      let usersRef = Firebase.database().ref('/users')
+      usersRef.push({
+        email: userData.email,
+        displayName: userData.displayName,
+        photoURL: userData.photoURL,
+        emailVerified: false
+      })
       dispatch(signupSuccess(userData))
     }).catch(function(error) {
       dispatch(signupFailed(error))
@@ -48,12 +55,15 @@ export const login = (email, pass) => {
     Firebase.auth().signInWithEmailAndPassword(
       email,
       pass
-    ).then(function (userData) {
-      if(userData.emailVerified){
+    ).then(function(userData) {
+      if(userData.emailVerified){       
         dispatch(loginSuccess(userData))
-        userData.getToken().then(function(reauthToken){
+        /*userData.getToken().then(function(reauthToken){
           userData.reauthToken = reauthToken
-          AsyncStorage.setItem('userData', JSON.stringify(userData))
+        })*/
+        var ref = Firebase.database().ref('users')
+        ref.orderByChild('email').equalTo(userData.email).on('value', function(userSnap) {
+          AsyncStorage.setItem('userData', JSON.stringify(userSnap.val()))
         })
         Actions.main()
       } else {
