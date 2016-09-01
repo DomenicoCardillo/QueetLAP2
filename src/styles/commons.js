@@ -42,8 +42,8 @@ let commonStyles = StyleSheet.create({
   },
   primaryButton: {
     marginTop: styleVariables.baseSpacer,
-    backgroundColor: styleVariables.colors.brandPrimary,
-    borderWidth: 0
+    borderWidth: 0,
+    backgroundColor: styleVariables.colors.brandPrimary
   },
   textLeft: {
     alignSelf: 'flex-start'

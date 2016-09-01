@@ -1,9 +1,9 @@
 import React, {
   Component
 } from 'react'
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 
-import UserModel from '../formsModels/user'
+import UserForm from '../formsModels/user'
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
 
@@ -27,15 +27,16 @@ export default class UserFormPage extends Component {
 
   render() {
     return (
-      <View style={commonStyles.container}>
+      <ScrollView style={commonStyles.container}>
         <Form 
           ref="form"
-          type={UserModel}
+          type={UserForm.model}
+          options={UserForm.options}
         /> 
-        <Button onPress={this.onPress.bind(this)}>
-          Ok
+        <Button style={commonStyles.primaryButton} textStyle={commonStyles.primaryButtonText} onPress={this.onPress.bind(this)}>
+        Ok
         </Button>
-      </View>
+      </ScrollView>
     )
   }
 }
