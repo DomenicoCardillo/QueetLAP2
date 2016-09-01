@@ -5,9 +5,7 @@ import React, {
 import {
   Text,
   View,
-  Navigator,
   StyleSheet,
-  AsyncStorage,
   StatusBar, 
   Platform
 } from 'react-native'
@@ -26,6 +24,7 @@ import Splash from '../components/splashPage'
 import Signup from './signup'
 import Login from './login'
 import Account from './account'
+import UserFormPage from '../components/userFormPage'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -83,6 +82,13 @@ const scenes = Actions.create(
       key='login' 
       title='Login'
       component={Login}
+      hideNavBar={false}
+      hideTabBar={true}
+      type='replace' />
+    <Scene 
+      key='userForm' 
+      title='UserForm'
+      component={UserFormPage}
       hideNavBar={false}
       hideTabBar={true}
       type='replace' />

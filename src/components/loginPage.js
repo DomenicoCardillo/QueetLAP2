@@ -23,6 +23,9 @@ export default class LoginPage extends Component {
   login() {
     this.props.submit(this.state.email, this.state.pass)
   }
+  goToForm() {
+    Actions.userForm()
+  }
 
   render() {
     return (
@@ -55,6 +58,12 @@ export default class LoginPage extends Component {
             isLoading={this.props.isLoading}
             onPress={this.login.bind(this)}>
             Login
+          </Button>
+          <Button 
+            style={commonStyles.primaryButton} 
+            textStyle={commonStyles.primaryButtonText}
+            onPress={this.goToForm.bind(this)}>
+            Go to form
           </Button>
           
           <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
