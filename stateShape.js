@@ -10,7 +10,8 @@ stateShape = {
     signup: {
       isLoading: false,
       hasError: false,
-      errorMessage: ''
+      errorMessage: '',
+      signupDone: false
     },
     login: {
       isLoading: false,

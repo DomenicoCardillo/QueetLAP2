@@ -12,6 +12,7 @@ const auth = (state = {}, action) => {
 
     case types.SIGNUP_SUCCESS:
       newState.signup.isLoading = false
+      newState.signup.signupDone = true
       return newState
 
     case types.SIGNUP_FAILED:

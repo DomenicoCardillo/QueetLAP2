@@ -16,7 +16,6 @@ export const signup = (email, pass) => {
     ).then(function (userData) {
       userData.sendEmailVerification()
       dispatch(signupSuccess(userData))
-      Actions.login()
     }).catch(function(error) {
       dispatch(signupFailed(error))
     })
