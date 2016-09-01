@@ -7,7 +7,7 @@ import styleVariables from './variables'
 let commonStyles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#f3f3f3'
   },
   container: {
     flex: 1,
@@ -38,7 +38,8 @@ let commonStyles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: styleVariables.baseSpacer,
     paddingRight: styleVariables.baseSpacer,
-    borderRadius: styleVariables.baseRadius
+    borderRadius: styleVariables.baseRadius,
+    backgroundColor: '#fff'
   },
   primaryButton: {
     marginTop: styleVariables.baseSpacer,

@@ -6,7 +6,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
@@ -14,6 +15,7 @@ import Button from 'apsl-react-native-button'
 
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
+import fonts from '../styles/fonts'
 
 export default class SignupPage extends Component {
   constructor (props) {
@@ -36,8 +38,10 @@ export default class SignupPage extends Component {
           </View>
         ) : null }
 
-        { !this.props.signupDone ? (
-          <View style={commonStyles.container}>
+        <View style={commonStyles.container}>
+          { !this.props.signupDone ? (
+            <View>
+              <Text style={Object.assign({}, fonts.style.h1, {margin: 50, textAlign: 'center'})}>Signup</Text>
               <TextInput
                 style={commonStyles.textInput}
                 onChangeText={(email) => this.setState({email: email})}
@@ -60,27 +64,38 @@ export default class SignupPage extends Component {
               <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToLogin.bind(this)}>
                 <Text>Got an Account?</Text>
               </TouchableOpacity>
-          </View>
-        ) : (
-          <View style={styles.errorBox}>
-            <Text style={commonStyles.whiteText}>
-              Please check your email before login
-            </Text>
-            <TouchableOpacity onPress={this.props.goToLogin.bind(this)}>
-              <Text>Go to login</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+            </View>
+          ) : (
+            <View style={styles.confirmBox}>
+              <Text style={fonts.style.h2}>Confirm Mail</Text>
+              <Image source={require('../assets/img/check-icon.png')} style={styles.checkImage}></Image>
+              <Text style={Object.assign({}, fonts.style.h5, {marginBottom: 5})}>Please check your email before login</Text>
+              <TouchableOpacity onPress={this.props.goToLogin.bind(this)}>
+                <Text>Go to login</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  checkImage: {
+    width: 100,
+    height: 100,
+    marginVertical: 50
+  },
   errorBox: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    height: 80,
     backgroundColor: styleVariables.colors.brandDanger
+  },
+  confirmBox: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })

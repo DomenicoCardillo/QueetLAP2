@@ -82,8 +82,6 @@ const scenes = Actions.create(
       key='login' 
       title='Login'
       component={Login}
-      hideNavBar={false}
-      hideTabBar={true}
       type='replace' />
     <Scene 
       key='userForm' 
@@ -96,8 +94,6 @@ const scenes = Actions.create(
       key='signup'
       title='Signup'
       component={Signup}
-      hideNavBar={false}
-      hideTabBar={true}
       type='replace' />
     <Scene 
       key='main'

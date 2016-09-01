@@ -14,6 +14,7 @@ import Button from 'apsl-react-native-button'
 
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
+import fonts from '../styles/fonts'
 
 export default class LoginPage extends Component {
   constructor (props) {
@@ -40,7 +41,7 @@ export default class LoginPage extends Component {
         ) : null }
 
         <View style={commonStyles.container}>
-
+          <Text style={Object.assign({}, fonts.style.h1, {margin: 50, textAlign: 'center'})}>Login</Text>
           <TextInput
             style={commonStyles.textInput}
             onChangeText={(email) => this.setState({email: email})}
@@ -59,16 +60,16 @@ export default class LoginPage extends Component {
             onPress={this.login.bind(this)}>
             Login
           </Button>
+          <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
+            <Text>Do not have an account yet?</Text>
+          </TouchableOpacity>
+
           <Button 
             style={commonStyles.primaryButton} 
             textStyle={commonStyles.primaryButtonText}
             onPress={this.goToForm.bind(this)}>
             Go to form
           </Button>
-          
-          <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
-            <Text>Do not have an account yet?</Text>
-          </TouchableOpacity>
         </View>
       </View>
     )
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   errorBox: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    height: 80,
     backgroundColor: styleVariables.colors.brandDanger
   }
 })
