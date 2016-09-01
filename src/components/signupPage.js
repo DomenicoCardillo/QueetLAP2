@@ -41,7 +41,7 @@ export default class SignupPage extends Component {
         <View style={commonStyles.container}>
           { !this.props.signupDone ? (
             <View>
-              <Text style={Object.assign({}, fonts.style.h1, {margin: 50, textAlign: 'center'})}>Signup</Text>
+              <Text style={[fonts.style.h1, {margin: 50, textAlign: 'center'}]}>Signup</Text>
               <TextInput
                 style={commonStyles.textInput}
                 onChangeText={(email) => this.setState({email: email})}
@@ -69,7 +69,7 @@ export default class SignupPage extends Component {
             <View style={styles.confirmBox}>
               <Text style={fonts.style.h2}>Confirm Mail</Text>
               <Image source={require('../assets/img/check-icon.png')} style={styles.checkImage}></Image>
-              <Text style={Object.assign({}, fonts.style.h5, {marginBottom: 5})}>Please check your email before login</Text>
+              <Text style={[fonts.style.h5, {marginBottom: 5}]}>Please check your email before login</Text>
               <TouchableOpacity onPress={this.props.goToLogin.bind(this)}>
                 <Text>Go to login</Text>
               </TouchableOpacity>

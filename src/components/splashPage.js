@@ -8,7 +8,8 @@ import {
   Text, 
   Image, 
   StyleSheet, 
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native'
 
 import Button from 'apsl-react-native-button'
