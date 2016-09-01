@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.auth.signup.isLoading,
     hasError: state.auth.signup.hasError,
-    errorMessage: state.auth.signup.errorMessage
+    errorMessage: state.auth.signup.errorMessage,
+    signupDone: state.auth.signup.signupDone
   }
 }
 

@@ -36,31 +36,41 @@ export default class SignupPage extends Component {
           </View>
         ) : null }
 
-        <View style={commonStyles.container}>
-          <TextInput
-            style={commonStyles.textInput}
-            onChangeText={(email) => this.setState({email: email})}
-            placeholder={"Email Address"}
-          />
-          <TextInput
-            style={commonStyles.textInput}
-            secureTextEntry={true}
-            onChangeText={(pass) => this.setState({pass: pass})}
-            placeholder={"Password"}
-          />
-          <Button 
-            style={commonStyles.primaryButton} 
-            textStyle={commonStyles.primaryButtonText}
-            isLoading={this.props.isLoading}
-            onPress={this.signup.bind(this)}>
-            Signup
-          </Button>
+        { !this.props.signupDone ? (
+          <View style={commonStyles.container}>
+              <TextInput
+                style={commonStyles.textInput}
+                onChangeText={(email) => this.setState({email: email})}
+                placeholder={"Email Address"}
+              />
+              <TextInput
+                style={commonStyles.textInput}
+                secureTextEntry={true}
+                onChangeText={(pass) => this.setState({pass: pass})}
+                placeholder={"Password"}
+              />
+              <Button 
+                style={commonStyles.primaryButton} 
+                textStyle={commonStyles.primaryButtonText}
+                isLoading={this.props.isLoading}
+                onPress={this.signup.bind(this)}>
+                Signup
+              </Button>
 
-          <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToLogin.bind(this)}>
-            <Text>Got an Account?</Text>
-          </TouchableOpacity>
-        
-        </View>
+              <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToLogin.bind(this)}>
+                <Text>Got an Account?</Text>
+              </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.errorBox}>
+            <Text style={commonStyles.whiteText}>
+              Please check your email before login
+            </Text>
+            <TouchableOpacity onPress={this.props.goToLogin.bind(this)}>
+              <Text>Go to login</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     )
   }
