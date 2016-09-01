@@ -14,6 +14,7 @@ export const signup = (email, pass) => {
       email,
       pass
     ).then(function (userData) {
+      userData.sendEmailVerification()
       dispatch(signupSuccess(userData))
       Actions.login()
     }).catch(function(error) {
@@ -49,13 +50,17 @@ export const login = (email, pass) => {
       email,
       pass
     ).then(function (userData) {
-      //check if user is not verified yet?
-      dispatch(loginSuccess(userData))
-      userData.getToken().then(function(reauthToken){
-        userData.reauthToken = reauthToken
-        AsyncStorage.setItem('userData', JSON.stringify(userData))
-      })
-      Actions.main()
+      if(userData.emailVerified){
+        dispatch(loginSuccess(userData))
+        userData.getToken().then(function(reauthToken){
+          userData.reauthToken = reauthToken
+          AsyncStorage.setItem('userData', JSON.stringify(userData))
+        })
+        Actions.main()
+      } else {
+        let error = { message: 'You must verify your account. Please check your email.' }
+        dispatch(loginFailed(error))
+      }
     }).catch(function(error) {
       dispatch(loginFailed(error))
     })
