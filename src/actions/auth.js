@@ -61,10 +61,15 @@ export const login = (email, pass) => {
         /*userData.getToken().then(function(reauthToken){
           userData.reauthToken = reauthToken
         })*/
-        var ref = Firebase.database().ref('users')
+        let ref = Firebase.database().ref('users')
         ref.orderByChild('email').equalTo(userData.email).on('value', function(userSnap) {
-          AsyncStorage.setItem('userData', JSON.stringify(userSnap.val()))
-        })
+        
+        let user = userSnap.val()
+        for(let key in userSnap.val()) user.id = key
+        user = Object.assign({}, {id: user.id}, user[user.id])
+        
+        AsyncStorage.setItem('userData', JSON.stringify(user))
+      })
         Actions.main()
       } else {
         let error = { message: 'You must verify your account. Please check your email.' }

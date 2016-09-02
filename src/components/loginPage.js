@@ -48,12 +48,12 @@ export default class LoginPage extends Component {
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
 
     /* Precompile email if userData is set */
-    AsyncStorage.getItem('userData').then((userDataJson) => {
-      let userData = JSON.parse(userDataJson)
-      if(userData != null) {
-        console.log(userData)
+    AsyncStorage.getItem('userData').then((userJson) => {
+      let user = JSON.parse(userJson)
+
+      if(user !== null) {
         this.setState({
-          email: userData.email
+          email: user.email
         })
       }
     })
@@ -103,12 +103,15 @@ export default class LoginPage extends Component {
         <ScrollView style={commonStyles.container}>
           <Text style={[{textAlign: 'center'}, this.state.pageTitle]}>Login</Text>
           <TextInput
+            ref='1'
             style={commonStyles.textInput}
             onChangeText={(email) => this.setState({email: email})}
             placeholder={"Email Address"}
             value={this.state.email}
+            onSubmitEditing={() =>  this.refs['2'].focus()}
           />
           <TextInput
+            ref='2'
             style={commonStyles.textInput}
             secureTextEntry={true}
             onChangeText={(pass) => this.setState({pass: pass})}

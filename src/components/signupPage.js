@@ -45,11 +45,14 @@ export default class SignupPage extends Component {
             <View>
               <Text style={[fonts.style.h1, {margin: 50, textAlign: 'center'}]}>Signup</Text>
               <TextInput
+                ref='1'
                 style={commonStyles.textInput}
                 onChangeText={(email) => this.setState({email: email})}
                 placeholder={"Email Address"}
+                onSubmitEditing={() =>  this.refs['2'].focus()}
               />
               <TextInput
+                ref='2'
                 style={commonStyles.textInput}
                 secureTextEntry={true}
                 onChangeText={(pass) => this.setState({pass: pass})}
