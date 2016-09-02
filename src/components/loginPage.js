@@ -27,14 +27,14 @@ export default class LoginPage extends Component {
       pageTitle: {
         fontSize: fonts.size.h1,
         margin: 50
-      }
+      },
+      email: '',
+      pass: ''
     }
   }
 
   login() {
-    if(this.state && this.state.email && this.state.pass) {
-      this.props.submit(this.state.email, this.state.pass)
-    }
+    this.props.submit(this.state.email, this.state.pass)
   }
 
   goToForm() {
@@ -51,9 +51,9 @@ export default class LoginPage extends Component {
     AsyncStorage.getItem('userData').then((userJson) => {
       let user = JSON.parse(userJson)
 
-      if(user !== null) {
+      if(user !== null && user[0]) {
         this.setState({
-          email: user.email
+          email: user[0].email
         })
       }
     })

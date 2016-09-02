@@ -20,12 +20,14 @@ import fonts from '../styles/fonts'
 export default class SignupPage extends Component {
   constructor (props) {
     super()
+    this.state = {
+      email: '',
+      pass: ''
+    }
   }
 
   signup() {
-    if(this.state && this.state.email && this.state.pass) {
-      this.props.submit(this.state.email, this.state.pass)
-    }
+    this.props.submit(this.state.email, this.state.pass)
   }
 
   render() {
