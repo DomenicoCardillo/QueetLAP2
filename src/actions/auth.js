@@ -22,6 +22,7 @@ export const signup = (email, pass) => {
         photoURL: userData.photoURL,
         emailVerified: false
       })
+      AsyncStorage.setItem('lastEmail', userData.email)
       dispatch(signupSuccess(userData))
     }).catch(function(error) {
       dispatch(signupFailed(error))
@@ -56,20 +57,16 @@ export const login = (email, pass) => {
       email,
       pass
     ).then(function(userData) {
-      if(userData.emailVerified){       
-        dispatch(loginSuccess(userData))
-        /*userData.getToken().then(function(reauthToken){
-          userData.reauthToken = reauthToken
-        })*/
+      if(userData.emailVerified){
+        AsyncStorage.setItem('lastEmail', userData.email)
+
         let ref = Firebase.database().ref('users')
         ref.orderByChild('email').equalTo(userData.email).on('value', function(userSnap) {
-        
-        let user = userSnap.val()
-        for(let key in userSnap.val()) user.id = key
-        user = Object.assign({}, {id: user.id}, user[user.id])
-        
-        AsyncStorage.setItem('userData', JSON.stringify(user))
-      })
+          let user = userSnap.val()
+          for(let key in userSnap.val()) user.id = key
+          user = Object.assign({}, {id: user.id}, user[user.id])
+          dispatch(loginSuccess(user))
+        })
         Actions.main()
       } else {
         let error = { message: 'You must verify your account. Please check your email.' }

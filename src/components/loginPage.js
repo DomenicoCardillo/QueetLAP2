@@ -47,13 +47,10 @@ export default class LoginPage extends Component {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow.bind(this))
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
 
-    /* Precompile email if userData is set */
-    AsyncStorage.getItem('userData').then((userJson) => {
-      let user = JSON.parse(userJson)
-
-      if(user !== null && user[0]) {
+    AsyncStorage.getItem('lastEmail').then((email) => {
+      if(email) {
         this.setState({
-          email: user[0].email
+          email: email
         })
       }
     })
