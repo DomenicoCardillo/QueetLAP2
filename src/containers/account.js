@@ -3,11 +3,17 @@ import AccountPage from '../components/accountPage'
 import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    currentUser: state.auth.currentUser
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    goToForm: () => {
+      Actions.userForm()
+    }
+  }
 }
 
 const Account = connect(

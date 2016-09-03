@@ -6,9 +6,8 @@ import {
     View,
     Text,
     StyleSheet,
-    Platform,
-    BackAndroid,
-    TouchableOpacity
+    ScrollView,
+    BackAndroid
 } from 'react-native'
 
 /*import ImagePicker from 'react-native-image-crop-picker'*/
@@ -25,10 +24,6 @@ import styleVariables from '../styles/variables'
 export default class AccountPage extends Component {
   constructor (props) {
     super()
-  }
-
-  goToForm() {
-    Actions.userForm()
   }
   
   componentDidMount() {
@@ -49,12 +44,17 @@ export default class AccountPage extends Component {
 
   render() {
     return (
-        <View style={commonStyles.container}>
-
+      <View style={commonStyles.container}>
+        <ScrollView style={commonStyles.container}>
+          <Text>Firstname: {this.props.currentUser.firstname}</Text>
+          <Text>Lastname: {this.props.currentUser.lastname}</Text>
+          <Text>Gender: {this.props.currentUser.gender}</Text>
+          <Text>Place: {this.props.currentUser.longPlace}</Text>
+        </ScrollView>
         <Button 
           style={commonStyles.primaryButton} 
           textStyle={commonStyles.primaryButtonText}
-          onPress={this.goToForm.bind(this)}>
+          onPress={this.props.goToForm.bind(this)}>
           Modify
         </Button>
       </View>

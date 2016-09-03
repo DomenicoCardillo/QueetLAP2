@@ -24,7 +24,8 @@ export default class UserFormPage extends Component {
         lastname: this.props.profile.lastname || '',
         gender: this.props.profile.gender || '' 
       },
-      place: this.props.profile.place
+      longPlace: this.props.profile.longPlace,
+      shortPlace: this.props.profile.shortPlace
     }
   }
 
@@ -36,17 +37,19 @@ export default class UserFormPage extends Component {
     let value = this.refs.form.getValue()
     if(value) {
       let newProfile = Object.assign({}, this.props.profile, value)
-      newProfile.place = this.state.place
+      newProfile.shortPlace = this.state.shortPlace
+      newProfile.longPlace = this.state.longPlace
       this.props.updateProfile(newProfile)
     }
   }
 
   getDefaultPlace(){
-    return this.state.place.shortname
+    return this.state.longPlace
   }
 
   updatePlace(data) {
-    this.state.place = {shortname: data.terms[0].value, longname: data.description}
+    this.state.shortPlace = data.terms[0].value
+    this.state.longPlace = data.description
   }
 
   render() {
