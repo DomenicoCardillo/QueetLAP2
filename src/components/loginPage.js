@@ -13,7 +13,6 @@ import {
   AsyncStorage
 } from 'react-native'
 
-import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
 
 import commonStyles from '../styles/commons'
@@ -21,7 +20,7 @@ import styleVariables from '../styles/variables'
 import fonts from '../styles/fonts'
 
 export default class LoginPage extends Component {
-  constructor (props) {
+  constructor(props) {
     super()
     this.state = {
       pageTitle: {
@@ -35,10 +34,6 @@ export default class LoginPage extends Component {
 
   login() {
     this.props.submit(this.state.email, this.state.pass)
-  }
-
-  goToForm() {
-    Actions.userForm()
   }
 
   componentWillMount() {
@@ -124,13 +119,6 @@ export default class LoginPage extends Component {
           <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
             <Text>Do not have an account yet?</Text>
           </TouchableOpacity>
-
-          <Button 
-            style={commonStyles.primaryButton} 
-            textStyle={commonStyles.primaryButtonText}
-            onPress={this.goToForm.bind(this)}>
-            Go to form
-          </Button>
         </ScrollView>
       </View>
     )

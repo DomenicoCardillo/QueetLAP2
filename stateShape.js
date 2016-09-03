@@ -2,10 +2,9 @@ stateShape = {
   auth: {
     currentUser: {
       email: 'marco.nisi.100@gmail.com',
-      displayName: 'Marco Nisi',
-      photoUrl: 'www.example.com/photo',
-      token: 'xxx-xxx-xxx'
-      //Save my friends and my events?
+      firstname: 'Marco',
+      lastname: 'Nisi',
+      gender: 'Male'
     },
     signup: {
       isLoading: false,
@@ -21,6 +20,11 @@ stateShape = {
     logout: {
       isLoading: false
     }
+  },
+  profile: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: ''
   },
   events: {
     0: {

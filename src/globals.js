@@ -1,3 +1,5 @@
+import Firebase from 'firebase'
+
 export const firebaseConfig = {
   apiKey        : 'AIzaSyA7xfi_HkGSSGYRsSZHoiqtRVt3G67KNA8',
   authDomain    : 'popping-inferno-7635.firebaseapp.com',
@@ -23,5 +25,16 @@ export const initialState = {
     logout: {
       isLoading: false
     }
+  },
+  profile: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: ''
   }
 }
+
+Firebase.initializeApp(firebaseConfig)
+
+export const firebaseDB = Firebase.database()
+export const dbUsersRef = firebaseDB.ref('users')
+export const firebaseAuth = Firebase.auth()
