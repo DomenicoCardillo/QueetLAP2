@@ -24,6 +24,11 @@ export default class AccountPage extends Component {
   constructor (props) {
     super()
   }
+
+  goToForm() {
+    Actions.userForm()
+  }
+  
   componentDidMount() {
 
     BackAndroid.addEventListener('hardwareBackPress', function() {
@@ -109,6 +114,13 @@ export default class AccountPage extends Component {
           // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
           filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} 
         />
+
+        <Button 
+          style={commonStyles.primaryButton} 
+          textStyle={commonStyles.primaryButtonText}
+          onPress={this.goToForm.bind(this)}>
+          Modify
+        </Button>
       </View>
     )
   }

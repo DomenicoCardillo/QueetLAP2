@@ -22,6 +22,10 @@ let Gender = t.enums({
   F: 'Female'
 })
 
+var Name = t.refinement(t.String, function (name) {
+  return name.length >= 2;
+});
+
 let styles = {
   textbox: {
 
@@ -52,15 +56,13 @@ let styles = {
 }
 
 const model = t.struct({
-  firstname: t.String,
-  lastname: t.String,
-  email: t.String,
-  birthdate: t.Date,
+  firstname: Name,
+  lastname: Name,
   gender: Gender
 })
 
 const options = {
-  stylesheet: stylesheet,
+  stylesheet: stylesheet
 }
 
 export default {

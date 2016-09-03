@@ -1,25 +1,19 @@
 import * as types from './types'
-import Firebase from 'firebase'
-import * as globals from '../globals'
+import { firebaseAuth, dbUsersRef, firebaseDB } from '../globals'
 import { AsyncStorage } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
 
-Firebase.initializeApp(globals.firebaseConfig)
-
 export const signup = (email, pass) => {
   return (dispatch) => {
     dispatch(signupStart())
-    Firebase.auth().createUserWithEmailAndPassword(
+    firebaseAuth.createUserWithEmailAndPassword(
       email,
       pass
     ).then(function(userData) {
       userData.sendEmailVerification()
-      let usersRef = Firebase.database().ref('/users')
-      usersRef.push({
+      firebaseDB.ref('users/' + userData.uid).set({
         email: userData.email,
-        displayName: userData.displayName,
-        photoURL: userData.photoURL,
         emailVerified: false
       })
       AsyncStorage.setItem('lastEmail', userData.email)
@@ -53,18 +47,24 @@ export const signupFailed = (error) => {
 export const login = (email, pass) => {
   return (dispatch) => {
     dispatch(loginStart())
-    Firebase.auth().signInWithEmailAndPassword(
+    firebaseAuth.signInWithEmailAndPassword(
       email,
       pass
     ).then(function(userData) {
       if(userData.emailVerified){
         AsyncStorage.setItem('lastEmail', userData.email)
 
-        let ref = Firebase.database().ref('users')
-        ref.orderByChild('email').equalTo(userData.email).on('value', function(userSnap) {
+        dbUsersRef.orderByChild('email').equalTo(userData.email).on('value', function(userSnap) {
           let user = userSnap.val()
-          for(let key in userSnap.val()) user.id = key
-          user = Object.assign({}, {id: user.id}, user[user.id])
+          user = user[userData.uid]
+          user.id = userData.uid
+
+          if(!user.emailVerified){
+            let updates = {}
+            updates['/' + user.id + '/emailVerified'] = true
+            dbUsersRef.update(updates)
+          }
+
           dispatch(loginSuccess(user))
         })
         Actions.main()
@@ -101,7 +101,7 @@ export const loginFailed = (error) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch(logoutStart())
-    Firebase.auth().signOut().then(function() {
+    firebaseAuth.signOut().then(function() {
       dispatch(logoutSuccess)
       AsyncStorage.setItem('userData', null)
       Actions.login()
@@ -127,7 +127,7 @@ export const reauthenticate = () => {
     AsyncStorage.getItem('userData').then((userDataJson) => {
       let userData = JSON.parse(userDataJson)
       if(userData != null) {
-        Firebase.auth().signInWithCustomToken(
+        firebaseAuth.signInWithCustomToken(
           userData.stsTokenManager.accessToken
         ).then(function(userData) {
           dispatch(reauthenticateSuccess(userData))

@@ -24,7 +24,7 @@ import Splash from '../components/splashPage'
 import Signup from './signup'
 import Login from './login'
 import Account from './account'
-import UserFormPage from '../components/userFormPage'
+import UserForm from './userForm'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -86,7 +86,7 @@ const scenes = Actions.create(
     <Scene 
       key='userForm' 
       title='UserForm'
-      component={UserFormPage}
+      component={UserForm}
       hideNavBar={false}
       hideTabBar={true}
       type='replace' />
