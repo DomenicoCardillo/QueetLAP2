@@ -11,7 +11,7 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-import ImagePicker from 'react-native-image-crop-picker'
+/*import ImagePicker from 'react-native-image-crop-picker'*/
 import NativeModules from 'NativeModules'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
@@ -63,13 +63,13 @@ export default class AccountPage extends Component {
   }
 
   openPicker() {
-    ImagePicker.openPicker({
+    /*ImagePicker.openPicker({
       width: 300,
       height: 400,
       cropping: true
     }).then(image => {
       console.log(image);
-    });
+    });*/
   }
 
   render() {
