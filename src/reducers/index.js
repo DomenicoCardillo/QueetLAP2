@@ -1,6 +1,7 @@
 import auth from './auth'
 import profile from './profile'
 import categories from './categories'
+import events from './events'
 
 import { combineReducers } from 'redux'
 
@@ -15,6 +16,10 @@ const rootReducer = (state = {}, action) => {
   newState.auth.currentUser = newProfile.auth.currentUser
 
   newState.categories = categories(state.categories, action)
+
+  let eventsStuffs = events({events: state.events, event: state.event}, action)
+  newState.events = eventsStuffs.events
+  newState.event = eventsStuffs.event
   
   return newState
 }

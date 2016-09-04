@@ -2,6 +2,8 @@ import React, {
   StyleSheet
 } from 'react-native'
 
+import { formatDate, formatTime } from '../globals'
+
 import t from 'tcomb-form-native'
 import _ from 'lodash'
 
@@ -17,10 +19,6 @@ stylesheet.select.normal.borderWidth = 1
 stylesheet.select.normal.borderColor = '#ddd'
 stylesheet.select.normal.borderRadius = 4
 
-let Gender = t.enums({
-  M: 'Male',
-  F: 'Female'
-})
 
 let Name = t.refinement(t.String, function (name) {
   return name.length >= 2;
@@ -56,16 +54,25 @@ let styles = {
 }
 
 const model = t.struct({
-  firstname: Name,
-  lastname: Name,
-  gender: Gender
+  name: Name,
+  date: t.Date,
+  time: t.Date
 })
 
 const options = {
   stylesheet: stylesheet,
   fields: {
-    gender: {
-      nullOption: false
+    date: {
+      mode: 'date',
+      config: {
+        format: formatDate
+      }
+    },
+    time: {
+      mode: 'time',
+      config: {
+        format: formatTime
+      }
     }
   }
 }

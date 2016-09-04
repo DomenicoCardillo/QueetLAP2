@@ -1,13 +1,13 @@
 import React, {
-    Component
+  Component
 } from 'react'
 
 import {
-    View,
-    Text,
-    StyleSheet,
-    ScrollView,
-    BackAndroid
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  BackAndroid
 } from 'react-native'
 
 /*import ImagePicker from 'react-native-image-crop-picker'*/
@@ -52,6 +52,12 @@ export default class AccountPage extends Component {
           <Text>Place: {this.props.currentUser.longPlace}</Text>
           <Text>Favourites sports: {this.props.currentUser.stringedCategories}</Text>
         </ScrollView>
+        <Button 
+          style={commonStyles.primaryButton} 
+          textStyle={commonStyles.primaryButtonText}
+          onPress={this.props.goToNewEvent.bind(this)}>
+          New event
+        </Button>
         <Button 
           style={commonStyles.primaryButton} 
           textStyle={commonStyles.primaryButtonText}
