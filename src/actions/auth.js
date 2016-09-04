@@ -1,6 +1,7 @@
 import * as types from './types'
 import { firebaseAuth, dbUsersRef, firebaseDB } from '../globals'
 import { AsyncStorage } from 'react-native'
+import { loadCategories } from './categories'
 
 import { Actions } from 'react-native-router-flux'
 
@@ -54,7 +55,7 @@ export const login = (email, pass) => {
       if(userData.emailVerified){
         AsyncStorage.setItem('lastEmail', userData.email)
 
-        dbUsersRef.orderByChild('email').equalTo(userData.email).on('value', function(userSnap) {
+        dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
           let user = userSnap.val()
           user = user[userData.uid]
           user.id = userData.uid
@@ -66,6 +67,7 @@ export const login = (email, pass) => {
           }
 
           dispatch(loginSuccess(user))
+          dispatch(loadCategories())
         })
         Actions.main()
       } else {

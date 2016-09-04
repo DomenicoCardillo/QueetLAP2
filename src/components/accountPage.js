@@ -50,6 +50,7 @@ export default class AccountPage extends Component {
           <Text>Lastname: {this.props.currentUser.lastname}</Text>
           <Text>Gender: {this.props.currentUser.gender}</Text>
           <Text>Place: {this.props.currentUser.longPlace}</Text>
+          <Text>Favourites sports: {this.props.currentUser.stringedCategories}</Text>
         </ScrollView>
         <Button 
           style={commonStyles.primaryButton} 

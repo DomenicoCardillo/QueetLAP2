@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
     profile: state.auth.currentUser,
     isLoading: state.profile.isLoading,
     hasError: state.profile.hasError,
-    errorMessage: state.profile.errorMessage
+    errorMessage: state.profile.errorMessage,
+    categories: state.categories
   }
 }
 

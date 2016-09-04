@@ -10,6 +10,7 @@ export const firebaseConfig = {
 export const initialState = {
   auth: {
     currentUser: {
+      categories: []
     },
     signup: {
       isLoading: false,
@@ -30,11 +31,13 @@ export const initialState = {
     isLoading: false,
     hasError: false,
     errorMessage: ''
-  }
+  },
+  categories: []
 }
 
 Firebase.initializeApp(firebaseConfig)
 
 export const firebaseDB = Firebase.database()
 export const dbUsersRef = firebaseDB.ref('users')
+export const dbCategoriesRef = firebaseDB.ref('categories')
 export const firebaseAuth = Firebase.auth()

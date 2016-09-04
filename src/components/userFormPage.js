@@ -1,13 +1,15 @@
 import React, {
   Component
 } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
 
 import UserForm from '../formsModels/user'
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
+
+import MultipleChoice from 'react-native-multiple-choice'
 
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
@@ -25,7 +27,9 @@ export default class UserFormPage extends Component {
         gender: this.props.profile.gender || '' 
       },
       longPlace: this.props.profile.longPlace,
-      shortPlace: this.props.profile.shortPlace
+      shortPlace: this.props.profile.shortPlace,
+      selectedCategories: this.getDefaultCategories(),
+      stringedCategories: this.getStringedCategories()
     }
   }
 
@@ -39,6 +43,13 @@ export default class UserFormPage extends Component {
       let newProfile = Object.assign({}, this.props.profile, value)
       newProfile.shortPlace = this.state.shortPlace
       newProfile.longPlace = this.state.longPlace
+
+      newProfile.categories = this.props.categories.filter(function(cat) {
+        return this.state.selectedCategories.indexOf(cat.name) >= 0
+      }.bind(this)).map((cat) => {
+        return cat.id
+      })
+
       this.props.updateProfile(newProfile)
     }
   }
@@ -50,6 +61,18 @@ export default class UserFormPage extends Component {
   updatePlace(data) {
     this.state.shortPlace = data.terms[0].value
     this.state.longPlace = data.description
+  }
+
+  getDefaultCategories(){
+    return this.props.categories.filter((cat) => {
+      return this.props.profile.categories && this.props.profile.categories.indexOf(cat.id) >= 0 
+    }).map((cat) => {
+      return cat.name
+    })
+  }
+
+  getStringedCategories(){
+    return this.props.categories.map((cat) => { return cat.name })
   }
 
   render() {
@@ -71,6 +94,16 @@ export default class UserFormPage extends Component {
           onChange={this.onChange.bind(this)}
         />
 
+        <Text>Favourites sports</Text>
+        <MultipleChoice
+          options={this.state.stringedCategories}
+          selectedOptions={this.state.selectedCategories}
+          maxSelectedOptions={5}
+        />
+
+        <View style={{height: 40}}></View>
+
+        <Text>Position</Text>
         <GooglePlacesAutocomplete
           placeholder='Posizione'
           minLength={2} // minimum length of text to search
@@ -126,6 +159,8 @@ export default class UserFormPage extends Component {
           filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} 
         />
 
+        <View style={{height: 40}}></View>
+
         <Button 
           style={commonStyles.primaryButton} 
           textStyle={commonStyles.primaryButtonText}
@@ -133,6 +168,8 @@ export default class UserFormPage extends Component {
           onPress={this.onSave.bind(this)}>
           Save
         </Button>
+
+        <View style={{height: 40}}></View>
       </ScrollView>
     )
   }

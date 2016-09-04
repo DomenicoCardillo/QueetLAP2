@@ -1,5 +1,4 @@
 import * as types from '../actions/types'
-import * as globals from '../globals'
 
 const profile = (state = {}, action) => {
   let newState = Object.assign({}, state)
