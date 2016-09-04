@@ -70,3 +70,34 @@ export const updateEventFailed = (error) => {
     error
   }
 }
+
+export const fetchEvents = () => {
+  return (dispatch) => {
+    dispatch(fetchEventsStart())
+    dbEventsRef.limitToLast(10).once('value').then(function(snapshot) {
+      dispatch(fetchEventsSuccess(snapshot.val()))
+    }).catch(function(error){
+      dispatch(fetchEventsFailed(error))
+    })
+  }
+}
+
+export const fetchEventsStart = () => {
+  return {
+    type: types.FETCH_EVENTS_START
+  }
+}
+
+export const fetchEventsSuccess = (payload) => {
+  return {
+    type: types.FETCH_EVENTS_SUCCESS,
+    payload
+  }
+}
+
+export const fetchEventsFailed = (error) => {
+  return {
+    type: types.FETCH_EVENTS_FAILED,
+    error
+  }
+}

@@ -26,6 +26,7 @@ import Login from './login'
 import Account from './account'
 import UserForm from './userForm'
 import EventForm from './eventForm'
+import Events from './events'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -100,6 +101,11 @@ const scenes = Actions.create(
       key='eventForm'
       title='New event'
       component={EventForm}
+      type='replace' />
+    <Scene 
+      key='events'
+      title='Events'
+      component={Events}
       type='replace' />
     <Scene 
       key='main'

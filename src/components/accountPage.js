@@ -55,6 +55,12 @@ export default class AccountPage extends Component {
         <Button 
           style={commonStyles.primaryButton} 
           textStyle={commonStyles.primaryButtonText}
+          onPress={this.props.goToEvents.bind(this)}>
+          View events
+        </Button>
+        <Button 
+          style={commonStyles.primaryButton} 
+          textStyle={commonStyles.primaryButtonText}
           onPress={this.props.goToNewEvent.bind(this)}>
           New event
         </Button>

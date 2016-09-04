@@ -49,6 +49,7 @@ export default class EventFormPage extends Component {
       newEvent.category = this.state.selectedCategory
       newEvent.date = formatDate(newEvent.date)
       newEvent.time = formatTime(newEvent.time)
+      newEvent.creator = this.props.creator
 
       if(this.state.isNew)  this.props.createEvent(newEvent)
       else                  this.props.updateEvent(newEvent)

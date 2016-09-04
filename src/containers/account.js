@@ -26,6 +26,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     goToNewEvent: () => {
       Actions.eventForm()
+    },
+    goToEvents: () => {
+      Actions.events()
     }
   }
 }
