@@ -14,7 +14,7 @@ export const updateProfile = (newProfile) => {
       }
       else {
         dispatch(updateProfileSuccess(newProfile))
-        Actions.main()
+        Actions.pop()
       }
     })
   }

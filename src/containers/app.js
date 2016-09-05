@@ -7,7 +7,8 @@ import {
   View,
   StyleSheet,
   StatusBar, 
-  Platform
+  Platform,
+  Image
 } from 'react-native'
 
 import { Actions, Scene, Router } from 'react-native-router-flux'
@@ -87,38 +88,16 @@ const scenes = Actions.create(
       component={Login}
       type='replace' />
     <Scene 
-      key='userForm' 
-      title='UserForm'
-      component={UserForm}
-      hideNavBar={false}
-      hideTabBar={true}
-      type='replace' />
-    <Scene 
       key='signup'
       title='Signup'
       component={Signup}
-      type='replace' />
-    <Scene 
-      key='eventForm'
-      title='New event'
-      component={EventForm}
       type='replace' />
     <Scene 
       key='main'
       tabs
       tabBarStyle={styles.tabBarStyle}
       tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
-      <Scene 
-        key='account'
-        title='Account'
-        component={Account}
-        hideNavBar={false}
-        hideTabBar={false}
-        icon={TabItem} 
-        titleStyle={styles.titleStyle}
-        navigationBarStyle={styles.navigationBarStyle}>
-      </Scene>
-      <Scene 
+      <Scene
         key='events'
         title='Events'
         component={Events}
@@ -126,9 +105,46 @@ const scenes = Actions.create(
         hideTabBar={false}
         icon={TabItem} 
         titleStyle={styles.titleStyle}
-        navigationBarStyle={styles.navigationBarStyle}>
-      </Scene>
+        navigationBarStyle={styles.navigationBarStyle}
+        rightTitle='+'
+        onRight={() => Actions.eventForm()}
+        rightButtonTextStyle={{color: '#fff', fontSize: 20}} />
+      <Scene
+        key='users'
+        title='Users'
+        component={Events}
+        hideNavBar={false}
+        hideTabBar={false}
+        icon={TabItem} 
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}
+        rightTitle='Profile'
+        onRight={() => Actions.account()}
+        rightButtonTextStyle={{color: '#fff'}} />
     </Scene>
+    <Scene 
+      key='account'
+      title='Account'
+      component={Account}
+      hideNavBar={false}
+      hideTabBar={false}
+      icon={TabItem} 
+      titleStyle={styles.titleStyle}
+      navigationBarStyle={styles.navigationBarStyle} />
+    <Scene 
+      key='userForm'
+      title='Profile edit'
+      component={UserForm}
+      hideNavBar={false}
+      hideTabBar={true}
+      type='replace' />
+    <Scene 
+      key='eventForm'
+      title='New event'
+      hideNavBar={false}
+      hideTabBar={true}
+      component={EventForm} />
+
   </Scene>
 )
 

@@ -19,7 +19,6 @@ stylesheet.select.normal.borderWidth = 1
 stylesheet.select.normal.borderColor = '#ddd'
 stylesheet.select.normal.borderRadius = 4
 
-
 let Name = t.refinement(t.String, function (name) {
   return name.length >= 2;
 });

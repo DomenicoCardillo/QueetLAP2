@@ -25,9 +25,9 @@ export default class EventFormPage extends Component {
     this.state = {
       isNew: Object.getOwnPropertyNames(this.props.event).length == 0, 
       value: {
-        name: this.props.event.name || '',
-        date: this.props.event.date || '',
-        time: this.props.event.time || '' 
+        name: this.props.event.name,
+        date: this.props.event.date,
+        time: this.props.event.time 
       },
       longPlace: this.props.event.longPlace || '',
       shortPlace: this.props.event.shortPlace || '',
