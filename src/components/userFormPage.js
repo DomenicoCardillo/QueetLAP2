@@ -1,7 +1,7 @@
 import React, {
   Component
 } from 'react'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 
 import UserForm from '../formsModels/user'
 import { Actions } from 'react-native-router-flux'
@@ -10,6 +10,7 @@ import Button from 'apsl-react-native-button'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
 import MultipleChoice from 'react-native-multiple-choice'
+import ImagePicker from 'react-native-image-crop-picker'
 
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
@@ -21,6 +22,7 @@ export default class UserFormPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      picture: this.props.picture || './../assets/img/user-default.png',
       value: {
         firstname: this.props.profile.firstname || '',
         lastname: this.props.profile.lastname || '',
@@ -75,6 +77,19 @@ export default class UserFormPage extends Component {
     return this.props.categories.map((cat) => { return cat.name })
   }
 
+  openPicker() {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image)
+      this.setState({
+        picture: image.path
+      })
+    })
+  }
+
   render() {
     return (
       <ScrollView style={commonStyles.container}>
@@ -85,6 +100,12 @@ export default class UserFormPage extends Component {
               </Text>
             </View>
           ) : null }
+
+
+        <TouchableOpacity onPress={this.openPicker.bind(this)} style={{flex: 1, alignItems: 'center'}}>
+          <Image source={{uri: this.state.picture}} style={styles.userImage} />
+          <Text style={commonStyles.label}>Change avatar</Text>
+        </TouchableOpacity>
 
         <Form 
           ref="form"
@@ -170,3 +191,12 @@ export default class UserFormPage extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  userImage: {
+    width: 90,
+    height: 90,
+    borderRadius: styleVariables.baseRadius,
+    marginBottom: 10
+  }
+})

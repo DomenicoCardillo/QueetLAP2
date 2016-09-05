@@ -11,8 +11,6 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import ImagePicker from 'react-native-image-crop-picker'
-
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
 import { Actions } from 'react-native-router-flux'
@@ -32,16 +30,6 @@ export default class AccountPage extends Component {
     })
   }
 
-  openPicker() {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true
-    }).then(image => {
-      console.log(image)
-    })
-  }
-
   render() {
     return (
       <View style={commonStyles.container}>
@@ -52,8 +40,6 @@ export default class AccountPage extends Component {
           <Text>Place: {this.props.currentUser.longPlace}</Text>
           <Text>Favourites sports: {this.props.currentUser.stringedCategories}</Text>
         </ScrollView>
-
-        <TouchableOpacity onPress={this.openPicker.bind(this)}><Text>Apri galleria</Text></TouchableOpacity>
       </View>
     )
   }
