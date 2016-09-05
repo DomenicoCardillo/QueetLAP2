@@ -36,6 +36,10 @@ const events = (state = {}, action) => {
       newState.event.errorMessage = action.error.message
       return newState
 
+    case types.APPLY_EVENT_CHANGES:
+      newState.events[action.payload.id] = action.payload.newValue
+      return newState
+
     default:
       return state
   }

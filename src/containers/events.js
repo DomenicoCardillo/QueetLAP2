@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchEvents } from '../actions/events'
+import { fetchEvents, listenChanges } from '../actions/events'
 import EventsPage from '../components/eventsPage'
 import { Actions } from 'react-native-router-flux'
 
@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchEvents: () => {
       dispatch(fetchEvents())
+    },
+    listenChanges: () => {
+      dispatch(listenChanges())
     }
   }
 }

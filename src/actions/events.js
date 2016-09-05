@@ -101,3 +101,18 @@ export const fetchEventsFailed = (error) => {
     error
   }
 }
+
+export const listenChanges = () => {
+  return (dispatch) => {
+    dbEventsRef.on('child_changed', function(childSnapshot, prevChildKey) {
+      dispatch(applyEventChanges({id: childSnapshot.key, newValue: childSnapshot.val()}))
+    })
+  }
+}
+
+export const applyEventChanges = (payload) => {
+  return {
+    type: types.APPLY_EVENT_CHANGES,
+    payload
+  }
+}

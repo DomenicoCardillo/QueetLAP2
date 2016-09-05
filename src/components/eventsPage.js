@@ -9,10 +9,50 @@ import {
   Text, 
   Image, 
   StyleSheet,
+  TouchableOpacity,
   RecyclerViewBackedScrollView
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
+
+const styles = StyleSheet.create({
+  eventBox: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 100,
+    padding: 15
+  },
+  eventImage: {
+    flex: 1,
+    width: 70,
+    height: 50,
+    marginRight: 10
+  },
+  eventContainer: {
+    flex: 2
+  },
+  eventTopInfo: {
+    flexDirection: 'row'
+  },
+  eventTitle: {
+    fontSize: 20, 
+    fontWeight: '500', 
+    marginBottom: 5
+  },
+  eventDate: {
+    position: 'absolute', 
+    right: 0,
+    color: '#999'
+  },
+  eventBottomInfo: {
+    position: 'absolute', 
+    bottom: 0
+  },
+  eventBottomInfoText: {
+    fontSize: 16, 
+    marginBottom: 3
+  }
+})
 
 class EventsPage extends Component {
   constructor(props){
@@ -20,12 +60,11 @@ class EventsPage extends Component {
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     }
-
-    //HOW TO GET NAME OF EVENT CREATOR?
   }
 
   componentDidMount() {
     this.props.fetchEvents()
+    this.props.listenChanges()
   }
 
   renderRow(event) {
@@ -35,12 +74,23 @@ class EventsPage extends Component {
       return cat.name
     })
     return (
-      <View>
-        <Text>{event.name}</Text>
-        <Text>{event.date} - {event.time}</Text>
-        <Text>{event.shortPlace} - {categoryName}</Text>
-        <Text>{event.creator.name}</Text>
-      </View>
+      <TouchableOpacity activeOpacity={0.7}>
+        <View style={styles.eventBox}>
+          <View>
+            <Image source={require('../assets/img/splash.png')} style={styles.eventImage} />
+          </View>
+          <View style={styles.eventContainer}>
+            <View style={styles.eventTopInfo}>
+              <Text style={styles.eventTitle}>{event.name}</Text>
+              <Text style={styles.eventDate}>{event.date} - {event.time}</Text>
+            </View>
+            <View style={styles.eventBottomInfo}>
+              <Text style={styles.eventBottomInfoText}>{event.shortPlace} - {categoryName}</Text>
+              <Text>{event.creator.name}</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -57,7 +107,8 @@ class EventsPage extends Component {
   }
 
   render() {
-    const dataSource = this.state.dataSource.cloneWithRows(this.props.events)
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const dataSource = ds.cloneWithRows(this.props.events)
 
     return (
       <ListView
