@@ -20,12 +20,11 @@ class EventsPage extends Component {
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     }
-
-    //HOW TO GET NAME OF EVENT CREATOR?
   }
 
   componentDidMount() {
     this.props.fetchEvents()
+    this.props.listenChanges()
   }
 
   renderRow(event) {
@@ -57,8 +56,8 @@ class EventsPage extends Component {
   }
 
   render() {
-    const dataSource = this.state.dataSource.cloneWithRows(this.props.events);
-
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const dataSource = ds.cloneWithRows(this.props.events)
     return (
       <ListView
         dataSource={dataSource}
