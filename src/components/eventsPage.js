@@ -39,6 +39,7 @@ class EventsPage extends Component {
         <Text>{event.name}</Text>
         <Text>{event.date} - {event.time}</Text>
         <Text>{event.shortPlace} - {categoryName}</Text>
+        <Text>{event.creator.name}</Text>
       </View>
     )
   }

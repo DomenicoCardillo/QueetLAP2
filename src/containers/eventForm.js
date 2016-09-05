@@ -5,7 +5,10 @@ import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
   return {
-    creator: state.auth.currentUser.id,
+    creator: {
+      id: state.auth.currentUser.id, 
+      name: state.auth.currentUser.firstname + ' ' + state.auth.currentUser.lastname
+    },
     event: state.events[state.event.currentId] || {},
     isLoading: state.event.isLoading,
     hasError: state.event.hasError,
