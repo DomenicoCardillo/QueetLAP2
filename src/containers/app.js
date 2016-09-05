@@ -136,7 +136,7 @@ const scenes = Actions.create(
       rightButtonTextStyle={{color: '#fff'}}  />
     <Scene 
       key='userForm'
-      title='Profile edit'
+      title='Profile Edit'
       component={UserForm}
       hideNavBar={false}
       hideTabBar={true}

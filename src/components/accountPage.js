@@ -7,11 +7,11 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  BackAndroid
+  BackAndroid,
+  TouchableOpacity
 } from 'react-native'
 
-/*import ImagePicker from 'react-native-image-crop-picker'*/
-import NativeModules from 'NativeModules'
+import ImagePicker from 'react-native-image-crop-picker'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
@@ -33,13 +33,13 @@ export default class AccountPage extends Component {
   }
 
   openPicker() {
-    /*ImagePicker.openPicker({
+    ImagePicker.openPicker({
       width: 300,
       height: 400,
       cropping: true
     }).then(image => {
-      console.log(image);
-    });*/
+      console.log(image)
+    })
   }
 
   render() {
@@ -52,9 +52,9 @@ export default class AccountPage extends Component {
           <Text>Place: {this.props.currentUser.longPlace}</Text>
           <Text>Favourites sports: {this.props.currentUser.stringedCategories}</Text>
         </ScrollView>
+
+        <TouchableOpacity onPress={this.openPicker.bind(this)}><Text>Apri galleria</Text></TouchableOpacity>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({})
