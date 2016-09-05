@@ -1,5 +1,5 @@
 import * as types from './types'
-import { dbUsersRef, firebaseAuth } from '../globals'
+import { dbUsersRef, firebaseAuth, dbEventsRef } from '../globals'
 import { Actions } from 'react-native-router-flux'
 
 export const updateProfile = (newProfile) => {
@@ -13,6 +13,18 @@ export const updateProfile = (newProfile) => {
         dispatch(updateProfileFailed(error))
       }
       else {
+        dbEventsRef.orderByChild('/creator/id').equalTo(userId).once('value').then((snapshot) => {
+          let events = snapshot.val()
+          if(Object.keys(events).length > 0){
+            let eventsUpdates = {}
+            for (var event in events) {
+              if (events.hasOwnProperty(event)) {
+                eventsUpdates['/' + event + '/creator/name'] = newProfile.firstname + ' ' + newProfile.lastname
+              }
+            }
+            dbEventsRef.update(eventsUpdates)
+          }
+        })
         dispatch(updateProfileSuccess(newProfile))
         Actions.pop()
       }
