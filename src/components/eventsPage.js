@@ -56,7 +56,7 @@ class EventsPage extends Component {
   }
 
   render() {
-    const dataSource = this.state.dataSource.cloneWithRows(this.props.events);
+    const dataSource = this.state.dataSource.cloneWithRows(this.props.events)
 
     return (
       <ListView
@@ -64,6 +64,7 @@ class EventsPage extends Component {
         renderRow={(event) => this.renderRow(event)}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSeparator={this.renderSeparator}
+        enableEmptySections={true}
       />
     )
   }

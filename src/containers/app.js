@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 
 import { Actions, Scene, Router } from 'react-native-router-flux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import * as globals from '../globals'
 import styleVariables from '../styles/variables'
@@ -103,11 +104,6 @@ const scenes = Actions.create(
       component={EventForm}
       type='replace' />
     <Scene 
-      key='events'
-      title='Events'
-      component={Events}
-      type='replace' />
-    <Scene 
       key='main'
       tabs
       tabBarStyle={styles.tabBarStyle}
@@ -116,6 +112,16 @@ const scenes = Actions.create(
         key='account'
         title='Account'
         component={Account}
+        hideNavBar={false}
+        hideTabBar={false}
+        icon={TabItem} 
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}>
+      </Scene>
+      <Scene 
+        key='events'
+        title='Events'
+        component={Events}
         hideNavBar={false}
         hideTabBar={false}
         icon={TabItem} 
