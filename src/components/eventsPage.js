@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   eventBox: {
     flex: 1,
     flexDirection: 'row',
-    height: 100,
+    height: 120,
     padding: 15
   },
   eventImage: {
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   eventTitle: {
-    fontSize: 20, 
+    fontSize: 18, 
+    width: 100,
     fontWeight: '500', 
     marginBottom: 5
   },
