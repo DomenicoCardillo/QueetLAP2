@@ -88,7 +88,7 @@ export default class EventFormPage extends Component {
           onChange={this.onChange.bind(this)}
         />
 
-        <Text>Select sport</Text>
+        <Text style={commonStyles.label}>Select sport</Text>
         <Picker
           selectedValue={this.state.selectedCategory}
           onValueChange={(category) => this.setState({selectedCategory: category})}>
@@ -98,11 +98,9 @@ export default class EventFormPage extends Component {
           }
         </Picker>
 
-        <View style={{height: 40}}></View>
-
-        <Text>Position</Text>
+        <Text style={commonStyles.label}>Position</Text>
         <GooglePlacesAutocomplete
-          placeholder='Posizione'
+          placeholder='Position'
           minLength={2} // minimum length of text to search
           onPress={this.updatePlace.bind(this)}
           getDefaultValue={this.getDefaultPlace.bind(this)}
@@ -159,14 +157,13 @@ export default class EventFormPage extends Component {
         <View style={{height: 40}}></View>
 
         <Button 
-          style={commonStyles.primaryButton} 
+          style={[commonStyles.primaryButton, {marginBottom: 10}]} 
           textStyle={commonStyles.primaryButtonText}
           isLoading={this.props.isLoading}
           onPress={this.onSave.bind(this)}>
           Save
         </Button>
 
-        <View style={{height: 40}}></View>
       </ScrollView>
     )
   }

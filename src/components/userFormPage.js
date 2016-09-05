@@ -94,7 +94,7 @@ export default class UserFormPage extends Component {
           onChange={this.onChange.bind(this)}
         />
 
-        <Text>Favourites sports</Text>
+        <Text style={commonStyles.label}>Favourites sports</Text>
         <MultipleChoice
           options={this.state.stringedCategories}
           selectedOptions={this.state.selectedCategories}
@@ -103,9 +103,9 @@ export default class UserFormPage extends Component {
 
         <View style={{height: 40}}></View>
 
-        <Text>Position</Text>
+        <Text style={commonStyles.label}>Position</Text>
         <GooglePlacesAutocomplete
-          placeholder='Posizione'
+          placeholder='Position'
           minLength={2} // minimum length of text to search
           onPress={this.updatePlace.bind(this)}
           getDefaultValue={this.getDefaultPlace.bind(this)}
@@ -159,17 +159,13 @@ export default class UserFormPage extends Component {
           filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} 
         />
 
-        <View style={{height: 40}}></View>
-
         <Button 
-          style={commonStyles.primaryButton} 
+          style={[commonStyles.primaryButton, {marginBottom: 10}]} 
           textStyle={commonStyles.primaryButtonText}
           isLoading={this.props.isLoading}
           onPress={this.onSave.bind(this)}>
           Save
         </Button>
-
-        <View style={{height: 40}}></View>
       </ScrollView>
     )
   }

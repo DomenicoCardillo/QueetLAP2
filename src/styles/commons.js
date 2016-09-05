@@ -67,6 +67,12 @@ let commonStyles = StyleSheet.create({
     width: null,
     height: null,
     backgroundColor: 'rgba(0, 0, 0, 0)'
+  },
+  label: {
+    marginBottom: 7,
+    color: '#000',
+    fontSize: 17,
+    fontWeight: '500'
   }
 })
 

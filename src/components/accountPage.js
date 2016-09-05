@@ -52,12 +52,6 @@ export default class AccountPage extends Component {
           <Text>Place: {this.props.currentUser.longPlace}</Text>
           <Text>Favourites sports: {this.props.currentUser.stringedCategories}</Text>
         </ScrollView>
-        <Button 
-          style={commonStyles.primaryButton} 
-          textStyle={commonStyles.primaryButtonText}
-          onPress={this.props.goToForm.bind(this)}>
-          Modify
-        </Button>
       </View>
     )
   }

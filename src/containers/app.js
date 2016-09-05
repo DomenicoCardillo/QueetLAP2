@@ -106,9 +106,9 @@ const scenes = Actions.create(
         icon={TabItem} 
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
-        rightTitle='+'
+        rightTitle='New'
         onRight={() => Actions.eventForm()}
-        rightButtonTextStyle={{color: '#fff', fontSize: 20}} />
+        rightButtonTextStyle={{color: '#fff'}} />
       <Scene
         key='users'
         title='Users'
@@ -127,23 +127,31 @@ const scenes = Actions.create(
       title='Account'
       component={Account}
       hideNavBar={false}
-      hideTabBar={false}
-      icon={TabItem} 
-      titleStyle={styles.titleStyle}
-      navigationBarStyle={styles.navigationBarStyle} />
+      hideTabBar={true} 
+      hideBackImage={true}
+      backTitle='Back'
+      rightTitle='Edit'
+      backButtonTextStyle={{color: '#fff'}}
+      onRight={() => Actions.userForm()}
+      rightButtonTextStyle={{color: '#fff'}}  />
     <Scene 
       key='userForm'
       title='Profile edit'
       component={UserForm}
       hideNavBar={false}
       hideTabBar={true}
-      type='replace' />
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={{color: '#fff'}} />
     <Scene 
       key='eventForm'
       title='New event'
+      component={EventForm}
       hideNavBar={false}
       hideTabBar={true}
-      component={EventForm} />
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={{color: '#fff'}} />
 
   </Scene>
 )
