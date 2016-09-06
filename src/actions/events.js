@@ -74,7 +74,7 @@ export const updateEventFailed = (error) => {
 export const fetchEvents = () => {
   return (dispatch) => {
     dispatch(fetchEventsStart())
-    dbEventsRef.limitToLast(10).once('value').then(function(snapshot) {
+    dbEventsRef.orderByChild('date').limitToLast(10).once('value').then(function(snapshot) {
       dispatch(fetchEventsSuccess(snapshot.val()))
     }).catch(function(error){
       dispatch(fetchEventsFailed(error))

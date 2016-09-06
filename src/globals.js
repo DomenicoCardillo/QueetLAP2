@@ -64,3 +64,28 @@ export const formatTime = (time) => {
   let minutes = time.getMinutes()+''
   return (hours.length == 2 ? hours : '0'+hours) + ':' + (minutes.length == 2 ? minutes : '0'+minutes)
 }
+
+export const fromObjToArray = (obj) => {
+  var array = [] 
+  for(var o in obj) {
+    obj[o].keyId = o
+    array.push(obj[o])
+  }
+  return array
+}
+
+export const sortArrayByPropsAsc = (array, major, minor) => {
+  array.sort((a, b) => {
+    if (a[major] < b[major])
+      return -1
+    else if (a[major] > b[major])
+      return 1
+    else {
+      if (a[minor] < b[minor])
+        return -1
+      else if (a[minor] > b[minor])
+        return 1
+      else return 0
+    }
+  })
+}
