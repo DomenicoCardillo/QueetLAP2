@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
 
   let stringedCategories = ''
   state.categories.forEach((cat) => {
-    if(state.auth.currentUser.categories.indexOf(cat.id) >= 0){
+    if(state.auth.currentUser.categories !== undefined && state.auth.currentUser.categories.indexOf(cat.id) >= 0){
       stringedCategories += cat.name + ', '
     }
   })
