@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
+import { fromObjToArray, sortArrayByPropsAsc } from '../globals'
 
 import {
   View,
@@ -10,7 +11,8 @@ import {
   Image, 
   StyleSheet,
   TouchableOpacity,
-  RecyclerViewBackedScrollView
+  RecyclerViewBackedScrollView,
+  RefreshControl
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
@@ -59,7 +61,8 @@ class EventsPage extends Component {
   constructor(props){
     super()
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      isRefreshing: false
     }
   }
 
@@ -107,9 +110,15 @@ class EventsPage extends Component {
     )
   }
 
+  onRefresh(){
+    
+  }
+
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const dataSource = ds.cloneWithRows(this.props.events)
+    let arrayEvent = fromObjToArray(this.props.events)
+    sortArrayByPropsAsc(arrayEvent, 'date', 'time')
+    const dataSource = ds.cloneWithRows(arrayEvent)
 
     return (
       <ListView
@@ -118,6 +127,17 @@ class EventsPage extends Component {
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         renderSeparator={this.renderSeparator}
         enableEmptySections={true}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this.onRefresh}
+            tintColor="#ff0000"
+            title="Loading..."
+            titleColor="#00ff00"
+            colors={['#ff0000', '#00ff00', '#0000ff']}
+            progressBackgroundColor="#ffff00"
+          />
+        }
       />
     )
   }
