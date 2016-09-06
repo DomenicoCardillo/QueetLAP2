@@ -124,7 +124,7 @@ const scenes = Actions.create(
     </Scene>
     <Scene 
       key='account'
-      title='Account'
+      title='Profile'
       component={Account}
       hideNavBar={false}
       hideTabBar={true} 

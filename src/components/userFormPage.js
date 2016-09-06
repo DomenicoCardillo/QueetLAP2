@@ -1,7 +1,16 @@
 import React, {
   Component
 } from 'react'
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+
+import { 
+  ScrollView, 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity, 
+  Image, 
+  Platform 
+} from 'react-native'
 
 import UserForm from '../formsModels/user'
 import { Actions } from 'react-native-router-flux'
@@ -16,18 +25,18 @@ import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
 
 import t from 'tcomb-form-native'
-let Form = t.form.Form;
+let Form = t.form.Form
 
 export default class UserFormPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      picture: this.props.picture || './../assets/img/user-default.png',
       value: {
         firstname: this.props.profile.firstname || '',
         lastname: this.props.profile.lastname || '',
         gender: this.props.profile.gender || '' 
       },
+      pictureUrl: this.props.profile.pictureUrl || './../assets/img/user-default.png',
       longPlace: this.props.profile.longPlace,
       shortPlace: this.props.profile.shortPlace,
       selectedCategories: this.getDefaultCategories(),
@@ -41,8 +50,12 @@ export default class UserFormPage extends Component {
 
   onSave() {
     let value = this.refs.form.getValue()
+
     if(value) {
       let newProfile = Object.assign({}, this.props.profile, value)
+      newProfile.pictureUrl = this.state.pictureUrl
+      newProfile.pictureExt = this.state.pictureExt
+
       newProfile.shortPlace = this.state.shortPlace
       newProfile.longPlace = this.state.longPlace
 
@@ -83,9 +96,9 @@ export default class UserFormPage extends Component {
       height: 400,
       cropping: true
     }).then(image => {
-      console.log(image)
       this.setState({
-        picture: image.path
+        pictureUrl: image.path,
+        pictureExt: image.mime
       })
     })
   }
@@ -103,7 +116,7 @@ export default class UserFormPage extends Component {
 
 
         <TouchableOpacity onPress={this.openPicker.bind(this)} style={{flex: 1, alignItems: 'center'}}>
-          <Image source={{uri: this.state.picture}} style={styles.userImage} />
+          <Image source={{uri: this.state.pictureUrl}} style={styles.userImage} />
           <Text style={commonStyles.label}>Change avatar</Text>
         </TouchableOpacity>
 

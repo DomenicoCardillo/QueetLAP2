@@ -49,6 +49,8 @@ export const dbUsersRef = firebaseDB.ref('users')
 export const dbCategoriesRef = firebaseDB.ref('categories')
 export const dbEventsRef = firebaseDB.ref('events')
 export const firebaseAuth = Firebase.auth()
+export const firebaseStorage = Firebase.storage()
+export const userStorageRef = firebaseStorage.ref('users')
 
 export const formatDate = (date) => {
   date = new Date(date)
