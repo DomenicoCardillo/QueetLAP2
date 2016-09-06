@@ -6,6 +6,10 @@ import { formatDate, formatTime } from '../globals'
 
 import t from 'tcomb-form-native'
 
+let Name = t.refinement(t.String, function (name) {
+  return name.length >= 2;
+});
+
 const model = t.struct({
   name: Name,
   date: t.Date,
