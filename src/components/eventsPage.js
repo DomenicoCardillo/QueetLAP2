@@ -129,7 +129,6 @@ class EventsPage extends Component {
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={this.renderSeparator}
           enableEmptySections={true}
-          onEndReached={this.props.fetchMoreEvents.bind(this)}
           refreshControl={
             <RefreshControl
               refreshing={this.state.isRefreshing}

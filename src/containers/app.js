@@ -49,7 +49,7 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
   }
   if (computedProps.isActive) {
     style.marginTop = computedProps.hideNavBar ? 0 : 64
-    style.marginBottom = computedProps.hideTabBar ? 0 : 50
+    style.marginBottom = computedProps.hideTabBar ? 0 : 60
   }
   return style
 }
@@ -63,7 +63,11 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   tabBarStyle: {
+    height: 60,
     backgroundColor: '#eee'
+  },
+  tabBarIconContainerStyle: {
+    height: 60
   },
   tabBarSelectedItemStyle: {
     backgroundColor: '#ddd'
@@ -96,6 +100,7 @@ const scenes = Actions.create(
       key='main'
       tabs
       tabBarStyle={styles.tabBarStyle}
+      tabBarIconContainerStyle={styles.tabBarIconContainerStyle}
       tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
       <Scene
         key='events'
@@ -104,6 +109,20 @@ const scenes = Actions.create(
         hideNavBar={false}
         hideTabBar={false}
         icon={TabItem} 
+        tabIcon='sellsy'
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}
+        rightTitle='New'
+        onRight={() => Actions.eventForm()}
+        rightButtonTextStyle={{color: '#fff'}} />
+      <Scene
+        key='myEvents'
+        title='My Events'
+        component={Events}
+        hideNavBar={false}
+        hideTabBar={false}
+        icon={TabItem}
+        tabIcon='calendar'
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
         rightTitle='New'
@@ -116,6 +135,20 @@ const scenes = Actions.create(
         hideNavBar={false}
         hideTabBar={false}
         icon={TabItem} 
+        tabIcon='users'
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}
+        rightTitle='Profile'
+        onRight={() => Actions.account()}
+        rightButtonTextStyle={{color: '#fff'}} /> 
+      <Scene
+        key='notifications'
+        title='Notifications'
+        component={Events}
+        hideNavBar={false}
+        hideTabBar={false}
+        icon={TabItem} 
+        tabIcon='bell'
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
         rightTitle='Profile'
