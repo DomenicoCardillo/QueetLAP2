@@ -36,7 +36,11 @@ export default class UserFormPage extends Component {
         lastname: this.props.profile.lastname || '',
         gender: this.props.profile.gender || '' 
       },
-      pictureUrl: this.props.profile.pictureUrl || './../assets/img/user-default.png',
+      picture: {
+        new: false,
+        url: this.props.profile.pictureUrl || '',
+        mime: ''
+      },
       longPlace: this.props.profile.longPlace,
       shortPlace: this.props.profile.shortPlace,
       selectedCategories: this.getDefaultCategories(),
@@ -53,8 +57,11 @@ export default class UserFormPage extends Component {
 
     if(value) {
       let newProfile = Object.assign({}, this.props.profile, value)
-      newProfile.pictureUrl = this.state.pictureUrl
-      newProfile.pictureExt = this.state.pictureExt
+      let picture = null
+
+      if (this.state.picture.new) {
+        picture = this.state.picture
+      }
 
       newProfile.shortPlace = this.state.shortPlace
       newProfile.longPlace = this.state.longPlace
@@ -65,7 +72,7 @@ export default class UserFormPage extends Component {
         return cat.id
       })
 
-      this.props.updateProfile(newProfile)
+      this.props.updateProfile(newProfile, picture)
     }
   }
 
@@ -97,8 +104,11 @@ export default class UserFormPage extends Component {
       cropping: true
     }).then(image => {
       this.setState({
-        pictureUrl: image.path,
-        pictureExt: image.mime
+        picture: {
+          new: true,
+          url: image.path,
+          mime: image.mime
+        }
       })
     })
   }
@@ -114,9 +124,13 @@ export default class UserFormPage extends Component {
             </View>
           ) : null }
 
-
         <TouchableOpacity onPress={this.openPicker.bind(this)} style={{flex: 1, alignItems: 'center'}}>
-          <Image source={{uri: this.state.pictureUrl}} style={styles.userImage} />
+           { this.state.picture.url === '' ? (
+              <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />
+            ) : (
+              <Image source={{ uri: this.state.picture.url }} style={styles.userImage} />
+            )
+          }
           <Text style={commonStyles.label}>Change avatar</Text>
         </TouchableOpacity>
 

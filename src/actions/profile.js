@@ -4,61 +4,80 @@ import { Actions } from 'react-native-router-flux'
 
 import RNFetchBlob from 'react-native-fetch-blob'
 
-export const updateProfile = (newProfile) => {
+export const updateProfile = (newProfile, picture) => {
   return (dispatch) => {
     dispatch(updateProfileStart())
 
     let userId = firebaseAuth.currentUser.uid
     let updates = {}
 
-    const fs = RNFetchBlob.fs
-    const Blob = RNFetchBlob.polyfill.Blob
+    console.log(picture)
 
-    window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
-    window.Blob = Blob
+    if(picture !== null) {
 
-    // Controllare se l'immagine è già stata caricata
-    //if (newProfile.pictureUrl.indexOf('firebase')) {}
-
-    let rnfbURI = RNFetchBlob.wrap(newProfile.pictureUrl)
+      // const?
+      const fs = RNFetchBlob.fs
+      const Blob = RNFetchBlob.polyfill.Blob
     
-    Blob
-      .build(rnfbURI, { type: newProfile.pictureExt + ';' })
-      .then((blob) => {
-        
-        // Upload image using Firebase SDK
-        userStorageRef
-          .child(userId)
-          .put(blob, { contentType: newProfile.pictureExt })
-          .then((snapshot) => {
-            newProfile.pictureUrl = snapshot.metadata.downloadURLs[0]
+      window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+      window.Blob = Blob
+      
+      let rnfbURI = RNFetchBlob.wrap(picture.url)
+      
+      let metadata = {
+        contentType: picture.mime
+      }
 
-            updates['/' + userId] = newProfile
+      Blob
+        .build(rnfbURI, { type: picture.mime + ';' })
+        .then((blob) => {
 
-            // Update profile
-            dbUsersRef.update(updates, (error) => {
-              if(error) {
-                dispatch(updateProfileFailed(error))
-              } else {
-                dbEventsRef.orderByChild('/creator/id').equalTo(userId).once('value').then((snapshot) => {
-                  let events = snapshot.val()
-                  if(Object.keys(events).length > 0){
-                    let eventsUpdates = {}
-                    for (var event in events) {
-                      if (events.hasOwnProperty(event)) {
-                        eventsUpdates['/' + event + '/creator/name'] = newProfile.firstname + ' ' + newProfile.lastname
-                      }
-                    }
-                    dbEventsRef.update(eventsUpdates)
-                  }
-                })
-              }
+          // Update file
+          userStorageRef
+            .child(userId)
+            .put(blob, metadata)
+            .then((snapshot) => {
+              newProfile.pictureUrl = snapshot.metadata.downloadURLs[0]
               
-              dispatch(updateProfileSuccess(newProfile))
-              Actions.pop()
+              // Update user
+              dbUsersRef.update(updates, (error) => {
+                if(error) {
+                  dispatch(updateProfileFailed(error))
+                } else {
+                  dispatch(updateProfileSuccess(newProfile))
+                  Actions.pop()
+                }
+              })
             })
+        })
+    } else {
+      updates['/' + userId] = newProfile
+
+      // Update user
+      dbUsersRef.update(updates, (error) => {
+        if(error) {
+          dispatch(updateProfileFailed(error))
+        } else {
+
+          // Update event
+          dbEventsRef.orderByChild('/creator/id').equalTo(userId).once('value').then((snapshot) => {
+            let events = snapshot.val()
+            if(Object.keys(events).length > 0){
+              let eventsUpdates = {}
+              for (var event in events) {
+                if (events.hasOwnProperty(event)) {
+                  eventsUpdates['/' + event + '/creator/name'] = newProfile.firstname + ' ' + newProfile.lastname
+                }
+              }
+              dbEventsRef.update(eventsUpdates)
+            }
           })
+        
+          dispatch(updateProfileSuccess(newProfile))
+          Actions.pop()  
+        }
       })
+    }
   }
 }
 

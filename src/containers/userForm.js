@@ -15,8 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateProfile: (newProfile) => {
-      dispatch(updateProfile(newProfile))
+    updateProfile: (newProfile, picture) => {
+      dispatch(updateProfile(newProfile, picture))
     }
   }
 }
