@@ -15,8 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchEvents: () => {
-      dispatch(fetchEvents())
+    fetchEvents: (orderByKey, limit) => {
+      dispatch(fetchEvents(orderByKey, limit))
     },
     listenChanges: () => {
       dispatch(listenChanges())

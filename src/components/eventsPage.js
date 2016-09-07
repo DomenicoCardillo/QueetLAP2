@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
-import { fromObjToArray, sortArrayByPropsAsc } from '../globals'
+import { fromObjToArray, sortArrayByProps } from '../globals'
 
 import {
   View,
@@ -62,12 +62,13 @@ class EventsPage extends Component {
     super()
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      isRefreshing: false
+      isRefreshing: false,
+      orderByKey: true
     }
   }
 
   componentDidMount() {
-    this.props.fetchEvents()
+    this.props.fetchEvents(this.state.orderByKey)
     this.props.listenChanges()
   }
 
@@ -111,34 +112,36 @@ class EventsPage extends Component {
   }
 
   onRefresh(){
-    
+    this.props.fetchEvents(this.state.orderByKey, Object.keys(this.props.events).length)
   }
 
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     let arrayEvent = fromObjToArray(this.props.events)
-    sortArrayByPropsAsc(arrayEvent, 'date', 'time')
+    if(this.state.orderByKey) sortArrayByProps(arrayEvent, 'desc', 'keyId')
+    else                      sortArrayByProps(arrayEvent, 'asc', 'date', 'time')
     const dataSource = ds.cloneWithRows(arrayEvent)
 
     return (
-      <ListView
-        dataSource={dataSource}
-        renderRow={(event) => this.renderRow(event)}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        renderSeparator={this.renderSeparator}
-        enableEmptySections={true}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.isRefreshing}
-            onRefresh={this.onRefresh}
-            tintColor="#ff0000"
-            title="Loading..."
-            titleColor="#00ff00"
-            colors={['#ff0000', '#00ff00', '#0000ff']}
-            progressBackgroundColor="#ffff00"
-          />
-        }
-      />
+        <ListView
+          dataSource={dataSource}
+          renderRow={(event) => this.renderRow(event)}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={this.renderSeparator}
+          enableEmptySections={true}
+          onEndReached={this.props.fetchMoreEvents.bind(this)}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isRefreshing}
+              onRefresh={this.onRefresh.bind(this)}
+              tintColor="#ff0000"
+              title="Loading..."
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffff00"
+            />
+          }
+        />
     )
   }
 }

@@ -1,5 +1,5 @@
 import * as types from './types'
-import { firebaseAuth, dbUsersRef, firebaseDB, dbEventsRef } from '../globals'
+import { firebaseAuth, dbUsersRef, firebaseDB, dbEventsRef, formatDate } from '../globals'
 import { AsyncStorage } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
@@ -71,14 +71,23 @@ export const updateEventFailed = (error) => {
   }
 }
 
-export const fetchEvents = () => {
+export const fetchEvents = (ordeByKey = false, limit = 3) => {
   return (dispatch) => {
     dispatch(fetchEventsStart())
-    dbEventsRef.orderByChild('date').limitToLast(10).once('value').then(function(snapshot) {
-      dispatch(fetchEventsSuccess(snapshot.val()))
-    }).catch(function(error){
-      dispatch(fetchEventsFailed(error))
-    })
+    if(ordeByKey){
+      dbEventsRef.orderByKey().limitToLast(limit).once('value').then(function(snapshot) {
+        dispatch(fetchEventsSuccess(snapshot.val()))
+      }).catch(function(error){
+        dispatch(fetchEventsFailed(error))
+      })
+    } else {
+      dbEventsRef.orderByChild('date').startAt(formatDate(new Date())).limitToFirst(limit)
+      .once('value').then(function(snapshot) {
+        dispatch(fetchEventsSuccess(snapshot.val()))
+      }).catch(function(error){
+        dispatch(fetchEventsFailed(error))
+      })
+    }
   }
 }
 

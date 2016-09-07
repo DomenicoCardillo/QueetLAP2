@@ -76,17 +76,25 @@ export const fromObjToArray = (obj) => {
   return array
 }
 
-export const sortArrayByPropsAsc = (array, major, minor) => {
+export const sortArrayByProps = (array, sortType, major, minor = '') => {
   array.sort((a, b) => {
-    if (a[major] < b[major])
-      return -1
-    else if (a[major] > b[major])
-      return 1
-    else {
-      if (a[minor] < b[minor])
-        return -1
-      else if (a[minor] > b[minor])
-        return 1
+    if(sortType == 'asc') {
+      if(a[major] < b[major]) return -1
+      else if(a[major] > b[major]) return 1
+      else if(minor != '') {
+        if(a[minor] < b[minor]) return -1
+        else if (a[minor] > b[minor]) return 1
+        else return 0
+      }
+      else return 0
+    } else {
+      if(a[major] > b[major]) return -1
+      else if(a[major] < b[major]) return 1
+      else if(minor != '') {
+        if(a[minor] > b[minor]) return -1
+        else if (a[minor] < b[minor]) return 1
+        else return 0
+      }
       else return 0
     }
   })
