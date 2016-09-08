@@ -32,7 +32,7 @@ export default class AccountPage extends Component {
 
   render() {
     return (
-      <View style={commonStyles.container}>
+      <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
           <Text>Firstname: {this.props.currentUser.firstname}</Text>
           <Text>Lastname: {this.props.currentUser.lastname}</Text>

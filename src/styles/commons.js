@@ -7,7 +7,7 @@ import styleVariables from './variables'
 let commonStyles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#f3f3f3'
+    backgroundColor: '#f7f7f7'
   },
   container: {
     flex: 1,

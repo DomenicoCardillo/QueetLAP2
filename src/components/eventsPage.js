@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 120,
-    padding: 15
+    padding: 15,
+    backgroundColor: '#fff'
   },
   eventImage: {
     flex: 1,
@@ -138,26 +139,28 @@ class EventsPage extends Component {
     const dataSource = ds.cloneWithRows(this.state.arrayEvents)
 
     return (
-      <ListView
-        dataSource={dataSource}
-        renderRow={(event) => this.renderRow(event)}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        renderSeparator={this.renderSeparator}
-        onEndReached={this.onEndReached.bind(this)}
-        enableEmptySections={true}
-        onEndReachedThreshold={60}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.isRefreshing}
-            onRefresh={this.onRefresh.bind(this)}
-            tintColor="#ff0000"
-            title="Loading..."
-            titleColor="#00ff00"
-            colors={['#ff0000', '#00ff00', '#0000ff']}
-            progressBackgroundColor="#ffff00"
-          />
-        }
-      />
+      <View style={commonStyles.mainContainer}>
+        <ListView
+          dataSource={dataSource}
+          renderRow={(event) => this.renderRow(event)}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={this.renderSeparator}
+          onEndReached={this.onEndReached.bind(this)}
+          enableEmptySections={true}
+          onEndReachedThreshold={60}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isRefreshing}
+              onRefresh={this.onRefresh.bind(this)}
+              tintColor={styleVariables.colors.brandPrimary}
+              title="Loading..."
+              titleColor={styleVariables.colors.brandPrimaryDark}
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffff00"
+            />
+          }
+        />
+      </View>
     )
   }
 }

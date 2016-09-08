@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import * as globals from '../globals'
 import styleVariables from '../styles/variables'
+import commonStyles from '../styles/commons'
 
 import { connect } from 'react-redux'
 import { reauthenticate } from '../actions/auth'
@@ -64,13 +65,13 @@ const styles = StyleSheet.create({
   },
   tabBarStyle: {
     height: 60,
-    backgroundColor: '#eee'
+    backgroundColor: styleVariables.colors.brandPrimary
   },
   tabBarIconContainerStyle: {
     height: 60
   },
   tabBarSelectedItemStyle: {
-    backgroundColor: '#ddd'
+    backgroundColor: styleVariables.colors.brandPrimaryDark
   }
 })
 
@@ -114,7 +115,7 @@ const scenes = Actions.create(
         navigationBarStyle={styles.navigationBarStyle}
         rightTitle='New'
         onRight={() => Actions.eventForm()}
-        rightButtonTextStyle={{color: '#fff'}} />
+        rightButtonTextStyle={commonStyles.whiteText} />
       <Scene
         key='myEvents'
         title='My Events'
@@ -127,7 +128,7 @@ const scenes = Actions.create(
         navigationBarStyle={styles.navigationBarStyle}
         rightTitle='New'
         onRight={() => Actions.eventForm()}
-        rightButtonTextStyle={{color: '#fff'}} />
+        rightButtonTextStyle={commonStyles.whiteText} />
       <Scene
         key='users'
         title='Users'
@@ -140,7 +141,7 @@ const scenes = Actions.create(
         navigationBarStyle={styles.navigationBarStyle}
         rightTitle='Profile'
         onRight={() => Actions.account()}
-        rightButtonTextStyle={{color: '#fff'}} /> 
+        rightButtonTextStyle={commonStyles.whiteText} /> 
       <Scene
         key='notifications'
         title='Notifications'
@@ -153,7 +154,7 @@ const scenes = Actions.create(
         navigationBarStyle={styles.navigationBarStyle}
         rightTitle='Profile'
         onRight={() => Actions.account()}
-        rightButtonTextStyle={{color: '#fff'}} />
+        rightButtonTextStyle={commonStyles.whiteText} />
     </Scene>
     <Scene 
       key='account'
@@ -164,9 +165,9 @@ const scenes = Actions.create(
       hideBackImage={true}
       backTitle='Back'
       rightTitle='Edit'
-      backButtonTextStyle={{color: '#fff'}}
+      backButtonTextStyle={commonStyles.whiteText}
       onRight={() => Actions.userForm()}
-      rightButtonTextStyle={{color: '#fff'}}  />
+      rightButtonTextStyle={commonStyles.whiteText}  />
     <Scene 
       key='userForm'
       title='Profile Edit'
@@ -175,7 +176,7 @@ const scenes = Actions.create(
       hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={{color: '#fff'}} />
+      backButtonTextStyle={commonStyles.whiteText} />
     <Scene 
       key='eventForm'
       title='New event'
@@ -184,7 +185,7 @@ const scenes = Actions.create(
       hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={{color: '#fff'}} />
+      backButtonTextStyle={commonStyles.whiteText} />
 
   </Scene>
 )
