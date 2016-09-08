@@ -66,7 +66,7 @@ class EventsPage extends Component {
       isRefreshing: this.props.isLoading,
       orderByKey: true,
       arrayEvents: [],
-      lastKey: null
+      lastKey: ''
     }
   }
 
