@@ -36,6 +36,22 @@ const events = (state = {}, action) => {
       newState.event.errorMessage = action.error.message
       return newState
 
+    case types.FETCH_MORE_EVENTS_START:
+      newState.event.isLoading = true
+      newState.event.hasError = false
+      return newState
+
+    case types.FETCH_MORE_EVENTS_SUCCESS:
+      newState.event.isLoading = false
+      newState.events = Object.assign({}, newState.events, action.payload)
+      return newState
+
+    case types.FETCH_MORE_EVENTS_FAILED:
+      newState.event.isLoading = false
+      newState.event.hasError = true
+      newState.event.errorMessage = action.error.message
+      return newState  
+
     case types.APPLY_EVENT_CHANGES:
       newState.events[action.payload.id] = action.payload.newValue
       return newState

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
-import { fromObjToArray, sortArrayByProps } from '../globals'
+import { fromObjToArray, sortArrayByProps, formatDate } from '../globals'
 
 import {
   View,
@@ -59,11 +59,13 @@ const styles = StyleSheet.create({
 
 class EventsPage extends Component {
   constructor(props){
-    super()
+    super(props)
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      isRefreshing: false,
-      orderByKey: true
+      isRefreshing: this.props.isLoading,
+      orderByKey: true,
+      arrayEvents: [],
+      lastKey: null
     }
   }
 
@@ -115,32 +117,47 @@ class EventsPage extends Component {
     this.props.fetchEvents(this.state.orderByKey, Object.keys(this.props.events).length)
   }
 
+  onEndReached(){
+    this.props.fetchMoreEvents(this.state.lastKey, this.state.orderByKey)
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.state.arrayEvents = fromObjToArray(nextProps.events)
+    if(this.state.orderByKey) sortArrayByProps(this.state.arrayEvents, 'desc', 'keyId')
+    else                      sortArrayByProps(this.state.arrayEvents, 'asc', 'date', 'time')
+    if(this.state.arrayEvents.length){
+      if(this.state.orderByKey)
+        this.state.lastKey = this.state.arrayEvents[this.state.arrayEvents.length - 1].keyId
+      else
+        this.state.lastKey = this.state.arrayEvents[this.state.arrayEvents.length - 1].date
+    }
+  }
+
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    let arrayEvent = fromObjToArray(this.props.events)
-    if(this.state.orderByKey) sortArrayByProps(arrayEvent, 'desc', 'keyId')
-    else                      sortArrayByProps(arrayEvent, 'asc', 'date', 'time')
-    const dataSource = ds.cloneWithRows(arrayEvent)
+    const dataSource = ds.cloneWithRows(this.state.arrayEvents)
 
     return (
-        <ListView
-          dataSource={dataSource}
-          renderRow={(event) => this.renderRow(event)}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this.renderSeparator}
-          enableEmptySections={true}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.isRefreshing}
-              onRefresh={this.onRefresh.bind(this)}
-              tintColor="#ff0000"
-              title="Loading..."
-              titleColor="#00ff00"
-              colors={['#ff0000', '#00ff00', '#0000ff']}
-              progressBackgroundColor="#ffff00"
-            />
-          }
-        />
+      <ListView
+        dataSource={dataSource}
+        renderRow={(event) => this.renderRow(event)}
+        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+        renderSeparator={this.renderSeparator}
+        onEndReached={this.onEndReached.bind(this)}
+        enableEmptySections={true}
+        onEndReachedThreshold={60}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this.onRefresh.bind(this)}
+            tintColor="#ff0000"
+            title="Loading..."
+            titleColor="#00ff00"
+            colors={['#ff0000', '#00ff00', '#0000ff']}
+            progressBackgroundColor="#ffff00"
+          />
+        }
+      />
     )
   }
 }

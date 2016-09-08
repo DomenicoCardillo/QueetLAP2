@@ -71,7 +71,7 @@ export const updateEventFailed = (error) => {
   }
 }
 
-export const fetchEvents = (ordeByKey = false, limit = 3) => {
+export const fetchEvents = (ordeByKey = false, limit = 5) => {
   return (dispatch) => {
     dispatch(fetchEventsStart())
     if(ordeByKey){
@@ -107,6 +107,46 @@ export const fetchEventsSuccess = (payload) => {
 export const fetchEventsFailed = (error) => {
   return {
     type: types.FETCH_EVENTS_FAILED,
+    error
+  }
+}
+
+export const fetchMoreEvents = (point, ordeByKey = false, limit = 5) => {
+  return (dispatch) => {
+    dispatch(fetchMoreEventsStart())
+    if(ordeByKey){
+      dbEventsRef.orderByKey().endAt(point).limitToLast(limit).once('value').then(function(snapshot) {
+        dispatch(fetchMoreEventsSuccess(snapshot.val()))
+      }).catch(function(error){
+        dispatch(fetchMoreEventsFailed(error))
+      })
+    } else {
+      dbEventsRef.orderByChild('date').startAt(point).limitToFirst(limit)
+      .once('value').then(function(snapshot) {
+        dispatch(fetchMoreEventsSuccess(snapshot.val()))
+      }).catch(function(error){
+        dispatch(fetchMoreEventsFailed(error))
+      })
+    }
+  }
+}
+
+export const fetchMoreEventsStart = () => {
+  return {
+    type: types.FETCH_MORE_EVENTS_START
+  }
+}
+
+export const fetchMoreEventsSuccess = (payload) => {
+  return {
+    type: types.FETCH_MORE_EVENTS_SUCCESS,
+    payload
+  }
+}
+
+export const fetchMoreEventsFailed = (error) => {
+  return {
+    type: types.FETCH_MORE_EVENTS_FAILED,
     error
   }
 }
