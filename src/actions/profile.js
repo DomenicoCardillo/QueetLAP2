@@ -11,8 +11,6 @@ export const updateProfile = (newProfile, picture) => {
     let userId = firebaseAuth.currentUser.uid
     let updates = {}
 
-    console.log(picture)
-
     if(picture !== null) {
 
       // const?
@@ -38,6 +36,7 @@ export const updateProfile = (newProfile, picture) => {
             .put(blob, metadata)
             .then((snapshot) => {
               newProfile.pictureUrl = snapshot.metadata.downloadURLs[0]
+              updates['/' + userId] = newProfile
               
               // Update user
               dbUsersRef.update(updates, (error) => {
