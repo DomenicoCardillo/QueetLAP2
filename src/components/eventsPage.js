@@ -16,6 +16,7 @@ import {
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
+import { SegmentedControls } from 'react-native-radio-buttons'
 
 const styles = StyleSheet.create({
   eventBox: {
@@ -66,7 +67,8 @@ class EventsPage extends Component {
       isRefreshing: this.props.isLoading,
       orderByKey: true,
       arrayEvents: [],
-      lastKey: ''
+      lastKey: '',
+      activeFilter: 'New'
     }
   }
 
@@ -134,12 +136,45 @@ class EventsPage extends Component {
     }
   }
 
+  setFilter(selectedFilter) {
+    this.setState({
+      activeFilter: selectedFilter
+    });
+  }
+
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     const dataSource = ds.cloneWithRows(this.state.arrayEvents)
 
+    const options = [
+      'New',
+      'Next',
+      'Nearest',
+      'Ended',
+    ];
+
     return (
-      <View style={commonStyles.mainContainer}>
+      <View style={[commonStyles.mainContainer, {backgroundColor: '#555577'}]}>
+        <View style={{paddingTop: 20, paddingBottom: 20}}>
+          <SegmentedControls
+            tint={styleVariables.colors.brandPrimaryDark}
+            selectedTint={'#fff'}
+            backTint={'#fff'}
+            optionStyle= {{
+              fontSize: 17,
+              width: styleVariables.screenWidth / 4 - 5
+            }}
+            containerStyle= {{
+              marginRight: 10,
+              marginLeft: 10,
+              flex: 1,
+              justifyContent: 'center',
+            }}
+            options={options}
+            onSelection={this.setFilter.bind(this)}
+            selectedOption={this.state.activeFilter}
+          />
+        </View>
         <ListView
           dataSource={dataSource}
           renderRow={(event) => this.renderRow(event)}
@@ -152,11 +187,11 @@ class EventsPage extends Component {
             <RefreshControl
               refreshing={this.state.isRefreshing}
               onRefresh={this.onRefresh.bind(this)}
-              tintColor={styleVariables.colors.brandPrimary}
+              tintColor='#fff'
               title="Loading..."
-              titleColor={styleVariables.colors.brandPrimaryDark}
-              colors={['#ff0000', '#00ff00', '#0000ff']}
-              progressBackgroundColor="#ffff00"
+              titleColor='#fff'
+              colors={['#555577', '#555577', '#fff']}
+              progressBackgroundColor="#fff"
             />
           }
         />

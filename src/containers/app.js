@@ -49,7 +49,13 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
     shadowRadius: null
   }
   if (computedProps.isActive) {
-    style.marginTop = computedProps.hideNavBar ? 0 : 64
+
+    if (Platform.OS === 'ios') {
+      style.marginTop = computedProps.hideNavBar ? 0 : 64
+    } else {
+      style.marginTop = computedProps.hideNavBar ? 0 : 54
+    }
+    
     style.marginBottom = computedProps.hideTabBar ? 0 : 60
   }
   return style
@@ -109,10 +115,10 @@ const scenes = Actions.create(
         component={Events}
         hideNavBar={false}
         hideTabBar={false}
-        icon={TabItem} 
-        tabIcon='sellsy'
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItem} 
+        tabIcon='sellsy'
         rightTitle='New'
         onRight={() => Actions.eventForm()}
         rightButtonTextStyle={commonStyles.whiteText} />
@@ -122,10 +128,10 @@ const scenes = Actions.create(
         component={Events}
         hideNavBar={false}
         hideTabBar={false}
-        icon={TabItem}
-        tabIcon='calendar'
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItem}
+        tabIcon='calendar'
         rightTitle='New'
         onRight={() => Actions.eventForm()}
         rightButtonTextStyle={commonStyles.whiteText} />
@@ -135,10 +141,10 @@ const scenes = Actions.create(
         component={Events}
         hideNavBar={false}
         hideTabBar={false}
-        icon={TabItem} 
-        tabIcon='users'
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItem} 
+        tabIcon='users'
         rightTitle='Profile'
         onRight={() => Actions.account()}
         rightButtonTextStyle={commonStyles.whiteText} /> 
@@ -148,10 +154,10 @@ const scenes = Actions.create(
         component={Events}
         hideNavBar={false}
         hideTabBar={false}
-        icon={TabItem} 
-        tabIcon='bell'
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItem} 
+        tabIcon='bell'
         rightTitle='Profile'
         onRight={() => Actions.account()}
         rightButtonTextStyle={commonStyles.whiteText} />
@@ -186,8 +192,7 @@ const scenes = Actions.create(
       hideBackImage={true}
       backTitle='Back'
       backButtonTextStyle={commonStyles.whiteText} />
-
-  </Scene>
+    </Scene>
 )
 
 class App extends Component {
