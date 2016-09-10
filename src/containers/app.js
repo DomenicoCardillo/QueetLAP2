@@ -120,6 +120,7 @@ const scenes = Actions.create(
         icon={TabItem} 
         tabIcon='sellsy'
         rightTitle='Category'
+        onRight={() => Actions.eventForm()}
         rightButtonTextStyle={commonStyles.whiteText} />
       <Scene
         key='myEvents'
