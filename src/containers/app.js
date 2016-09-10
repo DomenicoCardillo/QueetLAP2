@@ -119,8 +119,7 @@ const scenes = Actions.create(
         navigationBarStyle={styles.navigationBarStyle}
         icon={TabItem} 
         tabIcon='sellsy'
-        rightTitle='New'
-        onRight={() => Actions.eventForm()}
+        rightTitle='Category'
         rightButtonTextStyle={commonStyles.whiteText} />
       <Scene
         key='myEvents'
@@ -170,10 +169,7 @@ const scenes = Actions.create(
       hideTabBar={true} 
       hideBackImage={true}
       backTitle='Back'
-      rightTitle='Edit'
-      backButtonTextStyle={commonStyles.whiteText}
-      onRight={() => Actions.userForm()}
-      rightButtonTextStyle={commonStyles.whiteText}  />
+      backButtonTextStyle={commonStyles.whiteText} />
     <Scene 
       key='userForm'
       title='Profile Edit'

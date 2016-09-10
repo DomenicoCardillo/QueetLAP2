@@ -23,12 +23,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     goToForm: () => {
       Actions.userForm()
-    },
-    goToNewEvent: () => {
-      Actions.eventForm()
-    },
-    goToEvents: () => {
-      Actions.events()
     }
   }
 }
