@@ -54,6 +54,7 @@ export const login = (email, pass) => {
     ).then(function(userData) {
       if(userData.emailVerified){
         AsyncStorage.setItem('lastEmail', userData.email)
+        dispatch(loadCategories())
 
         dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
           let user = userSnap.val()
@@ -67,7 +68,6 @@ export const login = (email, pass) => {
           }
 
           dispatch(loginSuccess(user))
-          dispatch(loadCategories())
         })
         Actions.main()
       } else {

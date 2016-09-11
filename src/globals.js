@@ -37,9 +37,10 @@ export const initialState = {
     currentID: undefined,
     isLoading: false,
     hasError: false,
-    errorMessage: ''
+    errorMessage: '',
+    lastKey: ''
   },
-  events: {}
+  events: []
 }
 
 Firebase.initializeApp(firebaseConfig)
@@ -76,26 +77,30 @@ export const fromObjToArray = (obj) => {
   return array
 }
 
-export const sortArrayByProps = (array, sortType, major, minor = '') => {
+export const sortArrayByProps = (array, sortType, major) => {
   array.sort((a, b) => {
     if(sortType == 'asc') {
       if(a[major] < b[major]) return -1
       else if(a[major] > b[major]) return 1
-      else if(minor != '') {
-        if(a[minor] < b[minor]) return -1
-        else if (a[minor] > b[minor]) return 1
-        else return 0
-      }
       else return 0
     } else {
       if(a[major] > b[major]) return -1
       else if(a[major] < b[major]) return 1
-      else if(minor != '') {
-        if(a[minor] > b[minor]) return -1
-        else if (a[minor] < b[minor]) return 1
-        else return 0
-      }
       else return 0
     }
+  })
+}
+
+export const filterByDateTime = (array) => {
+  return array.filter((el) => {
+    return el.dateTime >= new Date().getTime()
+  })
+}
+
+export const defaultSizeList = 5
+
+export const removeDuplicateByKey = (array, keys) => {
+  return array.filter(function(item) {
+      return keys.indexOf(item.keyId) === -1
   })
 }
