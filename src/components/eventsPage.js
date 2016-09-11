@@ -76,16 +76,31 @@ class EventsPage extends Component {
   }
 
   renderRow(event) {
-    let categoryName = this.props.categories.filter((cat) => {
-      return cat.id == event.category
-    }).map((cat) => {
-      return cat.name
-    })
+    let catName = this.props.categories[event.category].name
+    let catSlug = this.props.categories[event.category].slug
+    let imageBox = null
+    switch (catSlug) {
+      case 'badminton':
+        imageBox = <Image source={require('../assets/img/badminton.jpg')} style={styles.eventImage} />
+        break
+      case 'basket':
+        imageBox = <Image source={require('../assets/img/basket.jpg')} style={styles.eventImage} />
+        break
+      case 'running':
+        imageBox = <Image source={require('../assets/img/running.jpg')} style={styles.eventImage} />
+        break
+      case 'soccer':
+        imageBox = <Image source={require('../assets/img/soccer.jpg')} style={styles.eventImage} />
+        break
+      case 'tennis':
+        imageBox = <Image source={require('../assets/img/tennis.jpg')} style={styles.eventImage} />
+        break
+    }
     return (
       <TouchableOpacity activeOpacity={0.7}>
         <View style={styles.eventBox}>
           <View>
-            <Image source={require('../assets/img/splash.png')} style={styles.eventImage} />
+            {imageBox}
           </View>
           <View style={styles.eventContainer}>
             <View style={styles.eventTopInfo}>
@@ -93,7 +108,7 @@ class EventsPage extends Component {
               <Text style={styles.eventDate}>{formatDate(event.dateTime)} - {formatTime(event.dateTime)}</Text>
             </View>
             <View style={styles.eventBottomInfo}>
-              <Text style={styles.eventBottomInfoText}>{event.shortPlace} - {categoryName}</Text>
+              <Text style={styles.eventBottomInfoText}>{event.shortPlace} - {catName}</Text>
               <Text>{event.creator.name}</Text>
             </View>
           </View>
