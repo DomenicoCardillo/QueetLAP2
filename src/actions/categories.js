@@ -1,11 +1,11 @@
 import * as types from './types'
-import { dbCategoriesRef } from '../globals'
+import { dbCategoriesRef, fromObjToArray } from '../globals'
 
 export const loadCategories = () => {
   return (dispatch) => {
     dispatch(loadCategoriesStart())
     dbCategoriesRef.once('value').then(function(snapshot) {
-      dispatch(loadCategoriesSuccess(snapshot.val()))
+      dispatch(loadCategoriesSuccess(fromObjToArray(snapshot.val())))
     }).catch(function(error){
       dispatch(loadCategoriesFailed(error))
     })

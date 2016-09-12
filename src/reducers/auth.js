@@ -5,34 +5,34 @@ const auth = (state = {}, action) => {
 
   switch (action.type) {
     case types.SIGNUP_START:
-      newState.signup.isLoading = true
-      newState.signup.hasError = false
+      newState.signupPage.isLoading = true
+      newState.signupPage.hasError = false
       return newState
 
     case types.SIGNUP_SUCCESS:
-      newState.signup.isLoading = false
-      newState.signup.signupDone = true
+      newState.signupPage.isLoading = false
+      newState.signupPage.signupDone = true
       return newState
 
     case types.SIGNUP_FAILED:
-      newState.signup.isLoading = false
-      newState.signup.hasError = true
-      newState.signup.errorMessage = action.error.message
+      newState.signupPage.isLoading = false
+      newState.signupPage.hasError = true
+      newState.signupPage.errorMessage = action.error.message
       return newState
 
     case types.LOGIN_START:
-      newState.login.isLoading = true
+      newState.loginPage.isLoading = true
       return newState
 
     case types.LOGIN_SUCCESS:
-      newState.login.isLoading = false
+      newState.loginPage.isLoading = false
       newState.currentUser = action.payload
       return newState
 
     case types.LOGIN_FAILED:
-      newState.login.isLoading = false
-      newState.login.hasError = true
-      newState.login.errorMessage = action.error.message
+      newState.loginPage.isLoading = false
+      newState.loginPage.hasError = true
+      newState.loginPage.errorMessage = action.error.message
       return newState
 
     case types.LOGOUT_START:
@@ -45,16 +45,16 @@ const auth = (state = {}, action) => {
       return newState
 
     case types.REAUTHENTICATE_START:
-      newState.login.isLoading = true
+      newState.loginPage.isLoading = true
       return newState
 
     case types.REAUTHENTICATE_SUCCESS:
-      newState.login.isLoading = false
+      newState.loginPage.isLoading = false
       newState.currentUser = action.payload
       return newState
 
     case types.REAUTHENTICATE_FAILED:
-      newState.login.isLoading = false
+      newState.loginPage.isLoading = false
       return newState
 
     default:

@@ -1,28 +1,33 @@
 import { connect } from 'react-redux'
-import { fetchEvents, listenChanges, fetchMoreEvents } from '../actions/events'
+import { fetchEvents, listenChanges, setEventsActiveFilter } from '../actions/events'
 import EventsPage from '../components/eventsPage'
 import { Actions } from 'react-native-router-flux'
 
+const getVisibleEvents = (events, activeFilter) => {
+  return events
+}
+
 const mapStateToProps = (state) => {
   return {
-    events: state.events,
-    isLoading: state.event.isLoading,
-    hasError: state.event.hasError,
-    errorMessage: state.event.errorMessage,
+    events: getVisibleEvents(state.events, state.activeFilter),
+    activeFilter: state.eventsPage.activeFilter,
+    isLoading: state.eventsPage.isLoading,
+    hasError: state.eventsPage.hasError,
+    errorMessage: state.eventsPage.errorMessage,
     categories: state.categories
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchEvents: (orderByKey, limit) => {
-      dispatch(fetchEvents(orderByKey, limit))
+    fetchEvents: () => {
+      dispatch(fetchEvents())
     },
     listenChanges: () => {
       dispatch(listenChanges())
     },
-    fetchMoreEvents: (point, orderByKey, limit) => {
-      dispatch(fetchMoreEvents(point, orderByKey, limit))
+    setFilter: (filter) => {
+      dispatch(setEventsActiveFilter(filter))
     }
   }
 }

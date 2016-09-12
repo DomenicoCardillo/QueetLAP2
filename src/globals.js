@@ -12,35 +12,44 @@ export const initialState = {
     currentUser: {
       categories: []
     },
-    signup: {
+    signupPage: {
       isLoading: false,
       hasError: false,
       errorMessage: '',
       signupDone: false
     },
-    login: {
+    loginPage: {
       isLoading: false,
       hasError: false,
       errorMessage: ''
-    },
-    logout: {
-      isLoading: false
     }
   },
-  profile: {
+  profilePage: {
     isLoading: false,
     hasError: false,
     errorMessage: ''
   },
-  categories: [],
-  event: {
-    currentID: undefined,
+  eventPage: {
     isLoading: false,
     hasError: false,
     errorMessage: '',
-    lastKey: ''
+    event: undefined
   },
-  events: []
+  eventsPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: '',
+    activeFilter: 'New'
+  },
+  myEventsPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: '',
+    activeFilter: 'Ended'
+  },
+  categories: [],
+  events: [],
+  users: []
 }
 
 Firebase.initializeApp(firebaseConfig)
@@ -91,9 +100,9 @@ export const sortArrayByProps = (array, sortType, major) => {
   })
 }
 
-export const filterByDateTime = (array) => {
+export const filterByDateTime = (array, greater = true) => {
   return array.filter((el) => {
-    return el.dateTime >= new Date().getTime()
+    return greater ? el.dateTime >= new Date().getTime() : el.dateTime <= new Date().getTime()
   })
 }
 

@@ -59,14 +59,13 @@ const styles = StyleSheet.create({
   }
 })
 
-class EventsPage extends Component {
+class MyEventsPage extends Component {
   constructor(props){
     super()
   }
 
   componentDidMount() {
-    this.setFilter('New')
-    this.props.listenChanges()
+    this.props.setFilter('Next')
   }
 
   renderRow(event) {
@@ -135,9 +134,7 @@ class EventsPage extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     const dataSource = ds.cloneWithRows(this.props.events)
     const options = [
-      'New',
       'Next',
-      'Near',
       'Ended'
     ]
 
@@ -150,7 +147,7 @@ class EventsPage extends Component {
             backTint={'#fff'}
             optionStyle= {{
               fontSize: 17,
-              width: styleVariables.screenWidth / 4 - 5
+              width: styleVariables.screenWidth / 2 - 5
             }}
             containerStyle= {{
               marginRight: 10,
@@ -159,7 +156,7 @@ class EventsPage extends Component {
               justifyContent: 'center',
             }}
             options={options}
-            onSelection={this.setFilter.bind(this)}
+            onSelection={this.props.setFilter.bind(this)}
             selectedOption={this.props.activeFilter}
           />
         </View>
@@ -187,4 +184,4 @@ class EventsPage extends Component {
 }
 
 
-export default EventsPage
+export default MyEventsPage

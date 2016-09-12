@@ -17,9 +17,16 @@ const rootReducer = (state = {}, action) => {
 
   newState.categories = categories(state.categories, action)
 
-  let eventsStuffs = events({events: state.events.slice(0), event: state.event}, action)
+  let eventsStuffs = events({
+    events: state.events.slice(0), 
+    eventsPage: state.eventsPage,
+    myEventsPage: state.myEventsPage,
+    eventPage: state.eventPage
+  }, action)
   newState.events = eventsStuffs.events
-  newState.event = eventsStuffs.event
+  newState.eventsPage = eventsStuffs.eventsPage
+  newState.myEventsPage = eventsStuffs.myEventsPage
+  newState.eventPage = eventsStuffs.eventPage
   
   return newState
 }

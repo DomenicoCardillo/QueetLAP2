@@ -1,73 +1,75 @@
 stateShape = {
   auth: {
     currentUser: {
-      email: 'marco.nisi.100@gmail.com',
-      firstname: 'Marco',
-      lastname: 'Nisi',
-      gender: 'Male'
     },
-    signup: {
+    signupPage: {
       isLoading: false,
       hasError: false,
       errorMessage: '',
       signupDone: false
     },
-    login: {
+    loginPage: {
       isLoading: false,
       hasError: false,
       errorMessage: ''
-    },
-    logout: {
-      isLoading: false
     }
   },
-  profile: {
+  profilePage: {
     isLoading: false,
     hasError: false,
     errorMessage: ''
   },
-  events: {
-    0: {
+  eventPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: ''
+  },
+  events: [
+    {
+      keyId: 0,
       name: 'Example event',
-      date: '2016-10-01',
-      time: '10:00',
+      dateTime: '1473811200000',
       category: 1,
-      description: 'Example description',
       creator: 2,
       partecipants: [
         2, 5, 6, 10
       ],
-      place: 5,
-      status: 'Live' //One of ['Future', 'Forthcoming', 'Live', 'Finished', 'Passed']
+      shortPlace: 'Aci Catena',
+      longPlace: 'Aci Catena, CT, Italia'
     }
+  ],
+  eventsPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: '',
+    activeFilter: 'New'
   },
-  users: {
-    0: {
+  myEventsPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: '',
+    activeFilter: 'Ended'
+  },
+  users: [
+    { 
+      keyId: 0,
       email: 'marco.nisi.100@gmail.com',
       firstName: 'Marco',
       lastName: 'Nisi',
       photoUrl: 'www.example.com/photo',
-      friends: [
+      /*friends: [
         2, 3, 4
       ],
       events: [
         0, 4, 5
-      ] //Ridondante
+      ]*/
     }
-  },
-  places: {
-    0: {
-      name: 'Villa Acicatena',
-      coordX: 'xxx',
-      coordY: 'xxx'
-    }
-  },
-  categories: {
-    0: {
+  ],
+  categories: [
+    {
+      keyId: 0,
       name: 'Running',
-      events: [
-        0, 2, 10
-      ] //Ridondante
+      slug: 'running'
     }
-  }
+  ]
 }

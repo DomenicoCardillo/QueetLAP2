@@ -5,54 +5,50 @@ const events = (state = {}, action) => {
 
   switch (action.type) {
     case types.CREATE_EVENT_START:
-      newState.event.isLoading = true
-      newState.event.hasError = false
+      newState.eventPage.isLoading = true
+      newState.eventPage.hasError = false
       return newState
 
     case types.CREATE_EVENT_SUCCESS:
-      newState.event.isLoading = false
+      newState.eventPage.isLoading = false
+      newState.eventPage.event = undefined
       newState.events.push(action.payload)
       return newState
 
     case types.CREATE_EVENT_FAILED:
-      newState.event.isLoading = false
-      newState.event.hasError = true
-      newState.event.errorMessage = action.error.message
+      newState.eventPage.isLoading = false
+      newState.eventPage.hasError = true
+      newState.eventPage.errorMessage = action.error.message
       return newState
 
     case types.FETCH_EVENTS_START:
-      newState.event.isLoading = true
-      newState.event.hasError = false
+      newState.eventsPage.isLoading = true
+      newState.eventsPage.hasError = false
+      newState.myEventsPage.isLoading = true
+      newState.myEventsPage.hasError = false
       return newState
 
     case types.FETCH_EVENTS_SUCCESS:
-      newState.event.isLoading = false
-      newState.events = action.payload.events
-      newState.event.lastKey = action.payload.lastKey
+      newState.eventsPage.isLoading = false
+      newState.myEventsPage.isLoading = false
+      newState.events = action.payload
       return newState
 
     case types.FETCH_EVENTS_FAILED:
-      newState.event.isLoading = false
-      newState.event.hasError = true
-      newState.event.errorMessage = action.error.message
+      newState.eventsPage.isLoading = false
+      newState.eventsPage.hasError = true
+      newState.eventsPage.errorMessage = action.error.message
+      newState.myEventsPage.isLoading = false
+      newState.myEventsPage.hasError = true
+      newState.myEventsPage.errorMessage = action.error.message
       return newState
 
-    case types.FETCH_MORE_EVENTS_START:
-      newState.event.isLoading = true
-      newState.event.hasError = false
+    case types.SET_EVENTS_ACTIVE_FILTER:
+      newState.eventsPage.activeFilter = action.payload
       return newState
-
-    case types.FETCH_MORE_EVENTS_SUCCESS:
-      newState.event.isLoading = false
-      newState.events = newState.events.concat(action.payload.events)
-      newState.event.lastKey = action.payload.lastKey
+    case types.SET_MY_EVENTS_ACTIVE_FILTER:
+      newState.myEventsPage.activeFilter = action.payload
       return newState
-
-    case types.FETCH_MORE_EVENTS_FAILED:
-      newState.event.isLoading = false
-      newState.event.hasError = true
-      newState.event.errorMessage = action.error.message
-      return newState  
 
     case types.APPLY_EVENT_CHANGES:
       newState.events[action.payload.id] = action.payload.newValue

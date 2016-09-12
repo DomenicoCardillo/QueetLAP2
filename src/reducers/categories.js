@@ -1,11 +1,10 @@
 import * as types from '../actions/types'
 
-const categories = (state = {}, action) => {
+const categories = (state = [], action) => {
 
   switch (action.type) {
     case types.LOAD_CATEGORIES_SUCCESS:
-      let newState = Object.assign({}, state)
-      newState = action.payload
+      let newState = action.payload
       return newState
 
     case types.LOAD_CATEGORIES_START:

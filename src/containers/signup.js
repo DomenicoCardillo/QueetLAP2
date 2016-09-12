@@ -5,10 +5,10 @@ import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.auth.signup.isLoading,
-    hasError: state.auth.signup.hasError,
-    errorMessage: state.auth.signup.errorMessage,
-    signupDone: state.auth.signup.signupDone
+    isLoading: state.auth.signupPage.isLoading,
+    hasError: state.auth.signupPage.hasError,
+    errorMessage: state.auth.signupPage.errorMessage,
+    signupDone: state.auth.signupPage.signupDone
   }
 }
 
