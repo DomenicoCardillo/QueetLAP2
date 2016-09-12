@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
   return {
+    event: state.eventPage.event,
     categories: state.categories
   }
 }

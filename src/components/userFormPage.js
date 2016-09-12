@@ -114,7 +114,7 @@ export default class UserFormPage extends Component {
               </View>
             ) : null }
 
-          <TouchableOpacity onPress={this.openPicker.bind(this)} style={{flex: 1, alignItems: 'center'}}>
+          <TouchableOpacity onPress={this.openPicker.bind(this)} style={{alignItems: 'center'}}>
             { this.state.picture.url === '' ? (
                 <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />
               ) : (
@@ -142,9 +142,7 @@ export default class UserFormPage extends Component {
             }
           </Picker>
 
-          <View style={{height: 40}}></View>
-
-          <Text style={commonStyles.label}>Position</Text>
+          <Text style={[commonStyles.label, {marginTop: 10}]}>Position</Text>
           <GooglePlacesAutocomplete
             placeholder='Position'
             minLength={2} // minimum length of text to search
@@ -180,7 +178,7 @@ export default class UserFormPage extends Component {
                 borderTopWidth: 0,
                 maxHeight: 200,
                 borderColor: styleVariables.colors.borderColor,
-                borderRadius: styleVariables.baseRadius
+                borderRadius: styleVariables.baseRadius,
               },
               separator: {
                 backgroundColor: styleVariables.colors.borderColor,
@@ -201,7 +199,7 @@ export default class UserFormPage extends Component {
           />
 
           <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+            style={[commonStyles.primaryButton, {marginBottom: 10, marginTop: 20}]} 
             textStyle={commonStyles.primaryButtonText}
             isLoading={this.props.isLoading}
             onPress={this.onSave.bind(this)}>

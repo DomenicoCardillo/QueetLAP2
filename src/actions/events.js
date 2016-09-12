@@ -127,6 +127,13 @@ export const setMyEventsActiveFilter = (payload) => {
   }
 }
 
+export const setEventDetail = (payload) => {
+  return {
+    type: types.SET_EVENT_DETAIL,
+    payload
+  }
+}
+
 export const listenChanges = () => {
   return (dispatch) => {
     dbEventsRef.on('child_changed', function(childSnapshot, prevChildKey) {
