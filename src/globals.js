@@ -101,15 +101,11 @@ export const sortArrayByProps = (array, sortType, major) => {
 }
 
 export const filterByDateTime = (array, greater = true) => {
-  return array.filter((el) => {
-    return greater ? el.dateTime >= new Date().getTime() : el.dateTime <= new Date().getTime()
-  })
+  return array.filter(el => 
+    greater ? el.dateTime >= new Date().getTime() : el.dateTime <= new Date().getTime()
+  )
 }
 
-export const defaultSizeList = 5
-
-export const removeDuplicateByKey = (array, keys) => {
-  return array.filter(function(item) {
-      return keys.indexOf(item.keyId) === -1
-  })
+export const filterByPlace = (array, place) => {
+  return array.filter(el => el.shortPlace === place)
 }
