@@ -31,6 +31,7 @@ import UserForm from './userForm'
 import EventForm from './eventForm'
 import Events from './events'
 import MyEvents from './myEvents'
+import Event from './event'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -120,7 +121,7 @@ const scenes = Actions.create(
         navigationBarStyle={styles.navigationBarStyle}
         icon={TabItem} 
         tabIcon='sellsy'
-        rightTitle='New'
+        rightTitle='Category'
         onRight={() => Actions.eventForm()}
         rightButtonTextStyle={commonStyles.whiteText} />
       <Scene
@@ -171,10 +172,7 @@ const scenes = Actions.create(
       hideTabBar={true} 
       hideBackImage={true}
       backTitle='Back'
-      rightTitle='Edit'
-      backButtonTextStyle={commonStyles.whiteText}
-      onRight={() => Actions.userForm()}
-      rightButtonTextStyle={commonStyles.whiteText}  />
+      backButtonTextStyle={commonStyles.whiteText} />
     <Scene 
       key='userForm'
       title='Profile Edit'
@@ -188,6 +186,15 @@ const scenes = Actions.create(
       key='eventForm'
       title='New event'
       component={EventForm}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={commonStyles.whiteText} />
+    <Scene
+      key='event'
+      title='Event'
+      component={Event}
       hideNavBar={false}
       hideTabBar={true}
       hideBackImage={true}

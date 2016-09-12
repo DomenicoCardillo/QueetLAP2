@@ -91,7 +91,7 @@ class EventsPage extends Component {
         break
     }
     return (
-      <TouchableOpacity activeOpacity={0.7}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => this.goToDetail(event)}>
         <View style={styles.eventBox}>
           <View>
             {imageBox}
@@ -131,6 +131,10 @@ class EventsPage extends Component {
     this.props.setFilter(selectedFilter)
   }
 
+  goToDetail(event) {
+    Actions.event({event: event})
+  }
+
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     const dataSource = ds.cloneWithRows(this.props.events)
@@ -142,10 +146,10 @@ class EventsPage extends Component {
     ]
 
     return (
-      <View style={[commonStyles.mainContainer, {backgroundColor: '#555577'}]}>
+      <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
         <View style={{paddingTop: 20, paddingBottom: 20}}>
           <SegmentedControls
-            tint={styleVariables.colors.brandPrimaryDark}
+            tint={'#64b0bc'}
             selectedTint={'#fff'}
             backTint={'#fff'}
             optionStyle= {{

@@ -8,20 +8,23 @@ import {
   StyleSheet,
   ScrollView,
   BackAndroid,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
+import fonts from '../styles/fonts'
 
 export default class AccountPage extends Component {
   constructor (props) {
-    super()
+    super(props)
   }
   
   componentDidMount() {
@@ -34,13 +37,66 @@ export default class AccountPage extends Component {
     return (
       <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
-          <Text>Firstname: {this.props.currentUser.firstname}</Text>
-          <Text>Lastname: {this.props.currentUser.lastname}</Text>
-          <Text>Gender: {this.props.currentUser.gender}</Text>
-          <Text>Place: {this.props.currentUser.longPlace}</Text>
-          <Text>Favourites sports: {this.props.currentUser.stringedCategories}</Text>
+          <View style={styles.imageContainer}>
+            { this.props.currentUser.pictureUrl === '' ? (
+                <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />
+              ) : (
+                <Image source={{ uri: this.props.currentUser.pictureUrl }} style={styles.userImage} />
+              )
+            }
+          </View>
+          <View style={styles.titleContainer}>
+            <Text style={[fonts.style.h4, {marginRight: 8}]}>{this.props.currentUser.firstname} {this.props.currentUser.lastname}</Text>
+            { this.props.currentUser.gender === 'M' ? (
+                <Icon name="mars" size={18} color="#3498db" style={{top: 8}} />
+              ) : (
+                <Icon name="venus" size={18} color="#ea4c89" style={{top: 8}} />
+              )
+            }
+          </View>
+          <View style={styles.infoContainer}>
+            <Icon name="map-marker" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
+            <Text style={fonts.style.h5}>{this.props.currentUser.longPlace}</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <Icon name="star" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
+            <Text style={fonts.style.h5}>{this.props.currentUser.stringedCategories}</Text>
+          </View>
+          <Button 
+            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+            textStyle={commonStyles.primaryButtonText}
+            onPress={this.props.goToForm}>
+            Edit Profile
+          </Button>
         </ScrollView>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  userImage: {
+    width: 120,
+    height: 120,
+    borderRadius: styleVariables.baseRadius,
+    marginBottom: 20
+  },
+  imageContainer: {
+    flex: 1, 
+    alignItems: 'center'
+  },
+  titleContainer: {
+    flexDirection: 'row', 
+    justifyContent: 'center', 
+    marginBottom: 25
+  },
+  infoContainer: {
+    flexDirection: 'row', 
+    marginBottom: 15
+  },
+  infoIcon: {
+    top: 3, 
+    width: 20,
+    marginRight: 8
+  }
+})
