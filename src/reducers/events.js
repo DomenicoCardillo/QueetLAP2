@@ -11,7 +11,7 @@ const events = (state = {}, action) => {
 
     case types.CREATE_EVENT_SUCCESS:
       newState.event.isLoading = false
-      newState.events[action.payload.id] = action.payload
+      newState.events.push(action.payload)
       return newState
 
     case types.CREATE_EVENT_FAILED:
@@ -27,7 +27,8 @@ const events = (state = {}, action) => {
 
     case types.FETCH_EVENTS_SUCCESS:
       newState.event.isLoading = false
-      newState.events = action.payload
+      newState.events = action.payload.events
+      newState.event.lastKey = action.payload.lastKey
       return newState
 
     case types.FETCH_EVENTS_FAILED:
@@ -43,7 +44,8 @@ const events = (state = {}, action) => {
 
     case types.FETCH_MORE_EVENTS_SUCCESS:
       newState.event.isLoading = false
-      newState.events = Object.assign({}, newState.events, action.payload)
+      newState.events = newState.events.concat(action.payload.events)
+      newState.event.lastKey = action.payload.lastKey
       return newState
 
     case types.FETCH_MORE_EVENTS_FAILED:

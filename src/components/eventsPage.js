@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
-import { fromObjToArray, sortArrayByProps, formatDate } from '../globals'
+import { formatDate, formatTime } from '../globals'
 
 import {
   View,
@@ -65,37 +65,50 @@ class EventsPage extends Component {
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       isRefreshing: this.props.isLoading,
-      orderByKey: true,
-      arrayEvents: [],
-      lastKey: '',
+      events: [],
       activeFilter: 'New'
     }
   }
 
   componentDidMount() {
-    this.props.fetchEvents(this.state.orderByKey)
+    this.setFilter('New')
     this.props.listenChanges()
   }
 
   renderRow(event) {
-    let categoryName = this.props.categories.filter((cat) => {
-      return cat.id == event.category
-    }).map((cat) => {
-      return cat.name
-    })
+    let catName = this.props.categories[event.category].name
+    let catSlug = this.props.categories[event.category].slug
+    let imageBox = null
+    switch (catSlug) {
+      case 'badminton':
+        imageBox = <Image source={require('../assets/img/badminton.jpg')} style={styles.eventImage} />
+        break
+      case 'basket':
+        imageBox = <Image source={require('../assets/img/basket.jpg')} style={styles.eventImage} />
+        break
+      case 'running':
+        imageBox = <Image source={require('../assets/img/running.jpg')} style={styles.eventImage} />
+        break
+      case 'soccer':
+        imageBox = <Image source={require('../assets/img/soccer.jpg')} style={styles.eventImage} />
+        break
+      case 'tennis':
+        imageBox = <Image source={require('../assets/img/tennis.jpg')} style={styles.eventImage} />
+        break
+    }
     return (
       <TouchableOpacity activeOpacity={0.7}>
         <View style={styles.eventBox}>
           <View>
-            <Image source={require('../assets/img/splash.png')} style={styles.eventImage} />
+            {imageBox}
           </View>
           <View style={styles.eventContainer}>
             <View style={styles.eventTopInfo}>
               <Text style={styles.eventTitle}>{event.name}</Text>
-              <Text style={styles.eventDate}>{event.date} - {event.time}</Text>
+              <Text style={styles.eventDate}>{formatDate(event.dateTime)} - {formatTime(event.dateTime)}</Text>
             </View>
             <View style={styles.eventBottomInfo}>
-              <Text style={styles.eventBottomInfoText}>{event.shortPlace} - {categoryName}</Text>
+              <Text style={styles.eventBottomInfoText}>{event.shortPlace} - {catName}</Text>
               <Text>{event.creator.name}</Text>
             </View>
           </View>
@@ -117,41 +130,32 @@ class EventsPage extends Component {
   }
 
   onRefresh(){
-    this.props.fetchEvents(this.state.orderByKey, Object.keys(this.props.events).length)
+    this.props.fetchEvents(this.state.activeFilter, this.props.events.length)
   }
 
   onEndReached(){
-    this.props.fetchMoreEvents(this.state.lastKey, this.state.orderByKey)
+    this.props.fetchMoreEvents(this.state.activeFilter)
   }
 
   componentWillReceiveProps(nextProps){
-    this.state.arrayEvents = fromObjToArray(nextProps.events)
-    if(this.state.orderByKey) sortArrayByProps(this.state.arrayEvents, 'desc', 'keyId')
-    else                      sortArrayByProps(this.state.arrayEvents, 'asc', 'date', 'time')
-    if(this.state.arrayEvents.length){
-      if(this.state.orderByKey)
-        this.state.lastKey = this.state.arrayEvents[this.state.arrayEvents.length - 1].keyId
-      else
-        this.state.lastKey = this.state.arrayEvents[this.state.arrayEvents.length - 1].date
-    }
+    this.state.events = nextProps.events
   }
 
   setFilter(selectedFilter) {
     this.setState({
       activeFilter: selectedFilter
-    });
+    }, () => this.props.fetchEvents(this.state.activeFilter))
   }
 
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const dataSource = ds.cloneWithRows(this.state.arrayEvents)
-
+    const dataSource = ds.cloneWithRows(this.state.events)
     const options = [
       'New',
       'Next',
-      'Nearest',
-      'Ended',
-    ];
+      'Near',
+      'Ended'
+    ]
 
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>

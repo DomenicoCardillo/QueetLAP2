@@ -17,7 +17,7 @@ const rootReducer = (state = {}, action) => {
 
   newState.categories = categories(state.categories, action)
 
-  let eventsStuffs = events({events: Object.assign({}, state.events), event: state.event}, action)
+  let eventsStuffs = events({events: state.events.slice(0), event: state.event}, action)
   newState.events = eventsStuffs.events
   newState.event = eventsStuffs.event
   

@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
       id: state.auth.currentUser.id, 
       name: state.auth.currentUser.firstname + ' ' + state.auth.currentUser.lastname
     },
-    event: state.events[state.event.currentId] || {},
+    event: state.events[state.event.currentId] || {dateTime: new Date().getTime()},
     isLoading: state.event.isLoading,
     hasError: state.event.hasError,
     errorMessage: state.event.errorMessage,

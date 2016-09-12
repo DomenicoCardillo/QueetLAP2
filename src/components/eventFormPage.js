@@ -23,11 +23,11 @@ export default class EventFormPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isNew: Object.getOwnPropertyNames(this.props.event).length == 0, 
+      isNew: this.props.event.keyId === undefined,
       value: {
         name: this.props.event.name,
-        date: this.props.event.date,
-        time: this.props.event.time 
+        date: this.props.event.dateTime,
+        time: this.props.event.dateTime
       },
       longPlace: this.props.event.longPlace || '',
       shortPlace: this.props.event.shortPlace || '',
@@ -43,14 +43,17 @@ export default class EventFormPage extends Component {
   onSave() {
     let value = this.refs.form.getValue()
     if(value) {
-      let newEvent = Object.assign({}, this.props.event, value)
-      newEvent.shortPlace = this.state.shortPlace
-      newEvent.longPlace = this.state.longPlace
-      newEvent.category = this.state.selectedCategory
-      newEvent.date = formatDate(newEvent.date)
-      newEvent.time = formatTime(newEvent.time)
-      newEvent.creator = this.props.creator
-
+      let dateTime = new Date(formatDate(value.date))
+      dateTime.setHours(formatTime(value.time).split(':')[0])
+      dateTime.setMinutes(formatTime(value.time).split(':')[1])
+      let newEvent = {
+        name: this.state.value.name,
+        shortPlace: this.state.shortPlace,
+        longPlace: this.state.longPlace,
+        category: this.state.selectedCategory,
+        dateTime: dateTime.getTime(),
+        creator: this.props.creator
+      }
       if(this.state.isNew)  this.props.createEvent(newEvent)
       else                  this.props.updateEvent(newEvent)
     }
