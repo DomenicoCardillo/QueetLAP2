@@ -109,3 +109,7 @@ export const filterByDateTime = (array, greater = true) => {
 export const filterByPlace = (array, place) => {
   return array.filter(el => el.shortPlace === place)
 }
+
+export const filterByCreator = (array, creatorId) => {
+  return array.filter(el => el.creator.id === creatorId)
+}
