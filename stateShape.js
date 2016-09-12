@@ -22,7 +22,8 @@ stateShape = {
   eventPage: {
     isLoading: false,
     hasError: false,
-    errorMessage: ''
+    errorMessage: '',
+    event: undefined
   },
   events: [
     {

@@ -54,6 +54,9 @@ const events = (state = {}, action) => {
       newState.events[action.payload.id] = action.payload.newValue
       return newState
 
+    case types.SET_EVENT_DETAIL:
+      newState.eventPage.event = action.payload
+
     default:
       return state
   }

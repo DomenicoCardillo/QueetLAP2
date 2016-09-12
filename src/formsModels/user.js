@@ -3,6 +3,11 @@ import React, {
 } from 'react-native'
 
 import t from 'tcomb-form-native'
+import _ from 'lodash'
+
+const stylesheet = _.cloneDeep(t.form.Form.stylesheet)
+stylesheet.textbox.normal.backgroundColor = '#fff'
+stylesheet.textbox.normal.fontSize        = 15
 
 let Gender = t.enums({
   M: 'Male',
@@ -20,7 +25,7 @@ const model = t.struct({
 })
 
 const options = {
-
+  stylesheet: stylesheet,
   /* Check this on new account */
   fields: {
     gender: {
