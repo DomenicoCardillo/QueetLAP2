@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   userImage: {
     width: 120,
     height: 120,
-    borderRadius: styleVariables.baseRadius,
-    marginBottom: 20
+    borderRadius: 60,
+    marginBottom: 20,
   },
   imageContainer: {
     flex: 1, 

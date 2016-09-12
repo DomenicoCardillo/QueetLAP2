@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   userImage: {
     width: 90,
     height: 90,
-    borderRadius: styleVariables.baseRadius,
+    borderRadius: 45,
     marginBottom: 10
   }
 })

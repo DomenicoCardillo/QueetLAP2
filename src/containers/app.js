@@ -32,6 +32,7 @@ import EventForm from './eventForm'
 import Events from './events'
 import MyEvents from './myEvents'
 import Event from './event'
+import Users from './users'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -140,7 +141,7 @@ const scenes = Actions.create(
       <Scene
         key='users'
         title='Users'
-        component={Events}
+        component={Users}
         hideNavBar={false}
         hideTabBar={false}
         titleStyle={styles.titleStyle}
