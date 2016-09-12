@@ -4,7 +4,6 @@ import {
   dbUsersRef, 
   firebaseDB, 
   dbEventsRef,
-  formatDate,
   fromObjToArray,
   sortArrayByProps,
   filterByDateTime,

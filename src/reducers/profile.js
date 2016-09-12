@@ -5,19 +5,19 @@ const profile = (state = {}, action) => {
 
   switch (action.type) {
     case types.UPDATE_PROFILE_START:
-      newState.profile.isLoading = true
-      newState.profile.hasError = false
+      newState.profilePage.isLoading = true
+      newState.profilePage.hasError = false
       return newState
 
     case types.UPDATE_PROFILE_SUCCESS:
-      newState.profile.isLoading = false
+      newState.profilePage.isLoading = false
       newState.auth.currentUser = action.payload
       return newState
 
     case types.UPDATE_PROFILE_FAILED:
-      newState.profile.isLoading = false
-      newState.profile.hasError = true
-      newState.profile.errorMessage = action.error.message
+      newState.profilePage.isLoading = false
+      newState.profilePage.hasError = true
+      newState.profilePage.errorMessage = action.error.message
       return newState
 
     default:

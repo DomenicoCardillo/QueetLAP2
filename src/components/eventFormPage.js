@@ -10,8 +10,6 @@ import Button from 'apsl-react-native-button'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
-import MultipleChoice from 'react-native-multiple-choice'
-
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
 import { formatDate, formatTime } from '../globals'

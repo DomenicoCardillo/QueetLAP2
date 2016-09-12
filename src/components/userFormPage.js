@@ -9,8 +9,10 @@ import {
   StyleSheet, 
   TouchableOpacity, 
   Image, 
-  Platform 
+  Platform,
+  Picker
 } from 'react-native'
+const Item = Picker.Item
 
 import UserForm from '../formsModels/user'
 import { Actions } from 'react-native-router-flux'
@@ -18,7 +20,6 @@ import Button from 'apsl-react-native-button'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
-import MultipleChoice from 'react-native-multiple-choice'
 import ImagePicker from 'react-native-image-crop-picker'
 
 import commonStyles from '../styles/commons'
@@ -43,7 +44,7 @@ export default class UserFormPage extends Component {
       },
       longPlace: this.props.profile.longPlace,
       shortPlace: this.props.profile.shortPlace,
-      selectedCategories: this.getDefaultCategories(),
+      selectedCategory: this.props.profile.category,
       stringedCategories: this.getStringedCategories()
     }
   }
@@ -66,11 +67,7 @@ export default class UserFormPage extends Component {
       newProfile.shortPlace = this.state.shortPlace
       newProfile.longPlace = this.state.longPlace
 
-      newProfile.categories = this.props.categories.filter(function(cat) {
-        return this.state.selectedCategories.indexOf(cat.name) >= 0
-      }.bind(this)).map((cat) => {
-        return cat.id
-      })
+      newProfile.category = this.state.selectedCategory
 
       this.props.updateProfile(newProfile, picture)
     }
@@ -83,14 +80,6 @@ export default class UserFormPage extends Component {
   updatePlace(data) {
     this.state.shortPlace = data.terms[0].value
     this.state.longPlace = data.description
-  }
-
-  getDefaultCategories(){
-    return this.props.categories.filter((cat) => {
-      return this.props.profile.categories && this.props.profile.categories.indexOf(cat.id) >= 0 
-    }).map((cat) => {
-      return cat.name
-    })
   }
 
   getStringedCategories(){
@@ -143,12 +132,15 @@ export default class UserFormPage extends Component {
             onChange={this.onChange.bind(this)}
           />
 
-          <Text style={commonStyles.label}>Favourites sports</Text>
-          <MultipleChoice
-            options={this.state.stringedCategories}
-            selectedOptions={this.state.selectedCategories}
-            maxSelectedOptions={5}
-          />
+          <Text style={commonStyles.label}>Select sport</Text>
+          <Picker
+            selectedValue={this.state.selectedCategory}
+            onValueChange={(category) => this.setState({selectedCategory: category})}>
+            { this.props.categories.map((cat) => {
+                return <Item label={cat.name} value={cat.id} />
+              })
+            }
+          </Picker>
 
           <View style={{height: 40}}></View>
 

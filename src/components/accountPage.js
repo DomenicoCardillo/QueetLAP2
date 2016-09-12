@@ -60,7 +60,7 @@ export default class AccountPage extends Component {
           </View>
           <View style={styles.infoContainer}>
             <Icon name="star" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
-            <Text style={fonts.style.h5}>{this.props.currentUser.stringedCategories}</Text>
+            <Text style={fonts.style.h5}>{this.props.currentUser.stringedCategory}</Text>
           </View>
           <Button 
             style={[commonStyles.primaryButton, {marginBottom: 10}]} 

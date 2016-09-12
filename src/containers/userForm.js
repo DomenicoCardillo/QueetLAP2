@@ -6,9 +6,9 @@ import { Actions } from 'react-native-router-flux'
 const mapStateToProps = (state) => {
   return {
     profile: state.auth.currentUser,
-    isLoading: state.profile.isLoading,
-    hasError: state.profile.hasError,
-    errorMessage: state.profile.errorMessage,
+    isLoading: state.profilePage.isLoading,
+    hasError: state.profilePage.hasError,
+    errorMessage: state.profilePage.errorMessage,
     categories: state.categories
   }
 }

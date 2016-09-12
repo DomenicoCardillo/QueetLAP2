@@ -11,8 +11,8 @@ const rootReducer = (state = {}, action) => {
 
   newState.auth = auth(state.auth, action)
 
-  let newProfile = profile({profile: state.profile, auth: newState.auth}, action)
-  newState.profile = newProfile.profile
+  let newProfile = profile({profilePage: state.profilePage, auth: newState.auth}, action)
+  newState.profilePage = newProfile.profilePage
   newState.auth.currentUser = newProfile.auth.currentUser
 
   newState.categories = categories(state.categories, action)
