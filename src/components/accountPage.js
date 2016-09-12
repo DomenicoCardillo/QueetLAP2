@@ -37,7 +37,7 @@ export default class AccountPage extends Component {
     return (
       <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
-          <View style={{flex: 1, alignItems: 'center'}}>
+          <View style={styles.imageContainer}>
             { this.props.currentUser.pictureUrl === '' ? (
                 <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />
               ) : (
@@ -45,21 +45,21 @@ export default class AccountPage extends Component {
               )
             }
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 15}}>
+          <View style={styles.titleContainer}>
             <Text style={[fonts.style.h4, {marginRight: 8}]}>{this.props.currentUser.firstname} {this.props.currentUser.lastname}</Text>
             { this.props.currentUser.gender === 'M' ? (
-                <Icon name="mars" size={20} color="#3498db" style={{top: 5}} />
+                <Icon name="mars" size={18} color="#3498db" style={{top: 8}} />
               ) : (
-                <Icon name="venus" size={20} color="#ea4c89" style={{top: 5}} />
+                <Icon name="venus" size={18} color="#ea4c89" style={{top: 8}} />
               )
             }
           </View>
-          <View style={{marginBottom: 15}}>
-            <Text style={[fonts.style.h5, {fontWeight: '700'}]}>Place: </Text>
+          <View style={styles.infoContainer}>
+            <Icon name="map-marker" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
             <Text style={fonts.style.h5}>{this.props.currentUser.longPlace}</Text>
           </View>
-          <View style={{marginBottom: 15}}>
-            <Text style={[fonts.style.h5, {fontWeight: '700'}]}>Favourites Sport: </Text>
+          <View style={styles.infoContainer}>
+            <Icon name="star" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
             <Text style={fonts.style.h5}>{this.props.currentUser.stringedCategories}</Text>
           </View>
           <Button 
@@ -80,5 +80,23 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: styleVariables.baseRadius,
     marginBottom: 20
+  },
+  imageContainer: {
+    flex: 1, 
+    alignItems: 'center'
+  },
+  titleContainer: {
+    flexDirection: 'row', 
+    justifyContent: 'center', 
+    marginBottom: 25
+  },
+  infoContainer: {
+    flexDirection: 'row', 
+    marginBottom: 15
+  },
+  infoIcon: {
+    top: 3, 
+    width: 20,
+    marginRight: 8
   }
 })

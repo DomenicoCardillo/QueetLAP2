@@ -30,6 +30,7 @@ import Account from './account'
 import UserForm from './userForm'
 import EventForm from './eventForm'
 import Events from './events'
+import Event from './event'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -184,6 +185,15 @@ const scenes = Actions.create(
       key='eventForm'
       title='New event'
       component={EventForm}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={commonStyles.whiteText} />
+    <Scene
+      key='event'
+      title='Event'
+      component={Event}
       hideNavBar={false}
       hideTabBar={true}
       hideBackImage={true}
