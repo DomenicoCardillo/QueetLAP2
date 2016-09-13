@@ -15,6 +15,7 @@ const getVisibleEvents = (events, activeFilter, userShortPlace) => {
       sortArrayByProps(events, 'asc', 'dateTime')
       break
     case 'Near':
+      events = filterByDateTime(events)
       events = filterByPlace(events, userShortPlace)
       sortArrayByProps(events, 'asc', 'dateTime')
       break
