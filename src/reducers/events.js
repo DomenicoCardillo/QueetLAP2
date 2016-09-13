@@ -46,12 +46,13 @@ const events = (state = {}, action) => {
     case types.SET_EVENTS_ACTIVE_FILTER:
       newState.eventsPage.activeFilter = action.payload
       return newState
+      
     case types.SET_MY_EVENTS_ACTIVE_FILTER:
       newState.myEventsPage.activeFilter = action.payload
       return newState
 
     case types.APPLY_EVENT_CHANGES:
-      newState.events[action.payload.id] = action.payload.newValue
+      newState.events[action.payload.index] = action.payload.newValue
       return newState
 
     case types.SET_EVENT_DETAIL:

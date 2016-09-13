@@ -135,9 +135,13 @@ export const setEventDetail = (payload) => {
 }
 
 export const listenChanges = () => {
-  return (dispatch) => {
-    dbEventsRef.on('child_changed', function(childSnapshot, prevChildKey) {
-      dispatch(applyEventChanges({id: childSnapshot.key, newValue: childSnapshot.val()}))
+  return (dispatch, getState) => {
+    dbEventsRef.on('child_changed', function(childSnapshot) {
+      let events = getState().events
+      let eventChangedIndex = events.findIndex(x => x.keyId == childSnapshot.key)
+      let newEventValue = childSnapshot.val()
+      newEventValue.keyId = childSnapshot.key
+      dispatch(applyEventChanges({index: eventChangedIndex, newValue: newEventValue}))
     })
   }
 }
