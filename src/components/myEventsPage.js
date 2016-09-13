@@ -141,10 +141,10 @@ class MyEventsPage extends Component {
     ]
 
     return (
-      <View style={[commonStyles.mainContainer, {backgroundColor: '#555577'}]}>
+      <View style={[commonStyles.mainContainer, {backgroundColor: '#fbc063'}]}>
         <View style={{paddingTop: 20, paddingBottom: 20}}>
           <SegmentedControls
-            tint={styleVariables.colors.brandPrimaryDark}
+            tint='#fbc063'
             selectedTint={'#fff'}
             backTint={'#fff'}
             optionStyle= {{

@@ -199,7 +199,7 @@ export default class UserFormPage extends Component {
           />
 
           <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10, marginTop: 20}]} 
+            style={[commonStyles.primaryButton, {marginBottom: 40, marginTop: 30}]} 
             textStyle={commonStyles.primaryButtonText}
             isLoading={this.props.isLoading}
             onPress={this.onSave.bind(this)}>

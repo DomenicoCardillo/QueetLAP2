@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchEvents: () => {
-      dispatch(fetchMyEvents())
+      dispatch(fetchEvents())
     },
     listenEventsChanges: () => {
       dispatch(listenEventsChanges())
