@@ -39,6 +39,9 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
+# Private Keystore
+android/app/queet-lap2.keystore
+
 # Editor
 .vscode/
 
