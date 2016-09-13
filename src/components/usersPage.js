@@ -12,7 +12,8 @@ import {
   StyleSheet,
   RecyclerViewBackedScrollView,
   TouchableOpacity,
-  RefreshControl
+  RefreshControl,
+  ActivityIndicator
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -24,15 +25,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    height: 60,
+    height: 70,
     padding: 15,
     backgroundColor: '#fff'
   },
   userImage: {
-    maxWidth: 40,
-    maxHeight: 40,
-    marginRight: 10,
-    borderRadius: 20
+    width: 45,
+    height: 45,
+    marginRight: 15,
+    borderRadius: 22.5
   }
 })
 
@@ -48,11 +49,17 @@ class UsersPage extends Component {
 
   renderRow(user) {
     user.firstname = user.firstname || 'Anonymus'
+    
     return (
       <TouchableOpacity activeOpacity={0.7}>
         <View style={styles.userBox}>
-          <Image source={{uri: user.pictureUrl}} style={styles.userImage} />
+          { user.pictureUrl === undefined ? (
+            <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />
+          ) : (
+            <Image source={{uri: user.pictureUrl}} style={styles.userImage} />
+          )}
           <Text style={{fontSize: 15, fontWeight: '500'}}>{user.firstname} {user.lastname}</Text>
+          <Icon name="chevron-right" size={22} color="#999" style={{position: 'absolute', right: 20, top: 25}} />
         </View>
       </TouchableOpacity>
     )
@@ -75,6 +82,18 @@ class UsersPage extends Component {
     const dataSource = ds.cloneWithRows(this.props.users)
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#ea573d'}]}>
+        <View style={{paddingTop: 20, paddingBottom: 20}}>
+          <Text style={[fonts.style.h5, {fontWeight: '500', textAlign: 'center', color: '#fff'}]}>Tutti gli utenti</Text>
+        </View>
+        {this.props.isLoading ? (
+            <ActivityIndicator
+              animating={this.props.isLoading}
+              style={{alignItems: 'center', justifyContent: 'center', height: 200}}
+              color="white"
+              size="large"
+            />
+          ) : null
+        }
         <ListView
             dataSource={dataSource}
             renderRow={(user) => this.renderRow(user)}
