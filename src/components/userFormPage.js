@@ -137,7 +137,7 @@ export default class UserFormPage extends Component {
             selectedValue={this.state.selectedCategory}
             onValueChange={(category) => this.setState({selectedCategory: category})}>
             { this.props.categories.map((cat) => {
-                return <Item label={cat.name} value={cat.id} />
+                return <Item key={cat.id} label={cat.name} value={cat.id} />
               })
             }
           </Picker>
