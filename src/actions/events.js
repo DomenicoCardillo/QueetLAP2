@@ -1,16 +1,8 @@
 import * as types from './types'
-import { 
-  firebaseAuth, 
-  dbUsersRef, 
-  firebaseDB, 
+import {
   dbEventsRef,
   fromObjToArray,
-  sortArrayByProps,
-  filterByDateTime,
-  defaultSizeList,
-  removeDuplicateByKey
 } from '../globals'
-import { AsyncStorage } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
 
@@ -86,7 +78,7 @@ export const fetchEvents = () => {
     dispatch(fetchEventsStart())
 
     dbEventsRef.once('value').then(function(snapshot) {
-      events = fromObjToArray(snapshot.val())
+      let events = fromObjToArray(snapshot.val())
       dispatch(fetchEventsSuccess(events))
     }).catch(function(error){
       dispatch(fetchEventsFailed(error))
@@ -134,7 +126,7 @@ export const setEventDetail = (payload) => {
   }
 }
 
-export const listenChanges = () => {
+export const listenEventsChanges = () => {
   return (dispatch, getState) => {
     dbEventsRef.on('child_changed', function(childSnapshot) {
       let events = getState().events

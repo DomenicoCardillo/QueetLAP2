@@ -37,8 +37,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchEvents: () => {
       dispatch(fetchMyEvents())
     },
-    listenChanges: () => {
-      dispatch(listenChanges())
+    listenEventsChanges: () => {
+      dispatch(listenEventsChanges())
     },
     setFilter: (filter) => {
       dispatch(setMyEventsActiveFilter(filter))

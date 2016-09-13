@@ -47,6 +47,11 @@ export const initialState = {
     errorMessage: '',
     activeFilter: 'Ended'
   },
+  usersPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: ''
+  },
   categories: [],
   events: [],
   users: []

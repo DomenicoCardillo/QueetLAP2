@@ -68,7 +68,7 @@ class EventsPage extends Component {
 
   componentDidMount() {
     this.setFilter('New')
-    this.props.listenChanges()
+    this.props.listenEventsChanges()
   }
 
   renderRow(event) {

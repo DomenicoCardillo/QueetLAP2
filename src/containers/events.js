@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchEvents, listenChanges, setEventsActiveFilter, setEventDetail } from '../actions/events'
+import { fetchEvents, listenEventsChanges, setEventsActiveFilter, setEventDetail } from '../actions/events'
 import EventsPage from '../components/eventsPage'
 import { Actions } from 'react-native-router-flux'
 import { filterByDateTime, sortArrayByProps, filterByPlace } from '../globals'
@@ -45,8 +45,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchEvents: () => {
       dispatch(fetchEvents())
     },
-    listenChanges: () => {
-      dispatch(listenChanges())
+    listenEventsChanges: () => {
+      dispatch(listenEventsChanges())
     },
     setFilter: (filter) => {
       dispatch(setEventsActiveFilter(filter))

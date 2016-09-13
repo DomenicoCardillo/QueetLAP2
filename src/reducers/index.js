@@ -2,8 +2,7 @@ import auth from './auth'
 import profile from './profile'
 import categories from './categories'
 import events from './events'
-
-import { combineReducers } from 'redux'
+import users from './users'
 
 
 const rootReducer = (state = {}, action) => {
@@ -27,6 +26,10 @@ const rootReducer = (state = {}, action) => {
   newState.eventsPage = eventsStuffs.eventsPage
   newState.myEventsPage = eventsStuffs.myEventsPage
   newState.eventPage = eventsStuffs.eventPage
+
+  let usersStuffs = users({usersPage: state.usersPage, users: state.users}, action)
+  newState.usersPage = usersStuffs.usersPage
+  newState.users = usersStuffs.users
   
   return newState
 }

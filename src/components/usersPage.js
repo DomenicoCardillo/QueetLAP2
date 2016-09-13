@@ -11,7 +11,8 @@ import {
   Image, 
   StyleSheet,
   RecyclerViewBackedScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  RefreshControl
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -41,15 +42,17 @@ class UsersPage extends Component {
   }
 
   componentDidMount() {
-    //this.props.listenChanges()
+    this.props.fetchUsers()
+    this.props.listenUsersChanges()
   }
 
-  renderRow(event) {
+  renderRow(user) {
+    user.firstname = user.firstname || 'Anonymus'
     return (
       <TouchableOpacity activeOpacity={0.7}>
         <View style={styles.userBox}>
-          <Image source={require('../assets/img/badminton.jpg')} style={styles.userImage} />
-          <Text style={{fontSize: 15, fontWeight: '500'}}>Domenico Cardillo</Text>
+          <Image source={{uri: user.pictureUrl}} style={styles.userImage} />
+          <Text style={{fontSize: 15, fontWeight: '500'}}>{user.firstname} {user.lastname}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -67,15 +70,29 @@ class UsersPage extends Component {
     )
   }
 
-  render() {  
+  render() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const dataSource = ds.cloneWithRows(this.props.users)
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#ea573d'}]}>
-        <TouchableOpacity activeOpacity={0.7}>
-          <View style={styles.userBox}>
-            <Image source={require('../assets/img/badminton.jpg')} style={styles.userImage} />
-            <Text style={{fontSize: 15, fontWeight: '500'}}>Domenico Cardillo</Text>
-          </View>
-        </TouchableOpacity>
+        <ListView
+            dataSource={dataSource}
+            renderRow={(user) => this.renderRow(user)}
+            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+            renderSeparator={this.renderSeparator}
+            enableEmptySections={true}
+            refreshControl={
+              <RefreshControl
+                refreshing={false}
+                onRefresh={this.props.fetchUsers.bind(this)}
+                tintColor='#fff'
+                title="Loading..."
+                titleColor='#fff'
+                colors={['#555577', '#555577', '#fff']}
+                progressBackgroundColor="#fff"
+              />
+            }
+          />
       </View>
     )
   }
