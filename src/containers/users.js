@@ -5,7 +5,8 @@ import { fetchUsers, listenUsersChanges } from '../actions/users'
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users
+    users: state.users,
+    isLoading: state.usersPage.isLoading
   }
 }
 

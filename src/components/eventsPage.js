@@ -172,8 +172,7 @@ class EventsPage extends Component {
           />
         </View>
         
-        {this.props.isLoading ? 
-          (
+        {this.props.isLoading ? (
             <ActivityIndicator
               animating={this.props.isLoading}
               style={{alignItems: 'center', justifyContent: 'center', height: 200}}
