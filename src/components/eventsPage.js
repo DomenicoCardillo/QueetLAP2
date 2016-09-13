@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
+import fonts from '../styles/fonts'
+
 import { formatDate, formatTime } from '../globals'
 
 import {
@@ -168,24 +170,33 @@ class EventsPage extends Component {
             selectedOption={this.props.activeFilter}
           />
         </View>
-        <ListView
-          dataSource={dataSource}
-          renderRow={(event) => this.renderRow(event)}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this.renderSeparator}
-          enableEmptySections={true}
-          refreshControl={
-            <RefreshControl
-              refreshing={false}
-              onRefresh={this.props.fetchEvents.bind(this)}
-              tintColor='#fff'
-              title="Loading..."
-              titleColor='#fff'
-              colors={['#555577', '#555577', '#fff']}
-              progressBackgroundColor="#fff"
-            />
-          }
-        />
+        { this.props.events.length === 0 ? (
+          <View style={styles.errorBox}>
+            <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>Nessun evento</Text>
+            <TouchableOpacity onPress={this.setFilter.bind(this, 'New')}>
+              <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>Vai ai nuovi eventi</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <ListView
+            dataSource={dataSource}
+            renderRow={(event) => this.renderRow(event)}
+            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+            renderSeparator={this.renderSeparator}
+            enableEmptySections={true}
+            refreshControl={
+              <RefreshControl
+                refreshing={false}
+                onRefresh={this.props.fetchEvents.bind(this)}
+                tintColor='#fff'
+                title="Loading..."
+                titleColor='#fff'
+                colors={['#555577', '#555577', '#fff']}
+                progressBackgroundColor="#fff"
+              />
+            }
+          />
+        )}
       </View>
     )
   }
