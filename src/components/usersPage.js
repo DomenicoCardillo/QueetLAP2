@@ -82,9 +82,6 @@ class UsersPage extends Component {
     const dataSource = ds.cloneWithRows(this.props.users)
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#ea573d'}]}>
-        <View style={{paddingTop: 20, paddingBottom: 20}}>
-          <Text style={[fonts.style.h5, {fontWeight: '500', textAlign: 'center', color: '#fff'}]}>Tutti gli utenti</Text>
-        </View>
         {this.props.isLoading ? (
             <ActivityIndicator
               animating={this.props.isLoading}
