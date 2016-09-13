@@ -14,7 +14,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   RecyclerViewBackedScrollView,
-  RefreshControl
+  RefreshControl,
+  ActivityIndicator
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
@@ -170,7 +171,19 @@ class EventsPage extends Component {
             selectedOption={this.props.activeFilter}
           />
         </View>
-        { this.props.events.length === 0 ? (
+        
+        {this.props.isLoading ? 
+          (
+            <ActivityIndicator
+              animating={this.props.isLoading}
+              style={{alignItems: 'center', justifyContent: 'center', height: 200}}
+              color="white"
+              size="large"
+            />
+          ) : null
+        }
+
+        { !this.props.isLoading && this.props.events.length === 0 ? (
           <View style={styles.errorBox}>
             <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>Nessun evento</Text>
             <TouchableOpacity onPress={this.setFilter.bind(this, 'New')}>
