@@ -92,7 +92,7 @@ class MyEventsPage extends Component {
         break
     }
     return (
-      <TouchableOpacity activeOpacity={0.7}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => this.goToEventDetail(event)}>
         <View style={styles.eventBox}>
           <View>
             {imageBox}
@@ -130,6 +130,10 @@ class MyEventsPage extends Component {
 
   setFilter(selectedFilter) {
     this.props.setFilter(selectedFilter)
+  }
+
+  goToEventDetail(event) {
+    this.props.setEventDetail(event)
   }
 
   render() {
