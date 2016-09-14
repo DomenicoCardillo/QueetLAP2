@@ -10,7 +10,8 @@ import {
   Keyboard,
   LayoutAnimation,
   ScrollView,
-  AsyncStorage
+  AsyncStorage,
+  Image
 } from 'react-native'
 
 import Button from 'apsl-react-native-button'
@@ -23,9 +24,16 @@ export default class LoginPage extends Component {
   constructor(props) {
     super()
     this.state = {
+      pageTitleContainer: {
+        marginBottom: 50
+      },
       pageTitle: {
-        fontSize: fonts.size.h1,
-        margin: 50
+        width: 137,
+        height: 50,
+        marginTop: 50
+      },
+      pageSubtitle: {
+        opacity: 1
       },
       email: '',
       pass: ''
@@ -61,10 +69,17 @@ export default class LoginPage extends Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
 
     this.setState({
+      pageTitleContainer: {
+        marginBottom: 30
+      },
       pageTitle: {
-        fontSize: fonts.size.h3,
-        margin: 20
-      }
+        width: 137 * 0.7,
+        height: 50 * 0.7,
+        marginTop: 30
+      },
+      pageSubtitle: {
+        opacity: 0
+      },
     })
   }
 
@@ -73,10 +88,17 @@ export default class LoginPage extends Component {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     
     this.setState({
+      pageTitleContainer: {
+        marginBottom: 50
+      },
       pageTitle: {
-        fontSize: fonts.size.h1,
-        margin: 50
-      }
+        width: 137,
+        height: 50,
+        marginTop: 50
+      },
+      pageSubtitle: {
+        opacity: 1
+      },
     })
   }
 
@@ -93,7 +115,10 @@ export default class LoginPage extends Component {
         ) : null }
 
         <ScrollView style={commonStyles.container}>
-          <Text style={[{textAlign: 'center'}, this.state.pageTitle]}>Login</Text>
+          <View style={this.state.pageTitleContainer}>
+            <Image source={require('../assets/img/login.png')} style={[this.state.pageTitle, {alignSelf: 'center', marginBottom: 5}]} />
+            <Text style={[this.state.pageSubtitle, {textAlign: 'center', color: styleVariables.colors.brandPrimary, fontWeight: '500'}]}>Effettua il login con la tua mail</Text>
+          </View>
           <TextInput
             ref='1'
             style={commonStyles.textInput}

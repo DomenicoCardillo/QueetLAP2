@@ -136,7 +136,6 @@ class EventsPage extends Component {
 
   goToEventDetail(event) {
     this.props.setEventDetail(event)
-    Actions.event()
   }
 
   render() {

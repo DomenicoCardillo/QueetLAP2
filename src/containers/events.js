@@ -53,6 +53,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     setEventDetail: (event) => {
       dispatch(setEventDetail(event))
+      Actions.event()
     }
   }
 }

@@ -21,6 +21,14 @@ export default class SignupPage extends Component {
   constructor (props) {
     super()
     this.state = {
+      pageTitleContainer: {
+        marginBottom: 50
+      },
+      pageTitle: {
+        width: 192,
+        height: 50,
+        marginTop: 50
+      },
       email: '',
       pass: ''
     }
@@ -45,7 +53,10 @@ export default class SignupPage extends Component {
         <View style={commonStyles.container}>
           { !this.props.signupDone ? (
             <View>
-              <Text style={[fonts.style.h1, {margin: 50, textAlign: 'center'}]}>Signup</Text>
+              <View style={this.state.pageTitleContainer}>
+                <Image source={require('../assets/img/signup.png')} style={[this.state.pageTitle, {alignSelf: 'center', marginBottom: 5}]} />
+                <Text style={{textAlign: 'center', color: styleVariables.colors.brandPrimary, fontWeight: '500'}}>Registrati con la tua email gratuitamente</Text>
+              </View>
               <TextInput
                 ref='1'
                 style={commonStyles.textInput}

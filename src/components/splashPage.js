@@ -24,7 +24,7 @@ class Splash extends Component {
       <Image source={require('../assets/img/splash.png')} style={commonStyles.backgroundImage}>
         <View style={{ flex: 1 }}>
             <View style={commonStyles.centeredBody}>
-                <Image source={require('../assets/img/logo-white.png')} style={{marginBottom: 50}} />
+                <Image source={require('../assets/img/logo-white-text.png')} style={{marginBottom: 50}} />
                 <Text style={styles.titleText}>Scopri</Text>
                 <Text style={styles.subText}>
                     Lorem Ipsum e' un testo segnaposto utilizzato nel settore della tipografia e della stampa.
