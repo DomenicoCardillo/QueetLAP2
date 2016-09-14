@@ -5,56 +5,56 @@ const auth = (state = {}, action) => {
 
   switch (action.type) {
     case types.SIGNUP_START:
-      newState.signupPage.isLoading = true
-      newState.signupPage.hasError = false
+      newState.auth.signupPage.isLoading = true
+      newState.auth.signupPage.hasError = false
       return newState
 
     case types.SIGNUP_SUCCESS:
-      newState.signupPage.isLoading = false
-      newState.signupPage.signupDone = true
+      newState.auth.signupPage.isLoading = false
+      newState.auth.signupPage.signupDone = true
       return newState
 
     case types.SIGNUP_FAILED:
-      newState.signupPage.isLoading = false
-      newState.signupPage.hasError = true
-      newState.signupPage.errorMessage = action.error.message
+      newState.auth.signupPage.isLoading = false
+      newState.auth.signupPage.hasError = true
+      newState.auth.signupPage.errorMessage = action.error.message
       return newState
 
     case types.LOGIN_START:
-      newState.loginPage.isLoading = true
+      newState.auth.loginPage.isLoading = true
       return newState
 
     case types.LOGIN_SUCCESS:
-      newState.loginPage.isLoading = false
-      newState.currentUser = action.payload
+      newState.auth.loginPage.isLoading = false
+      newState.auth.currentUser = action.payload
       return newState
 
     case types.LOGIN_FAILED:
-      newState.loginPage.isLoading = false
-      newState.loginPage.hasError = true
-      newState.loginPage.errorMessage = action.error.message
+      newState.auth.loginPage.isLoading = false
+      newState.auth.loginPage.hasError = true
+      newState.auth.loginPage.errorMessage = action.error.message
       return newState
 
     case types.LOGOUT_START:
-      newState.logout.isLoading = true
+      newState.profilePage.isLoading = true
       return newState
     
     case types.LOGOUT_SUCCESS:
-      newState.logout.isLoading = false
-      newState.currentUser = null
+      newState.profilePage.isLoading = false
+      newState.auth.currentUser = null
       return newState
 
     case types.REAUTHENTICATE_START:
-      newState.loginPage.isLoading = true
+      newState.auth.loginPage.isLoading = true
       return newState
 
     case types.REAUTHENTICATE_SUCCESS:
-      newState.loginPage.isLoading = false
-      newState.currentUser = action.payload
+      newState.auth.loginPage.isLoading = false
+      newState.auth.currentUser = action.payload
       return newState
 
     case types.REAUTHENTICATE_FAILED:
-      newState.loginPage.isLoading = false
+      newState.auth.loginPage.isLoading = false
       return newState
 
     default:

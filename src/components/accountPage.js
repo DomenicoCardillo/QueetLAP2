@@ -65,6 +65,12 @@ export default class AccountPage extends Component {
             onPress={this.props.goToForm}>
             Edit Profile
           </Button>
+          <Button 
+            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+            textStyle={commonStyles.primaryButtonText}
+            onPress={this.props.logout}>
+            Logout
+          </Button>
         </ScrollView>
       </View>
     )

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import AccountPage from '../components/accountPage'
 import { Actions } from 'react-native-router-flux'
+import { logout } from '../actions/auth'
 
 const mapStateToProps = (state) => {
 
@@ -18,6 +19,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     goToForm: () => {
       Actions.userForm()
+    },
+    logout: () => {
+      dispatch(logout())
     }
   }
 }
