@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import UsersPage from '../components/usersPage'
 import { Actions } from 'react-native-router-flux'
-import { fetchUsers, listenUsersChanges } from '../actions/users'
+import { fetchUsers, listenUsersChanges, setUserDetail } from '../actions/users'
 
 const mapStateToProps = (state) => {
   return {
@@ -17,6 +17,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     listenUsersChanges: () => {
       dispatch(listenUsersChanges())
+    },
+    setUserDetail: (user) => {
+      dispatch(setUserDetail(user))
+      Actions.user()
     }
   }
 }

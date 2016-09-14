@@ -19,7 +19,7 @@ import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
 import fonts from '../styles/fonts'
 
-export default class AccountPage extends Component {
+export default class UserPage extends Component {
   constructor (props) {
     super()
   }
@@ -35,36 +35,34 @@ export default class AccountPage extends Component {
       <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
           <View style={styles.imageContainer}>
-            { this.props.currentUser.pictureUrl === '' ? (
+            { this.props.user.pictureUrl === '' ? (
                 <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />
               ) : (
-                <Image source={{ uri: this.props.currentUser.pictureUrl }} style={styles.userImage} />
+                <Image source={{ uri: this.props.user.pictureUrl }} style={styles.userImage} />
               )
             }
           </View>
           <View style={styles.titleContainer}>
-            <Text style={[fonts.style.h4, {marginRight: 8}]}>{this.props.currentUser.firstname} {this.props.currentUser.lastname}</Text>
-            { this.props.currentUser.gender === 'M' ? (
+            <Text style={[fonts.style.h4, {marginRight: 8}]}>{this.props.user.firstname} {this.props.user.lastname}</Text>
+            { this.props.user.gender === 'M' ? (
                 <Icon name="mars" size={18} color="#3498db" style={{top: 8}} />
               ) : (
                 <Icon name="venus" size={18} color="#ea4c89" style={{top: 8}} />
               )
             }
           </View>
-          <View style={styles.infoContainer}>
-            <Icon name="map-marker" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
-            <Text style={fonts.style.h5}>{this.props.currentUser.longPlace}</Text>
-          </View>
-          <View style={styles.infoContainer}>
-            <Icon name="star" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
-            <Text style={fonts.style.h5}>{this.props.currentUser.stringedCategory}</Text>
-          </View>
-          <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
-            textStyle={commonStyles.primaryButtonText}
-            onPress={this.props.goToForm}>
-            Edit Profile
-          </Button>
+          { this.props.user.longPlace ? (
+            <View style={styles.infoContainer}>
+              <Icon name="map-marker" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
+              <Text style={fonts.style.h5}>{this.props.user.longPlace}</Text>
+            </View>
+          ): ( null ) }
+          { this.props.user.stringedCategory ? (
+            <View style={styles.infoContainer}>
+              <Icon name="star" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
+              <Text style={fonts.style.h5}>{this.props.user.stringedCategory}</Text>
+            </View>
+          ): ( null ) }
         </ScrollView>
       </View>
     )

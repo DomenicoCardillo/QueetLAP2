@@ -52,6 +52,11 @@ export const initialState = {
     hasError: false,
     errorMessage: ''
   },
+  userPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: ''
+  },
   categories: [],
   events: [],
   users: []

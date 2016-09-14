@@ -27,9 +27,14 @@ const rootReducer = (state = {}, action) => {
   newState.myEventsPage = eventsStuffs.myEventsPage
   newState.eventPage = eventsStuffs.eventPage
 
-  let usersStuffs = users({usersPage: state.usersPage, users: state.users.slice(0)}, action)
+  let usersStuffs = users({
+    usersPage: state.usersPage, 
+    users: state.users.slice(0),
+    userPage: state.userPage
+  }, action)
   newState.usersPage = usersStuffs.usersPage
   newState.users = usersStuffs.users
+  newState.userPage = usersStuffs.userPage
   
   return newState
 }

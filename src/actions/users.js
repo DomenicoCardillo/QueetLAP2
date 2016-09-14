@@ -54,3 +54,10 @@ export const applyUserChanges = (payload) => {
     payload
   }
 }
+
+export const setUserDetail = (payload) => {
+  return {
+    type: types.SET_USER_DETAIL,
+    payload
+  }
+}
