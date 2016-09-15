@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch) => {
     createEvent: (newEvent) => {
       dispatch(createEvent(newEvent))
     },
-    updateEvent: (event) => {
-      dispatch(updateEvent(event))
+    updateEvent: (event, eventId) => {
+      dispatch(updateEvent(event, eventId))
     }
   }
 }

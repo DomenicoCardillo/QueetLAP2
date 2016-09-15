@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
   return {
+    currentUser: state.auth.currentUser,
     event: state.eventPage.event,
     categories: state.categories
   }

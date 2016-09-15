@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchEvents, setMyEventsActiveFilter } from '../actions/events'
+import { fetchEvents, setMyEventsActiveFilter, setEventDetail } from '../actions/events'
 import MyEventsPage from '../components/myEventsPage'
 import { Actions } from 'react-native-router-flux'
 import { filterByDateTime, sortArrayByProps, filterByPlace, filterByCreator } from '../globals'
@@ -42,6 +42,14 @@ const mapDispatchToProps = (dispatch) => {
     },
     setFilter: (filter) => {
       dispatch(setMyEventsActiveFilter(filter))
+    },
+    setEventDetail: (event) => {
+      dispatch(setEventDetail(event))
+      Actions.event({
+        rightTitle: 'Edit',
+        rightButtonTextStyle: {color: '#fff'},
+        onRight: () => Actions.eventForm()
+      })
     }
   }
 }

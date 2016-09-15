@@ -212,8 +212,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router scenes={scenes} getSceneStyle={getSceneStyle}>
-      </Router>
+      <Router scenes={scenes} getSceneStyle={getSceneStyle} />
     )
   }
 }

@@ -23,6 +23,11 @@ import { formatDate, formatTime } from '../globals'
 export default class EventPage extends Component {
   constructor(props) {
     super(props)
+
+    /* Check with other joined users */
+    this.state = {
+      showJoin: this.props.currentUser.id !== this.props.event.creator.id
+    }
   }
 
   categoryImage() {
@@ -77,13 +82,15 @@ export default class EventPage extends Component {
             <Text>- Domenico</Text>
             <Text>- Marco</Text>
           </View>
-
-          <Button 
+          
+          {this.state.showJoin ? (
+            <Button 
             style={[commonStyles.primaryButton, {marginBottom: 10}]} 
             textStyle={commonStyles.primaryButtonText}
             onPress={this.props.join}>
-            Partecipa
-          </Button>
+              Partecipa
+            </Button>
+          ) : null}
         </ScrollView>
       </View>
     )

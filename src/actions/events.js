@@ -41,14 +41,20 @@ export const createEventFailed = (error) => {
   }
 }
 
-export const updateEvent = (event) => {
+export const updateEvent = (event, eventId) => {
   return (dispatch) => {
     dispatch(updateEventStart())
     let updates = {}
-    updates['/' + event.id] = event
+    updates['/' + eventId] = event
     dbEventsRef.update(updates, (error) => {
+      console.log(updates)
       if(error) dispatch(updateEventFailed(error))
-      else      dispatch(updateEventSuccess(event))
+      else {
+        event.keyId = eventId
+        dispatch(updateEventSuccess(event))
+        dispatch(setEventDetail(event))
+        Actions.pop()
+      }
     })
   }
 }

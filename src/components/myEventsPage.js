@@ -92,7 +92,7 @@ class MyEventsPage extends Component {
         break
     }
     return (
-      <TouchableOpacity activeOpacity={0.7}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => this.goToEventDetail(event)}>
         <View style={styles.eventBox}>
           <View>
             {imageBox}
@@ -132,6 +132,10 @@ class MyEventsPage extends Component {
     this.props.setFilter(selectedFilter)
   }
 
+  goToEventDetail(event) {
+    this.props.setEventDetail(event)
+  }
+
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     const dataSource = ds.cloneWithRows(this.props.events)
@@ -164,7 +168,7 @@ class MyEventsPage extends Component {
         </View>
 
         { this.props.events.length === 0 ? (
-          <View style={styles.errorBox}>
+          <View>
             <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>Nessun evento creato</Text>
             <TouchableOpacity onPress={() => Actions.eventForm()}>
               <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>Crea un evento</Text>

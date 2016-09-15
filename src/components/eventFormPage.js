@@ -53,7 +53,7 @@ export default class EventFormPage extends Component {
         creator: this.props.creator
       }
       if(this.state.isNew)  this.props.createEvent(newEvent)
-      else                  this.props.updateEvent(newEvent)
+      else                  this.props.updateEvent(newEvent, this.props.event.keyId)
     }
   }
 
