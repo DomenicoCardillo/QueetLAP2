@@ -34,6 +34,7 @@ import MyEvents from './myEvents'
 import Event from './event'
 import Users from './users'
 import User from './user'
+import EventsCategory from './eventsCategory'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -124,7 +125,7 @@ const scenes = Actions.create(
         icon={TabItem} 
         tabIcon='sellsy'
         rightTitle='Category'
-        onRight={() => Actions.eventForm()}
+        onRight={() => Actions.eventsCategory()}
         rightButtonTextStyle={commonStyles.whiteText} />
       <Scene
         key='myEvents'
@@ -193,7 +194,7 @@ const scenes = Actions.create(
       hideBackImage={true}
       backTitle='Back'
       backButtonTextStyle={commonStyles.whiteText} />
-    <Scene
+    <Scene 
       key='event'
       title='Event'
       component={Event}
@@ -211,7 +212,16 @@ const scenes = Actions.create(
       hideBackImage={true}
       backTitle='Back'
       backButtonTextStyle={commonStyles.whiteText} />
-    </Scene>
+    <Scene 
+      key='eventsCategory'
+      title='Category'
+      component={EventsCategory}
+      hideNavBar={false}
+      hideTabBar={true} 
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={commonStyles.whiteText} />
+  </Scene>
 )
 
 class App extends Component {
