@@ -93,26 +93,27 @@ class UsersPage extends Component {
               color="white"
               size="large"
             />
-          ) : null
+          ) : (
+            <ListView
+              dataSource={dataSource}
+              renderRow={(user) => this.renderRow(user)}
+              renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+              renderSeparator={this.renderSeparator}
+              enableEmptySections={true}
+              refreshControl={
+                <RefreshControl
+                  refreshing={false}
+                  onRefresh={this.props.fetchUsers.bind(this)}
+                  tintColor='#fff'
+                  title="Loading..."
+                  titleColor='#fff'
+                  colors={['#555577', '#555577', '#fff']}
+                  progressBackgroundColor="#fff"
+                />
+              }
+            />
+          )
         }
-        <ListView
-            dataSource={dataSource}
-            renderRow={(user) => this.renderRow(user)}
-            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-            renderSeparator={this.renderSeparator}
-            enableEmptySections={true}
-            refreshControl={
-              <RefreshControl
-                refreshing={false}
-                onRefresh={this.props.fetchUsers.bind(this)}
-                tintColor='#fff'
-                title="Loading..."
-                titleColor='#fff'
-                colors={['#555577', '#555577', '#fff']}
-                progressBackgroundColor="#fff"
-              />
-            }
-          />
       </View>
     )
   }

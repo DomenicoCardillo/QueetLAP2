@@ -59,18 +59,20 @@ export default class AccountPage extends Component {
             <Icon name="star" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
             <Text style={fonts.style.h5}>{this.props.currentUser.stringedCategory}</Text>
           </View>
-          <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
-            textStyle={commonStyles.primaryButtonText}
-            onPress={this.props.goToForm}>
-            Edit Profile
-          </Button>
-          <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
-            textStyle={commonStyles.primaryButtonText}
-            onPress={this.props.logout}>
-            Logout
-          </Button>
+          <View>
+            <Button 
+              style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={this.props.goToForm}>
+              Edit Profile
+            </Button>
+            <Button 
+              style={[commonStyles.dangerButton, {marginBottom: 10}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={this.props.logout}>
+              Logout
+            </Button>
+          </View>          
         </ScrollView>
       </View>
     )

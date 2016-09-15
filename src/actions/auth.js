@@ -107,8 +107,8 @@ export const logout = () => {
     dispatch(logoutStart())
     firebaseAuth.signOut().then(function() {
       dispatch(logoutSuccess)
-      AsyncStorage.setItem('userData', null)
-      Actions.login()
+      AsyncStorage.setItem('userData', '')
+      Actions.pop({popNum: 2})
     })
   }
 }
