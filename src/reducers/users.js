@@ -24,6 +24,9 @@ const users = (state = {}, action) => {
       newState.users[action.payload.index] = action.payload.newValue
       return newState
 
+    case types.SET_USER_DETAIL:
+      newState.userPage.user = action.payload
+
     default:
       return state
   }

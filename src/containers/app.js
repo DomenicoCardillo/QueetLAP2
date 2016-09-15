@@ -33,6 +33,7 @@ import Events from './events'
 import MyEvents from './myEvents'
 import Event from './event'
 import Users from './users'
+import User from './user'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -198,6 +199,15 @@ const scenes = Actions.create(
       component={Event}
       hideNavBar={false}
       hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={commonStyles.whiteText} />
+    <Scene 
+      key='user'
+      title='User'
+      component={User}
+      hideNavBar={false}
+      hideTabBar={true} 
       hideBackImage={true}
       backTitle='Back'
       backButtonTextStyle={commonStyles.whiteText} />

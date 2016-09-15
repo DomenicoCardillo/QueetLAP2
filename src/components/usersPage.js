@@ -47,11 +47,15 @@ class UsersPage extends Component {
     this.props.listenUsersChanges()
   }
 
+  goToUserDetail(user) {
+    this.props.setUserDetail(user)
+  }
+
   renderRow(user) {
     user.firstname = user.firstname || 'Anonymus'
     
     return (
-      <TouchableOpacity activeOpacity={0.7}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => this.goToUserDetail(user)}>
         <View style={styles.userBox}>
           { user.pictureUrl === undefined ? (
             <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />

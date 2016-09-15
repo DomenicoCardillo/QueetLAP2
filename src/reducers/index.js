@@ -8,7 +8,9 @@ import users from './users'
 const rootReducer = (state = {}, action) => {
   let newState = {}
 
-  newState.auth = auth(state.auth, action)
+  let authStuffs = auth({auth: state.auth, profilePage: state.profilePage}, action)
+  newState.auth = authStuffs.auth
+  newState.profilePage = authStuffs.profilePage
 
   let newProfile = profile({profilePage: state.profilePage, auth: newState.auth}, action)
   newState.profilePage = newProfile.profilePage
@@ -27,9 +29,14 @@ const rootReducer = (state = {}, action) => {
   newState.myEventsPage = eventsStuffs.myEventsPage
   newState.eventPage = eventsStuffs.eventPage
 
-  let usersStuffs = users({usersPage: state.usersPage, users: state.users.slice(0)}, action)
+  let usersStuffs = users({
+    usersPage: state.usersPage, 
+    users: state.users.slice(0),
+    userPage: state.userPage
+  }, action)
   newState.usersPage = usersStuffs.usersPage
   newState.users = usersStuffs.users
+  newState.userPage = usersStuffs.userPage
   
   return newState
 }
