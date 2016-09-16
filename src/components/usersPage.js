@@ -55,7 +55,7 @@ class UsersPage extends Component {
     user.firstname = user.firstname || 'Anonymus'
     
     return (
-      <TouchableOpacity activeOpacity={0.7} onPress={() => this.goToUserDetail(user)}>
+      <TouchableOpacity activeOpacity={0.9} onPress={() => this.goToUserDetail(user)}>
         <View style={styles.userBox}>
           { user.pictureUrl === undefined ? (
             <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />

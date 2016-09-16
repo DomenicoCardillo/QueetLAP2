@@ -97,7 +97,7 @@ class MyEventsPage extends Component {
         break
     }
     return (
-      <TouchableOpacity activeOpacity={0.7} onPress={() => this.goToEventDetail(event)}>
+      <TouchableOpacity activeOpacity={0.9} onPress={() => this.goToEventDetail(event)}>
         <View style={styles.eventBox}>
           <View>
             {imageBox}
