@@ -50,6 +50,9 @@ export default class EventPage extends Component {
       case 'tennis':
         imageBox = <Image source={require('../assets/img/tennis.jpg')} style={styles.image} />
         break
+      case 'volley':
+        imageBox = <Image source={require('../assets/img/volley.jpg')} style={styles.image} />
+        break
     }
 
     return imageBox
