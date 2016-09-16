@@ -24,6 +24,13 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1C67E799C6B64CAB83DCD0A9 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 640A838A454345DD9E680773 /* MaterialIcons.ttf */; };
+		235190C61D8CA369008B6DBF /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235190C11D8CA369008B6DBF /* FirebaseAnalytics.framework */; settings = {ASSET_TAGS = (); }; };
+		235190C71D8CA369008B6DBF /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235190C21D8CA369008B6DBF /* FirebaseInstanceID.framework */; settings = {ASSET_TAGS = (); }; };
+		235190C81D8CA369008B6DBF /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235190C31D8CA369008B6DBF /* GoogleInterchangeUtilities.framework */; settings = {ASSET_TAGS = (); }; };
+		235190C91D8CA369008B6DBF /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235190C41D8CA369008B6DBF /* GoogleSymbolUtilities.framework */; settings = {ASSET_TAGS = (); }; };
+		235190CA1D8CA369008B6DBF /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235190C51D8CA369008B6DBF /* GoogleUtilities.framework */; settings = {ASSET_TAGS = (); }; };
+		235190CD1D8CA39A008B6DBF /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235190CB1D8CA39A008B6DBF /* FirebaseMessaging.framework */; settings = {ASSET_TAGS = (); }; };
+		235190CE1D8CA39A008B6DBF /* GoogleIPhoneUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235190CC1D8CA39A008B6DBF /* GoogleIPhoneUtilities.framework */; settings = {ASSET_TAGS = (); }; };
 		237BA3C81D7DB40500B26217 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 237BA3C71D7DB40500B26217 /* FontAwesome.ttf */; settings = {ASSET_TAGS = (); }; };
 		237BA4201D7DF33600B26217 /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237BA41E1D7DF33600B26217 /* QBImagePicker.framework */; settings = {ASSET_TAGS = (); }; };
 		237BA4211D7DF33600B26217 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237BA41F1D7DF33600B26217 /* RSKImageCropper.framework */; settings = {ASSET_TAGS = (); }; };
@@ -31,6 +38,8 @@
 		237BA4231D7DF3A700B26217 /* QBImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237BA41E1D7DF33600B26217 /* QBImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		237BA4251D7DF3AB00B26217 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237BA41F1D7DF33600B26217 /* RSKImageCropper.framework */; };
 		237BA4261D7DF3AB00B26217 /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237BA41F1D7DF33600B26217 /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23DD94F41D8CA89D003A63A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23DD94F31D8CA89D003A63A6 /* GoogleService-Info.plist */; settings = {ASSET_TAGS = (); }; };
+		2CA39207E1B840B892C81A88 /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9009AB7DBD4928836F5379 /* libRNFIRMessaging.a */; };
 		423B58C5018243D49A57E414 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DE81EC54D6749ABB487E430 /* Zocial.ttf */; };
 		495D859504BF45469701BFF0 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC665E444FEE497583D96F45 /* EvilIcons.ttf */; };
 		548623E8FD7B43CEB20FC3D0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3684416D3C446BE9D84B38D /* libRNFetchBlob.a */; };
@@ -121,6 +130,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		235190BE1D8CA2B1008B6DBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C3696577666464598010B4F /* RNFIRMessaging.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFIRMessaging;
+		};
 		237BA4111D7DF2A800B26217 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8444366B840E4AA28EF13DE5 /* imageCropPicker.xcodeproj */;
@@ -179,11 +195,22 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = newQueetLAP2/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = newQueetLAP2/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		235190C11D8CA369008B6DBF /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		235190C21D8CA369008B6DBF /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		235190C31D8CA369008B6DBF /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		235190C41D8CA369008B6DBF /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		235190C51D8CA369008B6DBF /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		235190CB1D8CA39A008B6DBF /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
+		235190CC1D8CA39A008B6DBF /* GoogleIPhoneUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleIPhoneUtilities.framework; sourceTree = "<group>"; };
+		235190CF1D8CA429008B6DBF /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		237BA3C71D7DB40500B26217 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		237BA41E1D7DF33600B26217 /* QBImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QBImagePicker.framework; sourceTree = "<group>"; };
 		237BA41F1D7DF33600B26217 /* RSKImageCropper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = "<group>"; };
+		23DD94F31D8CA89D003A63A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		367A04B0E8014141972981B2 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		3D9009AB7DBD4928836F5379 /* libRNFIRMessaging.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFIRMessaging.a; sourceTree = "<group>"; };
 		3DE81EC54D6749ABB487E430 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		4C3696577666464598010B4F /* RNFIRMessaging.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFIRMessaging.xcodeproj; path = "../node_modules/react-native-fcm/ios/RNFIRMessaging.xcodeproj"; sourceTree = "<group>"; };
 		53BF875BAE6049E992F0785D /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		640A838A454345DD9E680773 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -213,23 +240,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				235190C81D8CA369008B6DBF /* GoogleInterchangeUtilities.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				237BA4251D7DF3AB00B26217 /* RSKImageCropper.framework in Frameworks */,
+				235190CA1D8CA369008B6DBF /* GoogleUtilities.framework in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
+				235190C91D8CA369008B6DBF /* GoogleSymbolUtilities.framework in Frameworks */,
+				235190CD1D8CA39A008B6DBF /* FirebaseMessaging.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				235190CE1D8CA39A008B6DBF /* GoogleIPhoneUtilities.framework in Frameworks */,
+				235190C71D8CA369008B6DBF /* FirebaseInstanceID.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				237BA4211D7DF33600B26217 /* RSKImageCropper.framework in Frameworks */,
+				235190C61D8CA369008B6DBF /* FirebaseAnalytics.framework in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				ACCD86E6E38543CBA8F7C6F8 /* libimageCropPicker.a in Frameworks */,
 				237BA4201D7DF33600B26217 /* QBImagePicker.framework in Frameworks */,
 				237BA4221D7DF3A700B26217 /* QBImagePicker.framework in Frameworks */,
 				548623E8FD7B43CEB20FC3D0 /* libRNFetchBlob.a in Frameworks */,
 				013F828E13A546EC8FCC5BEF /* libRNVectorIcons.a in Frameworks */,
+				2CA39207E1B840B892C81A88 /* libRNFIRMessaging.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +352,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				23DD94F31D8CA89D003A63A6 /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -343,6 +379,14 @@
 			isa = PBXGroup;
 			children = (
 				233188341D89D7D8006CF492 /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		235190AF1D8CA2B0008B6DBF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				235190BF1D8CA2B1008B6DBF /* libRNFIRMessaging.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -388,6 +432,7 @@
 				8444366B840E4AA28EF13DE5 /* imageCropPicker.xcodeproj */,
 				DA2D56C3C12646D1B0DC0AA2 /* RNFetchBlob.xcodeproj */,
 				367A04B0E8014141972981B2 /* RNVectorIcons.xcodeproj */,
+				4C3696577666464598010B4F /* RNFIRMessaging.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -427,6 +472,14 @@
 		D62ECEBA198B4C0BBA237EEF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				235190CF1D8CA429008B6DBF /* Firebase.h */,
+				235190CB1D8CA39A008B6DBF /* FirebaseMessaging.framework */,
+				235190CC1D8CA39A008B6DBF /* GoogleIPhoneUtilities.framework */,
+				235190C11D8CA369008B6DBF /* FirebaseAnalytics.framework */,
+				235190C21D8CA369008B6DBF /* FirebaseInstanceID.framework */,
+				235190C31D8CA369008B6DBF /* GoogleInterchangeUtilities.framework */,
+				235190C41D8CA369008B6DBF /* GoogleSymbolUtilities.framework */,
+				235190C51D8CA369008B6DBF /* GoogleUtilities.framework */,
 				98E1EA25FA114CC1822AE0F1 /* Entypo.ttf */,
 				EC665E444FEE497583D96F45 /* EvilIcons.ttf */,
 				A8ADE93BE6BE4D738A0F142E /* FontAwesome.ttf */,
@@ -555,6 +608,10 @@
 					ProjectRef = DA2D56C3C12646D1B0DC0AA2 /* RNFetchBlob.xcodeproj */;
 				},
 				{
+					ProductGroup = 235190AF1D8CA2B0008B6DBF /* Products */;
+					ProjectRef = 4C3696577666464598010B4F /* RNFIRMessaging.xcodeproj */;
+				},
+				{
 					ProductGroup = 233188221D89D7D8006CF492 /* Products */;
 					ProjectRef = 367A04B0E8014141972981B2 /* RNVectorIcons.xcodeproj */;
 				},
@@ -638,6 +695,13 @@
 			remoteRef = 233188331D89D7D8006CF492 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		235190BF1D8CA2B1008B6DBF /* libRNFIRMessaging.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFIRMessaging.a;
+			remoteRef = 235190BE1D8CA2B1008B6DBF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		237BA4121D7DF2A800B26217 /* libimageCropPicker.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -678,6 +742,7 @@
 				237BA3C81D7DB40500B26217 /* FontAwesome.ttf in Resources */,
 				A803AA6A549D4B0CA0973AE2 /* Entypo.ttf in Resources */,
 				495D859504BF45469701BFF0 /* EvilIcons.ttf in Resources */,
+				23DD94F41D8CA89D003A63A6 /* GoogleService-Info.plist in Resources */,
 				AB963D30B4C14423949E8064 /* FontAwesome.ttf in Resources */,
 				80F22EC9C3304C788DE7417A /* Foundation.ttf in Resources */,
 				74F3B9A9566A4A2FA8CD3D56 /* Ionicons.ttf in Resources */,
@@ -763,6 +828,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/newQueetLAP2.app/newQueetLAP2";
@@ -782,6 +848,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/newQueetLAP2.app/newQueetLAP2";
@@ -796,6 +863,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ImageCropPickerSDK",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -804,6 +872,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
 				);
 				INFOPLIST_FILE = newQueetLAP2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -824,6 +893,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ImageCropPickerSDK",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -832,6 +902,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
 				);
 				INFOPLIST_FILE = newQueetLAP2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -886,6 +957,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -929,6 +1001,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

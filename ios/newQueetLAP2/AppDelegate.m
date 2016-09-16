@@ -9,6 +9,9 @@
 
 #import "AppDelegate.h"
 
+#import "Firebase.h"
+#import "RNFIRMessaging.h"
+
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 
@@ -25,13 +28,20 @@
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-
+  
+  [FIRApp configure];
+  
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+  [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:notification];
+  handler(UIBackgroundFetchResultNewData);
 }
 
 @end

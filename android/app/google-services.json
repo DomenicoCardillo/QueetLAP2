@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "321786374889",
+    "firebase_url": "https://popping-inferno-7635.firebaseio.com",
+    "project_id": "popping-inferno-7635",
+    "storage_bucket": "popping-inferno-7635.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321786374889:android:1ca8a31dffc968e3",
+        "android_client_info": {
+          "package_name": "com.newqueetlap2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321786374889-8laofg030i1tullmgepa3d4ct4c1nhtp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-__q14KKVifzA6lb_gpvnft-E9tTnyPU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

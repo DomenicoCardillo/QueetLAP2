@@ -11,6 +11,8 @@ import {
   Image
 } from 'react-native'
 
+import FCM from 'react-native-fcm'
+
 import { Actions, Scene, Router } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   },
   buttonTextStyle: {
     color: '#fff',
-    fontSize: 15,
+    fontSize: 16,
     top: 2
   },
 })
@@ -213,7 +215,7 @@ const scenes = Actions.create(
       hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={commonStyles.whiteText} />
+      backButtonTextStyle={styles.buttonTextStyle} />
     <Scene
       key='eventsCategory'
       title='Categories'
@@ -228,8 +230,29 @@ const scenes = Actions.create(
 
 class App extends Component {
 
-  componentWillMount() {
-    //this.props.dispatch(reauthenticate())  Doesn't work yet
+  componentDidMount() {
+    FCM.requestPermissions() // for iOS
+    FCM.getFCMToken().then(token => {
+      console.log(token)
+      // store fcm token in your server
+    })
+    this.notificationUnsubscribe = FCM.on('notification', (notif) => {
+      // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+    })
+    this.localNotificationUnsubscribe = FCM.on('localNotification', (notif) => {
+      // notif.notification contains the data
+    })
+    this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
+      console.log(token)
+      // fcm token may not be available on first load, catch it here
+    })
+  }
+
+  componentWillUnmount() {
+    // prevent leaking
+    this.refreshUnsubscribe()
+    this.notificationUnsubscribe()
+    this.localNotificationUnsubscribe()
   }
 
   render() {
