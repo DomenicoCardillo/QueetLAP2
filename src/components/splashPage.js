@@ -25,9 +25,9 @@ class Splash extends Component {
         <View style={{ flex: 1 }}>
             <View style={commonStyles.centeredBody}>
                 <Image source={require('../assets/img/logo-white-text.png')} style={{marginBottom: 50}} />
-                <Text style={styles.titleText}>Scopri</Text>
+                <Text style={styles.titleText}>Organizza</Text>
                 <Text style={styles.subText}>
-                    Lorem Ipsum e' un testo segnaposto utilizzato nel settore della tipografia e della stampa.
+                    Queet, l'app che ti permette di organizzare qualsiasi tipo di evento sportivo con i tuoi amici!
                 </Text>
                 <Button 
                   style={commonStyles.primaryButton} 
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginRight: 40,
     marginLeft: 40,
-    marginBottom: 50
+    marginBottom: 120
   },
   button: {
     marginBottom: 20

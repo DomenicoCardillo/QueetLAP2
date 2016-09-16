@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   eventTitle: {
-    fontSize: 18, 
+    fontSize: 16, 
     width: 90,
     fontWeight: '500', 
     marginBottom: 5
@@ -91,6 +91,9 @@ class MyEventsPage extends Component {
         break
       case 'tennis':
         imageBox = <Image source={require('../assets/img/tennis.jpg')} style={styles.eventImage} />
+        break
+      case 'volley':
+        imageBox = <Image source={require('../assets/img/volley.jpg')} style={styles.eventImage} />
         break
     }
     return (

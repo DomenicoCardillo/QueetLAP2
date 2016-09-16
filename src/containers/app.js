@@ -6,7 +6,7 @@ import {
   Text,
   View,
   StyleSheet,
-  StatusBar, 
+  StatusBar,
   Platform,
   Image
 } from 'react-native'
@@ -60,7 +60,7 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
     } else {
       style.marginTop = computedProps.hideNavBar ? 0 : 54
     }
-    
+
     style.marginBottom = computedProps.hideTabBar ? 0 : 60
   }
   return style
@@ -83,32 +83,37 @@ const styles = StyleSheet.create({
   },
   tabBarSelectedItemStyle: {
     backgroundColor: styleVariables.colors.brandPrimaryDark
-  }
+  },
+  buttonTextStyle: {
+    color: '#fff',
+    fontSize: 15,
+    top: 2
+  },
 })
 
 const scenes = Actions.create(
-  <Scene 
+  <Scene
     key='root'
-    navigationBarStyle={styles.navigationBarStyle} 
+    navigationBarStyle={styles.navigationBarStyle}
     titleStyle={styles.titleStyle}>
-    <Scene 
-      key='splash' 
+    <Scene
+      key='splash'
       title=''
       component={Splash}
       hideNavBar={true}
       hideTabBar={true}
       initial={true} />
-    <Scene 
-      key='login' 
+    <Scene
+      key='login'
       title='Login'
       component={Login}
       type='replace' />
-    <Scene 
+    <Scene
       key='signup'
       title='Signup'
       component={Signup}
       type='replace' />
-    <Scene 
+    <Scene
       key='main'
       tabs
       tabBarStyle={styles.tabBarStyle}
@@ -122,11 +127,11 @@ const scenes = Actions.create(
         hideTabBar={false}
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
-        icon={TabItem} 
+        icon={TabItem}
         tabIcon='sellsy'
         rightTitle='Categories'
-        onRight={() => Actions.eventsCategory()}
-        rightButtonTextStyle={commonStyles.whiteText} />
+        onRight={() => Actions.eventsCategory() }
+        rightButtonTextStyle={styles.buttonTextStyle} />
       <Scene
         key='myEvents'
         title='My Events'
@@ -145,11 +150,11 @@ const scenes = Actions.create(
         hideTabBar={false}
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
-        icon={TabItem} 
+        icon={TabItem}
         tabIcon='users'
         rightTitle='Profile'
-        onRight={() => Actions.account()}
-        rightButtonTextStyle={commonStyles.whiteText} /> 
+        onRight={() => Actions.account() }
+        rightButtonTextStyle={styles.buttonTextStyle} />
       <Scene
         key='notifications'
         title='Notifications'
@@ -158,22 +163,22 @@ const scenes = Actions.create(
         hideTabBar={false}
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
-        icon={TabItem} 
+        icon={TabItem}
         tabIcon='bell'
         rightTitle='Profile'
-        onRight={() => Actions.account()}
-        rightButtonTextStyle={commonStyles.whiteText} />
+        onRight={() => Actions.account() }
+        rightButtonTextStyle={styles.buttonTextStyle} />
     </Scene>
-    <Scene 
+    <Scene
       key='account'
       title='Profile'
       component={Account}
       hideNavBar={false}
-      hideTabBar={true} 
+      hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={commonStyles.whiteText} />
-    <Scene 
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
       key='userForm'
       title='Profile Edit'
       component={UserForm}
@@ -181,8 +186,8 @@ const scenes = Actions.create(
       hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={commonStyles.whiteText} />
-    <Scene 
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
       key='eventForm'
       title='New event'
       component={EventForm}
@@ -190,8 +195,8 @@ const scenes = Actions.create(
       hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={commonStyles.whiteText} />
-    <Scene 
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
       key='event'
       title='Event'
       component={Event}
@@ -199,32 +204,32 @@ const scenes = Actions.create(
       hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={commonStyles.whiteText} />
-    <Scene 
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
       key='user'
       title='User'
       component={User}
       hideNavBar={false}
-      hideTabBar={true} 
+      hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
       backButtonTextStyle={commonStyles.whiteText} />
-    <Scene 
+    <Scene
       key='eventsCategory'
       title='Categories'
       component={EventsCategories}
       hideNavBar={false}
-      hideTabBar={true} 
+      hideTabBar={true}
       hideBackImage={true}
       backTitle='Back'
-      backButtonTextStyle={commonStyles.whiteText} />
+      backButtonTextStyle={styles.buttonTextStyle} />
   </Scene>
 )
 
 class App extends Component {
 
-  componentWillMount(){
-     //this.props.dispatch(reauthenticate())  Doesn't work yet
+  componentWillMount() {
+    //this.props.dispatch(reauthenticate())  Doesn't work yet
   }
 
   render() {

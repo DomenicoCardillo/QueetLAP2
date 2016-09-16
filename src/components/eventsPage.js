@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   eventTitle: {
-    fontSize: 18, 
+    fontSize: 16,
     width: 90,
     fontWeight: '500', 
     marginBottom: 5

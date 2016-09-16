@@ -35,7 +35,7 @@ export default class UserPage extends Component {
       <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
           <View style={styles.imageContainer}>
-            { this.props.user.pictureUrl === '' ? (
+            { this.props.user.pictureUrl === undefined || this.props.user.pictureUrl === '' ? (
                 <Image source={require('../assets/img/user-default.png')} style={styles.userImage} />
               ) : (
                 <Image source={{ uri: this.props.user.pictureUrl }} style={styles.userImage} />
