@@ -71,6 +71,7 @@ export const dbEventsRef = firebaseDB.ref('events')
 export const firebaseAuth = Firebase.auth()
 export const firebaseStorage = Firebase.storage()
 export const userStorageRef = firebaseStorage.ref('users')
+export const dbNotificationsRef = firebaseDB.ref('notifications')
 
 export const formatDate = (date) => {
   date = new Date(date)
@@ -122,4 +123,8 @@ export const filterByPlace = (array, place) => {
 
 export const filterByCreator = (array, creatorId) => {
   return array.filter(el => el.creator.id === creatorId)
+}
+
+export const filterByCategory = (array, categoryId) => {
+  return array.filter(el => el.category === categoryId)
 }

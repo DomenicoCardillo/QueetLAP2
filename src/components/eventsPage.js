@@ -97,6 +97,9 @@ class EventsPage extends Component {
       case 'tennis':
         imageBox = <Image source={require('../assets/img/tennis.jpg')} style={styles.eventImage} />
         break
+      case 'volley':
+        imageBox = <Image source={require('../assets/img/volley.jpg')} style={styles.eventImage} />
+        break
     }
     return (
       <TouchableOpacity activeOpacity={0.7} onPress={() => this.goToEventDetail(event)}>
@@ -155,12 +158,14 @@ class EventsPage extends Component {
 
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
+        {this.props.categoryFilter !== null ? (
         <View style={[commonStyles.primaryButton, {alignItems: 'center', justifyContent: 'center', flexDirection: 'row', padding: 10}]}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.removeCategoryFilter()}>
             <Icon name='close' size={20} color='#fff' style={{marginRight: 5}} />
           </TouchableOpacity>
-          <Text style={[commonStyles.whiteText, {fontWeight: '500', fontSize: 15}]}>Badminton</Text>
+          <Text style={[commonStyles.whiteText, {fontWeight: '500', fontSize: 15}]}>{this.props.categoryFilter}</Text>
         </View> 
+        ) : (null)}
         <View style={{paddingTop: 10, paddingBottom: 10}}>
           <SegmentedControls
             tint={'#64b0bc'}

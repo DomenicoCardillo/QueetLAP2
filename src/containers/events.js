@@ -1,10 +1,17 @@
 import { connect } from 'react-redux'
-import { fetchEvents, listenEventsChanges, setEventsActiveFilter, setEventDetail } from '../actions/events'
+import { 
+  fetchEvents, 
+  listenEventsChanges, 
+  setEventsActiveFilter, 
+  setEventDetail, 
+  setCategoryFilter 
+} from '../actions/events'
 import EventsPage from '../components/eventsPage'
 import { Actions } from 'react-native-router-flux'
-import { filterByDateTime, sortArrayByProps, filterByPlace } from '../globals'
+import { filterByDateTime, sortArrayByProps, filterByPlace, filterByCategory } from '../globals'
 
-const getVisibleEvents = (events, activeFilter, userShortPlace) => {
+const getVisibleEvents = (events, activeFilter, categoryFilter, userShortPlace) => {
+  if(categoryFilter !== undefined) events = filterByCategory(events, categoryFilter)
   switch (activeFilter) {
     case 'New':
       events = filterByDateTime(events)
@@ -30,9 +37,18 @@ const getVisibleEvents = (events, activeFilter, userShortPlace) => {
 }
 
 const mapStateToProps = (state) => {
+  let correctCat = state.categories[state.categories.findIndex(x => x.id == state.eventsPage.categoryFilter)]
+  correctCat = correctCat ? correctCat.name : null
+  
   return {
-    events: getVisibleEvents(state.events, state.eventsPage.activeFilter, state.auth.currentUser.shortPlace),
+    events: getVisibleEvents(
+      state.events, 
+      state.eventsPage.activeFilter,
+      state.eventsPage.categoryFilter,
+      state.auth.currentUser.shortPlace
+    ),
     activeFilter: state.eventsPage.activeFilter,
+    categoryFilter: correctCat,
     isLoading: state.eventsPage.isLoading,
     hasError: state.eventsPage.hasError,
     errorMessage: state.eventsPage.errorMessage,
@@ -54,6 +70,9 @@ const mapDispatchToProps = (dispatch) => {
     setEventDetail: (event) => {
       dispatch(setEventDetail(event))
       Actions.event()
+    },
+    removeCategoryFilter: () => {
+      dispatch(setCategoryFilter(undefined))
     }
   }
 }

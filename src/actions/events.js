@@ -150,3 +150,10 @@ export const applyEventChanges = (payload) => {
     payload
   }
 }
+
+export const setCategoryFilter = (payload) => {
+  return {
+    type: types.SET_CATEGORY_FILTER,
+    payload
+  }
+}
