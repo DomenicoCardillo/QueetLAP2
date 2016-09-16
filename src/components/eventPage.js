@@ -26,6 +26,7 @@ export default class EventPage extends Component {
 
     /* Check with other joined users */
     this.state = {
+      closed: this.props.event.dateTime <= new Date().getTime(),
       showJoin: this.props.currentUser.id !== this.props.event.creator.id
     }
   }
@@ -86,7 +87,7 @@ export default class EventPage extends Component {
             <Text>- Marco</Text>
           </View>
           
-          {this.state.showJoin ? (
+          {this.state.showJoin && !this.state.closed ? (
             <Button 
             style={[commonStyles.primaryButton, {marginBottom: 10}]} 
             textStyle={commonStyles.primaryButtonText}
