@@ -9,7 +9,7 @@ class TabItem extends Component {
     return (
       <View style={styles.tab}>
         <Icon name={this.props.tabIcon} size={25} color='#fff' style={styles.icon} />
-        <Text style={commonStyles.whiteText}>
+        <Text style={[commonStyles.whiteText, {fontSize: 12}]}>
           {this.props.title}
         </Text>
       </View>
@@ -25,7 +25,7 @@ let styles = StyleSheet.create({
   },
   icon: {
     marginBottom: 5, 
-    marginTop: 5
+    marginTop: 8
   }
 })
 

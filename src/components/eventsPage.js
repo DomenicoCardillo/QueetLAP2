@@ -21,6 +21,9 @@ import {
 import { Actions } from 'react-native-router-flux'
 import { SegmentedControls } from 'react-native-radio-buttons'
 
+import Button from 'apsl-react-native-button'
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 const styles = StyleSheet.create({
   eventBox: {
     flex: 1,
@@ -43,14 +46,16 @@ const styles = StyleSheet.create({
   },
   eventTitle: {
     fontSize: 18, 
-    width: 100,
+    width: 90,
     fontWeight: '500', 
     marginBottom: 5
   },
   eventDate: {
     position: 'absolute', 
     right: 0,
-    color: '#999'
+    top: 2,
+    color: '#999',
+    fontSize: 12
   },
   eventBottomInfo: {
     position: 'absolute', 
@@ -150,7 +155,13 @@ class EventsPage extends Component {
 
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
-        <View style={{paddingTop: 20, paddingBottom: 20}}>
+        <View style={[commonStyles.primaryButton, {alignItems: 'center', justifyContent: 'center', flexDirection: 'row', padding: 10}]}>
+          <TouchableOpacity>
+            <Icon name='close' size={20} color='#fff' style={{marginRight: 5}} />
+          </TouchableOpacity>
+          <Text style={[commonStyles.whiteText, {fontWeight: '500', fontSize: 15}]}>Badminton</Text>
+        </View> 
+        <View style={{paddingTop: 10, paddingBottom: 10}}>
           <SegmentedControls
             tint={'#64b0bc'}
             selectedTint={'#fff'}

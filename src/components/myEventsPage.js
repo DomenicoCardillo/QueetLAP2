@@ -37,19 +37,21 @@ const styles = StyleSheet.create({
   eventContainer: {
     flex: 2
   },
-  eventTopInfo: {
+    eventTopInfo: {
     flexDirection: 'row'
   },
   eventTitle: {
     fontSize: 18, 
-    width: 100,
+    width: 90,
     fontWeight: '500', 
     marginBottom: 5
   },
   eventDate: {
     position: 'absolute', 
     right: 0,
-    color: '#999'
+    top: 2,
+    color: '#999',
+    fontSize: 12
   },
   eventBottomInfo: {
     position: 'absolute', 
@@ -146,7 +148,7 @@ class MyEventsPage extends Component {
 
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#fbc063'}]}>
-        <View style={{paddingTop: 20, paddingBottom: 20}}>
+        <View style={{paddingTop: 10, paddingBottom: 10}}>
           <SegmentedControls
             tint='#fbc063'
             selectedTint={'#fff'}
