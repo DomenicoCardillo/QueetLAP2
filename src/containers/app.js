@@ -136,10 +136,7 @@ const scenes = Actions.create(
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
         icon={TabItem}
-        tabIcon='calendar'
-        rightTitle='New'
-        onRight={() => Actions.eventForm()}
-        rightButtonTextStyle={commonStyles.whiteText} />
+        tabIcon='calendar' />
       <Scene
         key='users'
         title='Users'

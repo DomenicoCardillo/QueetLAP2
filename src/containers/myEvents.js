@@ -43,6 +43,10 @@ const mapDispatchToProps = (dispatch) => {
     setFilter: (filter) => {
       dispatch(setMyEventsActiveFilter(filter))
     },
+    createNewEvent: () => {
+      dispatch(setEventDetail(null))
+       Actions.eventForm()
+    },
     setEventDetail: (event) => {
       dispatch(setEventDetail(event))
       Actions.event({

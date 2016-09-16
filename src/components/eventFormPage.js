@@ -20,6 +20,7 @@ let Form = t.form.Form;
 export default class EventFormPage extends Component {
   constructor(props) {
     super(props)
+    console.log(this.props)
     this.state = {
       isNew: this.props.event.keyId === undefined,
       value: {
