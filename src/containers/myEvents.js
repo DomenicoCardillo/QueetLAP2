@@ -51,7 +51,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setEventDetail(event))
       Actions.event({
         rightTitle: 'Edit',
-        rightButtonTextStyle: {color: '#fff'},
+        rightButtonTextStyle: {   
+          color: '#fff',
+          fontSize: 16,
+          top: 2
+        },
         onRight: () => Actions.eventForm()
       })
     }
