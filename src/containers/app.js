@@ -237,10 +237,8 @@ class App extends Component {
       // store fcm token in your server
     })
     this.notificationUnsubscribe = FCM.on('notification', (notif) => {
+      console.log(notif)
       // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-    })
-    this.localNotificationUnsubscribe = FCM.on('localNotification', (notif) => {
-      // notif.notification contains the data
     })
     this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
       console.log(token)
@@ -252,7 +250,6 @@ class App extends Component {
     // prevent leaking
     this.refreshUnsubscribe()
     this.notificationUnsubscribe()
-    this.localNotificationUnsubscribe()
   }
 
   render() {
