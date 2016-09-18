@@ -61,3 +61,10 @@ export const setUserDetail = (payload) => {
     payload
   }
 }
+
+export const setUsersActiveFilter = (payload) => {
+  return {
+    type: types.SET_USERS_ACTIVE_FILTER,
+    payload
+  }
+}

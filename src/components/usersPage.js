@@ -17,6 +17,7 @@ import {
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { SegmentedControls } from 'react-native-radio-buttons'
 
 import { Actions } from 'react-native-router-flux'
 
@@ -43,8 +44,13 @@ class UsersPage extends Component {
   }
 
   componentDidMount() {
+    this.setFilter('Friends')
     this.props.fetchUsers()
     this.props.listenUsersChanges()
+  }
+
+  setFilter(selectedFilter) {
+    this.props.setFilter(selectedFilter)
   }
 
   goToUserDetail(user) {
@@ -84,8 +90,32 @@ class UsersPage extends Component {
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     const dataSource = ds.cloneWithRows(this.props.users)
+    const options = [
+      'Friends',
+      'All'
+    ]
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#ea573d'}]}>
+        <View style={{paddingTop: 10, paddingBottom: 10}}>
+          <SegmentedControls
+            tint={'#64b0bc'}
+            selectedTint={'#fff'}
+            backTint={'#fff'}
+            optionStyle= {{
+              fontSize: 17,
+              width: styleVariables.screenWidth / 2 - 5
+            }}
+            containerStyle= {{
+              marginRight: 10,
+              marginLeft: 10,
+              flex: 1,
+              justifyContent: 'center',
+            }}
+            options={options}
+            onSelection={this.setFilter.bind(this)}
+            selectedOption={this.props.activeFilter}
+          />
+        </View>
         {this.props.isLoading ? (
             <ActivityIndicator
               animating={this.props.isLoading}

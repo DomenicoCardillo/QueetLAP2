@@ -56,7 +56,8 @@ export const initialState = {
   usersPage: {
     isLoading: false,
     hasError: false,
-    errorMessage: ''
+    errorMessage: '',
+    activeFilter: 'Friends'
   },
   userPage: {
     isLoadingPrimary: false,
@@ -139,4 +140,11 @@ export const filterByCategory = (array, categoryId) => {
 export const findBy = (prop, value, array, onlyIndex = false) => {
   if(onlyIndex) return array.findIndex(x => x[prop] == value)
   else          return array[array.findIndex(x => x[prop] == value)]
+}
+
+export const filterByFriends = (array, me, inclusive) => {
+  return array.filter(u => {
+    let isMyFriend = u.friends && u.friends.hasOwnProperty(me.id) && me.friends && me.friends.hasOwnProperty(u.id)
+    return inclusive ? isMyFriend : !isMyFriend
+  })
 }

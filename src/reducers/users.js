@@ -26,6 +26,11 @@ const users = (state = {}, action) => {
 
     case types.SET_USER_DETAIL:
       newState.userPage.user = action.payload
+      return newState
+
+    case types.SET_USERS_ACTIVE_FILTER:
+      newState.usersPage.activeFilter = action.payload
+      return newState
 
     default:
       return state
