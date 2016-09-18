@@ -53,7 +53,8 @@ export const initialState = {
     errorMessage: ''
   },
   userPage: {
-    isLoading: false,
+    isLoadingPrimary: false,
+    isLoadingSecondary: false,
     hasError: false,
     errorMessage: ''
   },
@@ -127,4 +128,9 @@ export const filterByCreator = (array, creatorId) => {
 
 export const filterByCategory = (array, categoryId) => {
   return array.filter(el => el.category === categoryId)
+}
+
+export const findBy = (prop, value, array, onlyIndex = false) => {
+  if(onlyIndex) return array.findIndex(x => x[prop] == value)
+  else          return array[array.findIndex(x => x[prop] == value)]
 }

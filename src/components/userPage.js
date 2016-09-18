@@ -56,13 +56,54 @@ export default class UserPage extends Component {
               <Icon name="map-marker" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
               <Text style={fonts.style.h5}>{this.props.user.longPlace}</Text>
             </View>
-          ): ( null ) }
+          ) : ( null ) }
           { this.props.user.stringedCategory ? (
             <View style={styles.infoContainer}>
               <Icon name="star" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
               <Text style={fonts.style.h5}>{this.props.user.stringedCategory}</Text>
             </View>
-          ): ( null ) }
+          ) : ( null ) }
+
+          { this.props.wathRender.addFriend ? (
+            <Button 
+              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={() => this.props.toggleFriendship(this.props.user.id)}
+              isLoading={this.props.isLoadingPrimary}>
+              Add friend
+            </Button>
+          ) : ( null ) }
+          { this.props.wathRender.removeFriend ? (
+            <Button 
+              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={() => this.props.toggleFriendship(this.props.user.id)}
+              isLoading={this.props.isLoadingPrimary}>
+              Remove friend
+            </Button>
+          ) : ( null ) }
+          { this.props.wathRender.waitResponse ? (
+            <Text>Wait for his friendship response</Text> 
+          ) : ( null ) }
+          { this.props.wathRender.confirmFriend ? (
+            <Button 
+              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={() => this.props.responseFriendship(this.props.user.id, true)}
+              isLoading={this.props.isLoadingPrimary}>
+              Confirm friendship
+            </Button>
+          ) : ( null ) }
+          { this.props.wathRender.rejectFriend ? (
+            <Button 
+              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={() => this.props.responseFriendship(this.props.user.id, false)}
+              isLoading={this.props.isLoadingSecondary}>
+              Reject friendship
+            </Button>
+          ) : ( null ) }
+
         </ScrollView>
       </View>
     )

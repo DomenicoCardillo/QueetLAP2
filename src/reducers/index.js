@@ -3,7 +3,7 @@ import profile from './profile'
 import categories from './categories'
 import events from './events'
 import users from './users'
-
+import friendships from './friendships'
 
 const rootReducer = (state = {}, action) => {
   let newState = {}
@@ -37,6 +37,15 @@ const rootReducer = (state = {}, action) => {
   newState.usersPage = usersStuffs.usersPage
   newState.users = usersStuffs.users
   newState.userPage = usersStuffs.userPage
+
+  let friendshipsStuffs = friendships({
+    auth: state.auth, 
+    userPage: state.userPage, 
+    users: newState.users.slice(0)
+  }, action)
+  newState.userPage = friendshipsStuffs.userPage
+  newState.auth = friendshipsStuffs.auth
+  newState.users = friendshipsStuffs.users
   
   return newState
 }
