@@ -15,10 +15,16 @@ let Name = t.refinement(t.String, function (name) {
   return name.length >= 2;
 });
 
+let Privacy = t.enums({
+  All: 'All',
+  Friends: 'Friends'
+})
+
 const model = t.struct({
   name: Name,
   date: t.Date,
-  time: t.Date
+  time: t.Date,
+  privacy: Privacy
 })
 
 const options = {
@@ -35,6 +41,9 @@ const options = {
       config: {
         format: formatTime
       }
+    },
+    privacy: {
+      nullOption: false
     }
   }
 }

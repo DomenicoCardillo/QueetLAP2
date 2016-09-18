@@ -45,7 +45,6 @@ class UsersPage extends Component {
 
   componentDidMount() {
     this.setFilter('Friends')
-    this.props.fetchUsers()
     this.props.listenUsersChanges()
   }
 

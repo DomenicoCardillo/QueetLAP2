@@ -4,11 +4,17 @@ import {
   listenEventsChanges, 
   setEventsActiveFilter, 
   setEventDetail, 
-  setCategoryFilter 
+  setCategoryFilter
 } from '../actions/events'
 import EventsPage from '../components/eventsPage'
 import { Actions } from 'react-native-router-flux'
-import { filterByDateTime, sortArrayByProps, filterByPlace, filterByCategory } from '../globals'
+import { 
+  filterByDateTime, 
+  sortArrayByProps, 
+  filterByPlace, 
+  filterByCategory, 
+  findBy 
+} from '../globals'
 
 const getVisibleEvents = (events, activeFilter, categoryFilter, userShortPlace) => {
   if(categoryFilter !== undefined) events = filterByCategory(events, categoryFilter)
@@ -36,13 +42,24 @@ const getVisibleEvents = (events, activeFilter, categoryFilter, userShortPlace) 
   return events
 }
 
+const getEventsByPrivacy = (events, me, users) => {
+  return events.filter(event => {
+    if(!event.privacy || event.privacy === 'All' || event.creator.id === me.id) return true
+    else {
+      let other = findBy('id', event.creator.id, users)
+      if(!other.friends || !me.friends) return false
+      return other.friends.hasOwnProperty(me.id) && me.friends.hasOwnProperty(other.id)
+    }
+  })
+}
+
 const mapStateToProps = (state) => {
   let correctCat = state.categories[state.categories.findIndex(x => x.id == state.eventsPage.categoryFilter)]
   correctCat = correctCat ? correctCat.name : null
   
   return {
     events: getVisibleEvents(
-      state.events, 
+      getEventsByPrivacy(state.events, state.auth.currentUser, state.users), 
       state.eventsPage.activeFilter,
       state.eventsPage.categoryFilter,
       state.auth.currentUser.shortPlace

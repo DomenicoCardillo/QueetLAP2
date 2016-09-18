@@ -26,7 +26,8 @@ export default class EventFormPage extends Component {
       value: {
         name: this.props.event.name,
         date: new Date(this.props.event.dateTime),
-        time: new Date(this.props.event.dateTime)
+        time: new Date(this.props.event.dateTime),
+        privacy: this.props.event.privacy
       },
       longPlace: this.props.event.longPlace || '',
       shortPlace: this.props.event.shortPlace || '',
