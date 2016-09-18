@@ -76,6 +76,11 @@ let commonStyles = StyleSheet.create({
     color: '#000',
     fontSize: 17,
     fontWeight: '500'
+  },
+  rowCenter: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center'
   }
 })
 

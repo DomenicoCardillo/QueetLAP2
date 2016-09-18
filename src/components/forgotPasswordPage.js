@@ -12,6 +12,7 @@ import {
 
 import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
@@ -52,6 +53,7 @@ export default class ForgotPasswordPage extends Component {
         <View style={commonStyles.container}>
           { !this.props.sendDone ? (
             <View>
+              <Icon name='key' size={70} color={styleVariables.colors.brandPrimary} style={styles.icon} />
               <View style={this.state.pageTitleContainer}>
                 <Text style={{textAlign: 'center', color: styleVariables.colors.brandPrimary, fontWeight: '500'}}>Insert your email</Text>
               </View>
@@ -77,7 +79,7 @@ export default class ForgotPasswordPage extends Component {
               <Image source={require('../assets/img/check-icon.png')} style={styles.checkImage}></Image>
               <Text style={[fonts.style.h5, {marginBottom: 5}]}>Please check your email for reset password</Text>
               <TouchableOpacity onPress={this.props.goToLogin.bind(this)}>
-                <Text>Go to login</Text>
+                <Text>Return to login!</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -103,5 +105,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  icon: {
+    flex: 1,
+    textAlign: 'center',
+    marginTop: 50,
+    marginBottom: 10
   }
 })

@@ -153,7 +153,7 @@ class MyEventsPage extends Component {
       <View style={[commonStyles.mainContainer, {backgroundColor: '#fbc063'}]}>
         <View style={{paddingTop: 10, paddingBottom: 10}}>
           <TouchableOpacity onPress={this.props.createNewEvent}>
-            <Text style={[commonStyles.whiteText, {textAlign: 'center', marginBottom: 10, fontSize: 16}]}>Crea un evento</Text>
+            <Text style={[commonStyles.whiteText, {textAlign: 'center', marginBottom: 10, fontSize: 16}]}>Create new event</Text>
           </TouchableOpacity>
           <SegmentedControls
             tint='#fbc063'
@@ -177,9 +177,9 @@ class MyEventsPage extends Component {
 
         { this.props.events.length === 0 ? (
           <View>
-            <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>Nessun evento creato</Text>
+            <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>You don't have events</Text>
             <TouchableOpacity onPress={this.props.createNewEvent}>
-              <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>Crea un evento</Text>
+              <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>Create new event</Text>
             </TouchableOpacity>
           </View>
         ) : (

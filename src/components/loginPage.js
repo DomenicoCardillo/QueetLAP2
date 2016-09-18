@@ -117,7 +117,7 @@ export default class LoginPage extends Component {
         <ScrollView style={commonStyles.container}>
           <View style={this.state.pageTitleContainer}>
             <Image source={require('../assets/img/login.png')} style={[this.state.pageTitle, {alignSelf: 'center', marginBottom: 5}]} />
-            <Text style={[this.state.pageSubtitle, {textAlign: 'center', color: styleVariables.colors.brandPrimary, fontWeight: '500'}]}>Effettua il login con la tua mail</Text>
+            <Text style={[this.state.pageSubtitle, {textAlign: 'center', color: styleVariables.colors.brandPrimary, fontWeight: '500'}]}>Please login with your email</Text>
           </View>
           <TextInput
             ref='1'
@@ -129,12 +129,15 @@ export default class LoginPage extends Component {
           />
           <TextInput
             ref='2'
-            style={commonStyles.textInput}
+            style={[commonStyles.textInput, {marginBottom: 5}]}
             secureTextEntry={true}
             onChangeText={(pass) => this.setState({pass: pass})}
             placeholder={"Password"}
           />
-          <Button 
+          <TouchableOpacity style={[commonStyles.textLeft, {marginBottom: 20}]} onPress={this.props.goToForgotPassword.bind(this)}>
+            <Text>Forgot password?</Text>
+          </TouchableOpacity>
+          <Button
             style={commonStyles.primaryButton} 
             textStyle={commonStyles.primaryButtonText}
             isLoading={this.props.isLoading}
@@ -143,9 +146,6 @@ export default class LoginPage extends Component {
           </Button>
           <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
             <Text>Do not have an account yet?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToForgotPassword.bind(this)}>
-            <Text>Forgot password?</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>

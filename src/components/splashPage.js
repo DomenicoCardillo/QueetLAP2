@@ -25,9 +25,9 @@ class Splash extends Component {
         <View style={{ flex: 1 }}>
             <View style={commonStyles.centeredBody}>
                 <Image source={require('../assets/img/logo-white-text.png')} style={{marginBottom: 50}} />
-                <Text style={styles.titleText}>Organizza</Text>
+                <Text style={styles.titleText}>Organize</Text>
                 <Text style={styles.subText}>
-                    Queet, l'app che ti permette di organizzare qualsiasi tipo di evento sportivo con i tuoi amici!
+                    Queet, the app that allows you to organize any type of sporting event with your friends!
                 </Text>
                 <Button 
                   style={commonStyles.primaryButton} 

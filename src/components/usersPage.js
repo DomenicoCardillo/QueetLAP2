@@ -98,7 +98,7 @@ class UsersPage extends Component {
       <View style={[commonStyles.mainContainer, {backgroundColor: '#ea573d'}]}>
         <View style={{paddingTop: 10, paddingBottom: 10}}>
           <SegmentedControls
-            tint={'#64b0bc'}
+            tint={'#ea573d'}
             selectedTint={'#fff'}
             backTint={'#fff'}
             optionStyle= {{

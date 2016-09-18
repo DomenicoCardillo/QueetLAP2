@@ -66,41 +66,48 @@ export default class UserPage extends Component {
 
           { this.props.wathRender.addFriend ? (
             <Button 
-              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              style={[commonStyles.primaryButton, {alignItems: 'center', marginTop: 20}]} 
               textStyle={commonStyles.primaryButtonText}
               onPress={() => this.props.toggleFriendship(this.props.user.id)}
               isLoading={this.props.isLoadingPrimary}>
-              Add friend
+              <Icon name="user-plus" size={18} color="#fff" style={{marginRight: 8}} />
+              <Text style={commonStyles.primaryButtonText}>Add friend</Text>
             </Button>
           ) : ( null ) }
           { this.props.wathRender.removeFriend ? (
             <Button 
-              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              style={[commonStyles.dangerButton, {alignItems: 'center', marginTop: 20}]}
               textStyle={commonStyles.primaryButtonText}
               onPress={() => this.props.toggleFriendship(this.props.user.id)}
               isLoading={this.props.isLoadingPrimary}>
-              Remove friend
+              <Icon name="user-times" size={18} color="#fff" style={{marginRight: 8}} />
+              <Text style={commonStyles.primaryButtonText}>Remove friend</Text>
             </Button>
           ) : ( null ) }
           { this.props.wathRender.waitResponse ? (
-            <Text>Wait for his friendship response</Text> 
+            <View style={commonStyles.rowCenter}>
+              <Icon name="user" size={18} color={styleVariables.colors.brandPrimary} style={{marginRight: 8}} />
+              <Text>Wait for his friendship response</Text>
+            </View>
           ) : ( null ) }
           { this.props.wathRender.confirmFriend ? (
             <Button 
-              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              style={[commonStyles.primaryButton, {alignItems: 'center'}]}
               textStyle={commonStyles.primaryButtonText}
               onPress={() => this.props.responseFriendship(this.props.user.id, true)}
               isLoading={this.props.isLoadingPrimary}>
-              Confirm friendship
+              <Icon name="user-plus" size={18} color="#fff" style={{marginRight: 8}} />
+              <Text style={commonStyles.primaryButtonText}>Confirm friendship</Text>
             </Button>
           ) : ( null ) }
           { this.props.wathRender.rejectFriend ? (
             <Button 
-              style={[commonStyles.dangerButton, {marginTop: 20}]} 
+              style={[commonStyles.dangerButton, {alignItems: 'center', marginTop: 20}]} 
               textStyle={commonStyles.primaryButtonText}
               onPress={() => this.props.responseFriendship(this.props.user.id, false)}
               isLoading={this.props.isLoadingSecondary}>
-              Reject friendship
+              <Icon name="user-times" size={18} color="#fff" style={{marginRight: 8}} />
+              <Text style={commonStyles.primaryButtonText}>Reject friendship</Text>
             </Button>
           ) : ( null ) }
 
@@ -128,7 +135,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flexDirection: 'row', 
-    marginBottom: 15
+    marginBottom: 20
   },
   infoIcon: {
     top: 3, 
