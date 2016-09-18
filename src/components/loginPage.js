@@ -144,6 +144,9 @@ export default class LoginPage extends Component {
           <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
             <Text>Do not have an account yet?</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToForgotPassword.bind(this)}>
+            <Text>Forgot password?</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     )

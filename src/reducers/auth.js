@@ -44,6 +44,20 @@ const auth = (state = {}, action) => {
       newState.auth.currentUser = null
       return newState
 
+    case types.SEND_RESET_PASSWORD_EMAIL_START:
+      newState.auth.forgotPasswordPage.isLoading = true
+      return newState
+
+    case types.SEND_RESET_PASSWORD_EMAIL_SUCCESS:
+      newState.auth.forgotPasswordPage.isLoading = false
+      return newState
+
+    case types.SEND_RESET_PASSWORD_EMAIL_FAILED:
+      newState.auth.forgotPasswordPage.isLoading = false
+      newState.auth.forgotPasswordPage.hasError = true
+      newState.auth.forgotPasswordPage.errorMessage = action.error.message
+      return newState
+
     case types.REAUTHENTICATE_START:
       newState.auth.loginPage.isLoading = true
       return newState

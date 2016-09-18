@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     goToSignup: () => {
       Actions.signup()
+    },
+    goToForgotPassword: () => {
+      Actions.forgotPassword()
     }
   }
 }

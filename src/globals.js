@@ -22,6 +22,12 @@ export const initialState = {
       isLoading: false,
       hasError: false,
       errorMessage: ''
+    },
+    forgotPasswordPage: {
+      isLoading: false,
+      hasError: false,
+      errorMessage: '',
+      sendDone: false
     }
   },
   profilePage: {

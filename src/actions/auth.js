@@ -106,7 +106,7 @@ export const logout = () => {
   return (dispatch) => {
     dispatch(logoutStart())
     firebaseAuth.signOut().then(function() {
-      dispatch(logoutSuccess)
+      dispatch(logoutSuccess())
       AsyncStorage.setItem('userData', '')
       Actions.pop({popNum: 2})
     })
@@ -124,6 +124,40 @@ export const logoutSuccess = () => {
     type: types.LOGOUT_SUCCESS
   }
 }
+
+export const sendResetPasswordEmail = (email) => {
+  return (dispatch) => {
+    dispatch(sendResetPasswordEmailStart())
+    firebaseAuth.sendPasswordResetEmail(email)
+    .then(function() {
+      dispatch(sendResetPasswordEmailSuccess())
+      Actions.login()
+    })
+    .catch(function(error) {
+      dispatch(sendResetPasswordEmailFailed(error))
+    })
+  }
+}
+
+export const sendResetPasswordEmailStart = () => {
+  return {
+    type: types.SEND_RESET_PASSWORD_EMAIL_START
+  }
+}
+
+export const sendResetPasswordEmailSuccess = () => {
+  return {
+    type: types.SEND_RESET_PASSWORD_EMAIL_SUCCESS
+  }
+}
+
+export const sendResetPasswordEmailFailed = (error) => {
+  return {
+    type: types.SEND_RESET_PASSWORD_EMAIL_FAILED,
+    error
+  }
+}
+
 
 export const reauthenticate = () => {
   return (dispatch) => {

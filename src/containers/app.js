@@ -37,6 +37,7 @@ import Event from './event'
 import Users from './users'
 import User from './user'
 import EventsCategories from './eventsCategories'
+import ForgotPassword from './forgotPassword'
 
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
@@ -114,6 +115,11 @@ const scenes = Actions.create(
       key='signup'
       title='Signup'
       component={Signup}
+      type='replace' />
+    <Scene
+      key='forgotPassword'
+      title='Forgot password'
+      component={ForgotPassword}
       type='replace' />
     <Scene
       key='main'

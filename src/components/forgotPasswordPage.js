@@ -17,7 +17,7 @@ import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
 import fonts from '../styles/fonts'
 
-export default class SignupPage extends Component {
+export default class ForgotPasswordPage extends Component {
   constructor (props) {
     super()
     this.state = {
@@ -29,13 +29,12 @@ export default class SignupPage extends Component {
         height: 50,
         marginTop: 50
       },
-      email: '',
-      pass: ''
+      email: ''
     }
   }
 
-  signup() {
-    this.props.submit(this.state.email, this.state.pass)
+  submit() {
+    this.props.submit(this.state.email)
   }
 
   render() {
@@ -51,43 +50,32 @@ export default class SignupPage extends Component {
         ) : null }
 
         <View style={commonStyles.container}>
-          { !this.props.signupDone ? (
+          { !this.props.sendDone ? (
             <View>
               <View style={this.state.pageTitleContainer}>
-                <Image source={require('../assets/img/signup.png')} style={[this.state.pageTitle, {alignSelf: 'center', marginBottom: 5}]} />
-                <Text style={{textAlign: 'center', color: styleVariables.colors.brandPrimary, fontWeight: '500'}}>Signup with your email</Text>
+                <Text style={{textAlign: 'center', color: styleVariables.colors.brandPrimary, fontWeight: '500'}}>Insert your email</Text>
               </View>
               <TextInput
-                ref='1'
                 style={commonStyles.textInput}
                 onChangeText={(email) => this.setState({email: email})}
                 placeholder={"Email Address"}
-                onSubmitEditing={() =>  this.refs['2'].focus()}
-              />
-              <TextInput
-                ref='2'
-                style={commonStyles.textInput}
-                secureTextEntry={true}
-                onChangeText={(pass) => this.setState({pass: pass})}
-                placeholder={"Password"}
               />
               <Button 
                 style={commonStyles.primaryButton} 
                 textStyle={commonStyles.primaryButtonText}
                 isLoading={this.props.isLoading}
-                onPress={this.signup.bind(this)}>
-                Signup
+                onPress={this.submit.bind(this)}>
+                Send reset email
               </Button>
 
               <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToLogin.bind(this)}>
-                <Text>Got an Account?</Text>
+                <Text>Go to login</Text>
               </TouchableOpacity>
             </View>
           ) : (
             <View style={styles.confirmBox}>
-              <Text style={fonts.style.h2}>Confirm Mail</Text>
               <Image source={require('../assets/img/check-icon.png')} style={styles.checkImage}></Image>
-              <Text style={[fonts.style.h5, {marginBottom: 5}]}>Please check your email before login</Text>
+              <Text style={[fonts.style.h5, {marginBottom: 5}]}>Please check your email for reset password</Text>
               <TouchableOpacity onPress={this.props.goToLogin.bind(this)}>
                 <Text>Go to login</Text>
               </TouchableOpacity>
