@@ -115,13 +115,24 @@ class UsersPage extends Component {
             selectedOption={this.props.activeFilter}
           />
         </View>
-        {this.props.isLoading ? (
+
+        {this.props.isLoading && this.props.users.length === 0 ? (
             <ActivityIndicator
               animating={this.props.isLoading}
               style={{alignItems: 'center', justifyContent: 'center', height: 200}}
               color="white"
               size="large"
             />
+          ) : null
+        }
+
+        { !this.props.isLoading && this.props.users.length === 0 ? (
+            <View style={styles.errorBox}>
+              <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>You have no frieds</Text>
+              <TouchableOpacity onPress={this.setFilter.bind(this, 'All')}>
+                <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>See all users</Text>
+              </TouchableOpacity>
+            </View>
           ) : (
             <ListView
               dataSource={dataSource}

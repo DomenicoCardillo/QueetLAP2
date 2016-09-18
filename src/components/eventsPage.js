@@ -199,9 +199,9 @@ class EventsPage extends Component {
 
         { !this.props.isLoading && this.props.events.length === 0 ? (
           <View style={styles.errorBox}>
-            <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>Nessun evento</Text>
+            <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>No event found</Text>
             <TouchableOpacity onPress={this.setFilter.bind(this, 'New')}>
-              <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>Vai ai nuovi eventi</Text>
+              <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>See new events</Text>
             </TouchableOpacity>
           </View>
         ) : (
