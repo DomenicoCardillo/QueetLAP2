@@ -72,7 +72,7 @@ export const login = (email, pass) => {
           }
           
           AsyncStorage.getItem('reauthToken').then((reauthToken) => {
-            if (reauthToken === null || reauthToken === '') {
+            if (reauthToken == null || reauthToken == '') {
               fetch(serverEndpoint + 'auth-token?userId=' + user.id, {
                 method: 'GET',
                 headers: {
@@ -183,7 +183,7 @@ export const reauthenticate = () => {
     dispatch(reauthenticateStart())
     AsyncStorage.getItem('reauthToken').then((reauthToken) => {
       console.log(reauthToken)
-      if(reauthToken !== null && reauthToken !== '') {
+      if(reauthToken != null) {
         firebaseAuth.signInWithCustomToken(reauthToken)
         .then(function(userData) {
           dispatch(loadCategories())
