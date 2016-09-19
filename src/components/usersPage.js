@@ -119,8 +119,8 @@ class UsersPage extends Component {
         {this.props.isLoading && this.props.users.length === 0 ? (
             <ActivityIndicator
               animating={this.props.isLoading}
-              style={{alignItems: 'center', justifyContent: 'center', height: 200}}
-              color="white"
+              style={{alignItems: 'center', justifyContent: 'center', height: styleVariables.screenHeight - (64 * 2)}}
+              color="#fff"
               size="large"
             />
           ) : null

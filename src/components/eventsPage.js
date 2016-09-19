@@ -159,12 +159,12 @@ class EventsPage extends Component {
     return (
       <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
         {this.props.categoryFilter !== null ? (
-        <View style={[commonStyles.primaryButton, {alignItems: 'center', justifyContent: 'center', flexDirection: 'row', padding: 10}]}>
-          <TouchableOpacity onPress={() => this.props.removeCategoryFilter()}>
-            <Icon name='close' size={20} color='#fff' style={{marginRight: 5}} />
-          </TouchableOpacity>
-          <Text style={[commonStyles.whiteText, {fontWeight: '500', fontSize: 15}]}>{this.props.categoryFilter}</Text>
-        </View> 
+          <View style={[commonStyles.primaryButton, {alignItems: 'center', justifyContent: 'center', flexDirection: 'row', padding: 10}]}>
+            <TouchableOpacity onPress={() => this.props.removeCategoryFilter()}>
+              <Icon name='close' size={20} color='#fff' style={{marginRight: 5}} />
+            </TouchableOpacity>
+            <Text style={[commonStyles.whiteText, {fontWeight: '500', fontSize: 15}]}>{this.props.categoryFilter}</Text>
+          </View>
         ) : (null)}
         <View style={{paddingTop: 10, paddingBottom: 10}}>
           <SegmentedControls
@@ -190,8 +190,8 @@ class EventsPage extends Component {
         {this.props.isLoading && this.props.events.length === 0 ? (
             <ActivityIndicator
               animating={this.props.isLoading}
-              style={{alignItems: 'center', justifyContent: 'center', height: 200}}
-              color="white"
+              style={{alignItems: 'center', justifyContent: 'center', height: styleVariables.screenHeight - (64 * 2)}}
+              color="#fff"
               size="large"
             />
           ) : null

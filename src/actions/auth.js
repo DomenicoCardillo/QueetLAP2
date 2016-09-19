@@ -5,6 +5,8 @@ import { loadCategories } from './categories'
 import { fetchEvents } from './events'
 import { fetchUsers } from './users'
 
+import FCM from 'react-native-fcm'
+
 import { Actions } from 'react-native-router-flux'
 
 export const signup = (email, pass) => {
@@ -70,23 +72,20 @@ export const login = (email, pass) => {
             updates['/' + user.id + '/emailVerified'] = true
             dbUsersRef.update(updates)
           }
-          
-          AsyncStorage.getItem('reauthToken').then((reauthToken) => {
-            if (reauthToken == null || reauthToken == '') {
-              fetch(serverEndpoint + 'auth-token?userId=' + user.id, {
-                method: 'GET',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                }
-              })
-              .then((response) => response.json())
-              .then((responseJson) => {
-                AsyncStorage.setItem('reauthToken', responseJson.token)
-              })
+                      
+          fetch(serverEndpoint + 'auth-token?userId=' + user.id, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
             }
           })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            AsyncStorage.setItem('reauthToken', responseJson.token)
+          })
 
+          FCM.subscribeToTopic('/topics/user_' + user.id)
           dispatch(loginSuccess(user))
         })
         
@@ -182,6 +181,7 @@ export const reauthenticate = () => {
   return (dispatch) => {
     dispatch(reauthenticateStart())
     AsyncStorage.getItem('reauthToken').then((reauthToken) => {
+      console.log(reauthToken)
       if(reauthToken != null) {
         firebaseAuth.signInWithCustomToken(reauthToken)
         .then(function(userData) {
@@ -194,6 +194,7 @@ export const reauthenticate = () => {
             user = user[userData.uid]
             user.id = userData.uid
 
+            FCM.subscribeToTopic('/topics/user_' + user.id)
             dispatch(reauthenticateSuccess(user))          
           })
 
