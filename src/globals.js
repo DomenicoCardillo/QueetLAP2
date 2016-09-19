@@ -80,6 +80,7 @@ export const firebaseAuth = Firebase.auth()
 export const firebaseStorage = Firebase.storage()
 export const userStorageRef = firebaseStorage.ref('users')
 export const dbNotificationsRef = firebaseDB.ref('notifications')
+export const serverEndpoint = 'http://localhost:3000/'
 
 export const formatDate = (date) => {
   date = new Date(date)

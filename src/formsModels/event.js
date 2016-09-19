@@ -10,6 +10,9 @@ import _ from 'lodash'
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet)
 stylesheet.textbox.normal.backgroundColor = '#fff'
 stylesheet.textbox.normal.fontSize        = 15
+stylesheet.textbox.normal.borderColor     = '#ddd'
+stylesheet.textbox.normal.borderWidth     = 1
+stylesheet.textbox.normal.paddingLeft     = 15
 
 let Name = t.refinement(t.String, function (name) {
   return name.length >= 2;

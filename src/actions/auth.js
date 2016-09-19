@@ -1,5 +1,5 @@
 import * as types from './types'
-import { firebaseAuth, dbUsersRef, firebaseDB } from '../globals'
+import { firebaseAuth, dbUsersRef, firebaseDB, serverEndpoint } from '../globals'
 import { AsyncStorage } from 'react-native'
 import { loadCategories } from './categories'
 import { fetchEvents } from './events'
@@ -70,9 +70,26 @@ export const login = (email, pass) => {
             updates['/' + user.id + '/emailVerified'] = true
             dbUsersRef.update(updates)
           }
+          
+          AsyncStorage.getItem('reauthToken').then((reauthToken) => {
+            if (reauthToken === null || reauthToken === '') {
+              fetch(serverEndpoint + 'auth-token?userId=' + user.id, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                }
+              })
+              .then((response) => response.json())
+              .then((responseJson) => {
+                AsyncStorage.setItem('reauthToken', responseJson.token)
+              })
+            }
+          })
 
           dispatch(loginSuccess(user))
         })
+        
         Actions.main()
       } else {
         let error = { message: 'You must verify your account. Please check your email.' }
@@ -109,7 +126,7 @@ export const logout = () => {
     dispatch(logoutStart())
     firebaseAuth.signOut().then(function() {
       dispatch(logoutSuccess())
-      AsyncStorage.setItem('userData', '')
+      AsyncStorage.setItem('reauthToken', '')
       Actions.pop({popNum: 2})
     })
   }
@@ -164,22 +181,28 @@ export const sendResetPasswordEmailFailed = (error) => {
 export const reauthenticate = () => {
   return (dispatch) => {
     dispatch(reauthenticateStart())
-    AsyncStorage.getItem('userData').then((userDataJson) => {
-      let userData = JSON.parse(userDataJson)
-      if(userData != null) {
-        firebaseAuth.signInWithCustomToken(
-          userData.stsTokenManager.accessToken
-        ).then(function(userData) {
-          dispatch(reauthenticateSuccess(userData))
-          AsyncStorage.setItem('userData', JSON.stringify(userData))
-          Actions.account()
+    AsyncStorage.getItem('reauthToken').then((reauthToken) => {
+      if(reauthToken !== null || reauthToken !== '') {
+        firebaseAuth.signInWithCustomToken(reauthToken)
+        .then(function(userData) {
+          dispatch(loadCategories())
+          dispatch(fetchEvents())
+          dispatch(fetchUsers())
+
+          dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
+            let user = userSnap.val()
+            user = user[userData.uid]
+            user.id = userData.uid
+
+            dispatch(reauthenticateSuccess(user))          
+          })
+
+          Actions.main()
         }).catch(function(error) {
           dispatch(reauthenticateFailed(error))
-          Actions.login()
         })
       } else {
         dispatch(reauthenticateFailed())
-        Actions.login()
       }
     })
   }

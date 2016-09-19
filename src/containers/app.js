@@ -20,11 +20,10 @@ import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
 
 import { connect } from 'react-redux'
-import { reauthenticate } from '../actions/auth'
 
 import TabItem from '../components/tabitem'
-import Splash from '../components/splashPage'
 
+import Splash from './splash'
 import Signup from './signup'
 import Login from './login'
 import Account from './account'

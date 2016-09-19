@@ -16,9 +16,10 @@ import Button from 'apsl-react-native-button'
 import { Actions } from 'react-native-router-flux'
 
 class Splash extends Component {
-  goto(page) {
-    Actions[page]({type: 'push'})
+  componentDidMount() {
+    this.props.reauthenticate()
   }
+
   render() {
     return (
       <Image source={require('../assets/img/splash.png')} style={commonStyles.backgroundImage}>
@@ -32,10 +33,11 @@ class Splash extends Component {
                 <Button 
                   style={commonStyles.primaryButton} 
                   textStyle={commonStyles.primaryButtonText}
-                  onPress={this.goto.bind(this, 'login')}>
+                  onPress={this.props.goToLogin.bind(this)}
+                  isLoading={this.props.isLoading}>
                   Login
                 </Button>
-                <TouchableOpacity style={commonStyles.textLeft} onPress={this.goto.bind(this, 'signup')}>
+                <TouchableOpacity style={commonStyles.textLeft} onPress={this.props.goToSignup.bind(this)}>
                   <Text style={commonStyles.whiteText}>Do not have an account yet?</Text>
                 </TouchableOpacity>
             </View>
