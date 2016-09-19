@@ -15,7 +15,7 @@ export const createEvent = (event) => {
         else {
           event.id = eventRef.key
           dispatch(createEventSuccess(event))
-          Actions.main()
+          Actions.pop()
         }
     })
   }
