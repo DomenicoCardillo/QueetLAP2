@@ -249,6 +249,8 @@ class App extends Component {
       console.log(token)
       // fcm token may not be available on first load, catch it here
     })
+
+    FCM.subscribeToTopic('/topics/user_userID');
   }
 
   componentWillUnmount() {
