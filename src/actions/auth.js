@@ -57,8 +57,8 @@ export const login = (email, pass) => {
       if(userData.emailVerified){
         AsyncStorage.setItem('lastEmail', userData.email)
         dispatch(loadCategories())
-        dispatch(fetchEvents())
         dispatch(fetchUsers())
+        dispatch(fetchEvents())
 
         dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
           let user = userSnap.val()
@@ -186,8 +186,8 @@ export const reauthenticate = () => {
         firebaseAuth.signInWithCustomToken(reauthToken)
         .then(function(userData) {
           dispatch(loadCategories())
-          dispatch(fetchEvents())
           dispatch(fetchUsers())
+          dispatch(fetchEvents())
 
           dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
             let user = userSnap.val()
