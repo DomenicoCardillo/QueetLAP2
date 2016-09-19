@@ -241,8 +241,9 @@ class App extends Component {
       // store fcm token in your server
     })
     this.notificationUnsubscribe = FCM.on('notification', (notif) => {
-      console.log(notif)
-      // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+      if (notif.opened_from_tray) {
+        console.log('Notification opened from push')
+      }
     })
     this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
       console.log(token)

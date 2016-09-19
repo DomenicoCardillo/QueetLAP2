@@ -128,7 +128,7 @@ class UsersPage extends Component {
 
         { !this.props.isLoading && this.props.users.length === 0 ? (
             <View style={styles.errorBox}>
-              <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>You have no frieds</Text>
+              <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>You have no friends</Text>
               <TouchableOpacity onPress={this.setFilter.bind(this, 'All')}>
                 <Text style={[fonts.style.h6, commonStyles.whiteText, {textAlign: 'center'}]}>See all users</Text>
               </TouchableOpacity>
