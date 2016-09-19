@@ -56,6 +56,7 @@ class AppPage extends Component {
       if (notification.opened_from_tray) {
         switch(notification.type) {
           case 'friendshipRequest':
+          case 'friendshipResponse':
             this.props.setUserDetail(JSON.parse(notification.userFrom))
             break
         }
