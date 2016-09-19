@@ -29,12 +29,6 @@ const model = t.struct({
 
 const options = {
   stylesheet: stylesheet,
-  /* Check this on new account */
-  fields: {
-    gender: {
-      nullOption: false
-    }
-  }
 }
 
 export default {

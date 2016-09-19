@@ -44,9 +44,6 @@ const options = {
       config: {
         format: formatTime
       }
-    },
-    privacy: {
-      nullOption: false
     }
   }
 }
