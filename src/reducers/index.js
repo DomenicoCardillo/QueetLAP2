@@ -4,6 +4,7 @@ import categories from './categories'
 import events from './events'
 import users from './users'
 import friendships from './friendships'
+import routes from './routes'
 
 const rootReducer = (state = {}, action) => {
   let newState = {}
@@ -46,6 +47,12 @@ const rootReducer = (state = {}, action) => {
   newState.userPage = friendshipsStuffs.userPage
   newState.auth = friendshipsStuffs.auth
   newState.users = friendshipsStuffs.users
+
+  let routingStuffs = routes({
+    scene: state.scene
+  }, action)
+
+  newState.routes = routingStuffs
   
   return newState
 }

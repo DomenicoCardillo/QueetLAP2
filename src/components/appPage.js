@@ -12,6 +12,8 @@ import {
   BackAndroid
 } from 'react-native'
 
+import { connect } from 'react-redux'
+
 import FCM from 'react-native-fcm'
 import { Actions, Scene, Router } from 'react-native-router-flux'
 
@@ -34,6 +36,8 @@ import User from '../containers/user'
 import EventsCategories from '../containers/eventsCategories'
 import ForgotPassword from '../containers/forgotPassword'
 
+const AppRouter = connect()(Router)
+
 /* Set status bar color (Check Android N) */
 if (Platform.OS == 'ios') {
   StatusBar.setBarStyle('light-content', true)
@@ -43,10 +47,15 @@ if (Platform.OS == 'ios') {
 
 class AppPage extends Component {
 
+  constructor(props) {
+    super()
+    this.backAndroidHandler = this.backAndroidHandler.bind(this)
+  }
+
   componentDidMount() {
-    
-    /* Disable android BackButton */
-    BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler.bind(this))
+
+    /* Enable/Disable android BackButton */
+    BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler)
     
     FCM.requestPermissions() // for iOS
 
@@ -81,13 +90,29 @@ class AppPage extends Component {
   }
 
   backAndroidHandler() {
-    console.log(this.props.state)
-    return true
+    let toReturn = true
+    
+    if (this.props.state.routes.scene === undefined) {
+      return toReturn
+    }
+    
+    switch(this.props.state.routes.scene.name) {
+      case 'eventsCategory':
+      case 'account':
+      case 'eventForm':
+      case 'userForm':
+      case 'event':
+      case 'user':
+        toReturn = false
+        break
+    }
+
+    return toReturn
   }
 
   render() {
     return (
-      <Router scenes={scenes} getSceneStyle={getSceneStyle} />
+      <AppRouter scenes={scenes} getSceneStyle={getSceneStyle} />
     )
   }
 }

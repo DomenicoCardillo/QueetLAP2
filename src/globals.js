@@ -67,7 +67,10 @@ export const initialState = {
   },
   categories: [],
   events: [],
-  users: []
+  users: [],
+  routes: {
+    scene: null
+  }
 }
 
 Firebase.initializeApp(firebaseConfig)
