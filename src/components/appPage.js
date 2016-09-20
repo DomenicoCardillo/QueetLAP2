@@ -147,16 +147,22 @@ const scenes = Actions.create(
       key='login'
       title='Login'
       component={Login}
+      hideNavBar={true}
+      hideTabBar={true}
       type='replace' />
     <Scene
       key='signup'
       title='Signup'
       component={Signup}
+      hideNavBar={true}
+      hideTabBar={true}
       type='replace' />
     <Scene
       key='forgotPassword'
       title='Forgot password'
       component={ForgotPassword}
+      hideNavBar={true}
+      hideTabBar={true}
       type='replace' />
     <Scene
       key='main'

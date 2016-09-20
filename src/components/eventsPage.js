@@ -190,7 +190,7 @@ class EventsPage extends Component {
         {this.props.isLoading && this.props.events.length === 0 ? (
             <ActivityIndicator
               animating={this.props.isLoading}
-              style={{alignItems: 'center', justifyContent: 'center', height: styleVariables.screenHeight - (64 * 2)}}
+              style={{alignItems: 'center', justifyContent: 'center', height: styleVariables.screenHeight - (85 * 2)}}
               color="#fff"
               size="large"
             />

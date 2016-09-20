@@ -181,7 +181,6 @@ export const reauthenticate = () => {
   return (dispatch) => {
     dispatch(reauthenticateStart())
     AsyncStorage.getItem('reauthToken').then((reauthToken) => {
-      console.log(reauthToken)
       if(reauthToken != null) {
         firebaseAuth.signInWithCustomToken(reauthToken)
         .then(function(userData) {
