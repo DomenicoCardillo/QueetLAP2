@@ -7,7 +7,8 @@ import {
   View, 
   Text,
   Image,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
@@ -75,16 +76,42 @@ export default class EventPage extends Component {
           
           <View style={styles.infoContainer}>
             <Text style={fonts.style.h1}>{this.props.event.name}</Text>
-            <Text style={{fontSize: 12}}>{formatDate(this.props.event.dateTime)} - {formatTime(this.props.event.dateTime)}</Text>
+            <Text style={{fontSize: 12, marginTop: 5}}>{formatDate(this.props.event.dateTime)} - {formatTime(this.props.event.dateTime)}</Text>
           </View>
           
           <View style={styles.listContainer}>
-            <Text style={fonts.style.h6}>Elenco partecipanti:</Text>
-            <Text>- Domenico</Text>
-            <Text>- Marco</Text>
-            <Text style={{fontWeight: '600'}}>- {this.props.event.creator.name} (Event Creator)</Text>
-            <Text>- Domenico</Text>
-            <Text>- Marco</Text>
+            <Text style={[fonts.style.h6, {marginBottom: 5}]}>List of participants:</Text>
+            <View style={styles.listItemContainer}>
+              <Icon name="star" size={18} color='#c19a2f' style={{marginRight: 5}} />
+              <Text style={{fontWeight: '600'}}>{this.props.event.creator.name}</Text>
+            </View>
+            <View style={styles.listItemContainer}>
+              <TouchableOpacity activeOpacity={0.6}>
+                <Icon name="close" size={18} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.6}>
+                <Icon name="check" size={18} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
+              </TouchableOpacity>
+              <Text>Marco Nisi</Text>
+            </View>
+            <View style={styles.listItemContainer}>
+              <TouchableOpacity activeOpacity={0.6}>
+                <Icon name="close" size={18} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.6}>
+                <Icon name="check" size={18} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
+              </TouchableOpacity>
+              <Text>Giuseppe Cutuli</Text>
+            </View>
+            <View style={styles.listItemContainer}>
+              <TouchableOpacity activeOpacity={0.6}>
+                <Icon name="close" size={18} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.6}>
+                <Icon name="check" size={18} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
+              </TouchableOpacity>
+              <Text>Gal Gadot</Text>
+            </View>            
           </View>
           
           {this.state.showJoin && !this.state.closed ? (
@@ -92,7 +119,7 @@ export default class EventPage extends Component {
             style={[commonStyles.primaryButton, {marginBottom: 10}]} 
             textStyle={commonStyles.primaryButtonText}
             onPress={this.props.join}>
-              Partecipa
+              Join
             </Button>
           ) : null}
         </ScrollView>
@@ -129,5 +156,9 @@ const styles = StyleSheet.create({
   infoContainer: {
     marginTop: 20,
     marginBottom: 10,
+  },
+  listItemContainer: {
+    flexDirection: 'row', 
+    paddingVertical: 5
   }
 })
