@@ -85,7 +85,7 @@ export default class UserPage extends Component {
           ) : ( null ) }
           { this.props.wathRender.confirmFriend ? (
             <Button 
-              style={[commonStyles.primaryButton, {alignItems: 'center'}]}
+              style={[commonStyles.primaryButton, {alignItems: 'center', marginTop: 20}]}
               textStyle={commonStyles.primaryButtonText}
               onPress={() => this.props.responseFriendship(this.props.user.id, true)}
               isLoading={this.props.isLoadingPrimary}>
@@ -95,7 +95,7 @@ export default class UserPage extends Component {
           ) : ( null ) }
           { this.props.wathRender.rejectFriend ? (
             <Button 
-              style={[commonStyles.dangerButton, {alignItems: 'center', marginTop: 20}]} 
+              style={[commonStyles.dangerButton, {alignItems: 'center'}]} 
               textStyle={commonStyles.primaryButtonText}
               onPress={() => this.props.responseFriendship(this.props.user.id, false)}
               isLoading={this.props.isLoadingSecondary}>

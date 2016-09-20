@@ -13,13 +13,15 @@ export const updateProfile = (newProfile, picture) => {
 
     if(picture !== null) {
 
-      // const?
       const fs = RNFetchBlob.fs
       const Blob = RNFetchBlob.polyfill.Blob
     
       window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
       window.Blob = Blob
       
+      // Fix on Android
+      picture.url = picture.url.replace('file://', '')
+
       let rnfbURI = RNFetchBlob.wrap(picture.url)
       
       let metadata = {
@@ -47,6 +49,8 @@ export const updateProfile = (newProfile, picture) => {
                   Actions.pop()
                 }
               })
+
+              blob.close()
             })
         })
     } else {
