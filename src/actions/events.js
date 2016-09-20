@@ -14,6 +14,7 @@ export const createEvent = (event) => {
         if(error) dispatch(createEventFailed(error))
         else {
           event.id = eventRef.key
+          event.users = {}
           dispatch(createEventSuccess(event))
           Actions.pop()
         }
