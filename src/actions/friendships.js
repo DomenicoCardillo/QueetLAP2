@@ -2,7 +2,6 @@ import * as types from './types'
 
 import {
   dbUsersRef,
-  fromObjToArray,
   dbNotificationsRef,
   findBy
 } from '../globals'

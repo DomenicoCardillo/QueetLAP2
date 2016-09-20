@@ -13,6 +13,8 @@ const events = (state = {}, action) => {
       newState.eventPage.isLoading = false
       newState.eventPage.event = undefined
       newState.events.push(action.payload)
+      newState.auth.currentUser.events = !newState.auth.currentUser.events ? {} : newState.auth.currentUser.events
+      newState.auth.currentUser.events[action.payload.id] = true
       return newState
 
     case types.CREATE_EVENT_FAILED:

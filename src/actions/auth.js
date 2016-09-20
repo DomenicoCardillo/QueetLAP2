@@ -66,6 +66,8 @@ export const login = (email, pass) => {
           let user = userSnap.val()
           user = user[userData.uid]
           user.id = userData.uid
+          user.events = {}
+          user.friends = {}
 
           if(!user.emailVerified){
             let updates = {}

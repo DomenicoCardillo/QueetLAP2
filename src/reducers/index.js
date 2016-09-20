@@ -4,6 +4,7 @@ import categories from './categories'
 import events from './events'
 import users from './users'
 import friendships from './friendships'
+import partecipations from './partecipations'
 
 const rootReducer = (state = {}, action) => {
   let newState = {}
@@ -22,12 +23,14 @@ const rootReducer = (state = {}, action) => {
     events: state.events.slice(0), 
     eventsPage: state.eventsPage,
     myEventsPage: state.myEventsPage,
-    eventPage: state.eventPage
+    eventPage: state.eventPage,
+    auth: state.auth
   }, action)
   newState.events = eventsStuffs.events
   newState.eventsPage = eventsStuffs.eventsPage
   newState.myEventsPage = eventsStuffs.myEventsPage
   newState.eventPage = eventsStuffs.eventPage
+  newState.auth = eventsStuffs.auth
 
   let usersStuffs = users({
     usersPage: state.usersPage, 
@@ -46,6 +49,10 @@ const rootReducer = (state = {}, action) => {
   newState.userPage = friendshipsStuffs.userPage
   newState.auth = friendshipsStuffs.auth
   newState.users = friendshipsStuffs.users
+
+  let partecipationsStuffs = partecipations({auth: state.auth, eventPage: state.eventPage}, action)
+  newState.auth = partecipationsStuffs.auth
+  newState.eventPage = partecipationsStuffs.eventPage
   
   return newState
 }

@@ -60,7 +60,42 @@ export default class EventPage extends Component {
     return imageBox
   }
 
+  join() {
+    this.props.requestPartecipation(this.props.event)
+  }
+  leave() {
+    this.props.removePartecipation(this.props.event)
+  }
+
   render() {
+    let users = []
+    users.push(
+      <View style={styles.listItemContainer} key={this.props.event.creator.id}>
+        <Text style={{fontWeight: '600'}}>{this.props.event.creator.name}</Text>
+        <Icon name="star" size={18} color='#c19a2f' style={{marginRight: 5}} />
+      </View>
+    )
+    for(var userId in this.props.event.users){
+      users.push(
+        <View style={styles.listItemContainer} key={userId}>
+          <Text>{this.props.event.users[userId].fullName}</Text>
+          {this.props.wathRender.usersActions ? (
+            <View style={{flexDirection: 'row'}}>
+              {this.props.event.users[userId].needConfirm ? (
+                <TouchableOpacity activeOpacity={0.6}>
+                  <Icon name="check" size={22} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
+                </TouchableOpacity>
+              ) : ( null )}
+              {this.props.event.users[userId].canRemove ? (
+              <TouchableOpacity activeOpacity={0.6}>
+                <Icon name="close" size={22} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
+              </TouchableOpacity> 
+              ) : ( null )}
+            </View>
+          ) : ( null )}
+        </View>
+      )
+    }
     return (
       <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
@@ -80,48 +115,33 @@ export default class EventPage extends Component {
           </View>
           
           <View style={styles.listContainer}>
-            <Text style={[fonts.style.h6, {marginBottom: 5}]}>List of participants:</Text>
-            <View style={styles.listItemContainer}>
-              <Icon name="star" size={18} color='#c19a2f' style={{marginRight: 5}} />
-              <Text style={{fontWeight: '600'}}>{this.props.event.creator.name}</Text>
-            </View>
-            <View style={styles.listItemContainer}>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="close" size={18} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="check" size={18} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
-              </TouchableOpacity>
-              <Text>Marco Nisi</Text>
-            </View>
-            <View style={styles.listItemContainer}>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="close" size={18} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="check" size={18} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
-              </TouchableOpacity>
-              <Text>Giuseppe Cutuli</Text>
-            </View>
-            <View style={styles.listItemContainer}>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="close" size={18} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="check" size={18} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
-              </TouchableOpacity>
-              <Text>Gal Gadot</Text>
-            </View>            
+            <Text style={[fonts.style.h6, {marginBottom: 5}]}>Partecipants:</Text>
+            {users}
           </View>
           
-          {this.state.showJoin && !this.state.closed ? (
+          { this.props.wathRender.addPartecipation ? (
             <Button 
             style={[commonStyles.primaryButton, {marginBottom: 10}]} 
             textStyle={commonStyles.primaryButtonText}
-            onPress={this.props.join}>
+            onPress={this.join.bind(this)}
+            isLoading={this.props.isLoading}>
               Join
             </Button>
-          ) : null}
+          ) : ( null ) }
+          { this.props.wathRender.removePartecipation ? (
+            <Button 
+            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+            textStyle={commonStyles.primaryButtonText}
+            onPress={this.leave.bind(this)}
+            isLoading={this.props.isLoading}>
+              Leave
+            </Button>
+          ) : ( null ) }
+          { this.props.wathRender.waitResponse ? (
+            <View style={commonStyles.rowCenter}>
+              <Text>Wait for event's creator response</Text>
+            </View>
+          ) : ( null ) }
         </ScrollView>
       </View>
     )
@@ -159,6 +179,7 @@ const styles = StyleSheet.create({
   },
   listItemContainer: {
     flexDirection: 'row', 
+    justifyContent: 'space-between',
     paddingVertical: 5
   }
 })
