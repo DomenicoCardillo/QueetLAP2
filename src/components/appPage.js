@@ -8,7 +8,8 @@ import {
   StyleSheet,
   StatusBar,
   Platform,
-  Image
+  Image,
+  BackAndroid
 } from 'react-native'
 
 import FCM from 'react-native-fcm'
@@ -43,6 +44,10 @@ if (Platform.OS == 'ios') {
 class AppPage extends Component {
 
   componentDidMount() {
+    
+    /* Disable android BackButton */
+    BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler.bind(this))
+    
     FCM.requestPermissions() // for iOS
 
     FCM.getFCMToken().then(token => {
@@ -73,6 +78,11 @@ class AppPage extends Component {
     // prevent leaking
     this.refreshUnsubscribe()
     this.notificationUnsubscribe()
+  }
+
+  backAndroidHandler() {
+    console.log(this.props.state)
+    return true
   }
 
   render() {

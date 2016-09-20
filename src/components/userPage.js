@@ -7,7 +7,6 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  BackAndroid,
   TouchableOpacity,
   Image
 } from 'react-native'
@@ -22,12 +21,6 @@ import fonts from '../styles/fonts'
 export default class UserPage extends Component {
   constructor (props) {
     super()
-  }
-  
-  componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', function() {
-      return true
-    })
   }
 
   render() {
