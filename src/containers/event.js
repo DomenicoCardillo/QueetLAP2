@@ -13,22 +13,19 @@ const hydrateEvent = (event, currentUser, users, isMyEvent) => {
     event.users[currentUser.id] = {
       id: currentUser.id,
       fullName: 'You',
-      needConfirm: false,
-      canRemove: false
+      needConfirm: false
     }
   }
-  let eventUsers = users.filter(user => {
+  users.filter(user => {
     return event.users.hasOwnProperty(user.id)
       && (isMyEvent || event.users[user.id])
-  }).map(user => {
-    return {
+  }).forEach(user => {
+    event.users[user.id] = {
       id: user.id,
       fullName: user.id == currentUser.id ? 'You' : user.firstname + ' ' + user.lastname,
-      needConfirm: !event.users[user.id],
-      canRemove: event.users[user.id]
+      needConfirm: !event.users[user.id]
     }
   })
-  event.users = Object.assign({}, event.users, eventUsers)
   if(event.creator.id == currentUser.id)  event.creator.name = 'You'
   return event
 }
@@ -69,8 +66,8 @@ const mapDispatchToProps = (dispatch) => {
     responsePartecipation: (userId, event, response) => {
       dispatch(responsePartecipation(userId, event, response))
     },
-    removePartecipation: (event, userId = null) => {
-      dispatch(removePartecipation(event, userId = null))
+    removePartecipation: (event, userId) => {
+      dispatch(removePartecipation(event, userId))
     }
   }
 }

@@ -34,7 +34,7 @@ export const requestPartecipation = (event) => {
 export const responsePartecipation = (userId, event, response) => {
   return (dispatch, getState) => {
     let currentUserId = getState().auth.currentUser.id
-    dispatch(confirmPartecipationStart())
+    dispatch(responsePartecipationStart())
     let notification = {
       from: currentUserId,
       to: userId,
@@ -56,7 +56,7 @@ export const responsePartecipation = (userId, event, response) => {
   }
 }
 
-export const removePartecipation = (event, userId = null) => {
+export const removePartecipation = (event, userId) => {
   return (dispatch, getState) => {
     let currentUserId = getState().auth.currentUser.id
     dispatch(removePartecipationStart())
