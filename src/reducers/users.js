@@ -25,7 +25,7 @@ const users = (state = {}, action) => {
       return newState
 
     case types.SET_USER_DETAIL:
-      newState.userPage.user = action.payload
+      newState.userPage.userIndex = action.payload
       return newState
 
     case types.SET_USERS_ACTIVE_FILTER:

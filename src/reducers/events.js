@@ -62,7 +62,8 @@ const events = (state = {}, action) => {
       return newState
 
     case types.SET_EVENT_DETAIL:
-      newState.eventPage.event = action.payload
+      newState.eventPage.eventIndex = action.payload
+      return newState
 
     default:
       return state

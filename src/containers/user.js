@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux'
 import { toggleFriendship, responseFriendship } from '../actions/friendships'
 
 const mapStateToProps = (state) => {
-  let user = Object.assign({}, state.userPage.user)
+  let user = Object.assign({}, state.users[state.userPage.userIndex])
   let correctCat = state.categories[state.categories.findIndex(x => x.id == user.category)]
   user.stringedCategory = correctCat ? correctCat.name : null
 

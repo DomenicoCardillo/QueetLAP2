@@ -66,6 +66,15 @@ export default class EventPage extends Component {
   leave() {
     this.props.removePartecipation(this.props.event)
   }
+  confirm(userId) {
+    this.props.responsePartecipation(userId, this.props.event, true)
+  }
+  reject(userId) {
+    this.props.responsePartecipation(userId, this.props.event, false)
+  }
+  remove(userId) {
+    this.props.removePartecipation(this.props.event, userId)
+  }
 
   render() {
     let users = []
@@ -79,20 +88,33 @@ export default class EventPage extends Component {
       users.push(
         <View style={styles.listItemContainer} key={userId}>
           <Text>{this.props.event.users[userId].fullName}</Text>
-          {this.props.wathRender.usersActions ? (
-            <View style={{flexDirection: 'row'}}>
-              {this.props.event.users[userId].needConfirm ? (
-                <TouchableOpacity activeOpacity={0.6}>
-                  <Icon name="check" size={22} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
-                </TouchableOpacity>
-              ) : ( null )}
-              {this.props.event.users[userId].canRemove ? (
-              <TouchableOpacity activeOpacity={0.6}>
-                <Icon name="close" size={22} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
-              </TouchableOpacity> 
-              ) : ( null )}
-            </View>
-          ) : ( null )}
+          {this.props.wathRender.usersActions ? 
+              this.props.event.users[userId].needConfirm ? (
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity 
+                    activeOpacity={0.6}
+                    onPress={() => { this.confirm(userId) }}
+                  >
+                    <Icon name="check" size={22} color={styleVariables.colors.brandSuccess} style={{marginRight: 5}} />
+                  </TouchableOpacity>
+                  <TouchableOpacity 
+                    activeOpacity={0.6}
+                    onPress={() => { this.reject(userId) }}
+                  >
+                    <Icon name="close" size={22} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
+                  </TouchableOpacity> 
+                </View>
+              ) : ( 
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity 
+                      activeOpacity={0.6}
+                      onPress={() => { this.remove(userId) }}
+                    >
+                    <Icon name="close" size={22} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
+                  </TouchableOpacity> 
+                </View> 
+              )
+           : null }
         </View>
       )
     }

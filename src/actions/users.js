@@ -2,7 +2,8 @@ import * as types from './types'
 
 import {
   dbUsersRef,
-  fromObjToArray
+  fromObjToArray,
+  findBy
 } from '../globals'
 
 export const fetchUsers = () => {
@@ -56,9 +57,12 @@ export const applyUserChanges = (payload) => {
 }
 
 export const setUserDetail = (payload) => {
-  return {
-    type: types.SET_USER_DETAIL,
-    payload
+  return (dispatch, getState) => {
+    let userIndex = findBy('id', payload.id, getState().users, true)
+    dispatch({
+      type: types.SET_USER_DETAIL,
+      payload: userIndex
+    })
   }
 }
 
