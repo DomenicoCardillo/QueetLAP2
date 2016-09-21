@@ -148,6 +148,8 @@ export default class UserFormPage extends Component {
             minLength={2} // minimum length of text to search
             onPress={this.updatePlace.bind(this)}
             getDefaultValue={this.getDefaultPlace.bind(this)}
+            currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+            currentLocationLabel="Current location"
             query={{
               // available options: https://developers.google.com/places/web-service/autocomplete
               key: 'AIzaSyB8XnrQEsL9JUIo2u4T7xbrvpHxTe39jD4',
@@ -176,7 +178,6 @@ export default class UserFormPage extends Component {
                 borderRightWidth: 1,
                 borderBottomWidth: 1,
                 borderTopWidth: 0,
-                maxHeight: 200,
                 borderColor: styleVariables.colors.borderColor,
                 borderRadius: styleVariables.baseRadius,
               },
@@ -191,8 +192,7 @@ export default class UserFormPage extends Component {
             }}
             GooglePlacesSearchQuery={{
               // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
-              rankby: 'distance',
-              types: 'food',
+              rankby: 'distance'
             }}
             // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} 
