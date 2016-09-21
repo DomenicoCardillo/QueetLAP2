@@ -74,7 +74,10 @@ export const login = (email, pass) => {
             updates['/' + user.id + '/emailVerified'] = true
             dbUsersRef.update(updates)
           }
-                      
+          
+          /* Save userId */
+          AsyncStorage.setItem('userId', user.id)
+
           fetch(serverEndpoint + 'auth-token?userId=' + user.id, {
             method: 'GET',
             headers: {
@@ -128,6 +131,7 @@ export const logout = () => {
     firebaseAuth.signOut().then(function() {
       dispatch(logoutSuccess())
       AsyncStorage.setItem('reauthToken', '')
+      AsyncStorage.setItem('userId', '')
       Actions.pop({popNum: 2})
     })
   }
@@ -200,8 +204,43 @@ export const reauthenticate = () => {
           })
 
           Actions.main()
-        }).catch(function(error) {
-          dispatch(reauthenticateFailed(error))
+        }).catch((error) => {
+          AsyncStorage.getItem('userId').then((userId) => {
+            if(userId != null) {
+              fetch(serverEndpoint + 'auth-token?userId=' + userId, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                }
+              })
+              .then((response) => response.json())
+              .then((responseJson) => {
+                AsyncStorage.setItem('reauthToken', responseJson.token)
+                dispatch(reauthenticate())
+                /*firebaseAuth.signInWithCustomToken(responseJson.token)
+                .then(function(userData) {
+                  dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
+                    let user = userSnap.val()
+                    user = user[userData.uid]
+                    user.id = userData.uid
+
+                    FCM.subscribeToTopic('/topics/user_' + user.id)
+                    dispatch(reauthenticateSuccess(user))
+                  })
+
+                  Actions.main()
+                }).catch((error) => {
+                  dispatch(reauthenticateFailed(error))
+                })*/
+              })
+              .catch((error) => {
+                dispatch(reauthenticateFailed(error))
+              })
+            } else {
+              dispatch(reauthenticateFailed(error))
+            }
+          })
         })
       } else {
         dispatch(reauthenticateFailed())
