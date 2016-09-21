@@ -152,7 +152,7 @@ export default class EventPage extends Component {
           ) : ( null ) }
           { this.props.wathRender.removePartecipation ? (
             <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+            style={[commonStyles.dangerButton, {marginBottom: 10}]} 
             textStyle={commonStyles.primaryButtonText}
             onPress={this.leave.bind(this)}
             isLoading={this.props.isLoading}>
