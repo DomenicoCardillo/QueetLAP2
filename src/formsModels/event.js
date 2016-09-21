@@ -14,20 +14,21 @@ stylesheet.textbox.normal.borderColor     = '#ddd'
 stylesheet.textbox.normal.borderWidth     = 1
 stylesheet.textbox.normal.paddingLeft     = 15
 
-let Name = t.refinement(t.String, function (name) {
-  return name.length >= 2;
-});
+let Name = t.refinement(t.String, name => { return name.length >= 2 })
 
 let Privacy = t.enums({
   All: 'All',
   Friends: 'Friends'
 })
 
+let MaxPartecipants = t.refinement(t.Number, n => { return n > 1 })
+
 const model = t.struct({
   name: Name,
   date: t.Date,
   time: t.Date,
-  privacy: Privacy
+  privacy: Privacy,
+  maxPartecipants: MaxPartecipants
 })
 
 const options = {

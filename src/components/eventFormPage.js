@@ -27,7 +27,8 @@ export default class EventFormPage extends Component {
         name: this.props.event.name,
         date: new Date(this.props.event.dateTime),
         time: new Date(this.props.event.dateTime),
-        privacy: this.props.event.privacy
+        privacy: this.props.event.privacy,
+        maxPartecipants: this.props.event.maxPartecipants
       },
       longPlace: this.props.event.longPlace || '',
       shortPlace: this.props.event.shortPlace || '',
@@ -58,7 +59,9 @@ export default class EventFormPage extends Component {
         longPlace: this.state.longPlace,
         category: this.state.selectedCategory,
         dateTime: dateTime.getTime(),
-        creator: this.props.creator
+        privacy: this.state.value.privacy,
+        creator: this.props.creator,
+        maxPartecipants: this.state.value.maxPartecipants
       }
       if(this.state.isNew)  this.props.createEvent(newEvent)
       else                  this.props.updateEvent(newEvent, this.props.event.keyId)

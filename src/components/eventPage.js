@@ -135,7 +135,7 @@ export default class EventPage extends Component {
             {users}
           </View>
           
-          { this.props.wathRender.addPartecipation ? (
+          { this.props.wathRender.addPartecipation && !this.props.wathRender.limitReached ? (
             <Button 
             style={[commonStyles.primaryButton, {marginBottom: 10}]} 
             textStyle={commonStyles.primaryButtonText}
@@ -156,6 +156,11 @@ export default class EventPage extends Component {
           { this.props.wathRender.waitResponse ? (
             <View style={commonStyles.rowCenter}>
               <Text>Wait for event's creator response</Text>
+            </View>
+          ) : ( null ) }
+          { this.props.wathRender.limitReached ? (
+            <View style={commonStyles.rowCenter}>
+              <Text>Max number of partecipants reached</Text>
             </View>
           ) : ( null ) }
         </ScrollView>

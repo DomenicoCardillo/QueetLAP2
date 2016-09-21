@@ -38,15 +38,13 @@ const mapStateToProps = (state) => {
   event = hydrateEvent(event, currentUser, state.users, isMyEvent)
 
   if(event.dateTime > new Date().getTime()) {
-    if(isMyEvent){
-      wathRender.usersActions = true
-    } else if(event.users[currentUser.id]){
+    if(isMyEvent) wathRender.usersActions = true
+    if(event.users[currentUser.id] && !event.users[currentUser.id].needConfirm) 
       wathRender.removePartecipation = true
-    } else if(event.users[currentUser.id] === undefined){
-      wathRender.addPartecipation = true
-    } else {
+    if(event.users[currentUser.id] && event.users[currentUser.id].needConfirm)
       wathRender.waitResponse = true
-    }
+    if(event.users[currentUser.id] === undefined) wathRender.addPartecipation = true
+    if(Object.keys(event.users).length + 1 >= event.maxPartecipants) wathRender.limitReached = true
   }
 
   return {
