@@ -23,13 +23,7 @@ import { formatDate, formatTime } from '../globals'
 
 export default class EventPage extends Component {
   constructor(props) {
-    super(props)
-
-    /* Check with other joined users */
-    this.state = {
-      closed: this.props.event.dateTime <= new Date().getTime(),
-      showJoin: this.props.currentUser.id !== this.props.event.creator.id
-    }
+    super()
   }
 
   categoryImage() {

@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     createNewEvent: () => {
       dispatch(setEventDetail(null))
-       Actions.eventForm()
+      Actions.eventForm()
     },
     setEventDetail: (event) => {
       dispatch(setEventDetail(event))
