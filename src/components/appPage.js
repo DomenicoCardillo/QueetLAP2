@@ -57,10 +57,8 @@ class AppPage extends Component {
     /* Enable/Disable android BackButton */
     BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler)
     
-    FCM.requestPermissions() // for iOS
-
+    FCM.requestPermissions()
     FCM.getFCMToken().then(token => {
-      // store fcm token in your server
       console.log(token)
     })
 
@@ -71,9 +69,17 @@ class AppPage extends Component {
         switch(notification.type) {
           case 'friendshipRequest':
           case 'friendshipResponse':
-            this.props.setUserDetail(JSON.parse(notification.userFrom))
+            this.props.setUserDetail({id: notification.userId})
+            break
+          case 'requestPartecipation':
+          case 'removeMyPartecipation':
+          case 'responsePartecipation':
+          case 'removePartecipation':
+            this.props.setEventDetail({keyId: notification.eventId})
             break
         }
+      } else {
+        // Dispath newUnreadNotification()
       }
     })
 

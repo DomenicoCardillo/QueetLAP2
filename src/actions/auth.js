@@ -128,11 +128,13 @@ export const loginFailed = (error) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch(logoutStart())
+
     firebaseAuth.signOut().then(function() {
       dispatch(logoutSuccess())
+      Actions.pop({popNum: 2})
       AsyncStorage.setItem('reauthToken', '')
       AsyncStorage.setItem('userId', '')
-      Actions.pop({popNum: 2})
+      //FCM.unsubscribeFromTopic('/topics/user_' + userId)
     })
   }
 }
@@ -200,7 +202,7 @@ export const reauthenticate = () => {
             user.id = userData.uid
 
             FCM.subscribeToTopic('/topics/user_' + user.id)
-            dispatch(reauthenticateSuccess(user))          
+            dispatch(reauthenticateSuccess(user))  
           })
 
           Actions.main()

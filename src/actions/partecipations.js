@@ -40,7 +40,8 @@ export const responsePartecipation = (userId, event, response) => {
       to: userId,
       seen: false,
       response: response,
-      type: 'responsePartecipation'
+      type: 'responsePartecipation',
+      event: event.keyId
     }
     dbNotificationsRef.push(notification, (error) => {
       if(error) dispatch(responsePartecipationFailed(error))
@@ -66,7 +67,8 @@ export const removePartecipation = (event, userId) => {
         from: currentUserId,
         to: userId,
         seen: false,
-        type: 'removePartecipation'
+        type: 'removePartecipation',
+        event: event.keyId
       }
       var idToRemove = userId
     } else {
@@ -74,7 +76,8 @@ export const removePartecipation = (event, userId) => {
       var notification = {
         from: currentUserId,
         seen: false,
-        type: 'removeMyPartecipation'
+        type: 'removeMyPartecipation',
+        event: event.keyId
       }
       var idToRemove = currentUserId
     }
