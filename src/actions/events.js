@@ -129,7 +129,7 @@ export const setMyEventsActiveFilter = (payload) => {
 
 export const setEventDetail = (payload) => {
   return (dispatch, getState) => {
-    let eventIndex = findBy('keyId', payload.keyId, getState().events, true)
+    let eventIndex = payload ? findBy('keyId', payload.keyId, getState().events, true) : null
     dispatch({
       type: types.SET_EVENT_DETAIL,
       payload: eventIndex
