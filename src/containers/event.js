@@ -36,8 +36,9 @@ const hydrateEvent = (event, currentUser, users, isMyEvent) => {
 const mapStateToProps = (state) => {
   var wathRender = {}
   let currentUser = state.auth.currentUser
-  let isMyEvent = state.eventPage.event.creator.id == currentUser.id
-  let event = hydrateEvent(state.eventPage.event, currentUser, state.users, isMyEvent)
+  let event = Object.assign({}, state.events[state.eventPage.eventIndex])
+  let isMyEvent = event.creator.id == currentUser.id
+  event = hydrateEvent(event, currentUser, state.users, isMyEvent)
 
   if(event.dateTime > new Date().getTime()) {
     if(isMyEvent){

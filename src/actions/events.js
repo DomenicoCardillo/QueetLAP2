@@ -2,6 +2,7 @@ import * as types from './types'
 import {
   dbEventsRef,
   fromObjToArray,
+  findBy
 } from '../globals'
 
 import { Actions } from 'react-native-router-flux'
@@ -127,9 +128,12 @@ export const setMyEventsActiveFilter = (payload) => {
 }
 
 export const setEventDetail = (payload) => {
-  return {
-    type: types.SET_EVENT_DETAIL,
-    payload
+  return (dispatch, getState) => {
+    let eventIndex = findBy('keyId', payload.keyId, getState().events, true)
+    dispatch({
+      type: types.SET_EVENT_DETAIL,
+      payload: eventIndex
+    })
   }
 }
 

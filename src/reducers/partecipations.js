@@ -13,7 +13,6 @@ const partecipations = (state = {}, action) => {
       newState.eventPage.isLoading = false
       newState.auth.currentUser.events = !newState.auth.currentUser.events ? {} : newState.auth.currentUser.events
       newState.auth.currentUser.events[action.payload] = false
-      newState.eventPage.event.users[newState.auth.currentUser.id] = false
       return newState
     
     case types.REQUEST_PARTECIPATION_FAILED:
@@ -28,8 +27,6 @@ const partecipations = (state = {}, action) => {
 
     case types.RESPONSE_PARTECIPATION_SUCCESS:
       newState.eventPage.isLoading = false
-      if(action.payload.response) delete newState.eventPage.event.users[action.payload.userId]
-      else                        newState.eventPage.event.users[action.payload.userId] = true
       return newState
     
     case types.RESPONSE_PARTECIPATION_FAILED:
@@ -44,7 +41,6 @@ const partecipations = (state = {}, action) => {
 
     case types.REMOVE_PARTECIPATION_SUCCESS:
       newState.eventPage.isLoading = false
-      delete newState.eventPage.event.users[action.payload]
       return newState
     
     case types.REMOVE_PARTECIPATION_FAILED:
