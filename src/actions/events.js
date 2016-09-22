@@ -49,7 +49,6 @@ export const updateEvent = (event, eventId) => {
     let updates = {}
     updates['/' + eventId] = event
     dbEventsRef.update(updates, (error) => {
-      console.log(updates)
       if(error) dispatch(updateEventFailed(error))
       else {
         event.keyId = eventId
@@ -127,13 +126,26 @@ export const setMyEventsActiveFilter = (payload) => {
   }
 }
 
-export const setEventDetail = (payload) => {
+export const setEventDetail = (payload, redirect = false) => {
   return (dispatch, getState) => {
     let eventIndex = payload ? findBy('keyId', payload.keyId, getState().events, true) : null
     dispatch({
       type: types.SET_EVENT_DETAIL,
       payload: eventIndex
     })
+    if(redirect){
+      if(payload.creator.id == getState().auth.currentUser.id){
+        Actions.event({
+          rightTitle: 'Edit',
+          rightButtonTextStyle: {   
+            color: '#fff',
+            fontSize: 16,
+            top: 2
+          },
+          onRight: () => Actions.eventForm()
+        })
+      } else Actions.event()
+    }
   }
 }
 

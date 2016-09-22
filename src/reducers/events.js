@@ -23,6 +23,22 @@ const events = (state = {}, action) => {
       newState.eventPage.errorMessage = action.error.message
       return newState
 
+    case types.UPDATE_EVENT_START:
+      newState.eventPage.isLoading = true
+      newState.eventPage.hasError = false
+      return newState
+
+    case types.UPDATE_EVENT_SUCCESS:
+      newState.eventPage.isLoading = false
+      newState.eventPage.event = undefined
+      return newState
+
+    case types.UPDATE_EVENT_FAILED:
+      newState.eventPage.isLoading = false
+      newState.eventPage.hasError = true
+      newState.eventPage.errorMessage = action.error.message
+      return newState
+
     case types.FETCH_EVENTS_START:
       newState.eventsPage.isLoading = true
       newState.eventsPage.hasError = false

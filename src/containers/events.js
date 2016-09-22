@@ -95,8 +95,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setEventsActiveFilter(filter))
     },
     setEventDetail: (event) => {
-      dispatch(setEventDetail(event))
-      Actions.event()
+      dispatch(setEventDetail(event, true))
     },
     removeCategoryFilter: () => {
       dispatch(setCategoryFilter(undefined))
