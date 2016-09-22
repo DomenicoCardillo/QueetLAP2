@@ -81,6 +81,7 @@ class EventsPage extends Component {
     let catName = this.props.categories[event.category].name
     let catSlug = this.props.categories[event.category].slug
     let imageBox = null
+    event.users = event.users || {} 
     switch (catSlug) {
       case 'badminton':
         imageBox = <Image source={require('../assets/img/badminton.jpg')} style={styles.eventImage} />
@@ -114,7 +115,11 @@ class EventsPage extends Component {
             </View>
             <View style={styles.eventBottomInfo}>
               <Text style={styles.eventBottomInfoText}>{event.shortPlace} - {catName}</Text>
-              <Text>{event.creator.name}</Text>
+              { event.maxPartecipants ? 
+                (<Text>{event.creator.name} - Partecipants {Object.keys(event.users).length + 1}/{event.maxPartecipants}</Text>)
+                :
+                (<Text>{event.creator.name}</Text>)
+              }
             </View>
           </View>
         </View>

@@ -131,7 +131,13 @@ export default class EventPage extends Component {
           </View>
           
           <View style={styles.listContainer}>
-            <Text style={[fonts.style.h6, {marginBottom: 5}]}>Partecipants:</Text>
+            { this.props.event.maxPartecipants ? 
+              (<Text style={[fonts.style.h6, {marginBottom: 5}]}>
+                Partecipants { Object.keys(this.props.event.users).length + 1}/{this.props.event.maxPartecipants}
+              </Text>)
+              :
+              (<Text><Text style={[fonts.style.h6, {marginBottom: 5}]}>Partecipants </Text></Text>)
+            }
             {users}
           </View>
           
