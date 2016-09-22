@@ -94,10 +94,10 @@ class UsersPage extends Component {
       'All'
     ]
     return (
-      <View style={[commonStyles.mainContainer, {backgroundColor: '#ea573d'}]}>
+      <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
         <View style={{paddingTop: 10, paddingBottom: 10}}>
           <SegmentedControls
-            tint={'#ea573d'}
+            tint={'#64b0bc'}
             selectedTint={'#fff'}
             backTint={'#fff'}
             optionStyle= {{

@@ -33,6 +33,7 @@ import MyEvents from '../containers/myEvents'
 import Event from '../containers/event'
 import Users from '../containers/users'
 import User from '../containers/user'
+import Notifications from '../containers/notifications'
 import EventsCategories from '../containers/eventsCategories'
 import ForgotPassword from '../containers/forgotPassword'
 
@@ -90,7 +91,6 @@ class AppPage extends Component {
   }
 
   componentWillUnmount() {
-    // prevent leaking
     this.refreshUnsubscribe()
     this.notificationUnsubscribe()
   }
@@ -250,16 +250,13 @@ const scenes = Actions.create(
       <Scene
         key='notifications'
         title='Notifications'
-        component={Events}
+        component={Notifications}
         hideNavBar={false}
         hideTabBar={false}
         titleStyle={styles.titleStyle}
         navigationBarStyle={styles.navigationBarStyle}
         icon={TabItem}
-        tabIcon='bell'
-        rightTitle='Profile'
-        onRight={() => Actions.account() }
-        rightButtonTextStyle={styles.buttonTextStyle} />
+        tabIcon='bell' />
     </Scene>
     <Scene
       key='account'

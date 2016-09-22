@@ -155,13 +155,13 @@ class MyEventsPage extends Component {
     ]
 
     return (
-      <View style={[commonStyles.mainContainer, {backgroundColor: '#fbc063'}]}>
+      <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
         <View style={{paddingTop: 10, paddingBottom: 10}}>
           <TouchableOpacity onPress={this.props.createNewEvent}>
             <Text style={[commonStyles.whiteText, {textAlign: 'center', marginBottom: 10, fontSize: 16}]}>Create new event</Text>
           </TouchableOpacity>
           <SegmentedControls
-            tint='#fbc063'
+            tint='#64b0bc'
             selectedTint={'#fff'}
             backTint={'#fff'}
             optionStyle= {{
