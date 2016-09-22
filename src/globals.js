@@ -152,3 +152,7 @@ export const filterByFriends = (array, me, inclusive) => {
     return inclusive ? isMyFriend : !isMyFriend
   })
 }
+
+export const filterByPartecipations = (array, userId) => {
+  return array.filter(el => (el.users && el.users[userId] === true) || el.creator.id === userId)
+}

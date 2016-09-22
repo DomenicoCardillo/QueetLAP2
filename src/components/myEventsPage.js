@@ -69,7 +69,7 @@ class MyEventsPage extends Component {
   }
 
   componentDidMount() {
-    this.props.setFilter('Next')
+    this.props.setFilter('Joined in')
   }
 
   renderRow(event) {
@@ -149,7 +149,8 @@ class MyEventsPage extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     const dataSource = ds.cloneWithRows(this.props.events)
     const options = [
-      'Next',
+      'Joined in',
+      'Owned',
       'Ended'
     ]
 
@@ -165,7 +166,7 @@ class MyEventsPage extends Component {
             backTint={'#fff'}
             optionStyle= {{
               fontSize: 17,
-              width: styleVariables.screenWidth / 2 - 5
+              width: styleVariables.screenWidth / 3 - 5
             }}
             containerStyle= {{
               marginRight: 10,
