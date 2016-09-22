@@ -134,7 +134,7 @@ export const setEventDetail = (payload, redirect = false) => {
       payload: eventIndex
     })
     if(redirect){
-      if(payload.creator.id == getState().auth.currentUser.id){
+      if(payload.creator.id == getState().auth.currentUser.id && payload.dateTime > new Date().getTime()){
         Actions.event({
           rightTitle: 'Edit',
           rightButtonTextStyle: {   
