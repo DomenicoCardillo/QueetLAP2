@@ -27,6 +27,10 @@ const mapStateToProps = (state) => {
     events = state.events
   } else {
     events = getVisibleEvents(state.events, state.myEventsPage.activeFilter, state.auth.currentUser.id)
+    events.map(event => {
+      if(event.creator.id == state.auth.currentUser.id) event.creator.name = 'You'
+      return event
+    })
   }
   return {
     events,

@@ -64,6 +64,10 @@ const mapStateToProps = (state) => {
       state.eventsPage.categoryFilter,
       state.auth.currentUser.shortPlace
     )
+    events.map(event => {
+      if(event.creator.id == state.auth.currentUser.id) event.creator.name = 'You'
+      return event
+    })
   }
   let correctCat = state.categories[state.categories.findIndex(x => x.id == state.eventsPage.categoryFilter)]
   correctCat = correctCat ? correctCat.name : null

@@ -43,7 +43,8 @@ const mapStateToProps = (state) => {
       wathRender.removePartecipation = true
     if(event.users[currentUser.id] && event.users[currentUser.id].needConfirm)
       wathRender.waitResponse = true
-    if(event.users[currentUser.id] === undefined) wathRender.addPartecipation = true
+    if(event.users[currentUser.id] === undefined && event.creator.id !== currentUser.id) 
+      wathRender.addPartecipation = true
     if(Object.keys(event.users).length + 1 >= event.maxPartecipants) wathRender.limitReached = true
   }
 
