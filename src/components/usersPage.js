@@ -57,7 +57,7 @@ class UsersPage extends Component {
   }
 
   renderRow(user) {
-    user.firstname = user.firstname || 'Anonymus'
+    user.firstname = user.firstname || user.email
     
     return (
       <TouchableOpacity activeOpacity={0.9} onPress={() => this.goToUserDetail(user)}>

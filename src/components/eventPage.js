@@ -108,7 +108,11 @@ export default class EventPage extends Component {
                   </TouchableOpacity> 
                 </View> 
               )
-           : null }
+           : this.props.event.users[userId].needConfirm ? (
+              <View style={{flexDirection: 'row'}}>
+                <Text>Pending</Text>
+              </View>
+            ) : ( null )}
         </View>
       )
     }

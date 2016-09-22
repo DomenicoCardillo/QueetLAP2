@@ -17,12 +17,12 @@ const hydrateEvent = (event, currentUser, users, isMyEvent) => {
     }
   }
   users.filter(user => {
-    return event.users.hasOwnProperty(user.id)
-      && (isMyEvent || event.users[user.id])
+    return event.users.hasOwnProperty(user.id) && event.users[user.id] !== undefined
   }).forEach(user => {
     event.users[user.id] = {
       id: user.id,
-      fullName: user.id == currentUser.id ? 'You' : user.firstname + ' ' + user.lastname,
+      fullName: user.id == currentUser.id ? 'You' : 
+        user.firstname ? user.firstname + ' ' + user.lastname : user.email,
       needConfirm: !event.users[user.id]
     }
   })
