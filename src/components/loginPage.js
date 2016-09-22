@@ -42,6 +42,7 @@ export default class LoginPage extends Component {
 
   login() {
     this.props.submit(this.state.email, this.state.pass)
+    this.state.pass = ''
   }
 
   componentWillMount() {
@@ -79,7 +80,7 @@ export default class LoginPage extends Component {
       },
       pageSubtitle: {
         opacity: 0
-      },
+      }
     })
   }
 
@@ -131,6 +132,7 @@ export default class LoginPage extends Component {
             ref='2'
             style={[commonStyles.textInput, {marginBottom: 5}]}
             secureTextEntry={true}
+            value={this.state.pass}
             onChangeText={(pass) => this.setState({pass: pass})}
             placeholder={"Password"}
           />
