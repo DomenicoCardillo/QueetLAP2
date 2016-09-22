@@ -54,16 +54,22 @@ const getEventsByPrivacy = (events, me, users) => {
 }
 
 const mapStateToProps = (state) => {
-  let correctCat = state.categories[state.categories.findIndex(x => x.id == state.eventsPage.categoryFilter)]
-  correctCat = correctCat ? correctCat.name : null
-  
-  return {
-    events: getVisibleEvents(
+  let events = {}
+  if(!state.auth.currentUser) {
+    events = state.events
+  } else {
+    events = getVisibleEvents(
       getEventsByPrivacy(state.events, state.auth.currentUser, state.users), 
       state.eventsPage.activeFilter,
       state.eventsPage.categoryFilter,
       state.auth.currentUser.shortPlace
-    ),
+    )
+  }
+  let correctCat = state.categories[state.categories.findIndex(x => x.id == state.eventsPage.categoryFilter)]
+  correctCat = correctCat ? correctCat.name : null
+
+  return {
+    events,
     activeFilter: state.eventsPage.activeFilter,
     categoryFilter: correctCat,
     isLoading: state.eventsPage.isLoading,

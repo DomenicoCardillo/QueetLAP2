@@ -62,7 +62,8 @@ export default class AccountPage extends Component {
             <Button 
               style={[commonStyles.dangerButton, {marginBottom: 10}]} 
               textStyle={commonStyles.primaryButtonText}
-              onPress={this.props.logout}>
+              onPress={this.props.logout}
+              isLoading={this.props.isLoading}>
               Logout
             </Button>
           </View>          

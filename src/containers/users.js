@@ -9,8 +9,14 @@ const getVisibleUsers = (users, currentUser, activeFilter) => {
 }
 
 const mapStateToProps = (state) => {
+  let users = {}
+  if(!state.auth.currentUser) {
+    users = state.users
+  } else {
+    users = getVisibleUsers(state.users, state.auth.currentUser, state.usersPage.activeFilter)
+  }
   return {
-    users: getVisibleUsers(state.users, state.auth.currentUser, state.usersPage.activeFilter),
+    users,
     isLoading: state.usersPage.isLoading,
     activeFilter: state.usersPage.activeFilter
   }

@@ -22,8 +22,14 @@ const getVisibleEvents = (events, activeFilter, userId) => {
   return events
 }
 const mapStateToProps = (state) => {
+  let events = {}
+  if(!state.auth.currentUser) {
+    events = state.events
+  } else {
+    events = getVisibleEvents(state.events, state.myEventsPage.activeFilter, state.auth.currentUser.id)
+  }
   return {
-    events: getVisibleEvents(state.events, state.myEventsPage.activeFilter, state.auth.currentUser.id),
+    events,
     activeFilter: state.myEventsPage.activeFilter,
     isLoading: state.myEventsPage.isLoading,
     hasError: state.myEventsPage.hasError,

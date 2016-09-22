@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
     .map(cat => cat.name)
 
   return {
-    currentUser: currentUser
+    currentUser: currentUser,
+    isLoading: state.profilePage.isLoading
   }
 }
 
