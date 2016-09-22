@@ -133,8 +133,14 @@ export const logout = () => {
       dispatch(logoutSuccess())
       Actions.pop({popNum: 2})
       AsyncStorage.setItem('reauthToken', '')
+
+      AsyncStorage.getItem('userId').then((userId) => {
+        if(userId != null) {
+          FCM.unsubscribeFromTopic('/topics/user_' + userId)
+        }
+      })
+     
       AsyncStorage.setItem('userId', '')
-      //FCM.unsubscribeFromTopic('/topics/user_' + userId)
     })
   }
 }
