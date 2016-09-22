@@ -75,7 +75,7 @@ class AppPage extends Component {
           case 'removeMyPartecipation':
           case 'responsePartecipation':
           case 'removePartecipation':
-            this.props.setEventDetail({keyId: notification.eventId})
+            this.props.setEventDetail({id: notification.eventId})
             break
         }
       } else {

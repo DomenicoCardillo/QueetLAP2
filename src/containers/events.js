@@ -21,7 +21,7 @@ const getVisibleEvents = (events, activeFilter, categoryFilter, userShortPlace) 
   switch (activeFilter) {
     case 'New':
       events = filterByDateTime(events)
-      sortArrayByProps(events, 'desc', 'keyId')
+      sortArrayByProps(events, 'desc', 'id')
       break
     case 'Next':
       events = filterByDateTime(events)

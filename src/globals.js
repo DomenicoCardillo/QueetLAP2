@@ -103,7 +103,7 @@ export const formatTime = (time) => {
 export const fromObjToArray = (obj) => {
   var array = [] 
   for(var o in obj) {
-    obj[o].keyId = o
+    obj[o].id = o
     array.push(obj[o])
   }
   return array
@@ -138,7 +138,7 @@ export const filterByCreator = (array, creatorId) => {
 }
 
 export const filterByCategory = (array, categoryId) => {
-  return array.filter(el => el.category === categoryId)
+  return array.filter(el => el.category == categoryId)
 }
 
 export const findBy = (prop, value, array, onlyIndex = false) => {

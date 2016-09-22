@@ -14,7 +14,7 @@ export const createEvent = (event) => {
     eventRef.set(event, (error) => {
         if(error) dispatch(createEventFailed(error))
         else {
-          event.keyId = eventRef.key
+          event.id = eventRef.key
           event.users = {}
           dispatch(createEventSuccess(event))
           Actions.pop()
@@ -51,7 +51,7 @@ export const updateEvent = (event, eventId) => {
     dbEventsRef.update(updates, (error) => {
       if(error) dispatch(updateEventFailed(error))
       else {
-        event.keyId = eventId
+        event.id = eventId
         dispatch(updateEventSuccess(event))
         dispatch(setEventDetail(event))
         Actions.pop()
@@ -128,7 +128,7 @@ export const setMyEventsActiveFilter = (payload) => {
 
 export const setEventDetail = (payload, redirect = false) => {
   return (dispatch, getState) => {
-    let eventIndex = payload ? findBy('keyId', payload.keyId, getState().events, true) : null
+    let eventIndex = payload ? findBy('id', payload.id, getState().events, true) : null
     dispatch({
       type: types.SET_EVENT_DETAIL,
       payload: eventIndex
@@ -153,9 +153,9 @@ export const listenEventsChanges = () => {
   return (dispatch, getState) => {
     dbEventsRef.on('child_changed', function(childSnapshot) {
       let events = getState().events
-      let eventChangedIndex = events.findIndex(x => x.keyId == childSnapshot.key)
+      let eventChangedIndex = events.findIndex(x => x.id == childSnapshot.key)
       let newEventValue = childSnapshot.val()
-      newEventValue.keyId = childSnapshot.key
+      newEventValue.id = childSnapshot.key
       dispatch(applyEventChanges({index: eventChangedIndex, newValue: newEventValue}))
     })
   }

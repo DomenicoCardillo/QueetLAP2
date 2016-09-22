@@ -22,7 +22,7 @@ export default class EventFormPage extends Component {
     super(props)
 
     this.state = {
-      isNew: this.props.event.keyId === undefined,
+      isNew: this.props.event.id === undefined,
       value: {
         name: this.props.event.name,
         date: new Date(this.props.event.dateTime),
@@ -64,7 +64,7 @@ export default class EventFormPage extends Component {
         maxPartecipants: this.state.value.maxPartecipants
       }
       if(this.state.isNew)  this.props.createEvent(newEvent)
-      else                  this.props.updateEvent(newEvent, this.props.event.keyId)
+      else                  this.props.updateEvent(newEvent, this.props.event.id)
     }
   }
 
