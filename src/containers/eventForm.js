@@ -4,7 +4,7 @@ import EventFormPage from '../components/eventFormPage'
 import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
-  let event = Object.assign({}, state.events[state.eventPage.eventIndex]) || {dateTime: new Date().getTime()}
+  let event = Object.assign({}, state.events[state.eventPage.eventIndex] || {dateTime: new Date().getTime()})
   return {
     creator: {
       id: state.auth.currentUser.id, 
