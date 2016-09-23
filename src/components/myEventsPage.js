@@ -76,6 +76,7 @@ class MyEventsPage extends Component {
     let catName = this.props.categories[event.category].name
     let catSlug = this.props.categories[event.category].slug
     let imageBox = null
+    event.users = event.users || {} 
     switch (catSlug) {
       case 'badminton':
         imageBox = <Image source={require('../assets/img/badminton.jpg')} style={styles.eventImage} />
