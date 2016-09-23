@@ -33,12 +33,14 @@ const options = {
   fields: {
     date: {
       mode: 'date',
+      minimumDate: new Date(),
       config: {
         format: formatDate
       }
     },
     time: {
       mode: 'time',
+      minimumDate: new Date(),
       config: {
         format: formatTime
       }
