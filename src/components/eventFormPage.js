@@ -1,7 +1,7 @@
 import React, {
   Component,
 } from 'react'
-import { ScrollView, View, Text, Picker } from 'react-native'
+import { ScrollView, View, Text, Picker, TextInput } from 'react-native'
 const Item = Picker.Item
 
 import EventForm from '../formsModels/event'
@@ -27,13 +27,13 @@ export default class EventFormPage extends Component {
         name: this.props.event.name,
         date: new Date(this.props.event.dateTime),
         time: new Date(this.props.event.dateTime),
-        privacy: this.props.event.privacy,
-        maxPartecipants: this.props.event.maxPartecipants
+        privacy: this.props.event.privacy
       },
       longPlace: this.props.event.longPlace || '',
       shortPlace: this.props.event.shortPlace || '',
       selectedCategory: this.props.event.category,
-      stringedCategories: this.getStringedCategories()
+      stringedCategories: this.getStringedCategories(),
+      maxPartecipants: this.props.event.maxPartecipants
     }
   }
 
@@ -61,7 +61,8 @@ export default class EventFormPage extends Component {
         dateTime: dateTime.getTime(),
         privacy: this.state.value.privacy,
         creator: this.props.creator,
-        maxPartecipants: this.state.value.maxPartecipants
+        users: this.props.event.users || {},
+        maxPartecipants: this.state.maxPartecipants
       }
       if(this.state.isNew)  this.props.createEvent(newEvent)
       else                  this.props.updateEvent(newEvent, this.props.event.id)
@@ -99,6 +100,14 @@ export default class EventFormPage extends Component {
             options={EventForm.options}
             value={this.state.value}
             onChange={this.onChange.bind(this)}
+          />
+
+          <Text style={commonStyles.label}>Max partecipants</Text>
+          <TextInput
+            editable={this.state.isNew}
+            keyboardType='numeric'
+            onChangeText={(maxPartecipants) => this.setState({maxPartecipants})}
+            value={this.state.maxPartecipants}
           />
 
           <Text style={commonStyles.label}>Select sport</Text>

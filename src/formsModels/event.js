@@ -21,14 +21,11 @@ let Privacy = t.enums({
   Friends: 'Friends'
 })
 
-let MaxPartecipants = t.refinement(t.Number, n => { return n > 1 })
-
 const model = t.struct({
   name: Name,
   date: t.Date,
   time: t.Date,
-  privacy: Privacy,
-  maxPartecipants: MaxPartecipants
+  privacy: Privacy
 })
 
 const options = {
