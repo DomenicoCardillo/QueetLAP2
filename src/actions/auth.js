@@ -80,6 +80,7 @@ export const login = (email, pass) => {
 
           fetch(serverEndpoint + 'auth-token?userId=' + user.id, {
             method: 'GET',
+            dataType: 'json',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
@@ -88,6 +89,9 @@ export const login = (email, pass) => {
           .then((response) => response.json())
           .then((responseJson) => {
             AsyncStorage.setItem('reauthToken', responseJson.token)
+          })
+          .catch((error) => {
+            console.log(error)
           })
 
           FCM.subscribeToTopic('/topics/user_' + user.id)
@@ -132,7 +136,7 @@ export const logout = () => {
     firebaseAuth.signOut().then(function() {
       dispatch(logoutSuccess())
       Actions.pop({popNum: 2})
-      AsyncStorage.setItem('reauthToken', '')
+      AsyncStorage.removeItem('reauthToken')
 
       AsyncStorage.getItem('userId').then((userId) => {
         if(userId != null) {
@@ -140,7 +144,7 @@ export const logout = () => {
         }
       })
      
-      AsyncStorage.setItem('userId', '')
+      AsyncStorage.removeItem('userId')
     })
   }
 }
@@ -217,6 +221,7 @@ export const reauthenticate = () => {
             if(userId != null) {
               fetch(serverEndpoint + 'auth-token?userId=' + userId, {
                 method: 'GET',
+                dataType: 'json',
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
