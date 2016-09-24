@@ -2,12 +2,12 @@ import {Dimensions, Platform} from 'react-native'
 
 const { width, height } = Dimensions.get('window')
 
-// Palette http://colrd.com/palette/23519/
+// OLD Palette http://colrd.com/palette/23519/
 // #ea573d    #fbc063    #64b0bc    
 // #446699    #555577    
 
-// https://coolors.co/ff8360-7dce82-7be0ad-aee5d8-e7e5e5
-// https://coolors.co/092327-0b5351-00a9a5-4e8098-90c2e7
+// New Palette
+// https://coolors.co/ffffff-f7f7f7-64b0bc-016fb9-004f7a
 
 let styleVariables = {
   baseRadius: 4,

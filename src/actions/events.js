@@ -1,6 +1,7 @@
 import * as types from './types'
 import {
   dbEventsRef,
+  dbNotificationsRef,
   fromObjToArray,
   findBy
 } from '../globals'
@@ -44,17 +45,31 @@ export const createEventFailed = (error) => {
 }
 
 export const updateEvent = (event, eventId) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    let currentUserId = getState().auth.currentUser.id
     dispatch(updateEventStart())
-    let updates = {}
-    updates['/' + eventId] = event
-    dbEventsRef.update(updates, (error) => {
-      if(error) dispatch(updateEventFailed(error))
+    
+    var notification = {
+      from: currentUserId,
+      seen: false,
+      type: 'eventUpdated',
+      event: eventId
+    }
+
+    dbNotificationsRef.push(notification, (error) => {
+      if(error) dispatch(removePartecipationFailed(error))
       else {
-        event.id = eventId
-        dispatch(updateEventSuccess(event))
-        dispatch(setEventDetail(event))
-        Actions.pop()
+        let updates = {}
+        updates['/' + eventId] = event
+        dbEventsRef.update(updates, (error) => {
+          if(error) dispatch(updateEventFailed(error))
+          else {
+            event.id = eventId
+            dispatch(updateEventSuccess(event))
+            dispatch(setEventDetail(event))
+            Actions.pop()
+          }
+        })
       }
     })
   }
