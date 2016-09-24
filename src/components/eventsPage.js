@@ -162,7 +162,7 @@ class EventsPage extends Component {
     ]
 
     return (
-      <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
+      <View style={[commonStyles.mainContainer, {backgroundColor: styleVariables.colors.backgroundColor}]}>
         {this.props.categoryFilter !== null ? (
           <View style={[commonStyles.primaryButton, {alignItems: 'center', justifyContent: 'center', flexDirection: 'row', padding: 10}]}>
             <TouchableOpacity onPress={() => this.props.removeCategoryFilter()}>
@@ -173,7 +173,7 @@ class EventsPage extends Component {
         ) : (null)}
         <View style={{paddingTop: 10, paddingBottom: 10}}>
           <SegmentedControls
-            tint={'#64b0bc'}
+            tint={styleVariables.colors.backgroundColor}
             selectedTint={'#fff'}
             backTint={'#fff'}
             optionStyle= {{

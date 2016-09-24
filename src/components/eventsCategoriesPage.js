@@ -68,7 +68,7 @@ class EventsCategoriesPage extends Component {
       )
     })
     return (
-      <ScrollView style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
+      <ScrollView style={[commonStyles.mainContainer, {backgroundColor: styleVariables.colors.backgroundColor}]}>
         <View style={styles.categoryBoxContainer}>
           {rows}
         </View>

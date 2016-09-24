@@ -6,6 +6,9 @@ const { width, height } = Dimensions.get('window')
 // #ea573d    #fbc063    #64b0bc    
 // #446699    #555577    
 
+// https://coolors.co/ff8360-7dce82-7be0ad-aee5d8-e7e5e5
+// https://coolors.co/092327-0b5351-00a9a5-4e8098-90c2e7
+
 let styleVariables = {
   baseRadius: 4,
   marginHorizontal: 10,
@@ -27,11 +30,13 @@ let styleVariables = {
     logo: 300
   },
   colors: {
-    brandPrimary: '#446699',
-    brandPrimaryDark: '#555577',
-    brandDanger: '#ea573d',
+    brandPrimary: '#016FB9',
+    brandPrimaryDark: '#006BA6',
+    brandDanger: '#DB5461',
     brandSuccess: '#2ecc71',
     borderColor: '#ddd',
+    backgroundColorContainer: '#f7f7f7',
+    backgroundColor: '#64B0BC'
   }
 }
 
