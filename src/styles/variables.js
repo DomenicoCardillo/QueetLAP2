@@ -31,7 +31,7 @@ let styleVariables = {
   },
   colors: {
     brandPrimary: '#016FB9',
-    brandPrimaryDark: '#006BA6',
+    brandPrimaryDark: '#004F7A',
     brandDanger: '#DB5461',
     brandSuccess: '#2ecc71',
     borderColor: '#ddd',
