@@ -6,6 +6,7 @@ import users from './users'
 import friendships from './friendships'
 import routes from './routes'
 import partecipations from './partecipations'
+import notifications from './notifications'
 
 const rootReducer = (state = {}, action) => {
   let newState = {}
@@ -60,6 +61,13 @@ const rootReducer = (state = {}, action) => {
   let partecipationsStuffs = partecipations({auth: state.auth, eventPage: state.eventPage}, action)
   newState.auth = partecipationsStuffs.auth
   newState.eventPage = partecipationsStuffs.eventPage
+
+  let notificationsStuffs = notifications({
+    notifications: state.notifications, 
+    notificationsPage: state.notificationsPage
+  }, action)
+  newState.notifications = notificationsStuffs.notifications
+  newState.notificationsPage = notificationsStuffs.notificationsPage
   
   return newState
 }

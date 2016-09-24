@@ -9,12 +9,11 @@ import {
   Text,
   Image,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  RecyclerViewBackedScrollView,
+  RefreshControl,
+  ActivityIndicator
 } from 'react-native'
-
-import { Actions } from 'react-native-router-flux'
-import Button from 'apsl-react-native-button'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 const styles = StyleSheet.create({
   notificationBox: {
@@ -49,21 +48,23 @@ class NotificationsPage extends Component {
     super()
   }
 
-  componentDidMount() {
-    //this.props.listenEventsChanges()
+  onPress(notification) {
+    this.props.setNotificationRead(notification.id)
+    if(notification.macroType == 'user') this.props.setUserDetail(notification.toUser)
+    if(notification.macroType == 'event') this.props.setEventDetail(notification.event)
   }
 
   renderRow(notification) {
     return (
-      <TouchableOpacity activeOpacity={0.9}>
+      <TouchableOpacity activeOpacity={0.9} onPress={this.onPress.bind(this, notification)}>
         <View style={styles.notificationBox}>
           <View>
-            <Image source={require('../assets/img/badminton.jpg') } style={styles.notificationImage} />
+            {notification.pictureElement}
           </View>
           <View style={styles.notificationInfo}>
-            <Text style={styles.notificationTitle}>Lorem ipsum</Text>
-            <Text style={styles.notificationBody}>Lorem ipsum lorem ipsum lorem ipsum</Text>
-            <Text style={styles.notificationDate}>20/07/2016</Text>
+            <Text style={styles.notificationTitle}>{notification.title}</Text>
+            <Text style={styles.notificationBody}>{notification.content}</Text>
+            <Text style={styles.notificationDate}>{notification.date}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -78,32 +79,59 @@ class NotificationsPage extends Component {
           height: adjacentRowHighlighted ? 4 : 1,
           backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
         }}
-        />
+      />
     )
   }
 
   onRefresh() {
-    this.props.fetchEvents()
+    this.props.fetchNotifications()
   }
 
   render() {
-    //const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    //const dataSource = ds.cloneWithRows(this.props.notifications)
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const dataSource = ds.cloneWithRows(this.props.notifications || [])
 
     return (
-      <View style={[commonStyles.mainContainer, {backgroundColor: '#64b0bc'}]}>
-        <TouchableOpacity activeOpacity={0.9}>
-          <View style={styles.notificationBox}>
-            <View>
-              <Image source={require('../assets/img/badminton.jpg') } style={styles.notificationImage} />
+      <View style={[commonStyles.mainContainer, {backgroundColor: styleVariables.colors.backgroundColor}]}>
+
+        { this.props.isLoading && this.props.notifications === null ? 
+          (
+            <ActivityIndicator
+              animating={this.props.isLoading}
+              style={{alignItems: 'center', justifyContent: 'center', height: styleVariables.screenHeight - (85 * 2)}}
+              color="#fff"
+              size="large"
+            />
+          ) : null
+        }
+
+        { !this.props.isLoading && this.props.notifications && this.props.notifications.length === 0 ? (
+            <View style={styles.errorBox}>
+              <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center', marginTop: 30}]}>
+                You have no notifications
+              </Text>
             </View>
-            <View style={styles.notificationInfo}>
-              <Text style={styles.notificationTitle}>Lorem ipsum</Text>
-              <Text style={styles.notificationBody}>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Text>
-              <Text style={styles.notificationDate}>20/07/2016</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+          ) : (
+            <ListView
+              dataSource={dataSource}
+              renderRow={(notification) => this.renderRow(notification)}
+              renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+              renderSeparator={this.renderSeparator}
+              enableEmptySections={true}
+              refreshControl={
+                <RefreshControl
+                  refreshing={false}
+                  onRefresh={this.props.fetchNotifications.bind(this)}
+                  tintColor='#fff'
+                  title="Loading..."
+                  titleColor='#fff'
+                  colors={['#555577', '#555577', '#fff']}
+                  progressBackgroundColor="#fff"
+                />
+              }
+            />
+          )
+        }
       </View>
     )
   }

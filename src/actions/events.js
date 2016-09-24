@@ -51,9 +51,10 @@ export const updateEvent = (event, eventId) => {
     
     var notification = {
       from: currentUserId,
-      seen: false,
+      read: false,
       type: 'eventUpdated',
-      event: eventId
+      event: eventId,
+      dateTime: new Date().getTime()
     }
 
     dbNotificationsRef.push(notification, (error) => {

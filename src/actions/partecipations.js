@@ -13,9 +13,10 @@ export const requestPartecipation = (event) => {
     let notification = {
       from: currentUserId,
       to: event.creator.id,
-      seen: false,
+      read: false,
       type: 'requestPartecipation',
-      event: event.id
+      event: event.id,
+      dateTime: new Date().getTime()
     }
     dbNotificationsRef.push(notification, (error) => {
       if(error) dispatch(requestPartecipationFailed(error))
@@ -38,10 +39,11 @@ export const responsePartecipation = (userId, event, response) => {
     let notification = {
       from: currentUserId,
       to: userId,
-      seen: false,
+      read: false,
       response: response,
       type: 'responsePartecipation',
-      event: event.id
+      event: event.id,
+      dateTime: new Date().getTime()
     }
     dbNotificationsRef.push(notification, (error) => {
       if(error) dispatch(responsePartecipationFailed(error))
@@ -66,18 +68,20 @@ export const removePartecipation = (event, userId) => {
       var notification = {
         from: currentUserId,
         to: userId,
-        seen: false,
+        read: false,
         type: 'removePartecipation',
-        event: event.id
+        event: event.id,
+        dateTime: new Date().getTime()
       }
       var idToRemove = userId
     } else {
       //I am a partecipant and I leave the event
       var notification = {
         from: currentUserId,
-        seen: false,
+        read: false,
         type: 'removeMyPartecipation',
-        event: event.id
+        event: event.id,
+        dateTime: new Date().getTime()
       }
       var idToRemove = currentUserId
     }

@@ -65,9 +65,15 @@ export const initialState = {
     hasError: false,
     errorMessage: ''
   },
+  notificationsPage: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: '',
+  },
   categories: [],
   events: [],
   users: [],
+  notifications: null,
   routes: {
     scene: null
   }
@@ -156,3 +162,5 @@ export const filterByFriends = (array, me, inclusive) => {
 export const filterByPartecipations = (array, userId) => {
   return array.filter(el => (el.users && el.users[userId] === true) || el.creator.id === userId)
 }
+
+export var badgeNotifications = {num: 0}

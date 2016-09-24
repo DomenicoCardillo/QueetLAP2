@@ -27,8 +27,9 @@ export const toggleFriendship = (userId) => {
       let notification = {
         from: currentUserId,
         to: userId,
-        seen: false,
-        type: 'friendshipRequest'
+        read: false,
+        type: 'friendshipRequest',
+        dateTime: new Date().getTime()
       }
       dbNotificationsRef.push(notification, (error) => {
           if(error) dispatch(addFriendshipFailed(error))
@@ -68,8 +69,10 @@ export const responseFriendship = (userId, response) => {
       let notification = {
         from: currentUserId,
         to: userId,
-        seen: false,
-        type: 'friendshipResponse'
+        read: false,
+        type: 'friendshipResponse',
+        response: true,
+        dateTime: new Date().getTime()
       }
       dbNotificationsRef.push(notification, (error) => {
           if(error) dispatch(confirmFriendshipFailed(error))
