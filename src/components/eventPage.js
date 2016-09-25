@@ -78,7 +78,7 @@ export default class EventPage extends Component {
         <Icon name="star" size={18} color='#c19a2f' style={{marginRight: 5}} />
       </View>
     )
-    for(var userId in this.props.event.users){
+    Object.keys(this.props.event.users).forEach((userId) => {
       users.push(
         <View style={styles.listItemContainer} key={userId}>
           <Text>{this.props.event.users[userId].fullName}</Text>
@@ -115,7 +115,7 @@ export default class EventPage extends Component {
             ) : ( null )}
         </View>
       )
-    }
+    })
     return (
       <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
