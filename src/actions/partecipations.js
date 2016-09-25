@@ -45,7 +45,7 @@ export const responsePartecipation = (userId, event, response) => {
 
     let notification = {
       from: currentUserId,
-      target: userId,
+      to: userId,
       read: false,
       response: response,
       type: 'responsePartecipation',
@@ -53,12 +53,7 @@ export const responsePartecipation = (userId, event, response) => {
       dateTime: new Date().getTime()
     }
 
-    for (var uid in event.users) {
-      if (event.users[uid] && uid !== userId) {
-        notification.to = uid
-        dbNotificationsRef.push(notification)
-      }
-    }
+    dbNotificationsRef.push(notification)
   }
 }
 

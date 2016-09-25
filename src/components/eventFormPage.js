@@ -178,7 +178,7 @@ export default class EventFormPage extends Component {
           <View style={{height: 40}}></View>
 
           <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+            style={[commonStyles.primaryButton, {marginBottom: 50}]} 
             textStyle={commonStyles.primaryButtonText}
             isLoading={this.props.isLoading}
             onPress={this.onSave.bind(this)}>
