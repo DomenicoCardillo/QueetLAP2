@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native'
 import { loadCategories } from './categories'
 import { fetchEvents } from './events'
 import { fetchUsers } from './users'
-import { fetchNotifications } from './notifications'
+import { fetchNotifications, listenNewNotifications } from './notifications'
 
 import FCM from 'react-native-fcm'
 
@@ -96,7 +96,7 @@ export const login = (email, pass) => {
           })
 
           FCM.subscribeToTopic('/topics/user_' + user.id)
-          dispatch(fetchNotifications())
+          dispatch(listenNewNotifications())
           dispatch(loginSuccess(user))
         })
         
@@ -214,8 +214,8 @@ export const reauthenticate = () => {
             user.id = userData.uid
 
             FCM.subscribeToTopic('/topics/user_' + user.id)
-            dispatch(reauthenticateSuccess(user))  
-            dispatch(fetchNotifications())
+            dispatch(reauthenticateSuccess(user))
+            dispatch(listenNewNotifications())
           })
 
           Actions.main()

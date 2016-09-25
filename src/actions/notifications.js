@@ -37,6 +37,21 @@ export const setNotificationRead = (notificationId) => {
   }
 }
 
+export const listenNewNotifications = () => {
+  return (dispatch, getState) => {
+    dbNotificationsRef.on('child_added', function(snapshot) {
+      let notification = snapshot.val()
+      notification.id = snapshot.key
+      if(notification.to == getState().auth.currentUser.id){
+        dispatch({
+          type: types.ADD_NEW_NOTIFICATION,
+          payload: notification
+        })
+      }
+    })
+  }
+}
+
 export const fetchNotificationsStart = () => {
   return {
     type: types.FETCH_NOTIFICATIONS_START

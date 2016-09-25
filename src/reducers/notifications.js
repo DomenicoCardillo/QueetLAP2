@@ -24,6 +24,11 @@ const notifications = (state = {}, action) => {
       newState.notifications[action.payload].read = true
       return newState
 
+    case types.ADD_NEW_NOTIFICATION:
+      if(newState.notifications === null) newState.notifications = []
+      newState.notifications.push(action.payload)
+      return newState
+
     default:
       return state
   }
