@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import EventPage from '../components/eventPage'
 import { Actions } from 'react-native-router-flux'
 import { requestPartecipation, responsePartecipation, removePartecipation } from '../actions/partecipations'
+import { mergeDeep } from '../globals'
 
 const hydrateEvent = (event, currentUser, users, isMyEvent) => {
   if(!event.users) {
@@ -14,7 +15,7 @@ const hydrateEvent = (event, currentUser, users, isMyEvent) => {
       event.users[currentUser.id] = {
         id: currentUser.id,
         fullName: 'You',
-        needConfirm: !(event.users[currentUser.id] == true)
+        needConfirm: !(event.users[currentUser.id] === true)
       }
     }
   }
@@ -35,7 +36,7 @@ const hydrateEvent = (event, currentUser, users, isMyEvent) => {
 const mapStateToProps = (state) => {
   var wathRender = {}
   let currentUser = state.auth.currentUser
-  let event = Object.assign({}, state.events[state.eventPage.eventIndex])
+  let event = mergeDeep({}, state.events[state.eventPage.eventIndex])
   let isMyEvent = event.creator.id == currentUser.id
   event = hydrateEvent(event, currentUser, state.users, isMyEvent)
 
