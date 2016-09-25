@@ -58,7 +58,7 @@ export const updateEvent = (event, eventId) => {
     }
 
     dbNotificationsRef.push(notification, (error) => {
-      if(error) dispatch(removePartecipationFailed(error))
+      if(error) dispatch(updateEventFailed(error))
       else {
         let updates = {}
         updates['/' + eventId] = event
