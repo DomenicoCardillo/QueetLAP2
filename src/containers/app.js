@@ -6,7 +6,7 @@ import { setEventDetail } from '../actions/events'
 
 const mapStateToProps = (state) => {
   return {
-      state: state
+    state: state
   }
 }
 
@@ -19,6 +19,10 @@ const mapDispatchToProps = (dispatch) => {
     setEventDetail: (event) => {
       dispatch(setEventDetail(event))
       Actions.event()
+    },
+    createNewEvent: () => {
+      dispatch(setEventDetail(null))
+      Actions.eventForm()
     }
   }
 }
