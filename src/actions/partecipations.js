@@ -10,6 +10,14 @@ export const requestPartecipation = (event) => {
   return (dispatch, getState) => {
     let currentUserId = getState().auth.currentUser.id
     dispatch(requestPartecipationStart())
+
+    let updates = {}
+    updates['/' + event.id + '/users/' + currentUserId] = false //wait for confirmation
+    dbEventsRef.update(updates, (error) => {
+      if(error) dispatch(requestPartecipationFailed(error))
+      else      dispatch(requestPartecipationSuccess(event.id))
+    })
+
     let notification = {
       from: currentUserId,
       to: event.creator.id,
@@ -18,17 +26,8 @@ export const requestPartecipation = (event) => {
       event: event.id,
       dateTime: new Date().getTime()
     }
-    dbNotificationsRef.push(notification, (error) => {
-      if(error) dispatch(requestPartecipationFailed(error))
-      else {
-        let updates = {}
-        updates['/' + event.id + '/users/' + currentUserId] = false //wait for confirmation
-        dbEventsRef.update(updates, (error) => {
-          if(error) dispatch(requestPartecipationFailed(error))
-          else      dispatch(requestPartecipationSuccess(event.id))
-        })
-      }
-    })
+    
+    dbNotificationsRef.push(notification)
   }
 }
 
@@ -36,26 +35,30 @@ export const responsePartecipation = (userId, event, response) => {
   return (dispatch, getState) => {
     let currentUserId = getState().auth.currentUser.id
     dispatch(responsePartecipationStart())
+
+    let updates = {}
+    updates['/' + event.id + '/users/' + userId] = response ? true : null
+    dbEventsRef.update(updates, (error) => {
+      if(error) dispatch(responsePartecipationFailed(error))
+      else      dispatch(responsePartecipationSuccess({userId, response}))
+    })
+
     let notification = {
       from: currentUserId,
-      to: userId,
+      target: userId,
       read: false,
       response: response,
       type: 'responsePartecipation',
       event: event.id,
       dateTime: new Date().getTime()
     }
-    dbNotificationsRef.push(notification, (error) => {
-      if(error) dispatch(responsePartecipationFailed(error))
-      else {
-        let updates = {}
-        updates['/' + event.id + '/users/' + userId] = response ? true : null
-        dbEventsRef.update(updates, (error) => {
-          if(error) dispatch(responsePartecipationFailed(error))
-          else      dispatch(responsePartecipationSuccess({userId, response}))
-        })
+
+    for (var uid in event.users) {
+      if (event.users[uid] && uid !== userId) {
+        notification.to = uid
+        dbNotificationsRef.push(notification)
       }
-    })
+    }
   }
 }
 
@@ -63,19 +66,20 @@ export const removePartecipation = (event, userId) => {
   return (dispatch, getState) => {
     let currentUserId = getState().auth.currentUser.id
     dispatch(removePartecipationStart())
-    if(event.creator.id == currentUserId){
-      //I am the event creator and I remove a partecipants (with id = userId)
+    if(event.creator.id == currentUserId) {
+      // I am the event creator and I remove a partecipants (with id = userId)
+      var idToRemove = userId
       var notification = {
         from: currentUserId,
-        to: userId,
+        target: userId,
         read: false,
         type: 'removePartecipation',
         event: event.id,
         dateTime: new Date().getTime()
       }
-      var idToRemove = userId
     } else {
-      //I am a partecipant and I leave the event
+      // I am a partecipant and I leave the event
+      var idToRemove = currentUserId
       var notification = {
         from: currentUserId,
         read: false,
@@ -83,19 +87,21 @@ export const removePartecipation = (event, userId) => {
         event: event.id,
         dateTime: new Date().getTime()
       }
-      var idToRemove = currentUserId
     }
-    dbNotificationsRef.push(notification, (error) => {
+
+    let updates = {}
+    updates['/' + event.id + '/users/' + idToRemove] = null
+    dbEventsRef.update(updates, (error) => {
       if(error) dispatch(removePartecipationFailed(error))
-      else {
-        let updates = {}
-        updates['/' + event.id + '/users/' + idToRemove] = null
-        dbEventsRef.update(updates, (error) => {
-          if(error) dispatch(removePartecipationFailed(error))
-          else      dispatch(removePartecipationSuccess(idToRemove))
-        })
-      }
+      else      dispatch(removePartecipationSuccess(idToRemove))
     })
+
+    for (var uid in event.users) {
+      if (event.users[uid] && uid !== userId) {
+        notification.to = uid
+        dbNotificationsRef.push(notification)
+      }
+    }
   }
 }
 

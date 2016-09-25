@@ -48,6 +48,18 @@ export const updateEvent = (event, eventId) => {
   return (dispatch, getState) => {
     let currentUserId = getState().auth.currentUser.id
     dispatch(updateEventStart())
+
+    let updates = {}
+    updates['/' + eventId] = event
+    dbEventsRef.update(updates, (error) => {
+      if(error) dispatch(updateEventFailed(error))
+      else {
+        event.id = eventId
+        dispatch(updateEventSuccess(event))
+        dispatch(setEventDetail(event))
+        Actions.pop()
+      }
+    })
     
     var notification = {
       from: currentUserId,
@@ -57,22 +69,12 @@ export const updateEvent = (event, eventId) => {
       dateTime: new Date().getTime()
     }
 
-    dbNotificationsRef.push(notification, (error) => {
-      if(error) dispatch(updateEventFailed(error))
-      else {
-        let updates = {}
-        updates['/' + eventId] = event
-        dbEventsRef.update(updates, (error) => {
-          if(error) dispatch(updateEventFailed(error))
-          else {
-            event.id = eventId
-            dispatch(updateEventSuccess(event))
-            dispatch(setEventDetail(event))
-            Actions.pop()
-          }
-        })
+    for (var uid in event.users) {
+      if (event.users[uid]) {
+        notification.to = uid
+        dbNotificationsRef.push(notification)
       }
-    })
+    }
   }
 }
 

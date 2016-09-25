@@ -79,8 +79,6 @@ class AppPage extends Component {
             this.props.setEventDetail({id: notification.eventId})
             break
         }
-      } else {
-        // Dispath newUnreadNotification()
       }
     })
 
