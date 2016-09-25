@@ -96,7 +96,7 @@ export default class EventPage extends Component {
                     onPress={() => { this.reject(userId) }}
                   >
                     <Icon name="close" size={22} color={styleVariables.colors.brandDanger} style={{marginRight: 5}} />
-                  </TouchableOpacity> 
+                  </TouchableOpacity>
                 </View>
               ) : ( 
                 <View style={{flexDirection: 'row'}}>

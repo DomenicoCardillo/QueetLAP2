@@ -9,11 +9,13 @@ const hydrateEvent = (event, currentUser, users, isMyEvent) => {
     return event
   }
 
-  if((!isMyEvent && event.users[currentUser.id])){
-    event.users[currentUser.id] = {
-      id: currentUser.id,
-      fullName: 'You',
-      needConfirm: false
+  if(!isMyEvent){
+    if(event.users[currentUser.id] != undefined){
+      event.users[currentUser.id] = {
+        id: currentUser.id,
+        fullName: 'You',
+        needConfirm: !(event.users[currentUser.id] == true)
+      }
     }
   }
   users.filter(user => {
@@ -23,7 +25,7 @@ const hydrateEvent = (event, currentUser, users, isMyEvent) => {
       id: user.id,
       fullName: user.id == currentUser.id ? 'You' : 
         user.firstname ? user.firstname + ' ' + user.lastname : user.email,
-      needConfirm: !event.users[user.id]
+      needConfirm: !(event.users[user.id] == true)
     }
   })
   if(event.creator.id == currentUser.id)  event.creator.name = 'You'
