@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 100,
-    padding: 15,
-    backgroundColor: '#fff'
+    padding: 15
   },
   notificationDate: {
     bottom: 0,
@@ -57,7 +56,7 @@ class NotificationsPage extends Component {
   renderRow(notification) {
     return (
       <TouchableOpacity activeOpacity={0.9} onPress={this.onPress.bind(this, notification)}>
-        <View style={styles.notificationBox}>
+        <View style={[styles.notificationBox, {backgroundColor: notification.read ? '#fff' : '#ddd'}]}>
           <View>
             {notification.pictureElement}
           </View>

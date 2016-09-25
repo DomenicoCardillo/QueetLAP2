@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
 
 const hydrateNotifications = (notifications, users, events, categories) => {
   if(notifications === null) return
-  notifications = notifications.filter(notification => !notification.read)
+  notifications = notifications.filter(notification => {
+    return !notification.read || (notification.dateTime > (new Date().getTime() - 86400000))
+  })
   notifications.forEach(notification => {
     let other = findBy('id', notification.from, users)
     let otherFullName = other.firstname ? other.firstname + ' ' + other.lastname : other.email
