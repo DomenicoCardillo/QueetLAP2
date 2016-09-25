@@ -3,23 +3,21 @@ import { View, Text, StyleSheet } from 'react-native'
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { badgeNotifications } from '../globals'
+import { connect } from 'react-redux'
 
-class TabItem extends Component {
+export class TabItem extends Component {
   render() {
     return (
       <View style={styles.tab}>
         <Icon name={this.props.tabIcon} size={25} color='#fff' style={styles.icon} />
         <View>
           <Text style={[commonStyles.whiteText, {fontSize: 12}]}>{this.props.title}</Text>
-          {this.props.title.toLowerCase() === 'notifications' && badgeNotifications.num > 0 ?
+          {this.props.title.toLowerCase() === 'notifications' && this.props.badgeNum > 0 ?
             (
               <View style={styles.notificationBadge}>
-                <Text style={styles.notificationBadgeText}>{badgeNotifications.num}</Text>
+                <Text style={styles.notificationBadgeText}>{this.props.badgeNum}</Text>
               </View>
-            ) : (
-              null
-            )
+            ) : ( null )
           }
         </View>
       </View>
@@ -58,7 +56,16 @@ let styles = StyleSheet.create({
 
 TabItem.propTypes = {
   selected: PropTypes.bool,
-  title: PropTypes.string,
+  title: PropTypes.string
 }
 
-export default TabItem
+
+const mapStateToProps = (state) => {
+  return {
+    badgeNum : state.notifications ? state.notifications.filter(n => !n.read).length : 0
+  }
+}
+
+export const TabItemConnected = connect(
+  mapStateToProps
+)(TabItem)

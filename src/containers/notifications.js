@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux'
 import { fetchNotifications, setNotificationRead } from '../actions/notifications'
 import { setUserDetail } from '../actions/users'
 import { setEventDetail } from '../actions/events'
-import { findBy, formatDate, formatTime, sortArrayByProps, badgeNotifications } from '../globals'
+import { findBy, formatDate, formatTime, sortArrayByProps } from '../globals'
 import React, { Component } from 'react'
 import { Image, StyleSheet } from 'react-native'
 
@@ -104,7 +104,6 @@ const hydrateNotifications = (notifications, users, events, categories) => {
         break
     }
   })
-  badgeNotifications.num = notifications.length
   sortArrayByProps(notifications, 'desc', 'dateTime')
   return notifications
 }

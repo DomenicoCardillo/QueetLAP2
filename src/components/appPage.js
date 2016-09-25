@@ -21,7 +21,7 @@ import * as globals from '../globals'
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
 
-import TabItem from './tabitem'
+import { TabItem, TabItemConnected } from './tabitem'
 import Splash from '../containers/splash'
 import Signup from '../containers/signup'
 import Login from '../containers/login'
@@ -204,9 +204,9 @@ class AppPage extends Component {
               hideTabBar={false}
               titleStyle={styles.titleStyle}
               navigationBarStyle={styles.navigationBarStyle}
-              icon={TabItem}
-              tabIcon='bell'
-              notificationCount={this.props.notificationCount} />
+              badgeNum={this.props.state.notifications ? this.props.state.notifications.length : 20}
+              icon={TabItemConnected}
+              tabIcon='bell' />
           </Scene>
           <Scene
             key='account'
