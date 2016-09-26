@@ -57,7 +57,7 @@ class AppPage extends Component {
 
     /* Enable/Disable android BackButton */
     BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler)
-    
+
     FCM.requestPermissions()
     FCM.getFCMToken().then(token => {
       console.log(token)
@@ -67,16 +67,16 @@ class AppPage extends Component {
       console.log(notification)
 
       if (notification.opened_from_tray) {
-        switch(notification.type) {
+        switch (notification.type) {
           case 'friendshipRequest':
           case 'friendshipResponse':
-            this.props.setUserDetail({id: notification.userId})
+            this.props.setUserDetail({ id: notification.userId })
             break
           case 'requestPartecipation':
           case 'removeMyPartecipation':
           case 'responsePartecipation':
           case 'removePartecipation':
-            this.props.setEventDetail({id: notification.eventId})
+            this.props.setEventDetail({ id: notification.eventId })
             break
         }
       }
@@ -99,8 +99,8 @@ class AppPage extends Component {
     if (this.props.state.routes.scene === undefined) {
       return toReturn
     }
-    
-    switch(this.props.state.routes.scene.name) {
+
+    switch (this.props.state.routes.scene.name) {
       case 'eventsCategory':
       case 'account':
       case 'eventForm':
@@ -116,152 +116,7 @@ class AppPage extends Component {
 
   render() {
     return (
-      <AppRouter getSceneStyle={getSceneStyle}>
-        <Scene
-          key='root'
-          navigationBarStyle={styles.navigationBarStyle}
-          titleStyle={styles.titleStyle}>
-          <Scene
-            key='splash'
-            title=''
-            component={Splash}
-            hideNavBar={true}
-            hideTabBar={true}
-            initial={true} />
-          <Scene
-            key='login'
-            title='Login'
-            component={Login}
-            hideNavBar={true}
-            hideTabBar={true}
-            type='replace' />
-          <Scene
-            key='signup'
-            title='Signup'
-            component={Signup}
-            hideNavBar={true}
-            hideTabBar={true}
-            type='replace' />
-          <Scene
-            key='forgotPassword'
-            title='Forgot password'
-            component={ForgotPassword}
-            hideNavBar={true}
-            hideTabBar={true}
-            type='replace' />
-          <Scene
-            key='main'
-            tabs
-            tabBarStyle={styles.tabBarStyle}
-            tabBarIconContainerStyle={styles.tabBarIconContainerStyle}
-            tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
-            <Scene
-              key='events'
-              title='Events'
-              component={Events}
-              hideNavBar={false}
-              hideTabBar={false}
-              titleStyle={styles.titleStyle}
-              navigationBarStyle={styles.navigationBarStyle}
-              icon={TabItem}
-              tabIcon='sellsy'
-              rightTitle='Categories'
-              onRight={() => Actions.eventsCategory() }
-              rightButtonTextStyle={styles.buttonTextStyle} />
-            <Scene
-              key='myEvents'
-              title='My Events'
-              component={MyEvents}
-              hideNavBar={false}
-              hideTabBar={false}
-              titleStyle={styles.titleStyle}
-              navigationBarStyle={styles.navigationBarStyle}
-              icon={TabItem}
-              tabIcon='calendar'
-              rightTitle='Create'
-              onRight={this.props.createNewEvent}
-              rightButtonTextStyle={styles.buttonTextStyle} />
-            <Scene
-              key='users'
-              title='Users'
-              component={Users}
-              hideNavBar={false}
-              hideTabBar={false}
-              titleStyle={styles.titleStyle}
-              navigationBarStyle={styles.navigationBarStyle}
-              icon={TabItem}
-              tabIcon='users'
-              rightTitle='Profile'
-              onRight={() => Actions.account() }
-              rightButtonTextStyle={styles.buttonTextStyle} />
-            <Scene
-              key='notifications'
-              title='Notifications'
-              component={Notifications}
-              hideNavBar={false}
-              hideTabBar={false}
-              titleStyle={styles.titleStyle}
-              navigationBarStyle={styles.navigationBarStyle}
-              badgeNum={this.props.state.notifications ? this.props.state.notifications.length : 20}
-              icon={TabItemConnected}
-              tabIcon='bell' />
-          </Scene>
-          <Scene
-            key='account'
-            title='Profile'
-            component={Account}
-            hideNavBar={false}
-            hideTabBar={true}
-            hideBackImage={true}
-            backTitle='Back'
-            backButtonTextStyle={styles.buttonTextStyle} />
-          <Scene
-            key='userForm'
-            title='Profile Edit'
-            component={UserForm}
-            hideNavBar={false}
-            hideTabBar={true}
-            hideBackImage={true}
-            backTitle='Back'
-            backButtonTextStyle={styles.buttonTextStyle} />
-          <Scene
-            key='eventForm'
-            title='New event'
-            component={EventForm}
-            hideNavBar={false}
-            hideTabBar={true}
-            hideBackImage={true}
-            backTitle='Back'
-            backButtonTextStyle={styles.buttonTextStyle} />
-          <Scene
-            key='event'
-            title='Event'
-            component={Event}
-            hideNavBar={false}
-            hideTabBar={true}
-            hideBackImage={true}
-            backTitle='Back'
-            backButtonTextStyle={styles.buttonTextStyle} />
-          <Scene
-            key='user'
-            title='User'
-            component={User}
-            hideNavBar={false}
-            hideTabBar={true}
-            hideBackImage={true}
-            backTitle='Back'
-            backButtonTextStyle={styles.buttonTextStyle} />
-          <Scene
-            key='eventsCategory'
-            title='Categories'
-            component={EventsCategories}
-            hideNavBar={false}
-            hideTabBar={true}
-            hideBackImage={true}
-            backTitle='Back'
-            backButtonTextStyle={styles.buttonTextStyle} />
-        </Scene>
-      </AppRouter>
+      <AppRouter scenes={scenes} getSceneStyle={getSceneStyle} />
     )
   }
 }
@@ -313,5 +168,149 @@ const styles = StyleSheet.create({
     top: 2
   },
 })
+
+/* Define Scenes */
+const scenes = Actions.create(
+  <Scene
+    key='root'
+    navigationBarStyle={styles.navigationBarStyle}
+    titleStyle={styles.titleStyle}>
+    <Scene
+      key='splash'
+      title=''
+      component={Splash}
+      hideNavBar={true}
+      hideTabBar={true}
+      initial={true} />
+    <Scene
+      key='login'
+      title='Login'
+      component={Login}
+      hideNavBar={true}
+      hideTabBar={true}
+      type='replace' />
+    <Scene
+      key='signup'
+      title='Signup'
+      component={Signup}
+      hideNavBar={true}
+      hideTabBar={true}
+      type='replace' />
+    <Scene
+      key='forgotPassword'
+      title='Forgot password'
+      component={ForgotPassword}
+      hideNavBar={true}
+      hideTabBar={true}
+      type='replace' />
+    <Scene
+      key='main'
+      tabs
+      tabBarStyle={styles.tabBarStyle}
+      tabBarIconContainerStyle={styles.tabBarIconContainerStyle}
+      tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
+      <Scene
+        key='events'
+        title='Events'
+        component={Events}
+        hideNavBar={false}
+        hideTabBar={false}
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItem}
+        tabIcon='sellsy'
+        rightTitle='Categories'
+        onRight={() => Actions.eventsCategory() }
+        rightButtonTextStyle={styles.buttonTextStyle} />
+      <Scene
+        key='myEvents'
+        title='My Events'
+        component={MyEvents}
+        hideNavBar={false}
+        hideTabBar={false}
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItem}
+        tabIcon='calendar' />
+      <Scene
+        key='users'
+        title='Users'
+        component={Users}
+        hideNavBar={false}
+        hideTabBar={false}
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItem}
+        tabIcon='users'
+        rightTitle='Profile'
+        onRight={() => Actions.account() }
+        rightButtonTextStyle={styles.buttonTextStyle} />
+      <Scene
+        key='notifications'
+        title='Notifications'
+        component={Notifications}
+        hideNavBar={false}
+        hideTabBar={false}
+        titleStyle={styles.titleStyle}
+        navigationBarStyle={styles.navigationBarStyle}
+        icon={TabItemConnected}
+        tabIcon='bell' />
+    </Scene>
+    <Scene
+      key='account'
+      title='Profile'
+      component={Account}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
+      key='userForm'
+      title='Profile Edit'
+      component={UserForm}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
+      key='eventForm'
+      title='New event'
+      component={EventForm}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
+      key='event'
+      title='Event'
+      component={Event}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
+      key='user'
+      title='User'
+      component={User}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={styles.buttonTextStyle} />
+    <Scene
+      key='eventsCategory'
+      title='Categories'
+      component={EventsCategories}
+      hideNavBar={false}
+      hideTabBar={true}
+      hideBackImage={true}
+      backTitle='Back'
+      backButtonTextStyle={styles.buttonTextStyle} />
+  </Scene>
+)
 
 export default AppPage

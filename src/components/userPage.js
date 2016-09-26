@@ -46,7 +46,7 @@ export default class UserPage extends Component {
           </View>
           { this.props.user.longPlace ? (
             <View style={styles.infoContainer}>
-              <Icon name="map-marker" size={20} color={styleVariables.colors.brandPrimary} style={styles.infoIcon} />
+              <Icon name="map-marker" size={20} color={styleVariables.colors.brandPrimary} style={[styles.infoIcon, {left: 4}]} />
               <Text style={fonts.style.h5}>{this.props.user.longPlace}</Text>
             </View>
           ) : ( null ) }

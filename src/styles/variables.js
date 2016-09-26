@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window')
 // #446699    #555577    
 
 // New Palette
-// https://coolors.co/ffffff-f7f7f7-016fb9-004f7a-0e7c7b
+// https://coolors.co/ffffff-f7f7f7-db414e-016fb9-004f7a
 
 let styleVariables = {
   baseRadius: 4,
@@ -36,7 +36,7 @@ let styleVariables = {
     brandSuccess: '#2ecc71',
     borderColor: '#ddd',
     backgroundColorContainer: '#f7f7f7',
-    backgroundColor: '#0E7C7B'
+    backgroundColor: '#DB414E'
   }
 }
 
