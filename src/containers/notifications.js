@@ -14,6 +14,12 @@ const styles = StyleSheet.create({
     width: 70,
     height: 50,
     marginRight: 10
+  },
+  notificationUserImage: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    marginRight: 10
   }
 })
 
@@ -30,9 +36,9 @@ const hydrateNotifications = (notifications, users, events, categories) => {
     notification.date = formatDate(notification.dateTime) + ' ' + formatTime(notification.dateTime)
     if(notification.type == 'friendshipRequest' || notification.type == 'friendshipResponse'){
       notification.pictureElement = other.pictureUrl === undefined ? (
-        <Image source={require('../assets/img/user-default.png')} style={styles.notificationImage} />
+        <Image source={require('../assets/img/user-default.png')} style={styles.notificationUserImage} />
       ) : (
-        <Image source={{uri: other.pictureUrl}} style={styles.notificationImage} />
+        <Image source={{uri: other.pictureUrl}} style={styles.notificationUserImage} />
       )
     } else {
       let catSlug = categories[event.category].slug
