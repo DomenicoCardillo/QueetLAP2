@@ -32,11 +32,6 @@ const friendships = (state = {}, action) => {
     case types.REMOVE_FRIENDSHIP_SUCCESS:
       newState.userPage.isLoadingPrimary = false
       delete newState.auth.currentUser.friends[action.payload.userId]
-      if(
-        newState.userPage.user 
-        && newState.userPage.user.friends 
-        && newState.userPage.user.id == action.payload.userId
-      ) delete newState.userPage.user.friends[newState.auth.currentUser.id]
       return newState
 
     case types.REMOVE_FRIENDSHIP_FAILED:
@@ -52,11 +47,6 @@ const friendships = (state = {}, action) => {
 
     case types.REJECT_FRIENDSHIP_SUCCESS:
       newState.userPage.isLoadingSecondary = false
-      if(
-        newState.userPage.user 
-        && newState.userPage.user.friends 
-        && newState.userPage.user.id == action.payload
-      ) delete newState.userPage.user.friends[newState.auth.currentUser.id]
 
     default:
       return state
