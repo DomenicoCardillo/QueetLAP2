@@ -126,7 +126,7 @@ class UsersPage extends Component {
           ) : null
         }
 
-        { !this.props.isLoading && this.props.users.length === 0 ? (
+        { !this.props.isLoading && this.props.users.length === 0 && this.props.activeFilter === 'Friends' ? (
             <View style={styles.errorBox}>
               <Text style={[fonts.style.h4, commonStyles.whiteText, {textAlign: 'center'}]}>You have no friends</Text>
               <TouchableOpacity onPress={this.setFilter.bind(this, 'All')}>
