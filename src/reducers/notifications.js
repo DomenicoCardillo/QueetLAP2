@@ -29,6 +29,10 @@ const notifications = (state = {}, action) => {
       newState.notifications.push(action.payload)
       return newState
 
+    case types.LOGOUT_SUCCESS:
+      newState.notifications = null
+      return newState
+
     default:
       return state
   }

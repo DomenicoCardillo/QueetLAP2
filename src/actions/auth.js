@@ -96,7 +96,7 @@ export const login = (email, pass) => {
           })
 
           FCM.subscribeToTopic('/topics/user_' + user.id)
-          dispatch(listenNewNotifications())
+          dispatch(listenNewNotifications(user.id))
           dispatch(loginSuccess(user))
         })
         
@@ -215,7 +215,7 @@ export const reauthenticate = () => {
 
             FCM.subscribeToTopic('/topics/user_' + user.id)
             dispatch(reauthenticateSuccess(user))
-            dispatch(listenNewNotifications())
+            dispatch(listenNewNotifications(user.id))
           })
 
           Actions.main()
