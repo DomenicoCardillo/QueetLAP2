@@ -56,7 +56,7 @@ class NotificationsPage extends Component {
   renderRow(notification) {
     return (
       <TouchableOpacity activeOpacity={0.9} onPress={this.onPress.bind(this, notification)}>
-        <View style={[styles.notificationBox, {backgroundColor: notification.read ? '#ccc' : '#fff'}]}>
+        <View style={[styles.notificationBox, {backgroundColor: notification.read ? '#ddd' : '#fff'}]}>
           <View>
             {notification.pictureElement}
           </View>
