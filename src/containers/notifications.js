@@ -97,12 +97,12 @@ const hydrateNotifications = (notifications, users, events, categories) => {
         notification.macroType = 'event'
         notification.toEvent = event
         break
-      case 'leftEvent':
+      case 'removeMyPartecipation':
         notification.title = otherFullName + ' leaved ' + eventName
         notification.macroType = 'event'
         notification.toEvent = event
         break
-      case 'removedFromEvent':
+      case 'removePartecipation':
         notification.title = otherFullName + ' has been removed from ' + eventName
         notification.macroType = 'event'
         notification.toEvent = event

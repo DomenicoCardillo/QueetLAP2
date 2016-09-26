@@ -104,8 +104,10 @@ export default class EventFormPage extends Component {
 
           <Text style={commonStyles.label}>Max partecipants</Text>
           <TextInput
+            style={commonStyles.textInput}
             editable={this.state.isNew}
             keyboardType='numeric'
+            placeholder={"Max partecipants"}
             onChangeText={(maxPartecipants) => this.setState({maxPartecipants})}
             value={this.state.maxPartecipants}
           />

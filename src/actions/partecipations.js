@@ -92,7 +92,7 @@ export const removePartecipation = (event, userId) => {
     })
 
     for (var uid in event.users) {
-      if (event.users[uid] && uid !== userId) {
+      if (event.users[uid] && uid !== currentUserId) {
         notification.to = uid
         dbNotificationsRef.push(notification)
       }
