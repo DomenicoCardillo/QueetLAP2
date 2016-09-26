@@ -152,10 +152,10 @@ export const findBy = (prop, value, array, onlyIndex = false) => {
   else          return array[array.findIndex(x => x[prop] == value)]
 }
 
-export const filterByFriends = (array, me, inclusive) => {
+export const filterByFriends = (array, me, onlyFriend) => {
   return array.filter(u => {
     let isMyFriend = u.friends && u.friends.hasOwnProperty(me.id) && me.friends && me.friends.hasOwnProperty(u.id)
-    return inclusive ? isMyFriend : !isMyFriend
+    return onlyFriend ? isMyFriend : true
   })
 }
 
