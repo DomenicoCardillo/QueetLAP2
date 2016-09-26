@@ -57,7 +57,7 @@ export default class AccountPage extends Component {
               style={[commonStyles.primaryButton, {marginBottom: 10}]} 
               textStyle={commonStyles.primaryButtonText}
               onPress={this.props.goToForm}>
-              Edit Profile
+              Edit profile
             </Button>
             <Button 
               style={[commonStyles.dangerButton, {marginBottom: 10}]} 
