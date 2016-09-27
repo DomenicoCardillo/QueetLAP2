@@ -1,6 +1,6 @@
 import * as types from './types'
 import { firebaseAuth, dbUsersRef, firebaseDB, serverEndpoint } from '../globals'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Platform } from 'react-native'
 import { loadCategories } from './categories'
 import { fetchEvents } from './events'
 import { fetchUsers } from './users'
@@ -68,7 +68,7 @@ export const login = (email, pass) => {
           user = user[userData.uid]
           user.id = userData.uid
           user.events = {}
-          user.friends = {}
+          user.friends = user.friends || {}
 
           if(!user.emailVerified){
             let updates = {}
@@ -95,7 +95,7 @@ export const login = (email, pass) => {
             console.log(error)
           })
 
-          FCM.subscribeToTopic('/topics/user_' + user.id)
+          if (Platform.OS === 'android') FCM.subscribeToTopic('/topics/user_' + user.id)
           dispatch(listenNewNotifications(user.id))
           dispatch(loginSuccess(user))
           if(!user.profileCompleted) Actions.userForm()
@@ -143,7 +143,7 @@ export const logout = () => {
 
       AsyncStorage.getItem('userId').then((userId) => {
         if(userId != null) {
-          FCM.unsubscribeFromTopic('/topics/user_' + userId)
+          if (Platform.OS === 'android') FCM.unsubscribeFromTopic('/topics/user_' + userId)
         }
       })
      
@@ -198,7 +198,7 @@ export const sendResetPasswordEmailFailed = (error) => {
 }
 
 
-export const reauthenticate = () => {
+export const reauthenticate = (callback) => {
   return (dispatch) => {
     dispatch(reauthenticateStart())
     AsyncStorage.getItem('reauthToken').then((reauthToken) => {
@@ -214,14 +214,19 @@ export const reauthenticate = () => {
             user = user[userData.uid]
             user.id = userData.uid
 
-            FCM.subscribeToTopic('/topics/user_' + user.id)
+            if (Platform.OS === 'android') FCM.subscribeToTopic('/topics/user_' + user.id)
             dispatch(reauthenticateSuccess(user))
             dispatch(listenNewNotifications(user.id))
             
-            if(!user.profileCompleted) Actions.userForm()
+            if(!user.profileCompleted) Actions.userForm()          
           })
 
           Actions.main()
+          
+          if (typeof callback !== 'undefined') {
+            setTimeout(() => callback(), 1500)
+          }
+
         }).catch((error) => {
           AsyncStorage.getItem('userId').then((userId) => {
             if(userId != null) {
@@ -237,21 +242,6 @@ export const reauthenticate = () => {
               .then((responseJson) => {
                 AsyncStorage.setItem('reauthToken', responseJson.token)
                 dispatch(reauthenticate())
-                /*firebaseAuth.signInWithCustomToken(responseJson.token)
-                .then(function(userData) {
-                  dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
-                    let user = userSnap.val()
-                    user = user[userData.uid]
-                    user.id = userData.uid
-
-                    FCM.subscribeToTopic('/topics/user_' + user.id)
-                    dispatch(reauthenticateSuccess(user))
-                  })
-
-                  Actions.main()
-                }).catch((error) => {
-                  dispatch(reauthenticateFailed(error))
-                })*/
               })
               .catch((error) => {
                 dispatch(reauthenticateFailed(error))

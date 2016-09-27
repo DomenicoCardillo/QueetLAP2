@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { reauthenticate } from '../actions/auth'
 import SplashPage from '../components/splashPage'
 import { Actions } from 'react-native-router-flux'
 
@@ -18,9 +17,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     goToSignup: () => {
       Actions.signup()
-    },
-    reauthenticate: () => {
-      dispatch(reauthenticate())
     }
   }
 }

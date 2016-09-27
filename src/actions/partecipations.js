@@ -61,10 +61,11 @@ export const removePartecipation = (event, userId) => {
   return (dispatch, getState) => {
     let currentUserId = getState().auth.currentUser.id
     dispatch(removePartecipationStart())
+
     if(event.creator.id == currentUserId) {
       // I am the event creator and I remove a partecipants (with id = userId)
-      var idToRemove = userId
-      var notification = {
+      let idToRemove = userId
+      let notification = {
         from: currentUserId,
         target: userId,
         read: false,
@@ -74,14 +75,17 @@ export const removePartecipation = (event, userId) => {
       }
     } else {
       // I am a partecipant and I leave the event
-      var idToRemove = currentUserId
-      var notification = {
+      let idToRemove = currentUserId
+      let notification = {
         from: currentUserId,
         read: false,
         type: 'leftEvent',
         event: event.id,
         dateTime: new Date().getTime()
       }
+
+      notification.to = event.creator.id
+      dbNotificationsRef.push(notification)
     }
 
     let updates = {}
@@ -91,7 +95,7 @@ export const removePartecipation = (event, userId) => {
       else      dispatch(removePartecipationSuccess(idToRemove))
     })
 
-    for (var uid in event.users) {
+    for (let uid in event.users) {
       if (event.users[uid] && uid !== currentUserId) {
         notification.to = uid
         dbNotificationsRef.push(notification)

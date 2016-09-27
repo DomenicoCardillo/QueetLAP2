@@ -55,37 +55,67 @@ class AppPage extends Component {
 
   componentDidMount() {
 
-    /* Enable/Disable android BackButton */
-    BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler)
+    if (Platform.OS === 'ios') {
+      this.props.reauthenticate()
+    }
 
-    FCM.requestPermissions()
-    FCM.getFCMToken().then(token => {
-      console.log(token)
-    })
+    if (Platform.OS === 'android') {
+      /* Enable/Disable android BackButton */
+      BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler)
 
-    this.notificationUnsubscribe = FCM.on('notification', (notification) => {
-      console.log(notification)
+      FCM.requestPermissions()
+      FCM.getFCMToken().then(token => {
+        console.log(token)
+      })
 
-      if (notification.opened_from_tray) {
-        switch (notification.type) {
-          case 'friendshipRequest':
-          case 'friendshipResponse':
-            this.props.setUserDetail({ id: notification.userId })
-            break
-          case 'requestPartecipation':
-          case 'leftEvent':
-          case 'responsePartecipation':
-          case 'removedFromEvent':
-            this.props.setEventDetail({ id: notification.eventId })
-            break
+      FCM.getInitialNotification()
+        .then((notification) => {
+          if (notification.from !== undefined && this.props.state.auth.currentUser.categories.length === 0) {
+            let self = this
+            
+            this.props.reauthenticate(() => {
+              switch (notification.type) {
+                case 'friendshipRequest':
+                case 'friendshipResponse':
+                  self.props.setUserDetail({ id: notification.userId })
+                  break
+                case 'requestPartecipation':
+                case 'leftEvent':
+                case 'responsePartecipation':
+                case 'removedFromEvent':
+                  self.props.setEventDetail({ id: notification.eventId })
+                  break
+              }
+            })
+          } else {
+            this.props.reauthenticate()
+          }
+        })
+
+      this.notificationUnsubscribe = FCM.on('notification', (notification) => {
+        console.log(notification)
+
+        if (notification.opened_from_tray) {
+          switch (notification.type) {
+            case 'friendshipRequest':
+            case 'friendshipResponse':
+              this.props.setUserDetail({ id: notification.userId })
+              break
+            case 'requestPartecipation':
+            case 'leftEvent':
+            case 'responsePartecipation':
+            case 'removedFromEvent':
+              this.props.setEventDetail({ id: notification.eventId })
+              break
+          }
         }
-      }
-    })
+      })
 
-    this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
-      console.log(token)
-      // fcm token may not be available on first load, catch it here
-    })
+      this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
+        console.log(token)
+        // fcm token may not be available on first load, catch it here
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -95,7 +125,7 @@ class AppPage extends Component {
 
   backAndroidHandler() {
     let toReturn = true
-    
+
     if (this.props.state.routes.scene === undefined) {
       return toReturn
     }

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import AppPage from '../components/appPage'
+import { reauthenticate } from '../actions/auth'
 import { Actions } from 'react-native-router-flux'
 import { setUserDetail } from '../actions/users'
 import { setEventDetail } from '../actions/events'
@@ -23,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
     createNewEvent: () => {
       dispatch(setEventDetail(null))
       Actions.eventForm()
+    },
+    reauthenticate: (callback) => {
+      dispatch(reauthenticate(callback))
     }
   }
 }

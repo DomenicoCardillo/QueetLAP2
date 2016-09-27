@@ -8,9 +8,7 @@
  */
 
 #import "AppDelegate.h"
-
 #import "Firebase.h"
-#import "RNFIRMessaging.h"
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -37,11 +35,6 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
-  [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:notification];
-  handler(UIBackgroundFetchResultNewData);
 }
 
 @end

@@ -16,10 +16,7 @@ import Button from 'apsl-react-native-button'
 import { Actions } from 'react-native-router-flux'
 
 class Splash extends Component {
-  componentDidMount() {
-    this.props.reauthenticate()
-  }
-
+  
   render() {
     return (
       <Image source={require('../assets/img/splash.png')} style={commonStyles.backgroundImage}>
