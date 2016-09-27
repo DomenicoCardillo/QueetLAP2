@@ -81,10 +81,10 @@ export const removePartecipation = (event, userId) => {
         read: false,
         type: 'leftEvent',
         event: event.id,
+        to: event.creator.id,
         dateTime: new Date().getTime()
       }
 
-      notification.to = event.creator.id
       dbNotificationsRef.push(notification)
     }
 
