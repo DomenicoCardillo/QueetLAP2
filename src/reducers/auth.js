@@ -27,6 +27,7 @@ const auth = (state = {}, action) => {
     case types.LOGIN_SUCCESS:
       newState.auth.loginPage.isLoading = false
       newState.auth.currentUser = action.payload
+      newState.auth.loginPage.hasError = false
       return newState
 
     case types.LOGIN_FAILED:
