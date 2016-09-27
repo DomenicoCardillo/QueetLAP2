@@ -98,8 +98,9 @@ export const login = (email, pass) => {
           FCM.subscribeToTopic('/topics/user_' + user.id)
           dispatch(listenNewNotifications(user.id))
           dispatch(loginSuccess(user))
+          if(!user.profileCompleted) Actions.userForm()
         })
-        
+
         Actions.main()
       } else {
         let error = { message: 'You must verify your account. Please check your email.' }
@@ -216,6 +217,8 @@ export const reauthenticate = () => {
             FCM.subscribeToTopic('/topics/user_' + user.id)
             dispatch(reauthenticateSuccess(user))
             dispatch(listenNewNotifications(user.id))
+            
+            if(!user.profileCompleted) Actions.userForm()
           })
 
           Actions.main()

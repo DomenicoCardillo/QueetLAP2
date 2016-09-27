@@ -10,6 +10,7 @@ export const updateProfile = (newProfile, picture) => {
 
     let userId = firebaseAuth.currentUser.uid
     let updates = {}
+    newProfile.profileCompleted = true
 
     if(picture !== null) {
 

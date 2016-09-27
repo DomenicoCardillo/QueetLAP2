@@ -64,8 +64,8 @@ export default class UserFormPage extends Component {
         picture = this.state.picture
       }
 
-      newProfile.shortPlace = this.state.shortPlace
-      newProfile.longPlace = this.state.longPlace
+      newProfile.shortPlace = this.state.shortPlace || ''
+      newProfile.longPlace = this.state.longPlace || ''
 
       newProfile.category = this.state.selectedCategory
 
