@@ -64,9 +64,7 @@ class AppPage extends Component {
       BackAndroid.addEventListener('hardwareBackPress', this.backAndroidHandler)
 
       FCM.requestPermissions()
-      FCM.getFCMToken().then(token => {
-        console.log(token)
-      })
+      // FCM.getFCMToken().then(token => {})
 
       FCM.getInitialNotification()
         .then((notification) => {
@@ -90,10 +88,9 @@ class AppPage extends Component {
           } else {
             this.props.reauthenticate()
           }
-        })
+      })
 
       this.notificationUnsubscribe = FCM.on('notification', (notification) => {
-        console.log(notification)
 
         if (notification.opened_from_tray) {
           switch (notification.type) {
@@ -110,16 +107,10 @@ class AppPage extends Component {
           }
         }
       })
-
-      this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
-        console.log(token)
-        // fcm token may not be available on first load, catch it here
-      })
     }
   }
 
   componentWillUnmount() {
-    this.refreshUnsubscribe()
     this.notificationUnsubscribe()
   }
 
@@ -161,6 +152,7 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
     shadowOpacity: null,
     shadowRadius: null
   }
+
   if (computedProps.isActive) {
 
     if (Platform.OS === 'ios') {
