@@ -80,8 +80,10 @@ export const removePartecipation = (event, userId) => {
         read: false,
         type: 'leftEvent',
         event: event.id,
+        to: event.creator.id,
         dateTime: new Date().getTime()
       }
+      dbNotificationsRef.push(notification)
     }
 
     let updates = {}
