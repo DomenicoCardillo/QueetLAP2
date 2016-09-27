@@ -73,9 +73,9 @@ class AppPage extends Component {
             this.props.setUserDetail({ id: notification.userId })
             break
           case 'requestPartecipation':
-          case 'removeMyPartecipation':
+          case 'leftEvent':
           case 'responsePartecipation':
-          case 'removePartecipation':
+          case 'removedFromEvent':
             this.props.setEventDetail({ id: notification.eventId })
             break
         }

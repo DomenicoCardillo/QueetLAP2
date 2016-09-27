@@ -68,7 +68,7 @@ export const removePartecipation = (event, userId) => {
         from: currentUserId,
         target: userId,
         read: false,
-        type: 'removePartecipation',
+        type: 'removedFromEvent',
         event: event.id,
         dateTime: new Date().getTime()
       }
@@ -78,7 +78,7 @@ export const removePartecipation = (event, userId) => {
       var notification = {
         from: currentUserId,
         read: false,
-        type: 'removeMyPartecipation',
+        type: 'leftEvent',
         event: event.id,
         dateTime: new Date().getTime()
       }
