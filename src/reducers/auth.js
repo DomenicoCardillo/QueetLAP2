@@ -22,6 +22,7 @@ const auth = (state = {}, action) => {
 
     case types.LOGIN_START:
       newState.auth.loginPage.isLoading = true
+      newState.auth.loginPage.logoutSuccess = false
       return newState
 
     case types.LOGIN_SUCCESS:
