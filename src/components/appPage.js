@@ -6,7 +6,6 @@ import {
   Text,
   View,
   StyleSheet,
-  StatusBar,
   Platform,
   Image,
   BackAndroid
@@ -38,13 +37,6 @@ import EventsCategories from '../containers/eventsCategories'
 import ForgotPassword from '../containers/forgotPassword'
 
 const AppRouter = connect()(Router)
-
-/* Set status bar color (Check Android N) */
-if (Platform.OS == 'ios') {
-  StatusBar.setBarStyle('light-content', true)
-} else {
-  StatusBar.setBackgroundColor(styleVariables.colors.brandPrimaryDark)
-}
 
 class AppPage extends Component {
 

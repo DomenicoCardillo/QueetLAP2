@@ -145,34 +145,36 @@ export default class EventPage extends Component {
             {users}
           </View>
           
-          { this.props.wathRender.addPartecipation && !this.props.wathRender.limitReached ? (
-            <Button 
-            style={[commonStyles.primaryButton, {marginBottom: 10}]} 
-            textStyle={commonStyles.primaryButtonText}
-            onPress={this.join.bind(this)}
-            isLoading={this.props.isLoading}>
-              Join
-            </Button>
-          ) : ( null ) }
-          { this.props.wathRender.removePartecipation ? (
-            <Button 
-            style={[commonStyles.dangerButton, {marginBottom: 10}]} 
-            textStyle={commonStyles.primaryButtonText}
-            onPress={this.leave.bind(this)}
-            isLoading={this.props.isLoading}>
-              Leave
-            </Button>
-          ) : ( null ) }
-          { this.props.wathRender.waitResponse ? (
-            <View style={commonStyles.rowCenter}>
-              <Text>Wait for event's creator response</Text>
-            </View>
-          ) : ( null ) }
-          { this.props.wathRender.limitReached ? (
-            <View style={commonStyles.rowCenter}>
-              <Text>Max number of partecipants reached</Text>
-            </View>
-          ) : ( null ) }
+          <View style={{marginBottom: 20}}>
+            { this.props.wathRender.addPartecipation && !this.props.wathRender.limitReached ? (
+              <Button 
+              style={[commonStyles.primaryButton, {marginBottom: 10}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={this.join.bind(this)}
+              isLoading={this.props.isLoading}>
+                Join
+              </Button>
+            ) : ( null ) }
+            { this.props.wathRender.removePartecipation ? (
+              <Button 
+              style={[commonStyles.dangerButton, {marginBottom: 10}]} 
+              textStyle={commonStyles.primaryButtonText}
+              onPress={this.leave.bind(this)}
+              isLoading={this.props.isLoading}>
+                Leave
+              </Button>
+            ) : ( null ) }
+            { this.props.wathRender.waitResponse ? (
+              <View style={commonStyles.rowCenter}>
+                <Text>Wait for event's creator response</Text>
+              </View>
+            ) : ( null ) }
+            { this.props.wathRender.limitReached ? (
+              <View style={commonStyles.rowCenter}>
+                <Text>Max number of partecipants reached</Text>
+              </View>
+            ) : ( null ) }
+          </View>
         </ScrollView>
       </View>
     )

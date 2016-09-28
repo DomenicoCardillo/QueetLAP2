@@ -8,12 +8,20 @@ import {
   Text, 
   Image, 
   StyleSheet, 
+  StatusBar,
+  Platform,
   TouchableOpacity,
   AsyncStorage
 } from 'react-native'
 
 import Button from 'apsl-react-native-button'
 import { Actions } from 'react-native-router-flux'
+
+if (Platform.OS == 'ios') {
+  StatusBar.setBarStyle('light-content', true)
+} else {
+  StatusBar.setBackgroundColor(styleVariables.colors.brandPrimaryDark, true)
+}
 
 class Splash extends Component {
   
