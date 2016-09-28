@@ -44,6 +44,7 @@ const auth = (state = {}, action) => {
       newState.profilePage.isLoading = false
       newState.auth.currentUser = null
       newState.notifications = null
+      newState.auth.loginPage.logoutSuccess = true
       return newState
 
     case types.SEND_RESET_PASSWORD_EMAIL_START:

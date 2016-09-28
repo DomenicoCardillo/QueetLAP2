@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.auth.loginPage.isLoading,
     hasError: state.auth.loginPage.hasError,
-    errorMessage: state.auth.loginPage.errorMessage
+    errorMessage: state.auth.loginPage.errorMessage,
+    logoutSuccess: state.auth.loginPage.logoutSuccess
   }
 }
 

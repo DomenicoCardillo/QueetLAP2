@@ -42,7 +42,14 @@ export default class LoginPage extends Component {
 
   login() {
     this.props.submit(this.state.email, this.state.pass)
-    this.state.pass = ''
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.logoutSuccess) {
+      this.setState({
+        pass: ''
+      })
+    }
   }
 
   componentWillMount() {
@@ -59,7 +66,7 @@ export default class LoginPage extends Component {
       }
     })
   }
-
+  
   componentWillUnmount() {
     this.keyboardDidShowListener.remove()
     this.keyboardDidHideListener.remove()
@@ -99,7 +106,7 @@ export default class LoginPage extends Component {
       },
       pageSubtitle: {
         opacity: 1
-      },
+      }
     })
   }
 
