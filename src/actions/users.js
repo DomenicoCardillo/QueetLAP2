@@ -6,13 +6,14 @@ import {
   findBy
 } from '../globals'
 
-export const fetchUsers = () => {
+export const fetchUsers = (userId, callback) => {
   return (dispatch, getState) => {
     dispatch(fetchUsersStart())
     dbUsersRef.once('value').then(function(snapshot) {
       let allUsers = snapshot.val()
-      delete allUsers[getState().auth.currentUser.id]
+      delete allUsers[userId]
       dispatch(fetchUsersSuccess(fromObjToArray(allUsers)))
+      if(callback !== undefined) callback()
     }).catch(function(error){
       dispatch(fetchUsersFailed(error))
     })

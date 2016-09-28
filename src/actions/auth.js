@@ -60,8 +60,6 @@ export const login = (email, pass) => {
       if(userData.emailVerified){
         AsyncStorage.setItem('lastEmail', userData.email)
         dispatch(loadCategories())
-        dispatch(fetchUsers())
-        dispatch(fetchEvents())
 
         dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
           let user = userSnap.val()
@@ -69,6 +67,10 @@ export const login = (email, pass) => {
           user.id = userData.uid
           user.events = {}
           user.friends = user.friends || {}
+
+          dispatch(fetchEvents(() => dispatch(fetchUsers(user.id))))
+
+          Actions.main()
 
           if(!user.emailVerified){
             let updates = {}
@@ -100,8 +102,6 @@ export const login = (email, pass) => {
           dispatch(loginSuccess(user))
           if(!user.profileCompleted) Actions.userForm()
         })
-
-        Actions.main()
       } else {
         let error = { message: 'You must verify your account. Please check your email.' }
         dispatch(loginFailed(error))
@@ -206,8 +206,6 @@ export const reauthenticate = (callback) => {
         firebaseAuth.signInWithCustomToken(reauthToken)
         .then(function(userData) {
           dispatch(loadCategories())
-          dispatch(fetchUsers())
-          dispatch(fetchEvents())
 
           dbUsersRef.orderByChild('email').equalTo(userData.email).once('value').then(function(userSnap) {
             let user = userSnap.val()
@@ -217,16 +215,12 @@ export const reauthenticate = (callback) => {
             if (Platform.OS === 'android') FCM.subscribeToTopic('/topics/user_' + user.id)
             dispatch(reauthenticateSuccess(user))
             dispatch(listenNewNotifications(user.id))
+            dispatch(fetchEvents(() => dispatch(fetchUsers(user.id, callback))))
+
+            Actions.main()
             
             if(!user.profileCompleted) Actions.userForm()          
           })
-
-          Actions.main()
-          
-          if (typeof callback !== 'undefined') {
-            setTimeout(() => callback(), 1500)
-          }
-
         }).catch((error) => {
           AsyncStorage.getItem('userId').then((userId) => {
             if(userId != null) {

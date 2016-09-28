@@ -98,13 +98,14 @@ export const updateEventFailed = (error) => {
   }
 }
 
-export const fetchEvents = () => {
+export const fetchEvents = (callback) => {
   return (dispatch) => {
     dispatch(fetchEventsStart())
 
     dbEventsRef.once('value').then(function(snapshot) {
       let events = fromObjToArray(snapshot.val())
       dispatch(fetchEventsSuccess(events))
+      if(callback !== undefined) callback()
     }).catch(function(error){
       dispatch(fetchEventsFailed(error))
     })

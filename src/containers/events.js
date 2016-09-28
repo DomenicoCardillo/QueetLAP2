@@ -47,7 +47,7 @@ const getEventsByPrivacy = (events, me, users) => {
     if(!event.privacy || event.privacy === 'All' || event.creator.id === me.id) return true
     else {
       let other = findBy('id', event.creator.id, users)
-      if(!other.friends || !me.friends) return false
+      if(!other || !other.friends || !me.friends) return false
       return other.friends.hasOwnProperty(me.id) && me.friends.hasOwnProperty(other.id)
     }
   })
