@@ -5,7 +5,7 @@ const routes = (state = {}, action) => {
 
   switch (action.type) {
     case ActionConst.FOCUS:
-      newState.scene = action.scene
+      newState.routes.scene = action.scene
       return newState
 
     default:

@@ -53,10 +53,10 @@ const rootReducer = (state = {}, action) => {
   newState.users = friendshipsStuffs.users
 
   let routingStuffs = routes({
-    scene: state.scene
+    routes: state.routes
   }, action)
 
-  newState.routes = routingStuffs
+  newState.routes = routingStuffs.routes
 
   let partecipationsStuffs = partecipations({auth: state.auth, eventPage: state.eventPage}, action)
   newState.auth = partecipationsStuffs.auth
