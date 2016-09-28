@@ -64,8 +64,8 @@ export const removePartecipation = (event, userId) => {
 
     if(event.creator.id == currentUserId) {
       // I am the event creator and I remove a partecipants (with id = userId)
-      let idToRemove = userId
-      let notification = {
+      var idToRemove = userId
+      var notification = {
         from: currentUserId,
         target: userId,
         read: false,
@@ -75,8 +75,8 @@ export const removePartecipation = (event, userId) => {
       }
     } else {
       // I am a partecipant and I leave the event
-      let idToRemove = currentUserId
-      let notification = {
+      var idToRemove = currentUserId
+      var notification = {
         from: currentUserId,
         read: false,
         type: 'leftEvent',
