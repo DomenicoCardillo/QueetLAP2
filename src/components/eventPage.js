@@ -145,7 +145,7 @@ export default class EventPage extends Component {
             {users}
           </View>
           
-          <View style={{marginBottom: 20}}>
+          <View style={{marginBottom: 40}}>
             { this.props.wathRender.addPartecipation && !this.props.wathRender.limitReached ? (
               <Button 
               style={[commonStyles.primaryButton, {marginBottom: 10}]} 
