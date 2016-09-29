@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
 import fonts from '../styles/fonts'
+import Swipeout from 'react-native-swipeout'
 
 import {
   View,
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
     color: '#999'
   },
   notificationTitle: {
+    width: 150,
     fontSize: 15,
     fontWeight: 'bold'
   },
@@ -53,20 +55,44 @@ class NotificationsPage extends Component {
     if(notification.macroType == 'event') this.props.setEventDetail(notification.toEvent)
   }
 
+  deleteNotification(notification) {
+    console.log(notification)
+  }
+
   renderRow(notification) {
+    var leftSwipeout = [
+      {
+        text: 'Mark as \n read',
+        backgroundColor: styleVariables.colors.brandPrimary,
+        underlayColor: styleVariables.colors.brandPrimary,
+        onPress: this.props.setNotificationRead.bind(this, notification.id)
+      }
+    ]
+
+    var rightSwipeout = [
+      {
+        text: 'Delete',
+        backgroundColor: styleVariables.colors.brandDanger,
+        underlayColor: styleVariables.colors.brandDanger,
+        onPress: this.deleteNotification.bind(this, notification)
+      }
+    ]
+
     return (
-      <TouchableOpacity activeOpacity={0.9} onPress={this.onPress.bind(this, notification)}>
-        <View style={[styles.notificationBox, {backgroundColor: notification.read ? '#ddd' : '#fff'}]}>
-          <View>
-            {notification.pictureElement}
+      <Swipeout left={leftSwipeout} right={rightSwipeout} autoClose={true} backgroundColor='#fff'>
+        <TouchableOpacity activeOpacity={0.9} onPress={this.onPress.bind(this, notification)}>
+          <View style={[styles.notificationBox, {backgroundColor: notification.read ? '#ddd' : '#fff'}]}>
+            <View>
+              {notification.pictureElement}
+            </View>
+            <View style={styles.notificationInfo}>
+              <Text style={styles.notificationTitle}>{notification.title}</Text>
+              <Text style={styles.notificationBody}>{notification.content}</Text>
+              <Text style={styles.notificationDate}>{notification.date}</Text>
+            </View>
           </View>
-          <View style={styles.notificationInfo}>
-            <Text style={styles.notificationTitle}>{notification.title}</Text>
-            <Text style={styles.notificationBody}>{notification.content}</Text>
-            <Text style={styles.notificationDate}>{notification.date}</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </Swipeout>
     )
   }
 

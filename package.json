@@ -17,6 +17,7 @@
     "react-native-image-crop-picker": "^0.9.5",
     "react-native-radio-buttons": "^0.12.1",
     "react-native-router-flux": "^3.35.0",
+    "react-native-swipeout": "git+https://github.com/magrinj/react-native-swipeout",
     "react-native-vector-icons": "^2.1.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
