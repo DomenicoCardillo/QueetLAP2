@@ -43,9 +43,14 @@ export const fetchUsersFailed = (error) => {
 export const listenUsersChanges = () => {
   return (dispatch, getState) => {
     dbUsersRef.on('child_changed', function(childSnapshot) {
-      let users = getState().users
-      let userChangedIndex = users.findIndex(x => x.id == childSnapshot.key)
-      dispatch(applyUserChanges({index: userChangedIndex, newValue: childSnapshot.val()}))
+      let currentUserId = getState().auth.currentUser.id
+      if(currentUserId == childSnapshot.key){
+        dispatch(applyUserChanges({currentUser: true, newValue: childSnapshot.val()}))
+      } else {
+        let users = getState().users
+        let userChangedIndex = users.findIndex(x => x.id == childSnapshot.key)
+        dispatch(applyUserChanges({index: userChangedIndex, newValue: childSnapshot.val()}))
+      }
     })
   }
 }

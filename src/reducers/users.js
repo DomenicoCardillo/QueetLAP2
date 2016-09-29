@@ -21,7 +21,7 @@ const users = (state = {}, action) => {
       return newState
 
     case types.APPLY_USER_CHANGES:
-      newState.users[action.payload.index] = action.payload.newValue
+      if(action.payload.index) newState.users[action.payload.index] = action.payload.newValue
       return newState
 
     case types.SET_USER_DETAIL:

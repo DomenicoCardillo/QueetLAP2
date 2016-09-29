@@ -74,6 +74,10 @@ const auth = (state = {}, action) => {
     case types.REAUTHENTICATE_FAILED:
       newState.auth.loginPage.isLoading = false
       return newState
+    
+    case types.APPLY_USER_CHANGES:
+      if(action.payload.currentUser) newState.auth.currentUser = action.payload.newValue
+      return newState
 
     default:
       return state
