@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     color: '#999'
   },
   notificationTitle: {
-    width: 150,
+    width: 250,
     fontSize: 15,
     fontWeight: 'bold'
   },
