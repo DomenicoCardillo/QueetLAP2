@@ -82,7 +82,7 @@ export default class UserPage extends Component {
         key={`${sectionID}-${rowID}`}
         style={{
           height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
+          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#ddd',
         }}
       />
     )
@@ -128,16 +128,6 @@ export default class UserPage extends Component {
             </View>
           ) : ( null ) }
 
-          { this.props.userEvents.length > 0 ? (
-            <ListView
-              dataSource={dataSource}
-              renderRow={(event) => this.renderRow(event)}
-              renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-              renderSeparator={this.renderSeparator}
-              enableEmptySections={true}
-            />
-          ) : null }
-
           { this.props.wathRender.addFriend ? (
             <Button 
               style={[commonStyles.primaryButton, {alignItems: 'center', marginTop: 20}]} 
@@ -159,9 +149,9 @@ export default class UserPage extends Component {
             </Button>
           ) : ( null ) }
           { this.props.wathRender.waitResponse ? (
-            <View style={[commonStyles.rowCenter, {marginTop: 30}]}>
+            <View style={[commonStyles.rowCenter, {marginTop: 20}]}>
               <Icon name="user" size={18} color={styleVariables.colors.brandPrimary} style={{marginRight: 8}} />
-              <Text>Wait for his friendship response</Text>
+              <Text style={{color: styleVariables.colors.brandPrimary}}>Wait for his friendship response...</Text>
             </View>
           ) : ( null ) }
           { this.props.wathRender.confirmFriend ? (
@@ -184,6 +174,20 @@ export default class UserPage extends Component {
               <Text style={commonStyles.primaryButtonText}>Reject friendship</Text>
             </Button>
           ) : ( null ) }
+
+          { this.props.userEvents.length > 0 ? (
+            <View style={{paddingVertical: 30}}>
+              <Text style={[fonts.style.h6, {marginBottom: 10}]}>Will participate in</Text>
+              <ListView
+                style={{borderWidth: 1, borderColor: '#ddd'}}
+                dataSource={dataSource}
+                renderRow={(event) => this.renderRow(event)}
+                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+                renderSeparator={this.renderSeparator}
+                enableEmptySections={true}
+              />
+            </View>
+          ) : null }
 
         </ScrollView>
       </View>
