@@ -1,1 +1,4 @@
 
+[submodule "server/queetlap2"]
+	path = server/queetlap2
+	url = https://git.heroku.com/queetlap2.git
