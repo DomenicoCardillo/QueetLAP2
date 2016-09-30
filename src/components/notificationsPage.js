@@ -55,8 +55,8 @@ class NotificationsPage extends Component {
     if(notification.macroType == 'event') this.props.setEventDetail(notification.toEvent)
   }
 
-  deleteNotification(notification) {
-    console.log(notification)
+  deleteNotification(notificationId) {
+    this.props.deleteNotification(notificationId)
   }
 
   renderRow(notification) {
@@ -68,13 +68,14 @@ class NotificationsPage extends Component {
         onPress: this.props.setNotificationRead.bind(this, notification.id)
       }
     ]
+    if(notification.read) leftSwipeout = []
 
     var rightSwipeout = [
       {
         text: 'Delete',
         backgroundColor: styleVariables.colors.brandDanger,
         underlayColor: styleVariables.colors.brandDanger,
-        onPress: this.deleteNotification.bind(this, notification)
+        onPress: this.deleteNotification.bind(this, notification.id)
       }
     ]
 

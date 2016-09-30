@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import NotificationsPage from '../components/notificationsPage'
 import { Actions } from 'react-native-router-flux'
-import { fetchNotifications, setNotificationRead } from '../actions/notifications'
+import { fetchNotifications, setNotificationRead, deleteNotification } from '../actions/notifications'
 import { setUserDetail } from '../actions/users'
 import { setEventDetail } from '../actions/events'
 import { findBy, formatDate, formatTime, sortArrayByProps } from '../globals'
@@ -136,6 +136,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setNotificationRead: (notificationId) => {
       dispatch(setNotificationRead(notificationId))
+    },
+    deleteNotification: (notificationId) => {
+      dispatch(deleteNotification(notificationId))
     }
   }
 }

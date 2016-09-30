@@ -33,6 +33,10 @@ const notifications = (state = {}, action) => {
       newState.notifications = null
       return newState
 
+    case types.DELETE_NOTIFICATION_SUCCESS:
+      newState.notifications.splice(action.payload.index, 1)
+      return newState
+
     default:
       return state
   }

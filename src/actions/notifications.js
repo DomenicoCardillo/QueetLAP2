@@ -71,3 +71,37 @@ export const fetchNotificationsFailed = (error) => {
     error
   }
 }
+
+export const deleteNotification = (notificationId) => {
+  return (dispatch, getState) => {
+    dispatch(deleteNotificationStart())
+    let updates = {}
+    updates['/' + notificationId] = null
+    dbNotificationsRef.update(updates, (error) => {
+      if(error) dispatch(deleteNotificationFailed(error))
+      else dispatch(deleteNotificationSuccess({
+        index: findBy('id', notificationId, getState().notifications, true)
+      }))
+    })
+  }
+}
+
+export const deleteNotificationStart = () => {
+  return {
+    type: types.DELETE_NOTIFICATION_START
+  }
+}
+
+export const deleteNotificationSuccess = (payload) => {
+  return {
+    type: types.DELETE_NOTIFICATION_SUCCESS,
+    payload
+  }
+}
+
+export const deleteNotificationFailed = (error) => {
+  return {
+    type: types.DELETE_NOTIFICATION_FAILED,
+    error
+  }
+}
