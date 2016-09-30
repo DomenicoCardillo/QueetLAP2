@@ -20,8 +20,8 @@ const notifications = (state = {}, action) => {
       newState.notificationsPage.errorMessage = action.error.message
       return newState
 
-    case types.SET_NOTIFICATION_READ:
-      newState.notifications[action.payload].read = true
+    case types.SET_NOTIFICATION_AS:
+      newState.notifications[action.payload.index].read = action.payload.newState 
       return newState
 
     case types.ADD_NEW_NOTIFICATION:

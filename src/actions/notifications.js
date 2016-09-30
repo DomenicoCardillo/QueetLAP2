@@ -21,16 +21,16 @@ export const fetchNotifications = () => {
   }
 }
 
-export const setNotificationRead = (notificationId) => {
+export const setNotificationAs = (notificationId, newState) => {
   return (dispatch, getState) => {
     let updates = {}
-    updates['/' + notificationId + '/read'] = true
+    updates['/' + notificationId + '/read'] = newState
     dbNotificationsRef.update(updates, (error) => {
       if(!error) {
         let notificationIndex = findBy('id', notificationId, getState().notifications, true)
         dispatch({
-          type: types.SET_NOTIFICATION_READ,
-          payload: notificationIndex
+          type: types.SET_NOTIFICATION_AS,
+          payload: { index: notificationIndex, newState }
         })
       }
     })

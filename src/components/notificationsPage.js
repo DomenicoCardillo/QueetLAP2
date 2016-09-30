@@ -62,13 +62,12 @@ class NotificationsPage extends Component {
   renderRow(notification) {
     var leftSwipeout = [
       {
-        text: 'Mark as \n read',
+        text: 'Mark as \n ' + (notification.read ? 'unread' : 'read'),
         backgroundColor: styleVariables.colors.brandPrimary,
         underlayColor: styleVariables.colors.brandPrimary,
-        onPress: this.props.setNotificationRead.bind(this, notification.id)
+        onPress: this.props.setNotificationAs.bind(this, notification.id, !notification.read)
       }
     ]
-    if(notification.read) leftSwipeout = []
 
     var rightSwipeout = [
       {
