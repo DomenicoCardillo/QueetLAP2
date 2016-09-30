@@ -11,6 +11,7 @@ export const fetchUsers = (userId, callback) => {
     dispatch(fetchUsersStart())
     dbUsersRef.once('value').then(function(snapshot) {
       let allUsers = snapshot.val()
+      if(userId === undefined) userId = getState().auth.currentUser.id
       delete allUsers[userId]
       dispatch(fetchUsersSuccess(fromObjToArray(allUsers)))
       if(callback !== undefined) callback()
