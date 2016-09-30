@@ -50,7 +50,7 @@ class NotificationsPage extends Component {
   }
 
   onPress(notification) {
-    this.props.setNotificationRead(notification.id)
+    if(!notification.read) this.props.setNotificationAs(notification.id, true)
     if(notification.macroType == 'user') this.props.setUserDetail(notification.toUser)
     if(notification.macroType == 'event') this.props.setEventDetail(notification.toEvent)
   }
