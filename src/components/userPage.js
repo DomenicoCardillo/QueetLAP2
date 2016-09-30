@@ -6,8 +6,10 @@ import {
   View,
   Text,
   StyleSheet,
+  ListView,
   ScrollView,
   TouchableOpacity,
+  RecyclerViewBackedScrollView,
   Image
 } from 'react-native'
 
@@ -17,13 +19,82 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
 import fonts from '../styles/fonts'
+import { formatDate, formatTime } from '../globals'
 
 export default class UserPage extends Component {
   constructor (props) {
     super()
   }
 
+  renderRow(event) {
+    let catName = this.props.categories[event.category].name
+    let catSlug = this.props.categories[event.category].slug
+    let imageBox = null
+    event.users = event.users || {} 
+    switch (catSlug) {
+      case 'badminton':
+        imageBox = <Image source={require('../assets/img/badminton.jpg')} style={styles.eventImage} />
+        break
+      case 'basket':
+        imageBox = <Image source={require('../assets/img/basket.jpg')} style={styles.eventImage} />
+        break
+      case 'running':
+        imageBox = <Image source={require('../assets/img/running.jpg')} style={styles.eventImage} />
+        break
+      case 'soccer':
+        imageBox = <Image source={require('../assets/img/soccer.jpg')} style={styles.eventImage} />
+        break
+      case 'tennis':
+        imageBox = <Image source={require('../assets/img/tennis.jpg')} style={styles.eventImage} />
+        break
+      case 'volley':
+        imageBox = <Image source={require('../assets/img/volley.jpg')} style={styles.eventImage} />
+        break
+    }
+    return (
+      <TouchableOpacity activeOpacity={0.9} onPress={() => this.goToEventDetail(event)}>
+        <View style={styles.eventBox}>
+          <View>
+            {imageBox}
+          </View>
+          <View style={styles.eventContainer}>
+            <View style={styles.eventTopInfo}>
+              <Text style={styles.eventTitle}>{event.name}</Text>
+              <Text style={styles.eventDate}>{formatDate(event.dateTime)} - {formatTime(event.dateTime)}</Text>
+            </View>
+            <View style={styles.eventBottomInfo}>
+              <Text style={styles.eventBottomInfoText}>{event.shortPlace} - {catName}</Text>
+              { event.maxPartecipants ? 
+                (<Text>{event.creator.name} - Partecipants {Object.keys(event.users).length + 1}/{event.maxPartecipants}</Text>)
+                :
+                (<Text>{event.creator.name}</Text>)
+              }
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
+  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={{
+          height: adjacentRowHighlighted ? 4 : 1,
+          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
+        }}
+      />
+    )
+  }
+
+  goToEventDetail(event) {
+    this.props.setEventDetail(event)
+  }
+
   render() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const dataSource = ds.cloneWithRows(this.props.userEvents)
     return (
       <View style={commonStyles.mainContainer}>
         <ScrollView style={commonStyles.container}>
@@ -57,6 +128,16 @@ export default class UserPage extends Component {
             </View>
           ) : ( null ) }
 
+          { this.props.userEvents.length > 0 ? (
+            <ListView
+              dataSource={dataSource}
+              renderRow={(event) => this.renderRow(event)}
+              renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+              renderSeparator={this.renderSeparator}
+              enableEmptySections={true}
+            />
+          ) : null }
+
           { this.props.wathRender.addFriend ? (
             <Button 
               style={[commonStyles.primaryButton, {alignItems: 'center', marginTop: 20}]} 
@@ -78,7 +159,7 @@ export default class UserPage extends Component {
             </Button>
           ) : ( null ) }
           { this.props.wathRender.waitResponse ? (
-            <View style={commonStyles.rowCenter}>
+            <View style={[commonStyles.rowCenter, {marginTop: 30}]}>
               <Icon name="user" size={18} color={styleVariables.colors.brandPrimary} style={{marginRight: 8}} />
               <Text>Wait for his friendship response</Text>
             </View>
@@ -134,5 +215,45 @@ const styles = StyleSheet.create({
     top: 3, 
     width: 20,
     marginRight: 8
+  },
+  eventBox: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 120,
+    padding: 15,
+    backgroundColor: '#fff'
+  },
+  eventImage: {
+    flex: 1,
+    width: 70,
+    height: 50,
+    marginRight: 10
+  },
+  eventContainer: {
+    flex: 2
+  },
+  eventTopInfo: {
+    flexDirection: 'row'
+  },
+  eventTitle: {
+    fontSize: 16,
+    width: 90,
+    fontWeight: '500', 
+    marginBottom: 5
+  },
+  eventDate: {
+    position: 'absolute', 
+    right: 0,
+    top: 2,
+    color: '#999',
+    fontSize: 12
+  },
+  eventBottomInfo: {
+    position: 'absolute', 
+    bottom: 0
+  },
+  eventBottomInfoText: {
+    fontSize: 16, 
+    marginBottom: 3
   }
 })

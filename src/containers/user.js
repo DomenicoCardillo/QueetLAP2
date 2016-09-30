@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 import UserPage from '../components/userPage'
 import { Actions } from 'react-native-router-flux'
 import { toggleFriendship, responseFriendship } from '../actions/friendships'
+import { setEventDetail } from '../actions/events'
+import { filterByPartecipations, sortArrayByProps, filterByDateTime } from '../globals'
 
 const mapStateToProps = (state) => {
   let user = Object.assign({}, state.users[state.userPage.userIndex])
@@ -11,6 +13,11 @@ const mapStateToProps = (state) => {
   let currentUser = state.auth.currentUser
   let isMyFriend = currentUser.friends && currentUser.friends.hasOwnProperty(user.id)
   let iAmHisFriend = user.friends && user.friends.hasOwnProperty(currentUser.id)
+
+  let userEvents = filterByDateTime(state.events)
+  userEvents = filterByPartecipations(userEvents, user.id)
+  sortArrayByProps(userEvents, 'asc', 'dateTime')
+  let categories = state.categories
 
   let wathRender = {}
 
@@ -29,7 +36,9 @@ const mapStateToProps = (state) => {
     user,
     wathRender,
     isLoadingPrimary: state.userPage.isLoadingPrimary,
-    isLoadingSecondary: state.userPage.isLoadingSecondary
+    isLoadingSecondary: state.userPage.isLoadingSecondary,
+    userEvents,
+    categories
   }
 }
 
@@ -40,6 +49,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     responseFriendship: (userId, response) => {
       dispatch(responseFriendship(userId, response))
+    },
+    setEventDetail: (event) => {
+      dispatch(setEventDetail(event, true))
     }
   }
 }
