@@ -82,7 +82,7 @@ export default class UserPage extends Component {
         key={`${sectionID}-${rowID}`}
         style={{
           height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#ddd',
+          backgroundColor: '#ddd'
         }}
       />
     )
@@ -178,7 +178,7 @@ export default class UserPage extends Component {
             <View style={{paddingVertical: 30}}>
               <Text style={[fonts.style.h6, {marginBottom: 10}]}>Will participate in</Text>
               <ListView
-                style={{borderWidth: 1, borderColor: '#ddd', height: this.props.userEvents.length * 137}}
+                style={{borderWidth: 1, borderColor: '#ddd', height: this.props.userEvents.length * 135}}
                 dataSource={dataSource}
                 renderRow={(event) => this.renderRow(event)}
                 renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
