@@ -16,6 +16,13 @@ const mapStateToProps = (state) => {
 
   let userEvents = filterByDateTime(state.events)
   userEvents = filterByPartecipations(userEvents, user.id)
+  userEvents = userEvents.filter(e => {
+    if(!e.privacy || e.privacy === 'All' || e.creator.id === currentUser.id) return true
+    else {
+      if(!user.friends || !currentUser.friends) return false
+      return user.friends.hasOwnProperty(currentUser.id) && currentUser.friends.hasOwnProperty(user.id)
+    }
+  })
   sortArrayByProps(userEvents, 'asc', 'dateTime')
   let categories = state.categories
 
