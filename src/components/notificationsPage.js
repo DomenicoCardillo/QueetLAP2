@@ -79,7 +79,7 @@ class NotificationsPage extends Component {
     ]
 
     return (
-      <Swipeout left={leftSwipeout} right={rightSwipeout} autoClose={true} backgroundColor='#fff'>
+      <Swipeout left={leftSwipeout} right={rightSwipeout} autoClose={true} sensitivity={2} backgroundColor='#fff'>
         <TouchableOpacity activeOpacity={0.9} onPress={this.onPress.bind(this, notification)}>
           <View style={[styles.notificationBox, {backgroundColor: notification.read ? '#ddd' : '#fff'}]}>
             <View>
