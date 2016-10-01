@@ -80,7 +80,7 @@ class UsersPage extends Component {
         key={`${sectionID}-${rowID}`}
         style={{
           height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
+          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#ddd',
         }}
       />
     )

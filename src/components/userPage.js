@@ -174,12 +174,11 @@ export default class UserPage extends Component {
               <Text style={commonStyles.primaryButtonText}>Reject friendship</Text>
             </Button>
           ) : ( null ) }
-
           { this.props.userEvents.length > 0 ? (
             <View style={{paddingVertical: 30}}>
               <Text style={[fonts.style.h6, {marginBottom: 10}]}>Will participate in</Text>
               <ListView
-                style={{borderWidth: 1, borderColor: '#ddd'}}
+                style={{borderWidth: 1, borderColor: '#ddd', height: this.props.userEvents.length * 122}}
                 dataSource={dataSource}
                 renderRow={(event) => this.renderRow(event)}
                 renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
