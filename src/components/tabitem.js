@@ -59,7 +59,6 @@ TabItem.propTypes = {
   title: PropTypes.string
 }
 
-
 const mapStateToProps = (state) => {
   return {
     badgeNum : state.notifications ? state.notifications.filter(n => !n.read).length : 0

@@ -17,7 +17,6 @@ import {
   RefreshControl
 } from 'react-native'
 
-import { Actions } from 'react-native-router-flux'
 import { SegmentedControls } from 'react-native-radio-buttons'
 
 const styles = StyleSheet.create({
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
 })
 
 class MyEventsPage extends Component {
-  constructor(props){
+  constructor(){
     super()
   }
 

@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 })
 
 class EventsPage extends Component {
-  constructor(props){
+  constructor(){
     super()
   }
 

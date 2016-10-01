@@ -19,8 +19,6 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { SegmentedControls } from 'react-native-radio-buttons'
 
-import { Actions } from 'react-native-router-flux'
-
 const styles = StyleSheet.create({
   userBox: {
     flex: 1,
@@ -39,7 +37,7 @@ const styles = StyleSheet.create({
 })
 
 class UsersPage extends Component {
-  constructor(props){
+  constructor(){
     super()
   }
 

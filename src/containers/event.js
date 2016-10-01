@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import EventPage from '../components/eventPage'
-import { Actions } from 'react-native-router-flux'
 import { requestPartecipation, responsePartecipation, removePartecipation } from '../actions/partecipations'
 import { mergeDeep } from '../globals'
 

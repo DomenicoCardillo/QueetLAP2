@@ -1,6 +1,4 @@
-import React, {
-  StyleSheet
-} from 'react-native'
+import React from 'react-native'
 
 import { formatDate, formatTime } from '../globals'
 

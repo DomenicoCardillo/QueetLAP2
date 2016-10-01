@@ -15,7 +15,7 @@ import styleVariables from '../styles/variables'
 import { formatDate, formatTime } from '../globals'
 
 import t from 'tcomb-form-native'
-let Form = t.form.Form;
+let Form = t.form.Form
 
 export default class EventFormPage extends Component {
   constructor(props) {

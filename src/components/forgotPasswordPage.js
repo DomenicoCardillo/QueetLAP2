@@ -10,7 +10,6 @@ import {
   Image
 } from 'react-native'
 
-import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -19,7 +18,7 @@ import styleVariables from '../styles/variables'
 import fonts from '../styles/fonts'
 
 export default class ForgotPasswordPage extends Component {
-  constructor (props) {
+  constructor () {
     super()
     this.state = {
       pageTitleContainer: {

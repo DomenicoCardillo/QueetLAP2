@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { updateProfile } from '../actions/profile'
 import UserFormPage from '../components/userFormPage'
-import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
   return {

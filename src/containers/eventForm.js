@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { createEvent, updateEvent } from '../actions/events'
 import EventFormPage from '../components/eventFormPage'
-import { Actions } from 'react-native-router-flux'
 
 const mapStateToProps = (state) => {
   let event = Object.assign({}, state.events[state.eventPage.eventIndex] || {dateTime: new Date().getTime()})

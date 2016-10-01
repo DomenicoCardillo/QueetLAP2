@@ -5,8 +5,6 @@ import {
   findBy
 } from '../globals'
 
-import { Actions } from 'react-native-router-flux'
-
 export const fetchNotifications = () => {
   return (dispatch, getState) => {
     dispatch(fetchNotificationsStart())

@@ -22,7 +22,7 @@ import fonts from '../styles/fonts'
 import { formatDate, formatTime } from '../globals'
 
 export default class UserPage extends Component {
-  constructor (props) {
+  constructor () {
     super()
   }
 

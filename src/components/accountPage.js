@@ -19,7 +19,7 @@ import styleVariables from '../styles/variables'
 import fonts from '../styles/fonts'
 
 export default class AccountPage extends Component {
-  constructor (props) {
+  constructor () {
     super()
   }
 

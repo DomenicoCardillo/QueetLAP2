@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 })
 
 class NotificationsPage extends Component {
-  constructor(props) {
+  constructor() {
     super()
   }
 

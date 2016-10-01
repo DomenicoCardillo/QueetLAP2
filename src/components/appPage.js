@@ -16,9 +16,7 @@ import { connect } from 'react-redux'
 import FCM from 'react-native-fcm'
 import { Actions, Scene, Router } from 'react-native-router-flux'
 
-import * as globals from '../globals'
 import styleVariables from '../styles/variables'
-import commonStyles from '../styles/commons'
 
 import { TabItem, TabItemConnected } from './tabitem'
 import Splash from '../containers/splash'
@@ -40,7 +38,7 @@ const AppRouter = connect()(Router)
 
 class AppPage extends Component {
 
-  constructor(props) {
+  constructor() {
     super()
     this.backAndroidHandler = this.backAndroidHandler.bind(this)
   }

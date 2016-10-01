@@ -22,7 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { formatDate, formatTime } from '../globals'
 
 export default class EventPage extends Component {
-  constructor(props) {
+  constructor() {
     super()
   }
 

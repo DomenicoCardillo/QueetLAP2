@@ -18,10 +18,9 @@ import Button from 'apsl-react-native-button'
 
 import commonStyles from '../styles/commons'
 import styleVariables from '../styles/variables'
-import fonts from '../styles/fonts'
 
 export default class LoginPage extends Component {
-  constructor(props) {
+  constructor() {
     super()
     this.state = {
       pageTitleContainer: {
@@ -72,7 +71,7 @@ export default class LoginPage extends Component {
     this.keyboardDidHideListener.remove()
   }
 
-  keyboardDidShow(e) {
+  keyboardDidShow() {
     // Animation types easeInEaseOut/linear/spring
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
 
@@ -91,7 +90,7 @@ export default class LoginPage extends Component {
     })
   }
 
-  keyboardDidHide(e) {
+  keyboardDidHide() {
     // Animation types easeInEaseOut/linear/spring
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     

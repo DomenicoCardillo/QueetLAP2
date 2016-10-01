@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
-import fonts from '../styles/fonts'
 
 import {
   View,
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
 })
 
 class EventsCategoriesPage extends Component {
-  constructor(props){
+  constructor(){
     super()
   }
 

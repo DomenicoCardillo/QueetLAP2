@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import UserPage from '../components/userPage'
-import { Actions } from 'react-native-router-flux'
 import { toggleFriendship, responseFriendship } from '../actions/friendships'
 import { setEventDetail } from '../actions/events'
 import { filterByPartecipations, sortArrayByProps, filterByDateTime } from '../globals'

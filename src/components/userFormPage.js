@@ -15,7 +15,6 @@ import {
 const Item = Picker.Item
 
 import UserForm from '../formsModels/user'
-import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'

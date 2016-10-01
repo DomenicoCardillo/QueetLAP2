@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import { fetchEvents, setMyEventsActiveFilter, setEventDetail } from '../actions/events'
+import { fetchEvents, setMyEventsActiveFilter, setEventDetail, listenEventsChanges } from '../actions/events'
 import MyEventsPage from '../components/myEventsPage'
 import { Actions } from 'react-native-router-flux'
-import { filterByDateTime, sortArrayByProps, filterByPlace, filterByCreator, filterByPartecipations } from '../globals'
+import { filterByDateTime, sortArrayByProps, filterByCreator, filterByPartecipations } from '../globals'
 
 const getVisibleEvents = (events, activeFilter, userId) => {
   switch (activeFilter) {

@@ -4,7 +4,7 @@ import { AsyncStorage, Platform } from 'react-native'
 import { loadCategories } from './categories'
 import { fetchEvents } from './events'
 import { fetchUsers } from './users'
-import { fetchNotifications, listenNewNotifications } from './notifications'
+import { listenNewNotifications } from './notifications'
 
 import FCM from 'react-native-fcm'
 
@@ -93,8 +93,7 @@ export const login = (email, pass) => {
           .then((responseJson) => {
             AsyncStorage.setItem('reauthToken', responseJson.token)
           })
-          .catch((error) => {
-            console.log(error)
+          .catch(() => {
           })
 
           if (Platform.OS === 'android') FCM.subscribeToTopic('/topics/user_' + user.id)

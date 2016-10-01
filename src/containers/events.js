@@ -7,7 +7,6 @@ import {
   setCategoryFilter
 } from '../actions/events'
 import EventsPage from '../components/eventsPage'
-import { Actions } from 'react-native-router-flux'
 import { 
   filterByDateTime, 
   sortArrayByProps, 

@@ -14,7 +14,6 @@ export const updateProfile = (newProfile, picture) => {
 
     if(picture !== null) {
 
-      const fs = RNFetchBlob.fs
       const Blob = RNFetchBlob.polyfill.Blob
     
       window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest

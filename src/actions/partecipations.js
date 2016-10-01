@@ -2,8 +2,7 @@ import * as types from './types'
 
 import {
   dbEventsRef,
-  dbNotificationsRef,
-  findBy
+  dbNotificationsRef
 } from '../globals'
 
 export const requestPartecipation = (event) => {

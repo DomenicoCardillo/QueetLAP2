@@ -10,7 +10,6 @@ import {
   Image
 } from 'react-native'
 
-import { Actions } from 'react-native-router-flux'
 import Button from 'apsl-react-native-button'
 
 import commonStyles from '../styles/commons'
@@ -18,7 +17,7 @@ import styleVariables from '../styles/variables'
 import fonts from '../styles/fonts'
 
 export default class SignupPage extends Component {
-  constructor (props) {
+  constructor () {
     super()
     this.state = {
       pageTitleContainer: {

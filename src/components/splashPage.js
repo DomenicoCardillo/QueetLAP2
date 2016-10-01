@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 import styleVariables from '../styles/variables'
 import commonStyles from '../styles/commons'
@@ -15,7 +15,6 @@ import {
 } from 'react-native'
 
 import Button from 'apsl-react-native-button'
-import { Actions } from 'react-native-router-flux'
 
 if (Platform.OS == 'ios') {
   StatusBar.setBarStyle('light-content', true)
