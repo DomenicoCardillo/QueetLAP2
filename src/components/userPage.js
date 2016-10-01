@@ -178,7 +178,7 @@ export default class UserPage extends Component {
             <View style={{paddingVertical: 30}}>
               <Text style={[fonts.style.h6, {marginBottom: 10}]}>Will participate in</Text>
               <ListView
-                style={{borderWidth: 1, borderColor: '#ddd', height: this.props.userEvents.length * 122}}
+                style={{borderWidth: 1, borderColor: '#ddd', height: this.props.userEvents.length * 137}}
                 dataSource={dataSource}
                 renderRow={(event) => this.renderRow(event)}
                 renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
   eventBox: {
     flex: 1,
     flexDirection: 'row',
-    height: 120,
+    height: 135,
     padding: 15,
     backgroundColor: '#fff'
   },
