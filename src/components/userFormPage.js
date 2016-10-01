@@ -148,8 +148,6 @@ export default class UserFormPage extends Component {
             minLength={2} // minimum length of text to search
             onPress={this.updatePlace.bind(this)}
             getDefaultValue={this.getDefaultPlace.bind(this)}
-            currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
-            currentLocationLabel="Current location"
             query={{
               // available options: https://developers.google.com/places/web-service/autocomplete
               key: 'AIzaSyB8XnrQEsL9JUIo2u4T7xbrvpHxTe39jD4',
