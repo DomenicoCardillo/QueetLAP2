@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 70,
     height: 50,
-    marginRight: 10
+    marginRight: 10,
+    borderRadius: 10
   },
   eventContainer: {
     flex: 2

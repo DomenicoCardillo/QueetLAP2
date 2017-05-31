@@ -71,6 +71,7 @@ class AppPage extends Component {
                 case 'leftEvent':
                 case 'responsePartecipation':
                 case 'removedFromEvent':
+                case 'eventUpdated':
                   self.props.setEventDetail({ id: notification.eventId })
                   break
               }
@@ -92,6 +93,7 @@ class AppPage extends Component {
             case 'leftEvent':
             case 'responsePartecipation':
             case 'removedFromEvent':
+            case 'eventUpdated':
               this.props.setEventDetail({ id: notification.eventId })
               break
           }

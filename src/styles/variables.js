@@ -2,10 +2,6 @@ import { Dimensions } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
 
-// OLD Palette http://colrd.com/palette/23519/
-// #ea573d    #fbc063    #64b0bc    
-// #446699    #555577    
-
 // New Palette
 // https://coolors.co/ffffff-f7f7f7-00a676-016fb9-004f7a
 
